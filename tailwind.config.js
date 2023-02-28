@@ -8,12 +8,6 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                // "": "",
-                // "": "",
-                // "": "",
-                // "": "",
-                // "": "",
-                // "": "",
             },
             fontSize: {
                 12: "12px",

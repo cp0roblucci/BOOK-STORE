@@ -8,6 +8,15 @@ module.exports = {
     theme: {
         extend: {
             colors: {
+                "blue-100": "#0099ff",
+                "blue-200": "#008fff",
+                "blue-300": "#0085ff",
+                "blue-400": "#007aff",
+                "blue-500": "#0070ff",
+                "blue-600": "#0066ff",
+                "blue-700": "#005cff",
+                "blue-800": "#0052ff",
+                "blue-900": "#0047ff",
             },
             fontSize: {
                 12: "12px",

@@ -5,8 +5,6 @@
       <img src="" alt="">
     </div>
     <div>
-      <i class="fa-solid fa-envelope"></i>
-      <a href=""><i class="fa-solid fa-envelope"></i></a>
     </div>
     <div class="">
       <span>Login</span>

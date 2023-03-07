@@ -33,3 +33,5 @@ Route::get('/signup', function () {
 Route::prefix('admin')->group(function() {
     Route::get('dashboard', [AdminController::class, 'dashboard']);
 });
+
+/*abc*/

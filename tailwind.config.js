@@ -29,7 +29,30 @@ module.exports = {
                 36: "36px",
                 48: "48px",
             },
+            boxShadow: {
+                md: "6px 6px 16px 0 rgba(0, 0, 0, 0.25), -4px -4px 12px 0 rgba(255, 255, 255, 0.3)",
+                sm: "0 1px 1px rgb(0 0 0 / 12%)",
+                cus: "29px 29px 58px #b8b8b8, -29px -29px 58px #ffffff",
+            },
+            animation: {
+                fadeIn: "fadeIn 0.4s linear",
+                fadeOut: "fadeOut 0.5s linear"
+            } ,
+            keyframes: {
+                fadeIn: {
+                    "0%": {transform: "translateY(-50px)", opacity: 0.1},
+                    "50%": {transform: "translateY(-25px)", opacity: 0.2},
+                    "100%": {transform: "translateY(0)", opacity: 1},
+                },
+                fadeOut: {
+                    "0%": {transform: "translateY(0)", opacity: 0.1},
+                    "50%": {transform: "translateY(-25px)", opacity: 0.2},
+                    "100%": {transform: "translateY(-50px)", opacity: 1},
+                }
+            }
         },
     },
-    plugins: [],
+    plugins: [
+        require('tailwind-scrollbar')({ nocompatible: true }),
+    ],
 }

@@ -29,6 +29,10 @@ module.exports = {
                 36: "36px",
                 48: "48px",
             },
+
+            fontFamily: {
+                'poppins': ['Poppins', 'sans-serif'],
+            },
         },
     },
     plugins: [],

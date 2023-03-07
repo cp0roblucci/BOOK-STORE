@@ -18,6 +18,19 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/', function () {
+    return view('homepage');
+});
+
+Route::get('/signin', function () {
+    return view('auth/signin');
+});
+
+
+Route::get('/signup', function () {
+    return view('auth/signup');
+});
+
 
 Route::prefix('admin')->group(function() {
     Route::get('dashboard', [AdminController::class, 'dashboard']);

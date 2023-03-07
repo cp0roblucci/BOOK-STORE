@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>@yield('title')</title>
   @vite(['./resources/css/app.css', './resources/js/app.js', './resources/js/admin/dashboard.js'])
+  <link rel="shortcut icon" sizes="114x114" href="{{  URL::to('/images/logo.png') }}">
 </head>
 <body class="scrollbar-thin scrollbar-thumb-rounded-lg scrollbar-thumb-blue-200 scrollbar-track-gray-100">
   <div class="app bg-slate-50">

@@ -23,35 +23,36 @@
             </div>
           <div class="inline-block pl-10 text-white">
             <div class="inline-block hover:opacity-80">
-              <form action="{{ route('admin-account')}}" method="post">
-                @csrf
-                <button type="submit" class="">
                   <i class="fa-regular fa-circle-user cursor-pointer"></i>
-                  Tran Van Truong
-                </button>
-              </form >
+                  <span  class="icon-dropdown cursor-pointer">
+                    Tran Van Truong
+                    <i  class="icon-menudropdown fa-solid fa-chevron-down fa-chevron-up select-none ml-1"></i>
+                  </span>
             </div>
-            <label class="mx-2 border"></label>
+            {{-- <label class="mx-2 border"></label>
             <div class="inline-block ">
-              <form action="logout" method="post">
+              <form action="{{route('admin-logout')}}" method="post">
                 @csrf
                 <button type="submit" class="hover:opacity-80">Đăng xuất</button>
               </form>
-            </div>
-            {{-- <span  class="icon-dropdown cursor-pointer">
-              <i  class="icon-menudropdown fa-solid fa-chevron-down fa-chevron-up select-none"></i>
-            </span> --}}
-            {{-- <div class="menu-dropdown absolute top-13 hidden shadow-md text-blue-200 z-100">
+            </div> --}}
+            <div class="menu-dropdown bg-white top-12 absolute hidden shadow-md text-blue-200 animate-fadeIn leading-[50px] z-10">
               <ul class="">
-                <li class="hover:bg-slate-200 px-4 border-b"><a href="">Quản lý tài khoản</a><li>
-                <li class="hover:bg-slate-200 px-4 border-b">
+                <li class="hover:bg-slate-200 px-2 text-center border-b transform transition-all duration-300">
+                  <form action="{{ route('admin-account')}}" method="post">
+                    @csrf
+                    <button type="submit" class="">
+                      Quản lý tài khoản
+                    </button>
+                  </form ><li>
+                <li class="hover:bg-slate-200 px-2 text-center border-b transform transition-all duration-300">
                   <form action="logout" method="post">
                     @csrf
                     <button type="submit">Đăng xuất</button>
                   </form>
                 </li>
               </ul>
-            </div> --}}
+            </div>
           </div>
         </div>
       </div>

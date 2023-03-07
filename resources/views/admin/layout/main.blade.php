@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>@yield('title')</title>
-  @vite(['./resources/css/app.css', './resources/css/app.js'])
+  @vite(['./resources/css/app.css', './resources/js/app.js', './resources/js/admin/dashboard.js'])
 </head>
-<body>
-  <div class="app">
-    <header class="h-[50px] border">
+<body class="scrollbar-thin scrollbar-thumb-rounded-lg scrollbar-thumb-blue-200 scrollbar-track-gray-100">
+  <div class="app bg-slate-50">
+    <header>
       @yield('header')
     </header>
   
-    <div class="mx-8 grid grid-cols-12 gap-4 bg-gradient-to-r from-blue-100 to-blue-900">
-      <aside class="col-span-3">
+    <div class="grid grid-cols-5 gap-4 mx-2">
+      <aside class="col-span-1">
         @yield('sidebar')
       </aside>
       
-      <main class="col-span-9">
+      <main class="col-span-4">
         @yield('content')
       </main>
     </div>

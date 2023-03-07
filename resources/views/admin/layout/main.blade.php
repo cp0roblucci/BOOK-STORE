@@ -5,21 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>@yield('title')</title>
-  @vite('./resources/css/app.css')
-  <link rel="stylesheet" href="../../../assets/fontawesome-free-6.3.0/css/all.min.css">
+  @vite(['./resources/css/app.css', './resources/js/app.js', './resources/js/admin/dashboard.js'])
 </head>
-<body>
-  <div class="app">
-    <header class="h-[50px] border">
+<body class="scrollbar-thin scrollbar-thumb-rounded-lg scrollbar-thumb-blue-200 scrollbar-track-gray-100">
+  <div class="app bg-slate-50">
+    <header>
       @yield('header')
     </header>
   
-    <div class="mx-8 grid grid-cols-12 gap-4">
-      <aside class="bg-red-500 col-span-3">
+    <div class="grid grid-cols-5 gap-4 mx-2">
+      <aside class="col-span-1">
         @yield('sidebar')
       </aside>
       
-      <main class="bg-blue-500 col-span-9">
+      <main class="col-span-4">
         @yield('content')
       </main>
     </div>

@@ -33,5 +33,8 @@ Route::get('/signup', function () {
 
 
 Route::prefix('admin')->group(function() {
-    Route::get('dashboard', [AdminController::class, 'dashboard']);
+    Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin-dashboard');
+    Route::post('account', [AdminController::class, 'account'])->name('admin-account');
+    Route::get('products', [AdminController::class, 'product'])->name('admin-product');
+    Route::get('users', [AdminController::class, 'user'])->name('admin-user');
 });

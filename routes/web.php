@@ -38,3 +38,5 @@ Route::prefix('admin')->group(function() {
     Route::get('products', [AdminController::class, 'product'])->name('admin-product');
     Route::get('users', [AdminController::class, 'user'])->name('admin-user');
 });
+
+/*abc*/

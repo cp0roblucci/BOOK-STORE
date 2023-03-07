@@ -19,6 +19,19 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/', function () {
+    return view('homepage');
+});
+
+Route::get('/signin', function () {
+    return view('auth/signin');
+});
+
+
+Route::get('/signup', function () {
+    return view('auth/signup');
+});
+
 
 Route::prefix('admin')->group(function() {
     Route::get('login', [AdminController::class, 'getLogin'])->name('admin-login');
@@ -35,3 +48,5 @@ Route::prefix('admin')->group(function() {
 
     Route::get('users', [UserController::class, 'index'])->name('admin-index');
 });
+
+/*abc*/

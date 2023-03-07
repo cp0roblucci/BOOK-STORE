@@ -7,7 +7,7 @@
 
 ## Công Nghệ
   - Laravel
-  - Tailwind Css
+  - Tailwindcss
   - Mysql
 ## Tính Năng
     - Đăng ký

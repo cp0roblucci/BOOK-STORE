@@ -16,11 +16,11 @@
     class="bg-gray-200 min-h-screen flex justify-center p-3 bg-no-repeat bg-cover">
         {{-- sign up container --}}
         <div style="background-image: url(https://images.unsplash.com/photo-1550016728-6e898923de4c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=861&q=80)" 
-         class=" bg-gray-100 flex rounded-2xl shadow-lg max-w-4xl p-5 bg-no-repeat bg-cover">
-       
+        class=" bg-gray-100 flex rounded-2xl shadow-lg max-w-4xl p-5 bg-no-repeat bg-cover">
+    
             {{-- img --}}
             <div class="w-1/2 md:block hidden relative ml-12 ">
-                 <div class="text-white mt-44">
+                <div class="text-white mt-44">
                     <h2 class="text-4xl mb-10 font-extrabold ">SHOP CÁ CẢNH 3TL</h2>
                     <p class="font-normal">Hân hạnh đồng hành cùng bạn trong lần mua sắm này...</p>
 
@@ -37,7 +37,7 @@
                         <i class="fa-brands fa-facebook mx-6 text-24 hover:scale-125 duration-200"></i>
                         <i class="fa-brands fa-google text-24 hover:scale-125 duration-200"></i>
                     </div>
-                 </div>
+                </div>
             </div>
             {{-- form --}}
             <div class="md:w-1/2 px-16 ">
@@ -48,7 +48,7 @@
                         <input type="text" name="fullName" placeholder="Họ Tên..." required
                         class="w-full border p-2 rounded-xl text-sm group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg">
                         <i class="fa-solid fa-pen
-                         absolute text-14 -translate-y-1/2 group-hover:scale-125 duration-200 bottom-1 right-2 text-teal-400"></i>
+                        absolute text-14 -translate-y-1/2 group-hover:scale-125 duration-200 bottom-1 right-2 text-teal-400"></i>
                     </div>
                         
                     <div class="relative group">

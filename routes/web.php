@@ -23,6 +23,10 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+Route::get('/product', function () {
+    return view('product');
+});
+
 Route::get('/signin', function () {
     return view('auth/signin');
 });

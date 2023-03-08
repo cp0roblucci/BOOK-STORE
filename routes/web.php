@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,8 +34,19 @@ Route::get('/signup', function () {
 
 
 Route::prefix('admin')->group(function() {
+    Route::get('login', [AdminController::class, 'getLogin'])->name('admin-login');
+    Route::post('login', [AdminController::class, 'postLogin'])->name('admin-login');
+    Route::post('logout', [AdminController::class, 'logout'])->name('admin-logout');
+
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin-dashboard');
+
     Route::post('account', [AdminController::class, 'account'])->name('admin-account');
+
     Route::get('products', [AdminController::class, 'product'])->name('admin-product');
-    Route::get('users', [AdminController::class, 'user'])->name('admin-user');
+
+    Route::get('orders', [AdminController::class, 'order'])->name('admin-order');
+
+    Route::get('users', [UserController::class, 'index'])->name('admin-index');
 });
+
+/*abc*/

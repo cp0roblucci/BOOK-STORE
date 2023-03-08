@@ -24,8 +24,9 @@
 
                 <form action="" class="flex flex-col gap-4">
                     <div class="relative mb-3 group mt-8">
-                        <input class="group p-2 rounded-xl w-full text-sm  group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg "
-                         type="text" name="username" placeholder="Username... ">
+                        <input
+                        class="group p-2 rounded-xl w-full text-sm group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg "
+                        type="text" name="username" placeholder="Username... ">
                         <i class="fa-solid fa-user
                         absolute text-14 -translate-y-1/2 group-hover:scale-125 duration-200 bottom-1 right-3 text-blue-400"></i>
                     </div>
@@ -59,7 +60,9 @@
 
                 <div class="mt-3 text-xs flex justify-between items-center text-white">
                     <p class="text-teal-100 py-4 border-t border-gray-400">Bạn chưa có tài khoản ?</p>
-                    <button class="py-2 px-5 bg-blue-400 border-blue-200 text-white font-bold rounded-xl hover:scale-125 duration-200 hover:shadow-cyan-400 shadow-lg ">Đăng Ký</button>
+                    <button type="button" class="py-2 px-5 bg-blue-400 border-blue-200 text-white font-bold rounded-xl hover:scale-125 duration-200 hover:shadow-cyan-400 shadow-lg ">
+                    <a href="signup">Đăng Ký</a>
+                    </button>
                 </div>
             </div>
             {{-- img --}}

@@ -44,57 +44,57 @@
                 <h2 class="font-bold text-2xl text-white">Sign Up</h2>
                 <p class="text-sm  mt-4 text-white">Vui lòng nhập vào các thông tin dưới đây :</p>
                 <form action="#" class="flex flex-col gap-4">
-                    <div class="mt-6 relative group ">
+                    <div class="mt-6 relative group">
                         <input type="text" name="fullName" placeholder="Họ Tên..." required
-                        class="w-full border p-2 rounded-xl text-sm group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg">
+                        class="w-full border p-2 rounded-xl text-sm placeholder-gray-500 group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg ">
                         <i class="fa-solid fa-pen
                          absolute text-14 -translate-y-1/2 group-hover:scale-125 duration-200 bottom-1 right-2 text-teal-400"></i>
                     </div>
                         
                     <div class="relative group">
                         <input type="email" name="email" placeholder="Email..." required
-                        class="w-full p-2 border  rounded-xl text-sm group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg">
+                        class="w-full p-2 border  rounded-xl text-sm placeholder-gray-500 group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg">
                         <i class="fa-solid fa-envelope
                         absolute text-14 -translate-y-1/2 group-hover:scale-125 duration-200 bottom-1 right-2 text-teal-400"></i>
                     </div>
     
                     <div class="relative group">
                         <input type="text" name="username" placeholder="Tên đăng nhập..." required
-                        class="w-full p-2 rounded-xl text-sm group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg">
+                        class="w-full p-2 rounded-xl text-sm placeholder-gray-500 group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg">
                         <i class="fa-solid fa-user
                         absolute text-14 -translate-y-1/2 group-hover:scale-125 duration-200 bottom-1 right-2 text-teal-400"></i>
                     </div>
                         
                     <div class="relative group ">
                         <input type="password" name="password" placeholder="Mật khẩu..." required
-                        class="w-full p-2 rounded-xl text-sm group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg ">
+                        class="w-full p-2 rounded-xl text-sm placeholder-gray-500 group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg ">
                         <i class="fa-solid fa-eye 
                         absolute right-2 bottom-1 text-14 -translate-y-1/2 group-hover:scale-125 duration-200 text-teal-400  "></i>
                     </div>
 
                     <div class="relative group">
                         <input type="password" name="confirmpassword" placeholder="Xác nhận mật khẩu..." required
-                        class="w-full p-2 rounded-lg text-sm group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg">
+                        class="w-full p-2 rounded-lg text-sm placeholder-gray-500 group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg">
                         <i class="fa-solid fa-eye 
                         absolute right-2 bottom-1 text-14 -translate-y-1/2 group-hover:scale-125 duration-200 text-teal-400"></i>
                     </div>
 
-                    <div class="relative ml-1 group text-white">
+                    {{-- <div class="relative ml-1 group text-white">
                             <input class="hover:scale-125 duration-300" type="radio" name="sex"> <label for="Boy" class="text-sm font-light mr-4">Nam</label>
                             <input class="hover:scale-125 duration-300"type="radio" name="sex" id="" > <label for="Girl" class="text-sm font-light mr-4">Nữ</label>
                             <input class="hover:scale-125 duration-300"type="radio" name="sex" id="" > <label for="Other" class="text-sm font-light">Khác</label>
-                    </div>  
+                    </div>   --}}
 
                     <div class="relative group">
                         <input type="text" name="address" id="" placeholder="Địa chỉ..." required
-                        class="w-full p-2 rounded-lg text-sm group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg">
+                        class="w-full p-2 rounded-lg text-sm placeholder-gray-500 group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg">
                         <i class="fa-solid fa-location-dot
                         absolute right-2 bottom-1 text-14 -translate-y-1/2 group-hover:scale-125 duration-200 text-teal-400"></i>
                     </div>
 
                     <div class="relative group">
                         <input type="tel" name="telephone" id="" pattern="[0-9]{10}" placeholder="Số điện thoại..." required
-                        class="w-full p-2 rounded-lg text-sm group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg">
+                        class="w-full p-2 rounded-lg text-sm placeholder-gray-500 group-hover:scale-110 duration-200 hover:shadow-cyan-400 outline-none shadow-lg">
                         <i class="fa-solid fa-phone
                         absolute right-2 bottom-1 text-14 -translate-y-1/2 group-hover:scale-125 duration-200 text-teal-400"></i>
                     </div>
@@ -107,7 +107,9 @@
                         class="text-sm"
                         for="">Đồng ý với điều khoản của chúng tôi</label>
                     </div>
-                    <button class="bg-blue-500 text-white rounded-lg p-2 font-bold hover:scale-110 duration-200 ">Sign Up</button>
+                    <button class="border-blue-200 bg-blue-400 py-2 text-white font-bold rounded-xl hover:scale-110 duration-300 hover:shadow-cyan-400 shadow-lg">
+                        Sign Up
+                    </button>
                 </form>
             </div>
         </div>

@@ -9,52 +9,64 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="bg-slate-200">
-    <div class="header mx-20 my-2 h-32 grid grid-cols-6 gap-2 ">
-        <div class="logo h-auto col-span-1 relative text-center">
-            <img class="h-28 m-auto" src="/images/logo.png" alt="">
+    <div class="header flex justify-between mx-20 px-4 mb-2 h-20">
+        <div class="logo h-auto py-1 col-span-1 relative text-center">
+            <a href="/">
+                <img class="w-12 h-12 m-auto" src="{{ URL::to('/images/logo.png')}}" alt="">
+            </a>
             <h1 class=""><a class="hover:text-red-500 font-bold" href="#">BETTA3TL.<span class="font-normal">COM</span></a></h1>
         </div>
-        <div class="search col-span-2">
+        <div class="flex leading-[80px] text-20">
+              <div class="px-4">
+                <a href="/" class="px-8 py-4 border-b-2 border-slate-300 rounded-xl hover:text-blue-500 hover:bg-gray-300">Trang chu</a>
+              </div>
+              <div class="px-4">
+                <a href="/product" class="px-8 py-4 border-b-2 border-slate-300 rounded-xl hover:text-blue-500 hover:bg-gray-300">San Pham</a>
+              </div>
+              <div class="px-4">
+                <a href="/product" class="px-8 py-4 border-b-2 border-slate-300 rounded-xl hover:text-blue-500 hover:bg-gray-300">Lien He</a>
+              </div>
+      </div>
+        {{-- <div class="search w-80 ">
             <form action="" class=" h-full relative">
                 <div class="w-10/12 relative h-2/5 left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
-                    <input type="text" class="w-full h-full  bg-slate-300 indent-2 text-white rounded-md " placeholder="Nhap san phamm ban can tim">
-                    <button><i class="fa-solid fa-magnifying-glass absolute top-0 right-0 p-4.5 rounded-md  hover:bg-blue-300"><input type="submit" value=""></i></button>
+                    <input type="text" class="w-full h-full border outline-none focus-within:border focus-within:border-slate-500 bg-slate-300 indent-2 text-white rounded-md " placeholder="Nhap san phamm ban can tim" required>
+                    <button type="submit">
+                        <i class="fa-solid opacity-60 fa-magnifying-glass absolute
+                        top-[30%] right-4 rounded-md"></i>
+                    </button>
                 </div>
             </form>
+        </div> --}}
+        {{-- <div class="mt-6 text-center">
+            <div class="text-24 font-bold text-blue-500">01231244123</div>
+            <span class="">Ho tro mua hang</span>
+        </div> --}}
+        <div class="leading-[80px]">
+            <a href="/login" class="hover:text-slate-400">
+                <i class="fa-solid fa-user text-slate-500"></i>
+                <span class="">Login</span>
+            </a>
+            <label for="" class="border mx-2 border-white"></label>
+            <a href="/register" class="hover:text-slate-400">
+                <span>Register</span>
+            </a>
         </div>
-        <div class="inf col-span-3 text-center relative m-auto">
-            <ul class="grid grid-cols-3 gap-2 text-36">
-                <li><a class="font-bold text-blue-400 " href="#">0797973939 <span class="block font-normal text-16 text-black ">Ho tro mua hang</span></a></li>
-                <li>
-                    <a class="inline-block" href="#"><i class="fa-solid fa-user text-slate-500"></i></a>
-                    <ul class="inline-block text-14">
-                        <li><a class="hover:text-red-500" href="/signin">Đăng nhập</a></li>
-                        <li><a class="hover:text-red-500" href="/signup">Đăng ký</a></li>
-                    </ul>
-                </li>
-                <li><a class="" href="#"><i class="fa-solid fa-cart-shopping text-slate-500"></i></a></li>
-            </ul>
+        <div class="cart leading-[80px] pr-10">
+          <a href="">
+            <i class="fa-solid fa-cart-shopping text-24 hover:text-slate-400 text-slate-500"></i>
+          </a>
         </div>
-
     </div>
-    <div class="nav mb-2 h-12 mx-20 text-center bg-slate-50 rounded-lg">
-        <div class="sub-nav ">    
-            <ul class="grid grid-cols-4 text-black">
-                <li class=""><a class="block hover:border hover:text-white hover:bg-blue-200 py-3 bg-slate-50 h-full w-full rounded-lg" href=""> Trang chu</a></li>
-                <li class=""><a class="block hover:border hover:text-white hover:bg-blue-200 py-3 bg-slate-50 h-full w-full rounded-lg" href="/product"> San Pham</a></li>
-                <li class=""><a class="block hover:border hover:text-white hover:bg-blue-200 py-3 bg-slate-50 h-full w-full rounded-lg" href=""> Ky Thuat nuoi</a></li>
-                <li class=""><a class="block hover:border hover:text-white hover:bg-blue-200 py-3 bg-slate-50 h-full w-full rounded-lg" href=""> Tin tuc</a></li>
-            </ul>
-        </div>
-        <!-- <div class="search basis-4/12 w-auto">
-            <form action="" class=" h-full">
-                <div class="w-11/12 relative h-full">
-                    <input type="text" class="w-full h-3/5 absolute bottom-0.5 left-0 bg-slate-300 indent-2 text-white " placeholder="Nhap san phamm ban can tim">
-                    <button><i class="fa-solid fa-magnifying-glass absolute right-0 top-5 hover:bg-blue-300 p-2"><input type="submit" value=""></i></button>
-                </div>
-            </form>
-        </div>-->
-    </div> 
+    <div class="w-[50%] mx-20 leading-10 mb-4 mt-2 pl-4 bg-slate-100 rounded-md border-[1.5px] focus-within:border-[1.5px] border-slate-400 focus-within:border-blue-500">
+      <form action="" method="post" class="flex justify-between">
+        @csrf
+        <input type="text" placeholder="Search..." name="users-search" class="caret-blue-500 outline-none w-full bg-slate-100" required>
+          <button type="submit" class="inline-block w-[18%] cursor-pointer top-0.5">
+            <i class="fa-solid fa-magnifying-glass text-slate-500"></i>
+          </button>
+      </form>
+    </div>
     <div class="content mx-20 h-auto  bg-slate-200 rounded-lg">
         <div class="flex flex-row h-auto bg-slate-50 rounded-lg shadow-lg">
             <div class="sidebar basis-3/12  h-auto uppercase text-20 ml-2">
@@ -316,11 +328,11 @@
             var i;
             var x = document.getElementsByClassName("slideshow");
             for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";  
+                x[i].style.display = "none";
             }
             myIndex++;
-            if (myIndex > x.length) {myIndex = 1}    
-            x[myIndex-1].style.display = "block";  
+            if (myIndex > x.length) {myIndex = 1}
+            x[myIndex-1].style.display = "block";
             setTimeout(slideshow, 2000);
         }
     </script>

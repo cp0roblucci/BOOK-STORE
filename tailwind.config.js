@@ -29,6 +29,16 @@ module.exports = {
                 36: "36px",
                 48: "48px",
             },
+            height: {
+                400: "400px",
+                500: "500px",
+                593: "593px",
+                600: "600px",
+                650: "650px",
+            },
+            width: {
+                600: "600px",
+            },
             boxShadow: {
                 md: "6px 6px 16px 0 rgba(0, 0, 0, 0.25), -4px -4px 12px 0 rgba(255, 255, 255, 0.3)",
                 sm: "0 1px 1px rgb(0 0 0 / 12%)",

@@ -40,7 +40,8 @@ module.exports = {
             },
             animation: {
                 fadeIn: "fadeIn 0.4s linear",
-                fadeOut: "fadeOut 0.5s linear"
+                fadeOut: "fadeOut 0.5s linear",
+                line : "line 0.75s linear infinite",
             } ,
             keyframes: {
                 fadeIn: {
@@ -52,6 +53,19 @@ module.exports = {
                     "0%": {transform: "translateY(0)", opacity: 0.1},
                     "50%": {transform: "translateY(-25px)", opacity: 0.2},
                     "100%": {transform: "translateY(-50px)", opacity: 1},
+                },
+                line:{
+                    "0%" :{
+                        border: "1px solid #0099ff",
+                        left: "32px",
+                        width: "0",
+                    },
+                    "100%": {
+                        border:" 1px solid #0047ff",
+                        left: "32px",
+                        width: "75%",
+                        
+                    },
                 }
             },
             spacing: {
@@ -68,10 +82,18 @@ module.exports = {
                 "98p" : "98%",
                 "95p" : "95%",
                 "112.5" : "450px",
+                "125" : "500px",
+                "115" : "460px",
             },
             blur : {
                 "10" : "10px",
-            }
+            },
+            fontFamily: {
+                "popins" : "Popins, sans-serif"
+            },
+            lineHeight: {
+                "70" : "56px",
+            },
         },
     },
     plugins: [

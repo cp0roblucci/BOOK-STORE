@@ -16,6 +16,8 @@ iconDropdown.addEventListener('click', function () {
 const btnChangePassword = $('.btn-change-password');
 const formChangePassword = $('.form-change-password');
 
-btnChangePassword.addEventListener('click', function () {
-  formChangePassword.classList.toggle('hidden');
-});
+if (btnChangePassword) {
+    btnChangePassword.addEventListener('click', function () {
+        formChangePassword.classList.toggle('hidden');
+    });
+}

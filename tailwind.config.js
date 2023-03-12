@@ -45,24 +45,24 @@ module.exports = {
                 cus: "29px 29px 58px #b8b8b8, -29px -29px 58px #ffffff",
             },
             animation: {
-                fadeIn: "fadeIn 0.4s linear",
-                fadeOut: "fadeOut 0.5s linear",
+                fadeIn: "fadeIn 1s linear",
+                fadeOut: "fadeOut 1s linear",
                 line : "line 0.75s linear infinite",
             } ,
             keyframes: {
                 fadeIn: {
-                    "0%": { opacity: 0.0 },
-                    "25%": { opacity: 0.2 },
-                    "50%": { opacity: 0.4 },
-                    "75%": { opacity: 0.6 },
+                    "0%": { opacity: 0.1 },
+                    "25%": { opacity: 0.3 },
+                    "50%": { opacity: 0.6 },
+                    "75%": { opacity: 0.9 },
                     "100%": { opacity: 1 },
                 },
                 fadeOut: {
                     "0%": { opacity: 1 },
-                    "25%": { opacity: 0.6 },
-                    "50%": { opacity: 0.4 },
-                    "75%": { opacity: 0.2 },
-                    "100%": { opacity: 0 },
+                    "25%": { opacity: 0.9 },
+                    "50%": { opacity: 0.6 },
+                    "75%": { opacity: 0.3 },
+                    "100%": { opacity: 0.1 },
                 },
                 line:{
                     "0%" :{

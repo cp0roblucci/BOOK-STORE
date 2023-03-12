@@ -20,7 +20,7 @@
           <div class="pl-4 text-white text-14">
             <div class="hover:opacity-80 icon-dropdown">
                   <i class="fa-solid fa-circle-user cursor-pointer"></i>
-                  <span  class="icon-dropdown cursor-pointer mx-2">
+                  <span  class="icon-dropdown cursor-pointer px-2">
                     Tran Van Truong
                   </span>
             </div>

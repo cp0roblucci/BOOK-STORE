@@ -93,7 +93,7 @@
             </div>
 
             <div class="mt-6 rounded-lg">
-              <a href="" class="inline-block px-[47%] py-1 border rounded-lg bg-slate-50 hover:bg-slate-100">
+              <a href="{{ route('login-google') }}" class="inline-block px-[47%] py-1 border rounded-lg bg-slate-50 hover:bg-slate-100">
                 <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(3.000000, 2.000000)" fill-rule="nonzero">
@@ -126,7 +126,7 @@
                 <span class="text-16 text-slate-400">with</span >
               </h2>
               <div class="flex justify-center">
-                <a href="" class="inline-block border px-4 py-2 rounded-lg">
+                <a href="{{ route('login-google') }}" class="inline-block border px-4 py-2 rounded-lg">
                   <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g transform="translate(3.000000, 2.000000)" fill-rule="nonzero">

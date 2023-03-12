@@ -1,8 +1,6 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-
-
 // show, hidden password login
 
 const passLogin = document.getElementById('passLogin');
@@ -14,7 +12,7 @@ iconHidePassLogin.addEventListener('click', function() {
   passLogin.setAttribute('type', 'text');
   iconShowPassLogin.classList.remove('hidden');
   iconHidePassLogin.classList.add('hidden');
-}); 
+});
 
 iconShowPassLogin.addEventListener('click', function() {
   passLogin.setAttribute('type', 'password');
@@ -32,7 +30,7 @@ iconHidePassRegister.addEventListener('click', function() {
   passRegister.setAttribute('type', 'text');
   iconShowPassRegister.classList.remove('hidden');
   iconHidePassRegister.classList.add('hidden');
-}); 
+});
 
 iconShowPassRegister.addEventListener('click', function() {
   passRegister.setAttribute('type', 'password');
@@ -51,18 +49,13 @@ iconHideConfirmPass.addEventListener('click', function() {
   passConfirmRegister.setAttribute('type', 'text');
   iconShowConfirmPass.classList.remove('hidden');
   iconHideConfirmPass.classList.add('hidden');
-}); 
+});
 
 iconShowConfirmPass.addEventListener('click', function() {
   passConfirmRegister.setAttribute('type', 'password');
   iconShowConfirmPass.classList.add('hidden');
   iconHideConfirmPass.classList.remove('hidden');
 });
-
-
-
-
-
 
 
 // image
@@ -81,7 +74,7 @@ signUp.addEventListener('click', function() {
 
   imgLogin1.classList.add('animate-fadeOut');
   imgLogin1.classList.remove('animate-fadeIn');
-  
+
   imgLogin2.classList.add('z-10');
 
   imgLogin2.classList.add('translate-x-2');
@@ -103,7 +96,7 @@ signIn.addEventListener('click', function() {
   imgLogin2.classList.add('translate-x-[96%]');
   imgLogin2.classList.add('animate-fadeOut');
   imgLogin2.classList.remove('animate-fadeIn');
-  
+
   imgLogin1.classList.remove('translate-x-2');
   imgLogin1.classList.add('translate-x-[96%]');
   imgLogin1.classList.add('animate-fadeIn');
@@ -111,7 +104,7 @@ signIn.addEventListener('click', function() {
 
 
   imgLogin2.classList.remove('z-10');
-  
+
 
   formLogin.classList.add('animate-fadeIn');
   formRegister.classList.add('animate-fadeOut');
@@ -119,3 +112,4 @@ signIn.addEventListener('click', function() {
   formLogin.classList.remove('animate-fadeOut');
   formRegister.classList.remove('animate-fadeIn');
 });
+

@@ -6,6 +6,11 @@ module.exports = {
         "./resources/**/*.vue",
     ],
     theme: {
+        fontFamily: {
+            "popins" : "Popins, sans-serif",
+            sora: ["Sora"],
+            pacifico: ["Pacifico"],
+        },
         extend: {
             colors: {
                 "blue-100": "#0099ff",
@@ -21,6 +26,7 @@ module.exports = {
                 "aliceblue" : "aliceblue",
             },
             fontSize: {
+                10: "10px",
                 12: "12px",
                 14: "14px",
                 16: "16px",
@@ -45,14 +51,18 @@ module.exports = {
             } ,
             keyframes: {
                 fadeIn: {
-                    "0%": {transform: "translateY(-50px)", opacity: 0.1},
-                    "50%": {transform: "translateY(-25px)", opacity: 0.2},
-                    "100%": {transform: "translateY(0)", opacity: 1},
+                    "0%": { opacity: 0.0 },
+                    "25%": { opacity: 0.2 },
+                    "50%": { opacity: 0.4 },
+                    "75%": { opacity: 0.6 },
+                    "100%": { opacity: 1 },
                 },
                 fadeOut: {
-                    "0%": {transform: "translateY(0)", opacity: 0.1},
-                    "50%": {transform: "translateY(-25px)", opacity: 0.2},
-                    "100%": {transform: "translateY(-50px)", opacity: 1},
+                    "0%": { opacity: 1 },
+                    "25%": { opacity: 0.6 },
+                    "50%": { opacity: 0.4 },
+                    "75%": { opacity: 0.2 },
+                    "100%": { opacity: 0 },
                 },
                 line:{
                     "0%" :{
@@ -64,7 +74,7 @@ module.exports = {
                         border:" 1px solid #0047ff",
                         left: "32px",
                         width: "75%",
-                        
+
                     },
                 }
             },
@@ -87,9 +97,6 @@ module.exports = {
             },
             blur : {
                 "10" : "10px",
-            },
-            fontFamily: {
-                "popins" : "Popins, sans-serif"
             },
             lineHeight: {
                 "70" : "56px",

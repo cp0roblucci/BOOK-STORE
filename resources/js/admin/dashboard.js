@@ -10,6 +10,14 @@ iconDropdown.addEventListener('click', function () {
   menuDropdown.classList.toggle('hidden');
 });
 
+window.addEventListener('click', function(e) {
+  if(!e.target.matches('.icon-dropdown')) {
+    if(!menuDropdown.classList.contains('hidden')) {
+      menuDropdown.classList.add('hidden');
+    }
+  }
+});
+
 
 // button change password
 

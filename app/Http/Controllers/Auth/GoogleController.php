@@ -35,6 +35,13 @@ class GoogleController extends Controller
                 Auth::login($user);
                 return redirect(RouteServiceProvider::HOME);
             }
+            $userEmail = User::where('email', $googleUser->email)->first();
+            if ($userEmail) {
+//                Auth::login($userEmail);
+//                return redirect(RouteServiceProvider::HOME);
+                session()->flash('email-exists', 'Email is existed.');
+                return redirect()->route('register');
+            }
             $nameArr = explode(' ', $googleUser->name, 2);
             $user = User::create(
                 [

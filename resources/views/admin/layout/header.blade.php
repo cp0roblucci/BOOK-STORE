@@ -42,7 +42,7 @@
                   </form ><li>
                 <li class="hover:bg-slate-200 hover:rounded-sm px-2 text-center transform transition-all duration-300">
                   <form action="{{ route('admin-logout')}}" method="post">
-                    @csrf
+                      @csrf
                     <button type="submit">Logout</button>
                   </form>
                 </li>

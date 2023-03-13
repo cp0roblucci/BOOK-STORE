@@ -7,14 +7,6 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function getLogin() {
-        return view('login');
-    }
-
-    public function postLogin(Request $request) {
-
-    }
-
     public function logout() {
         return view('home');
     }
@@ -23,8 +15,8 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    public function account() {
-        return view('admin.account');
+    public function profile() {
+        return view('admin.profile');
     }
 
     public function product() {
@@ -33,5 +25,9 @@ class AdminController extends Controller
 
     public function order() {
         return view('admin.order');
+    }
+
+    public function category() {
+        return view('admin.category');
     }
 }

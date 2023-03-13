@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,31 +24,36 @@ Route::get('/', function () {
 Route::get('/', function () {
     return view('homepage');
 });
-
-Route::get('/signin', function () {
-    return view('auth/signin');
+//products
+Route::get('/products', function () {
+    return view('products');
 });
 
-
-Route::get('/signup', function () {
-    return view('auth/signup');
+Route::get('/products_detail', function () {
+    return view('products_detail');
 });
+// auth
+
+Route::get('login', [AuthController::class, 'getLogin'])->name('login');
+Route::post('login', [AuthController::class, 'postLogin']);
+Route::get('register', [AuthController::class, 'getRegister'])->name('register');
+Route::post('register', [AuthController::class, 'postRegister']);
 
 
-Route::prefix('admin')->group(function() {
-    Route::get('login', [AdminController::class, 'getLogin'])->name('admin-login');
-    Route::post('login', [AdminController::class, 'postLogin'])->name('admin-login');
-    Route::post('logout', [AdminController::class, 'logout'])->name('admin-logout');
+// admin
+Route::group(['prefix' => 'admin'], function() {
+    Route::post('logout', [AuthController::class, 'logout'])->name('admin-logout');
 
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin-dashboard');
 
-    Route::post('account', [AdminController::class, 'account'])->name('admin-account');
+    Route::post('profile', [AdminController::class, 'profile'])->name('admin-profile');
 
     Route::get('products', [AdminController::class, 'product'])->name('admin-product');
 
     Route::get('orders', [AdminController::class, 'order'])->name('admin-order');
 
+    Route::get('categories', [AdminController::class, 'category'])->name('admin-categories');
+
     Route::get('users', [UserController::class, 'index'])->name('admin-index');
 });
 
-/*abc*/

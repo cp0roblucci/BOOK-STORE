@@ -1,37 +1,21 @@
+
 // header dropdown
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelector.bind(document);
 
 const iconDropdown = document.querySelector('.icon-dropdown');
 const menuDropdown = document.querySelector('.menu-dropdown');
 
-iconDropdown.addEventListener('click', function() {
+iconDropdown.addEventListener('click', function () {
   menuDropdown.classList.toggle('hidden');
 });
 
-// khi nguoi dung click ra ngoai man hinh thi dong dropdown
-window.onclick = function(e) {
-  if(!e.target.matches('.icon-dropdown') && !e.target.matches('.icon-menudropdown')) {
-    if(!menuDropdown.classList.contains('hidden')) {
-      menuDropdown.classList.add('hidden');
-    }
-  }
-}
 
+// button change password
 
+const btnChangePassword = $('.btn-change-password');
+const formChangePassword = $('.form-change-password');
 
-const clickDropDown = document.querySelector('.click_dropdown-sidebar');
-const dropdownSidebar = document.querySelector('.dropdown__siderbar');
-
-clickDropDown.addEventListener('click', function() {
-  dropdownSidebar.classList.toggle('hidden');
+btnChangePassword.addEventListener('click', function () {
+  formChangePassword.classList.toggle('hidden');
 });
-
-// // khi nguoi dung click ra ngoai man hinh thi dong dropdown
-// window.onclick = function(e) {
-//   if(!e.target.matches('.click_dropdown-sidebar') && !e.target.matches('.click_dropdown-sidebar-span')) {
-//     if(!dropdownSidebar.classList.contains('hidden')) {
-//       dropdownSidebar.classList.add('hidden');
-//     }
-//   }
-// }
-
-

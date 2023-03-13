@@ -1,15 +1,19 @@
 # Nội dung bài bài báo cáo
-  + Công nghệ
-  + Tính năng
-  + Giao diện
-  + Tài liệu, nguồn tham khảo
-  + ...
+
+- Công nghệ
+- Tính năng
+- Giao diện
+- Tài liệu, nguồn tham khảo
+- ...
 
 ## Công Nghệ
-  - Laravel
-  - Tailwindcss
-  - Mysql
+
+- Laravel
+- Tailwindcss
+- Mysql
+
 ## Tính Năng
+
     - Đăng ký
     - Đăng nhập
     - Đăng xuất
@@ -29,10 +33,13 @@
       * sản phẩm (thêm, sửa xóa)
       * người dùng
       * thống kê
+
 ## Giao diện
+
 ## Tài liệu, nguồn tham khảo
-  + [Documentation Laravel 9.x version](https://laravel.com/docs/9.x)
-  + [Tailwindcss.com](https://tailwindcss.com/)
-  + [Stackoverflow](https://stackoverflow.com/)
-  + 
-  + ...
+
+- [Documentation Laravel 9.x version](https://laravel.com/docs/9.x)
+- [Tailwindcss.com](https://tailwindcss.com/)
+- [Stackoverflow](https://stackoverflow.com/)
+-
+- ...

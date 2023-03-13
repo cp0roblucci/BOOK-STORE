@@ -17,17 +17,21 @@ module.exports = {
                 "blue-700": "#005cff",
                 "blue-800": "#0052ff",
                 "blue-900": "#0047ff",
+                "3f3f5a" :"#3f3f5a",
+                "aliceblue" : "aliceblue",
             },
             fontSize: {
                 12: "12px",
                 14: "14px",
                 16: "16px",
+                18: "18px",
                 20: "20px",
                 24: "24px",
                 26: "26px",
                 32: "32px",
                 36: "36px",
                 48: "48px",
+                56: "56px",
             },
             height: {
                 400: "400px",
@@ -59,7 +63,26 @@ module.exports = {
                     "50%": {transform: "translateY(-25px)", opacity: 0.2},
                     "100%": {transform: "translateY(-50px)", opacity: 1},
                 }
-            }
+            },
+            spacing: {
+                "4.5" : "18px",
+                "25" : "100px",
+            },
+            width: {
+                "30p" :"30%",
+                "98p" : "98%",
+                "90p" : "90%",
+                "112.5" : "450px",
+            },
+            height: {
+                "98p" : "98%",
+                "95p" : "95%",
+                "112.5" : "450px",
+            },
+            blur : {
+                "10" : "10px",
+            },
+            display : ['group-focus']
         },
     },
     plugins: [

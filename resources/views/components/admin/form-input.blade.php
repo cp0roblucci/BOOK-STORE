@@ -1,9 +1,9 @@
-<div class="border-[1.5px] w-[40%] my-2 px-2 focus-within:border-[1.5px] focus-within:border-blue-500">
+<div class="w-[50%] leading-8 pl-4 bg-slate-100 rounded-md border-[1.5px] focus-within:border-[1.5px] focus-within:border-slate-400">
   <form action="" method="post" class="flex justify-between">
     @csrf
-    <input type="text" placeholder="Tìm kiếm..." name="users-search" class="caret-blue-500 outline-none w-full py-2 " required>
-      <button type="submit" class="inline-block bg-blue-300 w-[18%] my-1 cursor-pointer top-0.5 right-1">
-        <i class="fa-solid fa-magnifying-glass text-white"></i>
+    <input type="text" placeholder="Search..." name="users-search" class="caret-blue-500 outline-none w-full bg-slate-100" required>
+      <button type="submit" class="inline-block w-[18%] cursor-pointer top-0.5">
+        <i class="fa-solid fa-magnifying-glass text-slate-500"></i>
       </button>
   </form>
 </div>

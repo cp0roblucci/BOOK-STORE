@@ -32,18 +32,17 @@ Route::get('/home', function () {
 
 Route::get('login', [AuthController::class, 'getLogin'])->name('login');
 Route::post('login', [AuthController::class, 'postLogin']);
+
 Route::get('register', [AuthController::class, 'getRegister'])->name('register');
 Route::post('register', [AuthController::class, 'postRegister']);
 
-Route::get('complete-info', [AuthController::class, 'completeInfo'])->name('complete-info');
 
 
 
 
 // google login
 Route::get('/get-google-sign-in', [GoogleController::class, 'getGoogleSignIn'])->name('login-google');
-Route::get('web/callback', [GoogleController::class, 'loginCallback']);
-Route::post('complete-info', [GoogleController::class, 'completeInfo'])->name('complete-info');
+Route::get('/callback', [GoogleController::class, 'loginCallback']);
 
 
 

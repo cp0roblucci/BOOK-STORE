@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function logout() {
-        return view('home');
-    }
-
     public function dashboard() {
         return view('admin.dashboard');
     }

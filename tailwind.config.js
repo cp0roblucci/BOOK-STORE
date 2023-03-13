@@ -6,8 +6,14 @@ module.exports = {
         "./resources/**/*.vue",
     ],
     theme: {
+        fontFamily: {
+            "popins" : "Popins, sans-serif",
+            sora: ["Sora"],
+            pacifico: ["Pacifico"],
+        },
         extend: {
             colors: {
+                "blue-50": "rgb(237, 233, 254, 0.5)",
                 "blue-100": "#0099ff",
                 "blue-200": "#008fff",
                 "blue-300": "#0085ff",
@@ -21,6 +27,7 @@ module.exports = {
                 "aliceblue" : "aliceblue",
             },
             fontSize: {
+                10: "10px",
                 12: "12px",
                 14: "14px",
                 16: "16px",
@@ -39,20 +46,24 @@ module.exports = {
                 cus: "29px 29px 58px #b8b8b8, -29px -29px 58px #ffffff",
             },
             animation: {
-                fadeIn: "fadeIn 0.4s linear",
-                fadeOut: "fadeOut 0.5s linear",
+                fadeIn: "fadeIn 1s linear",
+                fadeOut: "fadeOut 1s linear",
                 line : "line 0.75s linear infinite",
             } ,
             keyframes: {
                 fadeIn: {
-                    "0%": {transform: "translateY(-50px)", opacity: 0.1},
-                    "50%": {transform: "translateY(-25px)", opacity: 0.2},
-                    "100%": {transform: "translateY(0)", opacity: 1},
+                    "0%": { opacity: 0.1 },
+                    "25%": { opacity: 0.3 },
+                    "50%": { opacity: 0.6 },
+                    "75%": { opacity: 0.9 },
+                    "100%": { opacity: 1 },
                 },
                 fadeOut: {
-                    "0%": {transform: "translateY(0)", opacity: 0.1},
-                    "50%": {transform: "translateY(-25px)", opacity: 0.2},
-                    "100%": {transform: "translateY(-50px)", opacity: 1},
+                    "0%": { opacity: 1 },
+                    "25%": { opacity: 0.9 },
+                    "50%": { opacity: 0.6 },
+                    "75%": { opacity: 0.3 },
+                    "100%": { opacity: 0.1 },
                 },
                 line:{
                     "0%" :{
@@ -64,7 +75,7 @@ module.exports = {
                         border:" 1px solid #0047ff",
                         left: "32px",
                         width: "75%",
-                        
+
                     },
                 }
             },
@@ -87,9 +98,6 @@ module.exports = {
             },
             blur : {
                 "10" : "10px",
-            },
-            fontFamily: {
-                "popins" : "Popins, sans-serif"
             },
             lineHeight: {
                 "70" : "56px",

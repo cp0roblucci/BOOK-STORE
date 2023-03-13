@@ -65,7 +65,7 @@
             </a>
         </div> -->
         <div class="cart leading-[80px] pr-10">
-          <a href="">
+          <a href="/cart">
             <i class="fa-solid fa-cart-shopping text-24 hover:text-slate-400 text-slate-500"></i>
           </a>
         </div>
@@ -122,16 +122,16 @@
                     <h2 class="subname uppercase text-26 mb-2">HAFMOON BETTA FISH</h2>
                     <p class="des">Bettas are a member of the gourami family and are know to be highly territorial.</p>
                 </div>
-                <div class="btn-back text-slate-300 text-36 p-4 absolute top-1/2 -translate-y-1/2">
+                <div class="btn-pre text-slate-300 text-36 p-4 absolute top-1/2 -translate-y-1/2">
                     <button ><i class="fa-solid fa-angle-left"></i></button>
                 </div>
-                <div class="btn-forward text-slate-300 text-36 p-4 absolute top-1/2 -translate-y-1/2 right-0">
+                <div class="btn-next text-slate-300 text-36 p-4 absolute top-1/2 -translate-y-1/2 right-0">
                     <button ><i class="fa-solid fa-angle-right"></i></button>
                 </div>
                 <div class="dot text-slate-500 text-36  absolute left-1/2 -translate-x-1/2 bottom-0">
-                    <i class="fa-solid fa-minus scroll text-slate-300"></i>
-                    <i class="fa-solid fa-minus scroll"></i>
-                    <i class="fa-solid fa-minus scroll"></i>
+                    <i class="fa-solid fa-minus scroll cursor-pointer text-slate-300 "></i>
+                    <i class="fa-solid fa-minus scroll cursor-pointer "></i>
+                    <i class="fa-solid fa-minus scroll cursor-pointer "></i>  
                 </div>
             </div>
         </div>

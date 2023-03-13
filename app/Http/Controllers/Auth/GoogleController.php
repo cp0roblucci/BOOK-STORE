@@ -30,24 +30,23 @@ class GoogleController extends Controller
             parse_str($state, $result);
             $googleUser = Socialite::driver('google')->stateless()->user();
 
-            $user = User::where('email', $googleUser->email)->first();
+            $user = User::where('google_id', $googleUser->id)->first();
             if ($user) {
-                throw  new \Exception(__('Goole sign in email existed!'));
+                Auth::login($user);
+                return redirect(RouteServiceProvider::HOME);
             }
             $nameArr = explode(' ', $googleUser->name, 2);
-            $password = bin2hex(random_bytes(10));
             $user = User::create(
                 [
                     'first_name' => $nameArr[1],
                     'last_name' => $nameArr[0],
                     'google_id' => $googleUser->id,
                     'email' => $googleUser->email,
-                    'password' => Hash::make($password),
+                    'password' => '',
                 ]
             );
             Auth::login($user);
-            session()->flash('loginGoogleSuccess', 'You have logged in with Google.');
-            return redirect()->route('complete-info');
+            return redirect(RouteServiceProvider::HOME);
         } catch (\Exception $exception) {
             return response()->json([
                 'status' => __('google sign in failed'),
@@ -57,9 +56,4 @@ class GoogleController extends Controller
         }
     }
 
-    public function completeInfo(Request $request) {
-        echo "Complete Info";
-        dd($request);
-//        session()->forget('success');
-    }
 }

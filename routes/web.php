@@ -25,6 +25,10 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+Route::get('/cart', function () {
+    return view('cart');
+});
+
 // auth
 
 Route::get('login', [AuthController::class, 'getLogin'])->name('login');

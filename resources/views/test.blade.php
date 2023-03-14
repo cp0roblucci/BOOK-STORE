@@ -105,10 +105,7 @@
             
             categories.forEach(category => {
                 category.addEventListener('click', () => {
-                    // Loại bỏ lớp active khỏi tất cả các danh mục sản phẩm
-                    // Thêm lớp active cho danh mục sản phẩm được chọn
-                    category.classList.add('active');
-                    
+                    // Loại bỏ lớp active khỏi tất cả các danh mục sản phẩm        
                     const categoryValue = category.getAttribute('data-category');
                     // Lặp qua tất cả các sản phẩm và hiển thị sản phẩm thuộc danh mục được chọn
                     products.forEach(product => {

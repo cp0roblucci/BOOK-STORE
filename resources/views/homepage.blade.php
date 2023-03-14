@@ -46,24 +46,35 @@
             <span class="">Ho tro mua hang</span>
         </div> --}}
 
-        <!-- not logged -->
-        <div class="leading-[80px]">
-            <a href="/login" class="hover:text-slate-400">
-                <i class="fa-solid fa-user text-slate-500"></i>
-                <span class="">Login</span>
-            </a>
-            <label for="" class="border mx-2 border-white"></label>
-            <a href="/register" class="hover:text-slate-400">
-                <span>Register</span>
-            </a>
-        </div> 
         <!-- logged -->
-        <!-- <div class="leading-[80px]">
-            <a href="/login" class="hover:text-slate-400">
-                <i class="fa-solid fa-user text-slate-500"></i>
-                <span class=" ml-2">Name</span>
-            </a>
-        </div> -->
+        @if(Auth::check())
+            <div class="leading-[80px]">
+                <a href="/profile" class="hover:text-slate-400">
+                    <i class="fa-solid fa-user text-slate-500"></i>
+                    <span class=" ml-2">{{ Auth::user()->last_name . ' ' . Auth::user()->first_name }}</span>
+                    <label for="" class="border mx-2 border-white"></label>
+                </a>
+                <form action="{{ route('logout') }}" method="post" class="inline-block">
+                    @csrf
+                    <button type="submit" class="hover:text-slate-400">
+                        Log Out
+                    </button>
+                </form>
+            </div>
+        @else
+            <!-- not logged -->
+            <div class="leading-[80px]">
+                <a href="/login" class="hover:text-slate-400">
+                    <i class="fa-solid fa-user text-slate-500"></i>
+                    <span class="">Login</span>
+                </a>
+                <label for="" class="border mx-2 border-white"></label>
+                <a href="/register" class="hover:text-slate-400">
+                    <span>Register</span>
+                </a>
+            </div>
+        @endif
+
         <div class="cart leading-[80px] pr-10">
           <a href="/cart">
             <i class="fa-solid fa-cart-shopping text-24 hover:text-slate-400 text-slate-500"></i>
@@ -91,22 +102,22 @@
                         <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Rong</a>
                     </li>
                     <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Phuong Hoang</a> 
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Phuong Hoang</a>
                     </li>
                     <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Betta</a> 
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Betta</a>
                     </li>
                     <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Bay Mau</a> 
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Bay Mau</a>
                     </li>
                     <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Vang</a> 
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Vang</a>
                     </li>
                     <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Thuc An</a> 
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Thuc An</a>
                     </li>
                     <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Phu Kien</a> 
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Phu Kien</a>
                     </li>
                 </ul>
             </div>
@@ -131,7 +142,7 @@
                 <div class="dot text-slate-500 text-36  absolute left-1/2 -translate-x-1/2 bottom-0">
                     <i class="fa-solid fa-minus scroll cursor-pointer text-slate-300 "></i>
                     <i class="fa-solid fa-minus scroll cursor-pointer "></i>
-                    <i class="fa-solid fa-minus scroll cursor-pointer "></i>  
+                    <i class="fa-solid fa-minus scroll cursor-pointer "></i>
                 </div>
             </div>
         </div>

@@ -60,7 +60,29 @@
     <section class="px-20 py-4 bg-white">
         <div class="bg-white">
             <div class="flex ">
-                <div class="flex flex-col w-1/2 mx-16 mt-4">
+                <div class="flex flex-col w-1/2">
+                    <img src="/images/img_products/pd1.jpg" alt=""
+                    class="py-6 px-10">
+                    <div class="flex space-x-4 ml-12">
+                        <div class="w-24 h-24 border-2 hover:border-blue-400">
+                            <img src="images/img_products/pd1.jpg" alt=""
+                            class="h-full px-2 py-2">
+                        </div>
+                        <div class="w-24 h-24 border-2 hover:border-blue-400">
+                            <img src="images/img_products/pd1.jpg" alt=""
+                            class="h-full px-2 py-2">
+                        </div>
+                        <div class="w-24 h-24 border-2 hover:border-blue-400">
+                            <img src="images/img_products/pd1.jpg" alt=""
+                            class="h-full px-2 py-2">
+                        </div>
+                        <div class="w-24 h-24 border-2 hover:border-blue-400">
+                            <img src="images/img_products/pd1.jpg" alt=""
+                            class="h-full px-2 py-2">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col w-1/2 mr-16  mt-4">
                     <div class="">
                         <h2 class="text-24 font-semibold mb-2">Cá Siêu Saiyan SJJ 1 - Super Pro VJP</h2>
                         <div class="flex text-sm font-semibold">
@@ -125,11 +147,18 @@
                         </div>
                     </div>
                     <div class="mb-4">
-                        <button class="py-4 px-14 bg-blue-500 text-white font-medium hover:bg-red-500">
-                        <i class="fa-solid fa-cart-shopping mr-2"></i>    
-                        THÊM VÀO GIỎ HÀNG
-                        </button>
+                        <div class="flex">
+                            <button class="py-4 px-10 bg-blue-500 text-white font-medium hover:bg-red-500 mr-3">
+                                <i class="fa-solid fa-cart-shopping mr-2"></i>    
+                                MUA NGAY
+                            </button>
+                            <button class="py-4 px-6 bg-blue-500 text-white font-medium hover:bg-red-500 ">
+                                <i class="fa-solid fa-cart-shopping mr-2"></i>    
+                                THÊM VÀO GIỎ HÀNG
+                            </button>
+                        </div>
                     </div>
+                    
                     <div class="mb-4 flex border-t pt-2 border-black">
                         <p class="text-sm mr-2.5">Hotline đặt hàng:</p>
                         <p class="text-sm text-blue-500 font-semibold hover:text-red-500">
@@ -144,28 +173,7 @@
                 </div>
 
 
-                <div class="flex flex-col w-1/2 mr-6">
-                    <img src="/images/img_products/pd1.jpg" alt=""
-                    class="py-6">
-                    <div class="flex space-x-4 ml-2 ">
-                        <div class="w-24 h-24 border-2 hover:border-blue-400">
-                            <img src="images/img_products/pd1.jpg" alt=""
-                            class="h-full px-2 py-2">
-                        </div>
-                        <div class="w-24 h-24 border-2 hover:border-blue-400">
-                            <img src="images/img_products/pd1.jpg" alt=""
-                            class="h-full px-2 py-2">
-                        </div>
-                        <div class="w-24 h-24 border-2 hover:border-blue-400">
-                            <img src="images/img_products/pd1.jpg" alt=""
-                            class="h-full px-2 py-2">
-                        </div>
-                        <div class="w-24 h-24 border-2 hover:border-blue-400">
-                            <img src="images/img_products/pd1.jpg" alt=""
-                            class="h-full px-2 py-2">
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>

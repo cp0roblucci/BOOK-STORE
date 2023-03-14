@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use \App\Http\Controllers\Auth\GoogleController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,30 +20,39 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('/', function () {
     return view('homepage');
-});
-//products
-Route::get('/products', function () {
-    return view('products');
 });
 
 Route::get('/products_detail', function () {
     return view('products_detail');
 });
+
+Route::get('/products', function () {
+    return view('products');
+});
+Route::get('/test', function () {
+    return view('test');
+});
 // auth
 
 Route::get('login', [AuthController::class, 'getLogin'])->name('login');
 Route::post('login', [AuthController::class, 'postLogin']);
+
 Route::get('register', [AuthController::class, 'getRegister'])->name('register');
 Route::post('register', [AuthController::class, 'postRegister']);
 
 
+
+
+
+// google login
+Route::get('/get-google-sign-in', [GoogleController::class, 'getGoogleSignIn'])->name('login-google');
+Route::get('/callback', [GoogleController::class, 'loginCallback']);
+
+
+
 // admin
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::post('logout', [AuthController::class, 'logout'])->name('admin-logout');
 
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin-dashboard');

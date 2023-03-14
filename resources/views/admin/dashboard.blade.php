@@ -56,17 +56,32 @@
           </div>
         </div>
       </div>
+        <div class="grid grid-cols-4 gap-4 mt-6">
+            <div class="col-span-3 w-full">
+                <div class="bar-chart bg-white rounded-2xl shadow-md">
+                    <canvas id="barChart"></canvas>
+                </div>
+                <div class="line-chart bg-white rounded-2xl hidden">
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+            <div class="">
+            <span class="flex flex-col bg-white h-full rounded-xl shadow-md">
+              <span class="btn-bar-chart m-2 bg-slate-200 text-center rounded-xl py-2 cursor-pointer hover:opacity-80">Bar Chart</span>
+              <span class="btn-line-chart m-2 mt-1 bg-slate-200 text-center rounded-xl py-2 cursor-pointer hover:opacity-80">Line Chart</span>
+            </span>
+            </div>
+        </div>
 
-
-      <div class="grid grid-cols-5 gap-4 mt-10">
-        <div class="col-span-3 rounded-2xl">
+      <div class="grid grid-cols-4 gap-4 mt-6">
+        <div class="col-span-3 rounded-2xl h-full">
           <div class="flex flex-wrap -mx-3">
             <div class="flex flex-none w-full max-w-full px-3">
               <div class="relative flex flex-col w-full h-full mb-6 break-words bg-slate-100 border-0 border-transparent border-solid shadow-md rounded-2xl bg-clip-border">
                 <div class="p-6 pb-2 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                  <h3 class="text-[#344767]">Customers</h3>
+                  <h3 class="text-[#344767] uppercase text-14 font-thin">Customers</h3>
                 </div>
-        
+
                 <div class="flex-auto px-0 pt-0 pb-2">
                   <div class="p-0 overflow-x-auto place-self-auto">
                     <table class="items-center w-full mb-0 align-top border-collapse text-slate-500">
@@ -164,7 +179,7 @@
                               </form>
                             </td>
                           </tr>
-                          
+
                       </tbody>
                     </table>
                   </div>
@@ -174,14 +189,14 @@
           </div>
         </div>
 
-        <div class="col-span-2 rounded-2xl">
+        <div class="rounded-2xl">
           <div class="flex flex-wrap -mx-3">
             <div class="flex flex-none w-full max-w-full px-3">
               <div class="relative flex flex-col w-full h-full mb-6 break-words bg-slate-100 border-0 border-transparent border-solid shadow-md rounded-2xl bg-clip-border">
                 <div class="p-6 pb-2 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                  <h3 class="text-[#344767]">Categories</h3>
+                  <h3 class="text-[#344767] uppercase text-14 font-thin">Categories</h3>
                 </div>
-        
+
                 <div class="flex-auto px-0 pt-0 pb-2">
                   @for ($i = 0; $i < 4; $i++)
                   <div class="flex justify-between px-4 overflow-x-auto place-self-auto">

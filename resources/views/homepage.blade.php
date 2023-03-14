@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <title>Trang chủ</title>
-    @vite('./resources/css/app.css')
+    @vite(['./resources/css/app.css','./resources/js/homepage.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="bg-slate-200">
@@ -42,6 +45,8 @@
             <div class="text-24 font-bold text-blue-500">01231244123</div>
             <span class="">Ho tro mua hang</span>
         </div> --}}
+
+        <!-- not logged -->
         <div class="leading-[80px]">
             <a href="/login" class="hover:text-slate-400">
                 <i class="fa-solid fa-user text-slate-500"></i>
@@ -51,9 +56,16 @@
             <a href="/register" class="hover:text-slate-400">
                 <span>Register</span>
             </a>
-        </div>
+        </div> 
+        <!-- logged -->
+        <!-- <div class="leading-[80px]">
+            <a href="/login" class="hover:text-slate-400">
+                <i class="fa-solid fa-user text-slate-500"></i>
+                <span class=" ml-2">Name</span>
+            </a>
+        </div> -->
         <div class="cart leading-[80px] pr-10">
-          <a href="">
+          <a href="/cart">
             <i class="fa-solid fa-cart-shopping text-24 hover:text-slate-400 text-slate-500"></i>
           </a>
         </div>
@@ -67,47 +79,60 @@
           </button>
       </form>
     </div>
-    <div class="content mx-20 h-auto  bg-slate-200 rounded-lg">
-        <div class="flex flex-row h-auto bg-slate-50 rounded-lg shadow-lg">
-            <div class="sidebar basis-3/12  h-auto uppercase text-20 ml-2">
-                <div class="bars flex pl-1">
-                <i class="fa-solid fa-bars mt-1 text-24"></i>
-                <h1 class="pl-2 text-blue-400">Danh muc san pham</h1>
+    <div class="content mx-20 h-auto rounded-lg">
+        <div class="flex flex-row h-auto">
+            <div class="sidebar basis-3/12 bg-slate-50 h-auto uppercase text-20 shadow-lg rounded-lg font-popins">
+                <div class="bars flex pl-1 leading-10">
+                    <i class="fa-solid fa-bars mt-2.5 text-24"></i>
+                    <h1 class="ml-2 mt-1 text-blue-400">Danh muc san pham</h1>
                 </div>
                 <ul class="">
-                    <li class="relative group">
-                        <a href="#" class="pl-8 my-2 block border-b-2">Ca Rong</a>
-                        <div class="hidden group-hover:block line absolute bottom-0 left-0 h-1 w-full bg-red-300"></div>
+                    <li class="relative group  leading-70">
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Rong</a>
                     </li>
-                    <li class="relative group">
-                        <a href="#" class="pl-8 my-2 block border-b-2">Ca Phuong Hoang</a>
-                        <div class="hidden group-hover:block line absolute bottom-0 left-0 h-1 w-full bg-red-300">
+                    <li class="relative group leading-70">
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Phuong Hoang</a> 
                     </li>
-                    <li class="relative group">
-                        <a href="#" class="pl-8 my-2 block border-b-2">Ca Betta</a>
-                        <div class="hidden group-hover:block line absolute bottom-0 left-0 h-1 w-full bg-red-300">
+                    <li class="relative group leading-70">
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Betta</a> 
                     </li>
-                    <li class="relative group">
-                        <a href="#" class="pl-8 my-2 block border-b-2">Ca Bay Mau</a>
-                        <div class="hidden group-hover:block line absolute bottom-0 left-0 h-1 w-full bg-red-300">
+                    <li class="relative group leading-70">
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Bay Mau</a> 
                     </li>
-                    <li class="relative group">
-                        <a href="#" class="pl-8 my-2 block border-b-2">Ca Vang</a>
-                        <div class="hidden group-hover:block line absolute bottom-0 left-0 h-1 w-full bg-red-300">
+                    <li class="relative group leading-70">
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Vang</a> 
                     </li>
-                    <li class="relative group">
-                        <a href="#" class="pl-8 my-2 block border-b-2">Thuc An</a>
-                        <div class="hidden group-hover:block line absolute bottom-0 left-0 h-1 w-full bg-red-300">
+                    <li class="relative group leading-70">
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Thuc An</a> 
                     </li>
-                    <li class="relative group">
-                        <a href="#" class="pl-8 my-2 block border-b-2">Phu Kien</a>
-                        <div class="hidden group-hover:block line absolute bottom-0 left-0 h-1 w-full bg-red-300">
+                    <li class="relative group leading-70">
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Phu Kien</a> 
                     </li>
                 </ul>
             </div>
-            <div class="banner ml-2 basis-9/12 /bg-green-400 h-auto w-auto">
-                <img class="slideshow h-80 w-full rounded-lg" src="/images/banner1.jpg" alt="">
-                <img class="slideshow h-80 w-full rounded-lg" src="/images/banner2.jpg" alt="">
+            <div class="banner ml-2 basis-9/12  w-auto bg-black h-125 relative rounded-lg">
+                <div class="w-full h-full img-bg-box-banner">
+                    <img class="bg-img h-98p w-98p blur-10" src="/images/product1.jpg" alt="">
+                </div>
+                <div class="content-img-box absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-1/3 h-64">
+                    <img class=" content-img w-full h-full"  src="/images/product1-nobg.png" alt="">
+                </div>
+                <div class="content-banner absolute w-1/3 top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/2  text-aliceblue ">
+                    <h1 class="fish-name uppercase font-bold text-48 mb-4 ">Cyan Red</h1>
+                    <h2 class="subname uppercase text-26 mb-2">HAFMOON BETTA FISH</h2>
+                    <p class="des">Bettas are a member of the gourami family and are know to be highly territorial.</p>
+                </div>
+                <div class="btn-pre text-slate-300 text-36 p-4 absolute top-1/2 -translate-y-1/2">
+                    <button ><i class="fa-solid fa-angle-left"></i></button>
+                </div>
+                <div class="btn-next text-slate-300 text-36 p-4 absolute top-1/2 -translate-y-1/2 right-0">
+                    <button ><i class="fa-solid fa-angle-right"></i></button>
+                </div>
+                <div class="dot text-slate-500 text-36  absolute left-1/2 -translate-x-1/2 bottom-0">
+                    <i class="fa-solid fa-minus scroll cursor-pointer text-slate-300 "></i>
+                    <i class="fa-solid fa-minus scroll cursor-pointer "></i>
+                    <i class="fa-solid fa-minus scroll cursor-pointer "></i>  
+                </div>
             </div>
         </div>
         <div class="product h-auto my-2 bg-slate-50 rounded-lg shadow-lg">
@@ -127,7 +152,7 @@
                         <i class="fa-sharp fa-solid fa-bag-shopping ml-4 text-orange-500"><span class="text-12 ml-1">99</span></i>
                         <i class="fa-solid fa-eye ml-5 text-blue-400"><span class="text-12 ml-1">999</span></i>
                         </div>
-                        <div class="discription my-4"><a class=" hover:text-red-500" href="#">Discription</a></div>
+                        <div class="discription my-4"><a class=" hover:text-red-500" href="#">Name</a></div>
                         <div class="price flex">
                             <span class="text-red-400">50000d</span>
                             <span class="block ml-2 mt-0.5 opacity-70 line-through text-14">60000d</span>
@@ -148,7 +173,7 @@
                         <i class="fa-sharp fa-solid fa-bag-shopping ml-4 text-orange-500"><span class="text-12 ml-1">99</span></i>
                         <i class="fa-solid fa-eye ml-5 text-blue-400"><span class="text-12 ml-1">999</span></i>
                         </div>
-                        <div class="discription my-4"><a class=" hover:text-red-500" href="#">Discription</a></div>
+                        <div class="discription my-4"><a class=" hover:text-red-500" href="#">Name</a></div>
                         <div class="price flex">
                             <span class="text-red-400">50000d</span>
                             <span class="block ml-2 mt-0.5 opacity-70 line-through text-14">60000d</span>
@@ -169,7 +194,7 @@
                         <i class="fa-sharp fa-solid fa-bag-shopping ml-4 text-orange-500"><span class="text-12 ml-1">99</span></i>
                         <i class="fa-solid fa-eye ml-5 text-blue-400"><span class="text-12 ml-1">999</span></i>
                         </div>
-                        <div class="discription my-4"><a class=" hover:text-red-500" href="#">Discription</a></div>
+                        <div class="discription my-4"><a class=" hover:text-red-500" href="#">Name</a></div>
                         <div class="price flex">
                             <span class="text-red-400">50000d</span>
                             <span class="block ml-2 mt-0.5 opacity-70 line-through text-14">60000d</span>
@@ -190,7 +215,7 @@
                         <i class="fa-sharp fa-solid fa-bag-shopping ml-4 text-orange-500"><span class="text-12 ml-1">99</span></i>
                         <i class="fa-solid fa-eye ml-5 text-blue-400"><span class="text-12 ml-1">999</span></i>
                         </div>
-                        <div class="discription my-4"><a class=" hover:text-red-500" href="#">Discription</a></div>
+                        <div class="discription my-4"><a class=" hover:text-red-500" href="#">Name</a></div>
                         <div class="price flex">
                             <span class="text-red-400">50000d</span>
                             <span class="block ml-2 mt-0.5 opacity-70 line-through text-14">60000d</span>
@@ -211,7 +236,7 @@
                         <i class="fa-sharp fa-solid fa-bag-shopping ml-4 text-orange-500"><span class="text-12 ml-1">99</span></i>
                         <i class="fa-solid fa-eye ml-5 text-blue-400"><span class="text-12 ml-1">999</span></i>
                         </div>
-                        <div class="discription my-4"><a class=" hover:text-red-500" href="#">Discription</a></div>
+                        <div class="discription my-4"><a class=" hover:text-red-500" href="#">Name</a></div>
                         <div class="price flex">
                             <span class="text-red-400">50000d</span>
                             <span class="block ml-2 mt-0.5 opacity-70 line-through text-14">60000d</span>
@@ -221,52 +246,47 @@
             </div>
 
         </div>
-        <div class="news h-auto grid grid-cols-5 gap-1 /bg-blue-600 shadow-lg bg-slate-50 rounded-lg">
-            <div class="listNews col-span-3 grid grid-rows-3 gap-1 ml-2 mt-6">
-                <div class="news-item">
-                    <a href="#" class="grid grid-cols-5 gap-1 group">
-                        <div class="img-col-span-1">
-                            <img class="rounded-lg" src="/images/news1.png" alt="">
+        <div class="feedback h-125 shadow-lg bg-slate-50 rounded-lg">
+            <div class="container-feedback grid grid-cols-3 gap-10 h-115 mx-10">
+                <div class="feedback h-auto col-span-1 relative">
+                    <div class="content-feedback w-full h-2/3 absolute top-1/3  bg-slate-400 rounded-t-3xl ">
+                        <img class="img-user h-28 rounded-full absolute left-1/2 top-0 -translate-y-2/3 -translate-x-1/2" src="/images/user1.png" alt="">
+                        <div class="content text-center absolute top-1/3 left-1/2 -translate-x-1/2">
+                            <i class="fa-solid fa-quote-left absolute -top-3 -left-5"></i>
+                            <p>San pham rat ok</p>
+                            <i class="fa-solid fa-quote-right absolute -bottom-3 -right-5 "></i>
                         </div>
-                        <div class="news-content col-span-4">
-                            <h3 class=" group-hover:text-red-500">Shop cá cảnh TPHCM Online uy tín giá tốt</h3>
-                            <p class="block hover:text-black">Ngày nay, việc mua cá cảnh cũng có thể dễ dàng thực hiện bằng hình thức online. Bạn không cần phải đến trực...</p>
+                        <div class="name-user text-center absolute bottom-5 uppercase left-1/2 -translate-x-1/2">
+                            <span>Le Hung</span>
                         </div>
-                    </a>
-                </div>
-                <div class="news-item">
-                    <a href="#" class="grid grid-cols-5 gap-1 group">
-                        <div class="img-col-span-1">
-                            <img class="rounded-lg" src="/images/news2.png" alt="">
-                        </div>
-                        <div class="news-content col-span-4">
-                            <h3 class=" group-hover:text-red-500">Tọa đàm về ngành nuôi cá ở Cần Thơ</h3>
-                            <p> Vừa qua, ông Lê Hữu Thiện, Giám đốc công ty cổ phần sinh vật cảnh Thiên Đức đã có buổi gặp mặt, trao ...</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="news-item">
-                    <a href="#" class="grid grid-cols-5 gap-1 group">
-                        <div class="img-col-span-1">
-                            <img class="rounded-lg" src="/images/news3.jpg" alt="">
-                        </div>
-                        <div class="news-content col-span-4">
-                            <h3 class=" group-hover:text-red-500">Trại nuôi cá cảnh của ba anh chàng IT lỏ ở Cần Thơ</h3>
-                            <p>Lỏd Hùng - Lỏd Duy - Lỏd Trường có những xuất phát điểm khác nhau, nhưng cùng sở hữu chung trại cá Betta lớn ở Cần Thơ sau thời gian dài lao đao với nghề.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="news-outstanding col-span-2 my-6 mr-2">
-                <a class="group" href="#">
-                    <div class="">
-                        <img class="rounded-tr-lg rounded-lg w-full h-96" src="/images/news1.png" alt="">
                     </div>
-                    <div class="">
-                        <h3 class="font-bold text-18 group-hover:text-red-500">Shop cá cảnh TPHCM Online uy tín giá tốt</h3>
-                        <p class="text-14">Ngày nay, việc mua cá cảnh cũng có thể dễ dàng thực hiện bằng hình thức online. Bạn không cần phải đến trực...</p>
+                </div>
+                <div class="feedback h-auto col-span-1 relative">
+                    <div class="content-feedback w-full h-2/3 absolute top-1/3  bg-slate-400 rounded-t-3xl ">
+                        <img class="img-user h-28 rounded-full absolute left-1/2 top-0 -translate-y-2/3 -translate-x-1/2" src="/images/user2.png" alt="">
+                        <div class="content text-center absolute top-1/3 left-1/2 -translate-x-1/2">
+                            <i class="fa-solid fa-quote-left absolute -top-3 -left-5"></i>
+                            <p>San pham rat ok</p>
+                            <i class="fa-solid fa-quote-right absolute -bottom-3 -right-5 "></i>
+                        </div>
+                        <div class="name-user text-center absolute bottom-5 uppercase left-1/2 -translate-x-1/2">
+                            <span>Le Hung</span>
+                        </div>
                     </div>
-                </a>
+                </div>
+                <div class="feedback h-auto col-span-1 relative">
+                    <div class="content-feedback w-full h-2/3 absolute top-1/3  bg-slate-400 rounded-t-3xl ">
+                        <img class="img-user h-28 rounded-full absolute left-1/2 top-0 -translate-y-2/3 -translate-x-1/2" src="/images/user3.png" alt="">
+                        <div class="content text-center absolute top-1/3 left-1/2 -translate-x-1/2">
+                            <i class="fa-solid fa-quote-left absolute -top-3 -left-5"></i>
+                            <p>San pham rat ok</p>
+                            <i class="fa-solid fa-quote-right absolute -bottom-3 -right-5 "></i>
+                        </div>
+                        <div class="name-user text-center absolute bottom-5 uppercase left-1/2 -translate-x-1/2">
+                            <span>Le Hung</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -321,20 +341,20 @@
             </div>
         </div>
     </div>
-    <script>
-        var myIndex = 0;
-        slideshow();
-        function slideshow() {
-            var i;
-            var x = document.getElementsByClassName("slideshow");
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-            }
-            myIndex++;
-            if (myIndex > x.length) {myIndex = 1}
-            x[myIndex-1].style.display = "block";
-            setTimeout(slideshow, 2000);
-        }
+    <script >
+        // var myIndex = 0;
+        // slideshow();
+        // function slideshow() {
+        //     var i;
+        //     var x = document.getElementsByClassName("slideshow");
+        //     for (i = 0; i < x.length; i++) {
+        //         x[i].style.display = "none";
+        //     }
+        //     myIndex++;
+        //     if (myIndex > x.length) {myIndex = 1}
+        //     x[myIndex-1].style.display = "block";
+        //     setTimeout(slideshow, 2000);
+        // }
     </script>
 </body>
 </html>

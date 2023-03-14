@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="bg-slate-200">
-    <div class="header flex justify-between mx-20 px-4 mb-2 h-20">
+    <div class="header flex justify-between mx-20 px-4 mb-2 h-20 ">
         <div class="logo h-auto py-1 col-span-1 relative text-center">
             <a href="/">
                 <img class="w-12 h-12 m-auto" src="{{ URL::to('/images/logo.png')}}" alt="">
@@ -24,7 +24,7 @@
                 <a href="/" class="px-8 py-4 border-b-2 border-slate-300 rounded-xl hover:text-blue-500 hover:bg-gray-300">Trang chu</a>
               </div>
               <div class="px-4">
-                <a href="/product" class="px-8 py-4 border-b-2 border-slate-300 rounded-xl hover:text-blue-500 hover:bg-gray-300">San Pham</a>
+                <a href="/products" class="px-8 py-4 border-b-2 border-slate-300 rounded-xl hover:text-blue-500 hover:bg-gray-300">San Pham</a>
               </div>
               <div class="px-4">
                 <a href="/product" class="px-8 py-4 border-b-2 border-slate-300 rounded-xl hover:text-blue-500 hover:bg-gray-300">Lien He</a>

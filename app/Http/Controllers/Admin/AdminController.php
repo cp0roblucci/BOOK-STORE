@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class AdminController extends Controller
 {
@@ -25,5 +27,12 @@ class AdminController extends Controller
 
     public function category() {
         return view('admin.category');
+    }
+
+    public function logout() {
+        session()->flush();
+        Cache::flush();
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

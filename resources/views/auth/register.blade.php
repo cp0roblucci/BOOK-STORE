@@ -150,7 +150,7 @@
                 </div>
               </div>
                 <div class="mb-2">
-                    <div class="flex relative">
+                    <div id="condition-btn" class="flex relative">
                         <input
                             id="condition"
                             name="condition_register"
@@ -164,7 +164,7 @@
 
                     @if ($errors->has('condition_register'))
                         @foreach ($errors->get('condition_register') as $error)
-                            <span id="message-confirm-password" class="text-10 ml-2 text-red-500">* {{ $error }}</span><br>
+                            <span id="message-condition" class="text-10 ml-2 text-red-500">* {{ $error }}</span><br>
                         @endforeach
                     @endif
                 </div>

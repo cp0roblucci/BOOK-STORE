@@ -31,7 +31,7 @@
     <div class="bg-white h-full ">
       <div class="grid grid-cols-2 gap-8 h-full">
         {{-- Login --}}
-        <div id="formLogin" class="login flex w-[70%] h-[90%] mt-[5%] ml-8">
+        <div id="formLogin" class="login flex w-[70%] h-[90%] ml-8">
           <div class="p-6 w-full">
             <div class="mt-10 mb-6">
               <h2 class="text-26 font-bold text-[#344767] font-sora mb-1">Sign In</h2>
@@ -91,12 +91,14 @@
                   Sign in
                 </button>
             </form>
-
+            <div class="mt-2 text-12 text-blue-100">
+                <a href="{{ route('forgot-password') }}" class="">Forgot password?</a>
+            </div>
             <div class="relative mt-6">
               <div class="w-full border-b h-0.5 text-center">
               </div>
                 <label class=""></label>
-                <span class="inline px-2 bg-white absolute left-[45%] -top-3">
+                <span class="inline px-2 bg-white absolute left-[45%] -top-3 text-14">
                   Or
                 </span>
             </div>

@@ -77,10 +77,11 @@ class AuthController extends Controller
         return redirect(RouteServiceProvider::HOME);
     }
 
+
     public function logout() {
         session()->flush();
         Cache::flush();
         Auth::logout();
-        return redirect()->route('login');
+        return redirect(RouteServiceProvider::HOME);
     }
 }

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="bg-slate-200">
-    <div class="header flex justify-between mx-20 px-4 mb-2 h-20">
+    <div class="header flex justify-between mx-20 px-4 mb-2 h-20 ">
         <div class="logo h-auto py-1 col-span-1 relative text-center">
             <a href="/">
                 <img class="w-12 h-12 m-auto" src="{{ URL::to('/images/logo.png')}}" alt="">
@@ -24,7 +24,7 @@
                 <a href="/" class="px-8 py-4 border-b-2 border-slate-300 rounded-xl hover:text-blue-500 hover:bg-gray-300">Trang chu</a>
               </div>
               <div class="px-4">
-                <a href="/product" class="px-8 py-4 border-b-2 border-slate-300 rounded-xl hover:text-blue-500 hover:bg-gray-300">San Pham</a>
+                <a href="/products" class="px-8 py-4 border-b-2 border-slate-300 rounded-xl hover:text-blue-500 hover:bg-gray-300">San Pham</a>
               </div>
               <div class="px-4">
                 <a href="/product" class="px-8 py-4 border-b-2 border-slate-300 rounded-xl hover:text-blue-500 hover:bg-gray-300">Lien He</a>
@@ -46,24 +46,35 @@
             <span class="">Ho tro mua hang</span>
         </div> --}}
 
-        <!-- not logged -->
-        <div class="leading-[80px]">
-            <a href="/login" class="hover:text-slate-400">
-                <i class="fa-solid fa-user text-slate-500"></i>
-                <span class="">Login</span>
-            </a>
-            <label for="" class="border mx-2 border-white"></label>
-            <a href="/register" class="hover:text-slate-400">
-                <span>Register</span>
-            </a>
-        </div> 
         <!-- logged -->
-        <!-- <div class="leading-[80px]">
-            <a href="/login" class="hover:text-slate-400">
-                <i class="fa-solid fa-user text-slate-500"></i>
-                <span class=" ml-2">Name</span>
-            </a>
-        </div> -->
+        @if(Auth::check())
+            <div class="leading-[80px]">
+                <a href="/profile" class="hover:text-slate-400">
+                    <i class="fa-solid fa-user text-slate-500"></i>
+                    <span class=" ml-2">{{ Auth::user()->last_name . ' ' . Auth::user()->first_name }}</span>
+                    <label for="" class="border mx-2 border-white"></label>
+                </a>
+                <form action="{{ route('logout') }}" method="post" class="inline-block">
+                    @csrf
+                    <button type="submit" class="hover:text-slate-400">
+                        Log Out
+                    </button>
+                </form>
+            </div>
+        @else
+            <!-- not logged -->
+            <div class="leading-[80px]">
+                <a href="/login" class="hover:text-slate-400">
+                    <i class="fa-solid fa-user text-slate-500"></i>
+                    <span class="">Login</span>
+                </a>
+                <label for="" class="border mx-2 border-white"></label>
+                <a href="/register" class="hover:text-slate-400">
+                    <span>Register</span>
+                </a>
+            </div>
+        @endif
+
         <div class="cart leading-[80px] pr-10">
           <a href="/cart">
             <i class="fa-solid fa-cart-shopping text-24 hover:text-slate-400 text-slate-500"></i>
@@ -91,22 +102,22 @@
                         <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Rong</a>
                     </li>
                     <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Phuong Hoang</a> 
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Phuong Hoang</a>
                     </li>
                     <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Betta</a> 
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Betta</a>
                     </li>
                     <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Bay Mau</a> 
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Bay Mau</a>
                     </li>
                     <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Vang</a> 
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Vang</a>
                     </li>
                     <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Thuc An</a> 
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Thuc An</a>
                     </li>
                     <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Phu Kien</a> 
+                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Phu Kien</a>
                     </li>
                 </ul>
             </div>
@@ -131,7 +142,7 @@
                 <div class="dot text-slate-500 text-36  absolute left-1/2 -translate-x-1/2 bottom-0">
                     <i class="fa-solid fa-minus scroll cursor-pointer text-slate-300 "></i>
                     <i class="fa-solid fa-minus scroll cursor-pointer "></i>
-                    <i class="fa-solid fa-minus scroll cursor-pointer "></i>  
+                    <i class="fa-solid fa-minus scroll cursor-pointer "></i>
                 </div>
             </div>
         </div>

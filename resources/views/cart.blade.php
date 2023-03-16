@@ -8,10 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <title>Trang chủ</title>
-    @vite(['./resources/css/app.css','./resources/js/homepage.js'])
+    @vite(['./resources/css/app.css','./resources/js/cart.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body class="bg-slate-200">
+<body class="bg-slate-200 relative h-screen">
     <!-- Header -->
     <div class="header flex justify-between mx-20 px-4 mb-2 h-20">
         <div class="logo h-auto py-1 col-span-1 relative text-center">
@@ -83,48 +83,92 @@
     <!-- ConTent -->
     <div class="content mx-20 h-auto rounded-lg grid grid-cols-3 gap-2">
         <div class="cart bg-slate-100 col-span-2">
-            <div class="title">
+            <div class="title text-36 font-bold text-blue-200 ml-2">
                 <h1>Your Cart</h1>
             </div>
-            <div class="items-cart mx-2">
-                <div class="item-cart my-5 grid grid-cols-10 gap-2 items-center border ">
-                    <div class="check ">
-                        <input class="w-5 h-5 ml-2" type="checkbox">
+            <div class="items-cart mx-2 text-18">
+                <div class="item-cart bg-slate-200 my-5 grid grid-cols-10 gap-2 items-center border " data-key="1">
+                    <div class="check">
+                        <input class="add-buy w-5 h-5 ml-2" type="checkbox">
                     </div>
-                    <div class="img-item-cart w-16 h-16 col-span-2">
-                        <img class="w-full h-full" src="/images/xanhdam-trang.png" alt="">
+                    <div class="img-item-cart-box w-16 h-16 col-span-1">
+                        <img class="img-item-cart w-full h-full" src="/images/xanhdam-trang.png" alt="">
                     </div>
-                    <div class="name-product col-span-2">
-                            Name
+                    <div class="name-product-box col-span-2">
+                        <span class="name-product">Ca Rong Duoi Trang</span>
                     </div>
-                    <div class="category">
-                            Ca Rong
+                    <div class="category-box">
+                        <span class="category">Ca Rong</span>
                     </div>
-                    <div class="price">
-                        50000
+                    <div class="price-box">
+                        <span class="price">50000₫</span>
                     </div>
-                    <div class="quantity-container relative ">
-                        <div class="quantity w-full absolute top-1/2 -translate-y-1/2 border">
-                            <i class="fa-solid fa-plus px-0.5 cursor-pointer inline-block "></i>
-                            <input class="w-1/2 inline-block " type="text">
-                            <i class="fa-solid fa-minus px-0.5 cursor-pointer inline-block "></i>
+                    <div class="quantity-box relative col-span-2 flex justify-center">
+                        <div class="quantity  absolute top-1/2 -translate-y-1/2">
+                            <i class="fa-solid fa-minus minus p-2 border rounded-lg cursor-pointer inline-block hover:bg-white"></i>
+                            <input class="num w-1/4 inline-block h-8 text-center rounded-lg " type="text" value="1">
+                            <i class="fa-solid fa-plus plus p-2 border rounded-lg cursor-pointer inline-block hover:bg-white "></i>
                         </div>
                     </div>
-                    <div class="sum">
-                        50000
+                    <div class="total-box">
+                        <span class="total">50000₫</span>
                     </div>
-                    <div class="delete">
-                        <i class="fa-solid fa-trash-can"></i>
+                    <div class="delete cursor-pointer relative">
+                        <i class="fa-solid fa-trash-can delete-btn p-2 absolute right-5 top-0 -translate-y-1/2"></i>
+                    </div>
+                </div>
+                <div class="item-cart bg-slate-200 my-5 grid grid-cols-10 gap-2 items-center border " data-key="2">
+                    <div class="check">
+                        <input class="add-buy w-5 h-5 ml-2" type="checkbox">
+                    </div>
+                    <div class="img-item-cart-box w-16 h-16 col-span-1">
+                        <img class="w-full h-full" src="/images/xanhdam-trang.png" alt="">
+                    </div>
+                    <div class="name-product-box col-span-2">
+                        <span class="name-product">Ca Rong Duoi Vang</span>
+                    </div>
+                    <div class="category-box">
+                        <span class="category">Ca Rong</span>
+                    </div>
+                    <div class="price-box">
+                        <span class="price">70000₫</span>
+                    </div>
+                    <div class="quantity-box relative col-span-2 flex justify-center">
+                        <div class="quantity  absolute top-1/2 -translate-y-1/2">
+                            <i class="fa-solid fa-minus minus p-2 border rounded-lg cursor-pointer inline-block hover:bg-white"></i>
+                            <input class="num w-1/4 inline-block h-8 text-center rounded-lg " type="text" value="2">
+                            <i class="fa-solid fa-plus plus p-2 border rounded-lg cursor-pointer inline-block hover:bg-white "></i>
+                        </div>
+                    </div>
+                    <div class="total-box">
+                        <span class="total">70000₫</span>
+                    </div>
+                    <div class="delete cursor-pointer relative">
+                        <i class="fa-solid fa-trash-can delete-btn p-2 absolute right-5 top-0 -translate-y-1/2"></i>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="order bg-slate-100">
-
+        <div class="order-container bg-slate-100 relative flex flex-col justify-between">
+            <div class="items-order-container ">
+                <span class="hidden">-</span>
+                <div class="warning w-fulll h-16 text-24 flex justify-center items-center text-blue-100">
+                    <h1 class="font-bold uppercase">Add Your Favourites Item to buy</h1>
+                </div>
+            </div>
+            <div class="w-full">
+                <div class="total py-4 w-full flex justify-between">
+                    <span class="uppercase ml-2">total</span>
+                    <span class="total-value mr-2">0₫</span>
+                </div>
+                <div class="ordering h-16 flex items-center justify-center w-full uppercase bg-blue-300 text-aliceblue text-26 ">
+                   <a href="#">Order</a>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Footer -->
-    <div class="footer auto bg-yellow-300 w-full">
+    <div class="footer absolute bottom-0 bg-yellow-300 w-full">
         <div class="content-footer mx-20 mt-2 /bg-red-600 h-auto grid grid-cols-12 gap-4">
             <div class="footet-item col-span-4">
                 <div class="title pb-3">

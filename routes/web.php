@@ -24,6 +24,10 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+Route::get('/home', function () {
+    return view('homepage');
+});
+
 Route::get('/products_detail', function () {
     return view('products_detail');
 });
@@ -31,9 +35,8 @@ Route::get('/products_detail', function () {
 Route::get('/products', function () {
     return view('products');
 });
-Route::get('/test', function () {
-    return view('test');
-});
+
+
 // auth
 
 // login
@@ -46,7 +49,6 @@ Route::post('register', [AuthController::class, 'postRegister']);
 
 // forgot password
 Route::get('/forgot-password', [ResetPasswordController::class, 'getForgotPassword'])->name('forgot-password');
-
 Route::post('/forgot-password', [ResetPasswordController::class, 'sendMail']);
 Route::get('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('reset-password');
 Route::post('/reset-password', [ResetPasswordController::class, 'reset']);
@@ -78,5 +80,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::get('categories', [AdminController::class, 'category'])->name('admin-categories');
 
     Route::get('users', [UserController::class, 'index'])->name('admin-index');
+
+    Route::get('create-new-user', function() {
+        return view('admin.new-user');
+    })->name('new-user');
+    Route::post('create-new-user', [UserController::class, 'createUser']);
 });
 

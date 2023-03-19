@@ -24,9 +24,10 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+
 Route::get('/home', function () {
     return view('homepage');
-});
+})->name('home');
 
 Route::get('/products_detail', function () {
     return view('products_detail');
@@ -34,6 +35,10 @@ Route::get('/products_detail', function () {
 
 Route::get('/products', function () {
     return view('products');
+});
+
+Route::get('/cart', function () {
+    return view('cart');
 });
 
 

@@ -11,112 +11,125 @@
     <title>Trang chủ</title>
     @vite(['./resources/css/app.css','./resources/js/homepage.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!DOCTYPE html>
-    
-    <title>Shop Cá</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-            }
-            ul {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-wrap: wrap;
-            }
-            li {
-                padding: 8px 16px;
-                margin: 5px;
-                background-color: #eee;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-            li.active {
-                background-color: #4CAF50;
-                color: white;
-            }
-            .product {
-                display: none;
-                padding: 20px;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-                width: 250px;
-                margin: 10px;
-                float: left;
-                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-            }
-            .product img {
-                max-width: 100%;
-                height: auto;
-                display: block;
-                margin: 0 auto;
-                margin-bottom: 10px;
-            }
-            h2 {
-                margin-top: 0;
-                font-size: 20px;
-                font-weight: bold;
-                color: #555;
-                text-align: center;
-                text-transform: uppercase;
-            }
-            .clearfix {
-                clear: both;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Shop Cá</h1>
-        <ul id="categories">
-            <li class="active" data-category="all">Tất cả</li>
-            <li data-category="koi">Cá Koi</li>
-            <li data-category="goldfish">Cá Vàng</li>
-            <li data-category="tetra">Cá Tép</li>
-        </ul>
-        <div class="clearfix"></div>
-        <div id="products">
-            <div class="product" id="koi">
-                <h2>Cá Koi</h2>
-                <img src="https://cdn.pixabay.com/photo/2016/11/21/13/39/koi-1842263_960_720.jpg" alt="Cá Koi">
-                <p>Giá: 100,000 VNĐ</p>
-            </div>
-            <div class="product" id="goldfish">
-                <h2>Cá Vàng</h2>
-                <img src="https://cdn.pixabay.com/photo/2018/01/31/05/32/goldfish-3127758_960_720.jpg" alt="Cá Vàng">
-                <p>Giá: 50,000 VNĐ</p>
-            </div>
-            <div class="product" id="tetra">
-                <h2>Cá Tép</h2>
-                <img src="https://cdn.pixabay.com/photo/2018/05/13/17/20/fish-3391076_960_720.jpg" alt="Cá Tép">
-                <p>Giá: 80,000 VNĐ</p>
-            </div>
-            <div class="product" id="tetra">
-                <h2>Cá Tép</h2>
-                <img src="https://cdn.pixabay.com/photo/2018/05/13/17/20/fish-3391076_960_720.jpg" alt="Cá Tép">
-                <p>Giá: 80,000 VNĐ</p>
-            </div>
-        </div>
-        <script>
-            const categories = document.querySelectorAll('#categories li');
-            const products = document.querySelectorAll('.product');
-            
-            categories.forEach(category => {
-                category.addEventListener('click', () => {
-                    // Loại bỏ lớp active khỏi tất cả các danh mục sản phẩm        
-                    const categoryValue = category.getAttribute('data-category');
-                    // Lặp qua tất cả các sản phẩm và hiển thị sản phẩm thuộc danh mục được chọn
-                    products.forEach(product => {
-                        if (product.getAttribute('id') === categoryValue || categoryValue === 'all') {
-                            product.style.display = 'block';
-                        } else {
-                            product.style.display = 'none';
-                        }
-                    });
-                });
-            });
-        </script>
-    </body>
-    </html>
+
+
+	<title>Bán cá</title>
+	<style>
+		/* Thiết lập kiểu cho button danh mục */
+		.category-btn {
+			background-color: #4CAF50;
+			border: none;
+			color: white;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 10px 2px;
+			cursor: pointer;
+			border-radius: 5px;
+		}
+
+		/* Thiết lập kiểu cho các sản phẩm */
+		.product {
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			padding: 10px;
+			margin: 10px;
+			width: 300px;
+			float: left;
+			box-sizing: border-box;
+		}
+
+		.product img {
+			max-width: 100%;
+			height: auto;
+		}
+
+		/* Thiết lập kiểu cho phần lọc sản phẩm */
+		.filter-btn {
+			background-color: #008CBA;
+			border: none;
+			color: white;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 10px 2px;
+			cursor: pointer;
+			border-radius: 5px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Bán cá</h1>
+	<button class="category-btn" id="all-products-btn">Tất cả sản phẩm</button>
+	<button class="category-btn" id="loai1-btn">Loại 1</button>
+	<button class="category-btn" id="loai2-btn">Loại 2</button>
+	<button class="category-btn" id="loai3-btn">Loại 3</button>
+
+	<div id="product-container">
+		<!-- Sản phẩm -->
+		<div class="product loai1">
+			<img src="https://via.placeholder.com/300x200?text=Loai+1">
+			<h2>Sản phẩm 1</h2>
+			<p>Mô tả sản phẩm 1</p>
+		</div>
+		<div class="product loai2">
+			<img src="https://via.placeholder.com/300x200?text=Loai+2">
+			<h2>Sản phẩm 2</h2>
+			<p>Mô tả sản phẩm 2</p>
+		</div>
+		<div class="product loai1">
+			<img src="https://via.placeholder.com/300x200?text=Loai+1">
+			<h2>Sản phẩm 3</h2>
+			<p>Mô tả sản phẩm 3</p>
+		</div>
+		<div class="product loai3">
+			<img src="https://via.placeholder.com/300x200?text=Loai+3">
+			<h2>Sản phẩm
+
+
+
+
+			<p>Mô tả sản phẩm 4</p>
+		</div>
+		<div class="product loai2">
+			<img src="https://via.placeholder.com/300x200?text=Loai+2">
+			<h2>Sản phẩm 5</h2>
+			<p>Mô tả sản phẩm 5</p>
+		</div>
+		<div class="product loai3">
+			<img src="https://via.placeholder.com/300x200?text=Loai+3">
+			<h2>Sản phẩm 6</h2>
+			<p>Mô tả sản phẩm 6</p>
+		</div>
+	</div>
+
+	<script>
+		// Lấy tất cả các button danh mục
+		const categoryBtns = document.querySelectorAll('.category-btn');
+
+		// Lấy phần container của sản phẩm
+		const productContainer = document.getElementById('product-container');
+
+		// Lặp qua từng button danh mục và thêm event listener cho nó
+		categoryBtns.forEach(function(btn) {
+			btn.addEventListener('click', function() {
+				// Lấy id của button
+				const categoryId = this.id;
+
+				// Lặp qua từng sản phẩm và ẩn/hiện sản phẩm theo loại
+				productContainer.querySelectorAll('.product').forEach(function(product) {
+					if (categoryId === 'all-products-btn' || product.classList.contains(categoryId)) {
+						product.style.display = 'block';
+					} else {
+						product.style.display = 'none';
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>

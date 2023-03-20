@@ -11,6 +11,8 @@ const lastName = document.getElementById('last-name');
 const emailRegister = document.getElementById('email-register');
 const passwordRegister = document.getElementById('password-register');
 const confirmpasswordRegister = document.getElementById('confirm-password-register');
+const condition = document.getElementById('condition');
+
 
 // message error
 //login
@@ -22,6 +24,7 @@ const messageLastName = document.getElementById('message-lastname');
 const messageEmailRegister = document.getElementById('message-email-register');
 const messagePasswordRegister = document.getElementById('message-password-register');
 const messageConfirmPassword = document.getElementById('message-confirm-password');
+const messageCondition = document.getElementById('message-condition');
 
 
 
@@ -161,6 +164,12 @@ if(confirmpasswordRegister) {
   });
 
 }
-
+if(condition) {
+    condition.addEventListener('click', function () {
+        if (messageCondition) {
+            messageCondition.classList.add('hidden');
+        }
+    });
+}
 
 

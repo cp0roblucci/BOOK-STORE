@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,10 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+Route::get('/home', function () {
+    return view('home');
+});
+
 Route::get('/products_detail', function () {
     return view('products_detail');
 });
@@ -35,25 +40,36 @@ Route::get('/test', function () {
 });
 // auth
 
+// login
 Route::get('login', [AuthController::class, 'getLogin'])->name('login');
 Route::post('login', [AuthController::class, 'postLogin']);
 
+// register
 Route::get('register', [AuthController::class, 'getRegister'])->name('register');
 Route::post('register', [AuthController::class, 'postRegister']);
 
+// forgot password
+Route::get('/forgot-password', [ResetPasswordController::class, 'getForgotPassword'])->name('forgot-password');
+
+Route::post('/forgot-password', [ResetPasswordController::class, 'sendMail']);
+Route::get('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('reset-password');
+Route::post('/reset-password', [ResetPasswordController::class, 'reset']);
 
 
+// logout
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+// 403
+Route::view('/403', '403')->name('403');
 
 
 // google login
 Route::get('/get-google-sign-in', [GoogleController::class, 'getGoogleSignIn'])->name('login-google');
 Route::get('/callback', [GoogleController::class, 'loginCallback']);
 
-
-
 // admin
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
-    Route::post('logout', [AuthController::class, 'logout'])->name('admin-logout');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function() {
+    Route::post('logout', [AdminController::class, 'logout'])->name('admin-logout');
 
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin-dashboard');
 

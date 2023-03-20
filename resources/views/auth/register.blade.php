@@ -122,11 +122,13 @@
                     placeholder="Password"
                     class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}"
                   >
+                  <div id="message-password-register"   class="" >
                   @if ($errors->has('password'))
-                  @foreach ($errors->get('password') as $error)
-                    <span id="message-password-register" class="text-10 ml-2 text-red-500">* {{ $error }}</span><br>
-                  @endforeach
+                      @foreach ($errors->get('password') as $error)
+                        <span class="text-10 ml-2 text-red-500">* {{ $error }}</span><br>
+                      @endforeach
                   @endif
+                </div>
                   <i id="iconHidePassRegister" class="fa-regular fa-eye-slash absolute text-14 right-6 top-4 cursor-pointer text-slate-500"></i>
                   <i id="iconShowPassRegister" class="fa-regular fa-eye hidden absolute text-14 right-6 top-4 cursor-pointer text-slate-500"></i>
                 </div>
@@ -139,16 +141,16 @@
                     class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}"
                   >
                   @if ($errors->has('password_confirmation'))
-                  @foreach ($errors->get('password_confirmation') as $error)
-                    <span id="message-confirm-password" class="text-10 ml-2 text-red-500">* {{ $error }}</span><br>
-                  @endforeach
+                      @foreach ($errors->get('password_confirmation') as $error)
+                        <span id="message-confirm-password" class="text-10 ml-2 text-red-500">* {{ $error }}</span><br>
+                      @endforeach
                   @endif
                   <i id="iconHideConfirmPass" class="fa-regular fa-eye-slash absolute text-14 right-6 top-4 cursor-pointer text-slate-500"></i>
                   <i id="iconShowConfirmPass" class="fa-regular fa-eye hidden absolute text-14 right-6 top-4 cursor-pointer text-slate-500"></i>
                 </div>
               </div>
                 <div class="mb-2">
-                    <div class="flex relative">
+                    <div id="condition-btn" class="flex relative">
                         <input
                             id="condition"
                             name="condition_register"
@@ -162,7 +164,7 @@
 
                     @if ($errors->has('condition_register'))
                         @foreach ($errors->get('condition_register') as $error)
-                            <span id="message-confirm-password" class="text-10 ml-2 text-red-500">* {{ $error }}</span><br>
+                            <span id="message-condition" class="text-10 ml-2 text-red-500">* {{ $error }}</span><br>
                         @endforeach
                     @endif
                 </div>

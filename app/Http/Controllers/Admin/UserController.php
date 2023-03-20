@@ -6,36 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Repositories\UserRepositoryRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     protected $userRepository;
+
     public function __construct(UserRepositoryRepository $userRepository)
     {
-        $this->userRepository = $userRepository;
+      $this->userRepository = $userRepository;
     }
 
-    public function index() {
-        $users = array(
-            array('name' => 'Trần Văn Trường 1', 'phoneNumber' => '0123456789', 'address' => 'Cần Thơ', 'role' => 'Admin'),
-            array('name' => 'Trần Văn Trường 2', 'phoneNumber' => '0123456789', 'address' => 'Cần Thơ', 'role' => 'Admin'),
-            array('name' => 'Trần Văn Trường 3', 'phoneNumber' => '0123456789', 'address' => 'Cần Thơ', 'role' => 'Admin'),
-            array('name' => 'Trần Văn Trường 4', 'phoneNumber' => '0123456789', 'address' => 'Cần Thơ', 'role' => 'Admin'),
-            array('name' => 'Trần Văn Trường 5', 'phoneNumber' => '0123456789', 'address' => 'Cần Thơ', 'role' => 'Admin'),
-            // array('name' => 'Trần Văn Trường 5', 'phoneNumber' => '0123456789', 'address' => 'Cần Thơ', 'role' => 'Admin'),
-            // array('name' => 'Trần Văn Trường 5', 'phoneNumber' => '0123456789', 'address' => 'Cần Thơ', 'role' => 'Admin'),
-            // array('name' => 'Trần Văn Trường 5', 'phoneNumber' => '0123456789', 'address' => 'Cần Thơ', 'role' => 'Admin'),
-            // array('name' => 'Trần Văn Trường 5', 'phoneNumber' => '0123456789', 'address' => 'Cần Thơ', 'role' => 'Admin'),
-            // array('name' => 'Trần Văn Trường 5', 'phoneNumber' => '0123456789', 'address' => 'Cần Thơ', 'role' => 'Admin'),
-            // array('name' => 'Trần Văn Trường 5', 'phoneNumber' => '0123456789', 'address' => 'Cần Thơ', 'role' => 'Admin'),
-            // array('name' => 'Trần Văn Trường 5', 'phoneNumber' => '0123456789', 'address' => 'Cần Thơ', 'role' => 'Admin'),
-        );
-        return view('admin.user', ['users' => $users]);
-    }
-
-    public function register(RegisterRequest $request)
-    {
-        dd($request);
+    public function index(Request $request) {
+      $page = $request->query('page', 1);
+      $users = DB::table('users')->paginate(5);
+      return view('admin.user', compact('users', 'page'));
     }
 
     public function create()

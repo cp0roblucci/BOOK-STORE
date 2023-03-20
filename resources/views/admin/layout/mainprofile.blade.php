@@ -15,6 +15,7 @@
   href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
   rel="stylesheet"
 />
+<script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
 </head>
 <body class="scrollbar-thin scroll-smooth scrollbar-thumb-rounded-lg scrollbar-thumb-slate-400 scrollbar-track-gray-100 bg-slate-200">
 
@@ -22,14 +23,14 @@
     style="background-image: url('/images/admin/cover-image-profile.jpg")
     class="absolute w-full min-h-[50%] bg-cover">
   </div>
-  <div class="app p-4">
+  <div class="app p-4 px-20">
     <div class="grid grid-cols-5 gap-16 mx-2">
 
-      <aside class="col-span-1">
+      {{-- <aside class="col-span-1">
         @yield('sidebar')
-      </aside>
+      </aside> --}}
       
-      <main class="col-span-4 relative">
+      <main class="col-span-5 relative">
         {{-- Header --}}
         <header>
           @yield('header')
@@ -39,7 +40,7 @@
         @yield('content')
 
         {{-- Footer --}}
-        <footer class="">
+        <footer class="float-right">
           @yield('footer')
         </footer>
 

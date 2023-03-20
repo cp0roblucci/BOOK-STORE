@@ -58,7 +58,10 @@ module.exports = {
             animation: {
                 fadeIn: "fadeIn 1s linear",
                 fadeOut: "fadeOut 1s linear",
+                topToBottom: "topToBottom 0.3s linear",
+                bottomToTop: "bottomToTop 0.3s linear",
                 line : "line 0.75s linear infinite",
+
             } ,
             keyframes: {
                 fadeIn: {
@@ -74,6 +77,16 @@ module.exports = {
                     "50%": { opacity: 0.6 },
                     "75%": { opacity: 0.3 },
                     "100%": { opacity: 0.1 },
+                },
+                topToBottom: {
+                    "0%": { transform: "translateY(-128px)", opacity: 0 },
+                    "50%": { transform: "translateY(-64px)", opacity: 0.5 },
+                    "100%": { transform: "translateY(0)", opacity: 1 },
+                },
+                bottomToTop: {
+                    "0%": { transform: "translateY(0)", opacity: 1 },
+                    "50%": { transform: "translateY(-64px)", opacity: 0.5 },
+                    "100%": { transform: "translateY(-128px)", opacity: 0 },
                 },
                 line:{
                     "0%" :{

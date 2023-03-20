@@ -1,7 +1,7 @@
 
 // header dropdown
 const $ = document.querySelector.bind(document);
-const $$ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
 
 const iconDropdown = document.querySelector('.icon-dropdown');
 const menuDropdown = document.querySelector('.menu-dropdown');

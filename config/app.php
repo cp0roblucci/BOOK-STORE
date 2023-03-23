@@ -185,6 +185,8 @@ return [
 //        Authentication with google
         Laravel\Socialite\SocialiteServiceProvider::class,
 
+//      config cloudinary
+        CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -215,7 +217,10 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
 
 //        Authentication with google
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+      'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+//      config cloudinary
+      'Cloudinary' => CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary::class,
     ])->toArray(),
 
 ];

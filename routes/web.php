@@ -84,11 +84,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 
     Route::get('categories', [AdminController::class, 'category'])->name('admin-categories');
 
-    Route::get('users', [UserController::class, 'index'])->name('admin-index');
+    Route::get('users', [UserController::class, 'index'])->name('admin-users');
 
     Route::get('create-new-user', function() {
         return view('admin.new-user');
     })->name('new-user');
+
+    Route::get('create-new-product', function() {
+        return view('admin.new-product');
+    })->name('new-product');
     Route::post('create-new-user', [UserController::class, 'createUser']);
 });
 

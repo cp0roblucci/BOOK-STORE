@@ -16,7 +16,7 @@
     <div class="">
       {{-- @include('components.admin.form-input') --}}
       {{-- Product --}}
-      
+
       <div class="">
         <div class="grid grid-cols-3 gap-4 bg-gradient-to-r from-[#3b82f6] to-indigo-600 py-5 px-4 rounded-xl shadow-sm">
 
@@ -131,7 +131,6 @@
                             </td>
                           </tr>
                           @endfor
-                          
 
                       </tbody>
                     </table>
@@ -151,15 +150,15 @@
 
               <div class="flex-auto px-0 pt-0">
                 @for ($i = 0; $i < 5; $i++)
-                <div class="flex justify-between items-center px-4 my-1 text-12 pt-0.5 pb-0.5">
-                  <div class="">
-                    <h6 class="text-14 mb-1.5 font-sora">Beta</h6>
-                    <span class="text-purple-300 ">36+ sold</span>
+                  <div class="flex justify-between items-center px-4 my-1 text-12 pt-0.5 pb-0.5">
+                    <div class="">
+                      <h6 class="text-14 mb-1.5 font-sora">Beta</h6>
+                      <span class="text-purple-300 ">36+ sold</span>
+                    </div>
+                    <a href="" class="hover:translate-x-1 transition-all p-2">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </a>
                   </div>
-                  <a href="" class="hover:translate-x-1 transition-all p-2">
-                    <i class="fa-solid fa-chevron-right"></i>
-                  </a>
-                </div>
                 @endfor
               </div>
             </div>

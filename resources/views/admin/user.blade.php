@@ -17,13 +17,8 @@
     <div class="flex flex-wrap -mx-3 mb-10 mt-2">
       <div class="flex flex-col w-full max-w-full px-3">
         <div class="flex flex-col min-w-[980px] mb-6 break-words bg-white border-0 border-transparent border-solid shadow-md rounded-lg bg-clip-border overflow-hidden">
-          <div class="flex p-2 py-4 items-center justify-between">
-            <h3 class="text-[#344767] text-20">Users</h3>
-            <div class="inline-block rounded-md ml-4">
-              <a href="{{ route('new-user')}}" class="border text-blue-200 px-4 py-2 hover:bg-blue-100 hover:text-white">
-                New User
-              </a>
-            </div>
+          <div class="flex p-2 py-2 items-center justify-between">
+            <h3 class="text-[#344767] text-20 font-sora">Users</h3>
           </div>
           <div class="flex-auto px-0 pt-0">
             <div class="p-0 overflow-x-auto place-self-auto">
@@ -34,7 +29,7 @@
                     <th class="px-4 py-3 font-bold ">Name</th>
                     <th class="px-4 py-3 font-bold ">Phone number</th>
                     <th class="px-4 py-3 font-bold ">Address</th>
-                    <th class="px-4 py-3 font-bold ">Role</th>
+                    <th class="px-4 py-3 font-bold text-center">Role</th>
                     <th class="px-4 py-3 font-bold "></th>
                   </tr>
                 </thead>
@@ -57,12 +52,12 @@
                         </div>
                       </td>
                       <td class="p-4 bg-transparent">
-                        <div class="px-2 py-1">
-                            <h6 class="mb-0 text-sm leading-normal">{{ $user->user_address }}</h6>
+                        <div class="px-2 py-1 w-56">
+                            <h6 class="mb-0 text-sm leading-normal truncate">{{ $user->user_address }}</h6>
                         </div>
                       </td>
-                      <td class="p-4 bg-transparent">
-                        <div class="px-2 py-1">
+                      <td class="p-4 bg-transparent text-center">
+                        <div class="px-2 py-1 rounded-full {{ $user->role_id == 1  ? 'bg-blue-100 text-white' : ''}}">
                             <h6 class="mb-0 text-sm leading-normal"> {{ $user->role_id }}</h6>
                         </div>
                       </td>

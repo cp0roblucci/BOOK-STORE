@@ -7,39 +7,104 @@
         </a>
       </div>
     </div>
-    <ul class="ml-4 mt-2">
-      <li class="w-full inline-block py-4 text-gray-500">
-        <div class="px-2 cursor-pointer
-        {{ request()->is('admin/categories') ? 'text-blue-200' : ''}}">
-          <a href="{{route('admin-categories')}}">
-            Categories management
+    <ul class="mt-4 ml-2 text-16">
+      <li class="w-full inline-block text-gray-500">
+        <div class="btn__slidebar cursor-pointer
+        {{ request()->is('admin/categories') ? 'text-purple-400' : ''}}">
+          <div class="hover:bg-slate-200 ml-2 py-1 rounded-sm">
+            <button class="icon__btn--slidebar hover:bg-purple-200 w-6 h-6 rounded-full">
+              <i class="fa-solid fa-angle-right transform transition-all duration-200"></i>
+              {{-- <i class="fa-solid fa-angle-down mt-1.5"></i> --}}
+            </button>
+            Categories
+          </div>
+        </div>
+        <div class="menu__slidebar flex flex-col ml-6 text-14 mt-1 mb-4 transform transition-all duration-200 max-h-0 overflow-hidden">
+          <a href="" class="transition-all hover:bg-slate-100 py-1 rounded-sm">
+            <i class="fa-solid fa-circle-dot text-10 text-purple-400 mr-1"></i>
+            Create new
+          </a>
+          <a href="" class="transition-all hover:bg-slate-100 py-1 rounded-sm">
+            <i class="fa-solid fa-circle-dot text-10 text-purple-400 mr-1"></i>
+            Create new
           </a>
         </div>
       </li>
 
-      <li class="texborder-b w-full inline-block py-4 text-gray-500">
-        <div class="px-2 cursor-pointer
-        {{ request()->is('admin/products') ? ' text-blue-200' : ''}}">
-          <a href="{{route('admin-product')}}">
-            Products Management
+      <li class="w-full inline-block text-gray-500">
+        <div class="btn__slidebar cursor-pointer
+        {{ request()->is('admin/products') || request()->is('admin/create-new-product') ? ' text-blue-200' : ''}}">
+          <div class="hover:bg-slate-200 ml-2 py-1 rounded-sm">
+            <button class="icon__btn--slidebar w-6 h-6 rounded-full hover:bg-blue-100
+            {{ request()->is('admin/products') || request()->is('admin/create-new-product') ? ' bg-blue-100 text-white' : ''}}">
+              <i class="fa-solid fa-angle-right transform transition-all duration-200"></i>
+            </button>
+            Products
+          </div>
+        </div>
+        <div class="menu__slidebar flex flex-col ml-6 text-14 mt-1 mb-4 transform transition-all duration-200 overflow-hidden
+        {{ request()->is('admin/products') || request()->is('admin/create-new-product') ? ' max-h-screen' : 'max-h-0'}}">
+          <a href="{{route('admin-product')}}" class="transition-all hover:bg-slate-100 py-1 rounded-sm">
+            <i class="fa-solid fa-circle-dot text-10 text-blue-400 mr-1"></i>
+            List products
+          </a>
+          <a href="{{route('new-product')}}" class="transition-all hover:bg-slate-100 py-1 rounded-sm">
+            <i class="fa-solid fa-circle-dot text-10 text-blue-400 mr-1"></i>
+            Create new
           </a>
         </div>
       </li>
 
-      <li class="w-full inline-block py-4 text-gray-500">
-        <div class="px-2 cursor-pointer
-        {{ request()->is('admin/users') ? 'text-blue-200' : ''}}">
-          <a href="{{route('admin-index')}}">
-            Users Management
+      <li class="w-full inline-block text-gray-500">
+        <div class="btn__slidebar cursor-pointer
+        {{ request()->is('admin/users') || request()->is('admin/create-new-user')  ? 'text-purple-400' : ''}}">
+          <div class="hover:bg-slate-200 hover:text-purple-400 ml-2 py-1 rounded-sm">
+            <button class="icon__btn--slidebar hover:bg-purple-200 w-6 h-6 rounded-full
+            {{ request()->is('admin/users') || request()->is('admin/create-new-user') ? 'bg-purple-400 text-white' : '' }}">
+              <i class="fa-solid fa-angle-right transform transition-all duration-200"></i>
+            </button>
+            Users
+          </div>
+        </div>
+        <div class="menu__slidebar flex flex-col ml-6 text-14 mt-1 mb-4 transform transition-all duration-200 overflow-hidden
+        {{ request()->is('admin/users') || request()->is('admin/create-new-user') ? 'max-h-screen' : 'max-h-0' }}">
+          <a 
+            href="{{route('admin-users')}}" 
+            class="transition-all hover:bg-slate-100 py-1 rounded-sm
+            {{ request()->is('admin/users') ? 'text-purple-400' : '' }}"
+          >
+            <i class="fa-solid fa-circle-dot text-10 text-purple-400 mr-1"></i>
+            List users
+          </a>
+          <a 
+            href="{{route('new-user')}}" 
+            class="transition-all hover:bg-slate-100 py-1 rounded-sm
+            {{ request()->is('admin/create-new-user') ? 'text-purple-400' : '' }}"
+          >
+            <i class="fa-solid fa-circle-dot text-10 text-purple-400 mr-1"></i>
+            Create new
           </a>
         </div>
       </li>
 
-      <li class="w-full inline-block py-4 text-gray-500">
-        <div class="px-2 cursor-pointer
+      <li class="w-full inline-block text-gray-500">
+        <div class="btn__slidebar cursor-pointer
         {{ request()->is('admin/orders') ? 'text-blue-200' : ''}} ">
-          <a href="{{ route('admin-order')}}">
-            Orders Management
+          <div class="hover:bg-slate-200 ml-2 py-1 rounded-sm">
+            <button class="icon__btn--slidebar hover:bg-blue-100 w-6 h-6 rounded-full">
+              <i class="fa-solid fa-angle-right transform transition-all duration-200"></i>
+            </button>
+            Orders
+          </div>
+        </div>
+        <div class="menu__slidebar flex flex-col ml-6 text-14 mt-1 mb-4 transform transition-all duration-200 max-h-0 overflow-hidden">
+          <a href="" class="transition-all hover:bg-slate-100 py-1 rounded-sm">
+            <i class="fa-solid fa-circle-dot text-10 text-blue-400 mr-1"></i>
+            Create new
+          </a>
+          <a href="" class="transition-all hover:bg-slate-100 py-1 rounded-sm">
+            <i class="fa-solid fa-circle-dot text-10 text-blue-400 mr-1"></i>
+            Create new
           </a>
         </div>
       </li>

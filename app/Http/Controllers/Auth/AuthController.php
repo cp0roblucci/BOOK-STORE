@@ -68,10 +68,10 @@ class AuthController extends Controller
         }
         User::create(
             [
-                'first_name' => $firstname,
-                'last_name' => $lastname,
-                'email' => $email,
-                'password' => $password,
+              'first_name' => $firstname,
+              'last_name' => $lastname,
+              'email' => $email,
+              'password' => $password,
             ]
         );
         return redirect(RouteServiceProvider::HOME);

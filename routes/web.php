@@ -90,9 +90,25 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         return view('admin.new-user');
     })->name('new-user');
 
+    Route::get('create-new-accessories-type', function() {
+        return view('admin.new-accessories-type');
+    })->name('new-accessories-type');
+
+    Route::get('create-new-accessory', function() {
+        return view('admin.new-accessory');
+    })->name('new-accessory');
+
     Route::get('create-new-product', function() {
         return view('admin.new-product');
     })->name('new-product');
+
+    Route::get('create-new-ph', function() {
+        return view('admin.new-ph');
+    })->name('new-ph');
+
+    Route::get('create-new-color', function() {
+        return view('admin.new-color');
+    })->name('new-color');
     Route::post('create-new-user', [UserController::class, 'createUser']);
 });
 

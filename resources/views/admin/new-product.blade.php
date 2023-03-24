@@ -14,7 +14,7 @@
       @include('admin.layout.header')
     @endsection
 
-    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Create new User</div>
+    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Create new Product</div>
     <div class="">
       <div class="col-span-3 border p-4">
         <form action="" method="post">
@@ -105,7 +105,7 @@
                 <select 
                   name="phlevel" 
                   id="ph_level"
-                  class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14"
+                  class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14 cursor-pointer"
                 >
                   <option value="5">5</option>
                   <option value="6">6</option>
@@ -128,7 +128,7 @@
                 <select 
                   name="phlevel" 
                   id="ph_level"
-                  class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14"
+                  class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14 cursor-pointer"
                 >
                   <option value="red">Red</option>
                   <option value="blue">Blue</option>

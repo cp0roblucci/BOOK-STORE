@@ -53,6 +53,9 @@
                     <span id="message-email-login" class="text-12 ml-2 text-red-500">* {{ $error }}</span>
                   @endforeach
                   @endif
+                  @if(session()->has('account-not-exists'))
+                        <span id="message-password-login" class="text-12 ml-2 text-red-500">* {{ session()->get('account-not-exists') }}</span>
+                    @endif
                 </div>
                 <div class="w-full relative mb-4">
                   <input

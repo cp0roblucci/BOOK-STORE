@@ -32,6 +32,11 @@ class AuthController extends Controller
     public function postLogin(LoginRequest $request)
     {
         $email = $request->input('email');
+        $user = User::where('email', $email)->first();
+        if (!$user) {
+            session()->flash('account-not-exists', 'Account does not exist');
+            return redirect()->route('login');
+        }
         $credentials = $request->only('email', 'password');
         if (Auth::guard('web')->attempt($credentials)) {
             $user = $this->userRepository->getUserByEmail($email);
@@ -68,10 +73,10 @@ class AuthController extends Controller
         }
         User::create(
             [
-              'first_name' => $firstname,
-              'last_name' => $lastname,
-              'email' => $email,
-              'password' => $password,
+                'first_name' => $firstname,
+                'last_name' => $lastname,
+                'email' => $email,
+                'password' => $password,
             ]
         );
         return redirect(RouteServiceProvider::HOME);

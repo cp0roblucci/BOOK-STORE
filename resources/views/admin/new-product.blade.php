@@ -14,26 +14,26 @@
       @include('admin.layout.header')
     @endsection
 
-    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Create new Product</div>
+    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Create new Fish</div>
     <div class="">
       <div class="col-span-3 border p-4">
         <form action="" method="post">
           @csrf
           <div class="flex items-center justify-between mt-1 mb-6">
               <div class="w-80 h-32 mr-10">
-                {{-- <img 
-                  src="{{ URL::to('/images/admin/vtd.png')}}" 
-                  alt="avatar" 
+                {{-- <img
+                  src="{{ URL::to('/images/admin/vtd.png')}}"
+                  alt="avatar"
                   class="w-full h-full rounded-full"
                 > --}}
                 <img
                   id="img-preview"
-                  src="{{ URL::to('/images/admin/fish-default.png')}}" 
-                  alt="avatar" 
+                  src="{{ URL::to('/images/admin/fish-default.png')}}"
+                  alt="avatar"
                   class="w-full h-full"
                 >
               </div>
-    
+
               <input
                 id="input-file-img"
                 type="file"
@@ -42,43 +42,43 @@
                 class="w-full py-8 text-14 border border-slate-500 file:ml-2 rounded-lg border-dashed text-slate-500 cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-none file:bg-[#5490f0] file:text-white file:cursor-pointer file:hover:bg-blue-100"
               >
             </div>
-  
-  
+
+
           <div class="grid grid-cols-2 gap-4">
             <div class="">
-              <label 
-                for="species" 
+              <label
+                for="species"
                 class="text-slate-500 text-14"
               >
                 Species
               </label><br>
               <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
-                <input 
-                  type="text" 
-                  name="species" 
+                <input
+                  type="text"
+                  name="species"
                   placeholder="Species"
-                  class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14" 
+                  class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14"
                 >
               </div>
             </div>
-  
+
             <div class="">
-              <label 
+              <label
                 for="fishname"
                 class="text-slate-500 text-14"
               >
                 Name
               </label><br>
               <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
-                <input 
-                  type="text" 
-                  name="fishname" 
+                <input
+                  type="text"
+                  name="fishname"
                   placeholder="Name"
-                  class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14" 
+                  class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14"
                 >
               </div>
             </div>
-    
+
             <div class="">
               {{-- <label
                 for="phonenumber"
@@ -88,11 +88,11 @@
               </label><br>
               <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
                 <i class="fa-solid fa-mobile-screen px-2"></i>
-                <input 
+                <input
                   type="number"
                   name="phonenumber"
                   placeholder="(012) 345-6789"
-                  class="py-1.5 w-full outline-none rounded-lg placeholder:text-14 text-14" 
+                  class="py-1.5 w-full outline-none rounded-lg placeholder:text-14 text-14"
                 >
               </div> --}}
               <label
@@ -102,8 +102,8 @@
                 PH Level
               </label><br>
               <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
-                <select 
-                  name="phlevel" 
+                <select
+                  name="phlevel"
                   id="ph_level"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14 cursor-pointer"
                 >
@@ -114,9 +114,9 @@
                   <option value="9">9</option>
                 </select>
               </div>
-                
+
             </div>
-            
+
             <div class="">
               <label
                 for="phonenumber"
@@ -125,8 +125,8 @@
                 Color
               </label><br>
               <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
-                <select 
-                  name="phlevel" 
+                <select
+                  name="phlevel"
                   id="ph_level"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14 cursor-pointer"
                 >
@@ -139,16 +139,16 @@
               </div>
             </div>
           </div>
-  
+
           <div class="mt-4 ">
-            <label 
+            <label
               for="habit"
               class="text-slate-500 text-14"
             >
               Habit
             </label><br>
             <div class="border-[1.5px] mt-1">
-              <input 
+              <input
                 type="text"
                 name="habit"
                 placeholder="Habit"
@@ -156,16 +156,16 @@
               >
             </div>
           </div>
-  
+
           <div class="mt-4 ">
-            <label 
+            <label
               for="description"
               class="text-slate-500 text-14"
             >
               Description
             </label><br>
             <div class="border-[1.5px] mt-1">
-              <input 
+              <input
                 type="text"
                 name="description"
                 placeholder="Description"
@@ -173,20 +173,20 @@
               >
             </div>
           </div>
-          
-  
-          <button 
-            type="submit" 
+
+
+          <button
+            type="submit"
             class="border-2 border-blue-500 p-2 px-6 mt-4 flex hover:bg-slate-100"
           >
             Create
           </button>
-  
+
         </form>
       </div>
-  
+
     </div >
-  </div>  
+  </div>
 
 @endsection
 

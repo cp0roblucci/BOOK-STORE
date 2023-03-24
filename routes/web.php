@@ -86,29 +86,40 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 
     Route::get('users', [UserController::class, 'index'])->name('admin-users');
 
-    Route::get('create-new-user', function() {
-        return view('admin.new-user');
-    })->name('new-user');
-
+    // accessories type
     Route::get('create-new-accessories-type', function() {
         return view('admin.new-accessories-type');
     })->name('new-accessories-type');
+    Route::post('create-new-accessories-type', []);
 
+    // accessories
     Route::get('create-new-accessory', function() {
         return view('admin.new-accessory');
     })->name('new-accessory');
+    Route::post('create-new-accessory', []);
 
+    // new product
     Route::get('create-new-product', function() {
         return view('admin.new-product');
     })->name('new-product');
+    Route::post('create-new-product', []);
 
+    // new ph
     Route::get('create-new-ph', function() {
         return view('admin.new-ph');
     })->name('new-ph');
-
+    Route::post('create-new-ph', []);
+    
+    // new color
     Route::get('create-new-color', function() {
         return view('admin.new-color');
     })->name('new-color');
+    Route::post('create-new-color', []);
+
+    // new user
+    Route::get('create-new-user', function() {
+        return view('admin.new-user');
+    })->name('new-user');
     Route::post('create-new-user', [UserController::class, 'createUser']);
 });
 

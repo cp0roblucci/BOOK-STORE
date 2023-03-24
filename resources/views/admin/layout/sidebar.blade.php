@@ -33,26 +33,26 @@
 
       <li class="w-full inline-block text-gray-500">
         <div class="btn__slidebar cursor-pointer
-        {{ 
-          request()->is('admin/products') 
-          || request()->is('admin/create-new-product') 
-          || request()->is('admin/create-new-ph') 
+        {{
+          request()->is('admin/products')
+          || request()->is('admin/create-new-product')
+          || request()->is('admin/create-new-ph')
           || request()->is('admin/create-new-color')
-          || request()->is('admin/create-new-accessories-type') 
+          || request()->is('admin/create-new-accessories-type')
           || request()->is('admin/create-new-accessory')
-          ? ' text-blue-200' 
+          ? ' text-blue-200'
           : ''
         }}">
           <div class="hover:bg-slate-200 ml-2 py-1 rounded-sm">
             <button class="icon__btn--slidebar w-6 h-6 rounded-full hover:bg-blue-100
-            {{ 
-              request()->is('admin/products') 
-              || request()->is('admin/create-new-product') 
-              || request()->is('admin/create-new-ph') 
+            {{
+              request()->is('admin/products')
+              || request()->is('admin/create-new-product')
+              || request()->is('admin/create-new-ph')
               || request()->is('admin/create-new-color')
-              || request()->is('admin/create-new-accessories-type') 
+              || request()->is('admin/create-new-accessories-type')
               || request()->is('admin/create-new-accessory')
-              ? ' bg-blue-100 text-white' 
+              ? ' bg-blue-100 text-white'
               : ''
             }}">
               <i class="fa-solid fa-angle-right transform transition-all duration-200"></i>
@@ -61,18 +61,18 @@
           </div>
         </div>
         <div class="menu__slidebar flex flex-col ml-6 text-14 mt-1 mb-4 transform transition-all duration-200 overflow-hidden
-        {{ 
-          request()->is('admin/products') 
-          || request()->is('admin/create-new-product') 
-          || request()->is('admin/create-new-ph') 
+        {{
+          request()->is('admin/products')
+          || request()->is('admin/create-new-product')
+          || request()->is('admin/create-new-ph')
           || request()->is('admin/create-new-color')
-          || request()->is('admin/create-new-accessories-type') 
+          || request()->is('admin/create-new-accessories-type')
           || request()->is('admin/create-new-accessory')
-          ? ' max-h-screen' : 
+          ? ' max-h-screen' :
           'max-h-0'
         }}">
-          <a 
-            href="{{route('admin-product')}}" 
+          <a
+            href="{{route('admin-product')}}"
             class="transition-all hover:bg-slate-100 py-1 rounded-sm
             {{ request()->is('admin/products') ? ' text-blue-200' : ''}}"
           >
@@ -80,24 +80,24 @@
             List products
           </a>
           <div class="btn__slidebar2 cursor-pointer
-            {{ 
-              request()->is('admin/create-new-product') 
-              || request()->is('admin/create-new-ph') 
+            {{
+              request()->is('admin/create-new-product')
+              || request()->is('admin/create-new-ph')
               || request()->is('admin/create-new-color')
-              || request()->is('admin/create-new-accessories-type') 
+              || request()->is('admin/create-new-accessories-type')
               ||request()->is('admin/create-new-accessory')
-              ? ' text-blue-200' 
+              ? ' text-blue-200'
               : ''
             }}">
           <div class="hover:bg-slate-200 py-1 rounded-sm">
             <button class="icon__btn--slidebar2 w-4 h-4 rounded-full hover:bg-blue-100 hover:text-white
-            {{ 
-              request()->is('admin/create-new-product') 
-              || request()->is('admin/create-new-ph') 
+            {{
+              request()->is('admin/create-new-product')
+              || request()->is('admin/create-new-ph')
               || request()->is('admin/create-new-color')
-              || request()->is('admin/create-new-accessories-type') 
+              || request()->is('admin/create-new-accessories-type')
               || request()->is('admin/create-new-accessory')
-              ? ' bg-blue-100 text-white' 
+              ? ' bg-blue-100 text-white'
               : ''
             }}">
               <i class="fa-solid fa-angle-right flex items-center ml-[5px] transform transition-all duration-200 text-10"></i>
@@ -105,52 +105,52 @@
             Create new
           </div>
         </div>
-          <div 
+          <div
             class="menu__slidebar2 flex flex-col ml-6 text-14 mt-1 mb-4 transform transition-all duration-200 overflow-hidden
-            {{ 
-              request()->is('admin/create-new-product') 
-              || request()->is('admin/create-new-ph') 
+            {{
+              request()->is('admin/create-new-product')
+              || request()->is('admin/create-new-ph')
               || request()->is('admin/create-new-color')
-              || request()->is('admin/create-new-accessories-type') 
+              || request()->is('admin/create-new-accessories-type')
               ||request()->is('admin/create-new-accessory')
-              ? 'max-h-screen' 
-              : 'max-h-0' 
+              ? 'max-h-screen'
+              : 'max-h-0'
             }}"
           >
-            <a 
-              href="{{route('new-accessories-type')}}" 
+            <a
+              href="{{route('new-accessories-type')}}"
               class="transition-all hover:bg-slate-100 py-1 rounded-sm
               {{ request()->is('admin/create-new-accessories-type') ? 'text-blue-900' : '' }}"
             >
               <i class="fa-solid fa-circle-dot text-10 text-blue-900 mr-1"></i>
               Accessories Type
             </a>
-            <a 
-              href="{{route('new-accessory')}}" 
+            <a
+              href="{{route('new-accessory')}}"
               class="transition-all hover:bg-slate-100 py-1 rounded-sm
               {{ request()->is('admin/create-new-accessory') ? 'text-blue-900' : '' }}"
             >
               <i class="fa-solid fa-circle-dot text-10 text-blue-900 mr-1"></i>
-              Accessory
+              Accessories
             </a>
-            <a 
-              href="{{route('new-product')}}" 
+            <a
+              href="{{route('new-product')}}"
               class="transition-all hover:bg-slate-100 py-1 rounded-sm
               {{ request()->is('admin/create-new-product') ? 'text-blue-100' : '' }}"
             >
               <i class="fa-solid fa-circle-dot text-10 text-blue-100 mr-1"></i>
-              Product
+              Fish
             </a>
-            <a 
-              href="{{route('new-ph')}}" 
+            <a
+              href="{{route('new-ph')}}"
               class="transition-all hover:bg-slate-100 py-1 rounded-sm
               {{ request()->is('admin/create-new-ph') ? 'text-blue-100' : '' }}"
             >
               <i class="fa-solid fa-circle-dot text-10 text-blue-100 mr-1"></i>
               PH level
             </a>
-            <a 
-              href="{{route('new-color')}}" 
+            <a
+              href="{{route('new-color')}}"
               class="transition-all hover:bg-slate-100 py-1 rounded-sm
               {{ request()->is('admin/create-new-color') ? 'text-blue-100' : '' }}"
             >
@@ -174,16 +174,16 @@
         </div>
         <div class="menu__slidebar flex flex-col ml-6 text-14 mt-1 mb-4 transform transition-all duration-200 overflow-hidden
         {{ request()->is('admin/users') || request()->is('admin/create-new-user') ? 'max-h-screen' : 'max-h-0' }}">
-          <a 
-            href="{{route('admin-users')}}" 
+          <a
+            href="{{route('admin-users')}}"
             class="transition-all hover:bg-slate-100 py-1 rounded-sm
             {{ request()->is('admin/users') ? 'text-purple-400' : '' }}"
           >
             <i class="fa-solid fa-circle-dot text-10 text-purple-400 mr-1"></i>
             List users
           </a>
-          <a 
-            href="{{route('new-user')}}" 
+          <a
+            href="{{route('new-user')}}"
             class="transition-all hover:bg-slate-100 py-1 rounded-sm
             {{ request()->is('admin/create-new-user') ? 'text-purple-400' : '' }}"
           >
@@ -234,7 +234,7 @@
           </ul>
         </div>
       </li> --}}
-      
+
     </ul>
   </aside>
 </div>

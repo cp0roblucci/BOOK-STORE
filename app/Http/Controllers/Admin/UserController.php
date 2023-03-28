@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Models\User;
 use App\Repositories\UserRepositoryRepository;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -19,12 +22,6 @@ class UserController extends Controller
     public function __construct(UserRepositoryRepository $userRepository)
     {
       $this->userRepository = $userRepository;
-    }
-
-    public function index(Request $request) {
-      $page = $request->query('page', 1);
-      $users = DB::table('users')->paginate(5);
-      return view('admin.user', compact('users', 'page'));
     }
 
     public function createUser(Request $request)
@@ -82,5 +79,37 @@ class UserController extends Controller
     public function getAll()
     {
 
+    }
+
+    public function edit($id) {
+      $user = User::find($id)->first();
+      return view('admin.edit-user', compact('user'));
+    }
+
+    public function editProfile(Request $request) {
+      dd($request);
+    }
+
+    public function changePassword(ChangePasswordRequest $request) {
+      $oldPassword = $request->input('old_password');
+      $newPassword = $request->input('new_password');
+      $confirmPassword = $request->input('confirm_password');
+
+      // Kiểm tra mật khẩu cũ có khớp không
+      if (!Hash::check($oldPassword, Auth::user()->password)) {
+        return back()->withErrors(['old_password' => 'Password incorrect']);
+      }
+
+      // Kiểm tra mật khẩu mới và xác nhận mật khẩu có khớp nhau không
+      if ($newPassword !== $confirmPassword) {
+        return back()->withErrors(['confirm_password' => 'Confirm Password incorrect']);
+      }
+
+      // Cập nhật mật khẩu mới cho người dùng
+      $user = Auth::user();
+      $user->password = Hash::make($newPassword);
+      $user->save();
+
+      return redirect()->route('admin-profile')->with('success', 'Change Password Successfully!');
     }
 }

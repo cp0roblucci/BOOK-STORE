@@ -12,6 +12,7 @@
     './resources/js/admin/chart.js',
     './resources/js/admin/user.js',
     './resources/js/admin/slidebar.js',
+    './resources/js/admin/modal.js',
     './resources/js/complete-info.js',
   ])
   <link rel="shortcut icon" sizes="114x114" href="{{  URL::to('/images/logo.png') }}">

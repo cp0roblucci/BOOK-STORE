@@ -14,7 +14,7 @@
       @include('admin.layout.header')
     @endsection
 
-    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Create new User</div>
+    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Edit User</div>
     <div class="border p-4">
       <form action="" method="post" enctype="multipart/form-data">
         @csrf
@@ -28,7 +28,7 @@
               > --}}
               <img
                 id="img-preview"
-                src="{{ URL::to('/images/admin/avatar-default.png')}}"
+                src="{{ Auth::user()->link_avt  }}"
                 alt="avatar"
                 class="w-full h-full rounded-full"
               >
@@ -83,6 +83,7 @@
                 type="text"
                 name="lastname"
                 placeholder="Last name"
+                value="{{ Auth::user()->last_name}}"
                 class="py-1.5 w-full outline-none rounded-lg placeholder:text-14 text-14"
               >
             </div>
@@ -101,6 +102,7 @@
                 type="text"
                 name="firstname"
                 placeholder="First name"
+                value="{{ Auth::user()->first_name}}"
                 class="py-1.5 w-full outline-none rounded-lg placeholder:text-14 text-14"
               >
             </div>
@@ -119,6 +121,7 @@
                 type="number"
                 name="phonenumber"
                 placeholder="(012) 345-6789"
+                value="{{ Auth::user()->phone_number}}"
                 class="py-1.5 w-full outline-none rounded-lg placeholder:text-14 text-14"
               >
             </div>
@@ -137,6 +140,7 @@
                 type="email"
                 name="email"
                 placeholder="Email address"
+                value="{{ Auth::user()->email}}"
                 class="py-1.5 w-full outline-none rounded-lg placeholder:text-14 text-14"
               >
             </div>
@@ -155,24 +159,8 @@
               type="text"
               name="address"
               placeholder="Address"
+              value="{{ Auth::user()->user_address}}"
               class="pb-11 pt-1 w-full outline-none focus-within:border-blue-500 px-2 placeholder:text-14 text-14"
-            >
-          </div>
-        </div>
-
-        <div class="my-4">
-          <label
-            for="password"
-            class="text-slate-500 text-14"
-          >
-            Password
-          </label><br>
-          <div class="border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14"
             >
           </div>
         </div>
@@ -181,7 +169,7 @@
           type="submit"
           class="border-2 border-blue-500 p-2 px-6 mt-4 flex hover:bg-slate-100"
         >
-          Create
+          Update
         </button>
 
       </form>

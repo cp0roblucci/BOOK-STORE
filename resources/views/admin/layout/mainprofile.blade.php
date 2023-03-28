@@ -19,7 +19,7 @@
 </head>
 <body class="scrollbar-thin scroll-smooth scrollbar-thumb-rounded-lg scrollbar-thumb-slate-400 scrollbar-track-gray-100 bg-slate-200">
 
-  <div 
+  <div
     style="background-image: url('/images/admin/cover-image-profile.jpg")
     class="absolute w-full min-h-[50%] bg-cover">
   </div>
@@ -29,7 +29,7 @@
       {{-- <aside class="col-span-1">
         @yield('sidebar')
       </aside> --}}
-      
+
       <main class="col-span-5 relative">
         {{-- Header --}}
         <header>
@@ -47,7 +47,7 @@
       </main>
 
     </div>
-  
+
   </div >
 
 </body>

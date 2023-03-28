@@ -13,9 +13,9 @@ if(btnSlideBar) {
       iconBtnSlideBar[i].classList.toggle('rotate-90');
       iconBtnSlideBar[i].classList.toggle('text-white');
       if (i % 2 == 0) {
-        iconBtnSlideBar[i].classList.toggle('bg-purple-500');
+        iconBtnSlideBar[i].classList.toggle('bg-blue-500');
       } else {
-        iconBtnSlideBar[i].classList.toggle('bg-blue-100');
+        iconBtnSlideBar[i].classList.toggle('bg-purple-400');
       }
     });
   }

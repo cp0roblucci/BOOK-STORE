@@ -1,8 +1,8 @@
 @extends('admin.layout.main')
 
 {{-- set title --}}
-@section('title', 'Create new User')
-@section('path', 'Users / New User')
+@section('title', 'Create new Fish')
+@section('path', 'Create new / Fish')
 
 @section('sidebar')
   @include('admin.layout.sidebar')
@@ -37,7 +37,7 @@
               <input
                 id="input-file-img"
                 type="file"
-                name="avatar"
+                name="fish-img"
                 placeholder=""
                 class="w-full py-8 text-14 border border-slate-500 file:ml-2 rounded-lg border-dashed text-slate-500 cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-none file:bg-[#5490f0] file:text-white file:cursor-pointer file:hover:bg-blue-100"
               >

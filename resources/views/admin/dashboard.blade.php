@@ -37,7 +37,7 @@
             <div class="p-2 flex items-center justify-between">
               <div class="flex flex-col text-white">
                 <h2 class="uppercase text-14">New Clients</h2>
-                <span class="font-bold mt-6 text-20">400+</span>
+                <span class="font-bold mt-6 text-20">{{ $totalCustomer }}</span>
               </div>
               <div class="mr-10">
                 <i class="fa-solid fa-user text-white text-32"></i>
@@ -116,7 +116,7 @@
                             </td>
                             <td class="p-2 bg-transparent text-left">
                               <div class="px-2 py-1">
-                                  <a href="/product-detail" class="mb-0 text-sm leading-normal hover:text-blue-100">Cá phượng hoàng ngũ sắc lùn</a>
+                                  <span class="mb-0 text-sm leading-normal">Cá phượng hoàng ngũ sắc lùn</span>
                               </div>
                             </td>
                             <td class="p-2 bg-transparent">

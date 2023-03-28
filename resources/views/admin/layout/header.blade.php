@@ -2,7 +2,7 @@
 
   <div class="flex items-center justify-between">
     <div class="">
-      <div class="text-14 text-slate-400"><span class="text-slate-300">Pages </span> / @yield('path')</div>
+      <div class="text-12 text-slate-400"><span class="text-slate-300">Pages </span> / @yield('path')</div>
     </div>
     {{-- @include('components.admin.form-input') --}}
     <div class="items-center">
@@ -49,11 +49,9 @@
           <div class="menu-dropdown bg-slate-50 min-w-[116px] top-10 right-6 absolute hidden shadow-md text-blue-900 animate-topToBottom leading-[40px] rounded-sm z-10">
             <ul class="">
               <li class="hover:bg-slate-200 hover:rounded-sm px-2 text-center border-b transform transition-all duration-300">
-                <form action="{{ route('admin-profile')}}" method="post">
-                  @csrf
-                  <button type="submit" class="">
+                  <a href="{{ route('admin-profile') }}" type="submit" class="">
                     My Account
-                  </button>
+                  </a>
                 </form ><li>
               <li class="hover:bg-slate-200 hover:rounded-sm px-2 text-center transform transition-all duration-300">
                 <form action="{{ route('admin-logout')}}" method="post">

@@ -1,8 +1,8 @@
 @extends('admin.layout.main')
 
 {{-- set title --}}
-@section('title', 'Create new User')
-@section('path', 'Users / New User')
+@section('title', 'Create new PH')
+@section('path', 'Create new / PH')
 
 @section('sidebar')
   @include('admin.layout.sidebar')
@@ -19,16 +19,16 @@
       <div class="col-span-3 border p-4">
         <form action="" method="post">
           @csrf
-  
+
           <div class="mt-4 ">
-            <label 
+            <label
               for="ph-level"
               class="text-slate-500 text-14"
             >
               PH Level
             </label><br>
             <div class="border-[1.5px] mt-1">
-              <input 
+              <input
                 type="number"
                 name="ph-level"
                 placeholder="PH Level"
@@ -36,20 +36,20 @@
               >
             </div>
           </div>
-          
-  
-          <button 
-            type="submit" 
+
+
+          <button
+            type="submit"
             class="border-2 border-blue-500 p-2 px-6 mt-4 flex hover:bg-slate-100"
           >
             Create
           </button>
-  
+
         </form>
       </div>
-  
+
     </div >
-  </div>  
+  </div>
 
 @endsection
 

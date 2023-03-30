@@ -2,7 +2,7 @@
 
   <div class="flex items-center justify-between">
     <div class="">
-      <div class="text-14 text-slate-400"><span class="text-slate-300">Pages </span> / @yield('path')</div>
+      <div class="text-12 text-slate-400"><span class="text-slate-300">Pages </span> / @yield('path')</div>
     </div>
     {{-- @include('components.admin.form-input') --}}
     <div class="items-center">
@@ -23,9 +23,13 @@
         <div class="pl-4 text-[#848484] text-14">
           <div class="flex hover:opacity-80 icon-dropdown">
             @if (Auth::check())
-              <div class="w-6 h-6 border rounded-full p-1">
+              <div class="w-6 h-6">
                 {{-- <img src="{{Auth::user()->link_avt}}" alt=""> --}}
-                <img src="{{ URL::to('/images/logo.png') }}" alt="">
+                <img
+                  src="{{Auth::user()->link_avt}}"
+                  alt="avatar"
+                  class="w-full h-full rounded-full"
+                >
               </div>
             @else
               <i class="fa-solid fa-circle-user cursor-pointer"></i>
@@ -41,15 +45,13 @@
               <button type="submit" class="hover:opacity-80">Đăng xuất</button>
             </form>
           </div> --}}
-          
+
           <div class="menu-dropdown bg-slate-50 min-w-[116px] top-10 right-6 absolute hidden shadow-md text-blue-900 animate-topToBottom leading-[40px] rounded-sm z-10">
             <ul class="">
               <li class="hover:bg-slate-200 hover:rounded-sm px-2 text-center border-b transform transition-all duration-300">
-                <form action="{{ route('admin-profile')}}" method="post">
-                  @csrf
-                  <button type="submit" class="">
+                  <a href="{{ route('admin-profile') }}" type="submit" class="">
                     My Account
-                  </button>
+                  </a>
                 </form ><li>
               <li class="hover:bg-slate-200 hover:rounded-sm px-2 text-center transform transition-all duration-300">
                 <form action="{{ route('admin-logout')}}" method="post">

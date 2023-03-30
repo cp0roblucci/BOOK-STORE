@@ -61,7 +61,7 @@ module.exports = {
                 topToBottom: "topToBottom 0.3s linear",
                 bottomToTop: "bottomToTop 0.3s linear",
                 line : "line 0.75s linear infinite",
-
+                before: "before 3s linear",
             } ,
             keyframes: {
                 fadeIn: {
@@ -100,6 +100,10 @@ module.exports = {
                         width: "75%",
 
                     },
+                },
+                before: {
+                  "0%": { width: "100%" },
+                  "100%": { width: "0" }
                 }
             },
             spacing: {

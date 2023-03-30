@@ -1,8 +1,13 @@
 <?php
 
+use App\Http\Controllers\AccessoriesController;
+use App\Http\Controllers\AccessoriesTypeController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\FishController;
+use App\Http\Controllers\PHController;
 use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -78,19 +83,66 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin-dashboard');
 
-    Route::post('profile', [AdminController::class, 'profile'])->name('admin-profile');
+    Route::get('accessories', [AdminController::class, 'accessories'])->name('admin-accessories');
 
-    Route::get('products', [AdminController::class, 'product'])->name('admin-product');
+    Route::get('fish', [AdminController::class, 'fish'])->name('admin-fish');
 
     Route::get('orders', [AdminController::class, 'order'])->name('admin-order');
 
     Route::get('categories', [AdminController::class, 'category'])->name('admin-categories');
 
-    Route::get('users', [UserController::class, 'index'])->name('admin-index');
+    Route::get('users', [AdminController::class, 'users'])->name('admin-users');
 
+    Route::get('profile', function () {
+      return view('admin.profile');
+    })->name('admin-profile');
+    Route::post('profile', [UserController::class, 'editProfile'])->name('edit-profile');
+
+    Route::get('change-password', function () {
+      return view('admin.change-password');
+    })->name('change-password');
+    Route::post('change-password', [UserController::class, 'changePassword']);
+
+    //  USER
+    // new user
     Route::get('create-new-user', function() {
         return view('admin.new-user');
     })->name('new-user');
     Route::post('create-new-user', [UserController::class, 'createUser']);
+
+    Route::get('users/{id}/edit', [UserController::class, 'edit'])->name('edit-user');
+
+    // PRODUCT
+
+    // accessories type
+    Route::get('create-new-accessories-type', function() {
+        return view('admin.new-accessories-type');
+    })->name('new-accessories-type');
+    Route::post('create-new-accessories-type', [AccessoriesTypeController::class, 'create']);
+
+    // accessories
+    Route::get('create-new-accessory', function() {
+        return view('admin.new-accessory');
+    })->name('new-accessory');
+    Route::post('create-new-accessory', [AccessoriesController::class, 'create']);
+
+    // new product
+    Route::get('create-new-fish', function() {
+        return view('admin.new-fish');
+    })->name('new-fish');
+    Route::post('create-new-fish', [FishController::class, 'create']);
+
+    // new ph
+    Route::get('create-new-ph', function() {
+        return view('admin.new-ph');
+    })->name('new-ph');
+    Route::post('create-new-ph', [PHController::class, 'create']);
+
+    // new color
+    Route::get('create-new-color', function() {
+        return view('admin.new-color');
+    })->name('new-color');
+    Route::post('create-new-color', [ColorController::class, 'create']);
+
 });
 

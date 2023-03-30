@@ -29,3 +29,12 @@ if (btnChangePassword) {
         formChangePassword.classList.toggle('hidden');
     });
 }
+
+
+const message = document.getElementById('message');
+
+if (message) {
+  setTimeout(() => {
+    message.classList.add('hidden');
+  }, 3000);
+}

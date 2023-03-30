@@ -10,7 +10,10 @@
     './resources/js/app.js',
     './resources/js/admin/dashboard.js',
     './resources/js/admin/chart.js',
-    './resources/js/admin/user.js'
+    './resources/js/admin/user.js',
+    './resources/js/admin/slidebar.js',
+    './resources/js/admin/modal.js',
+    './resources/js/complete-info.js',
   ])
   <link rel="shortcut icon" sizes="114x114" href="{{  URL::to('/images/logo.png') }}">
   <link
@@ -43,12 +46,12 @@
             @yield('header')
           </header>
           {{-- Content --}}
-          <main class="mt-2 mx-6 mb-6">
+          <main class="mt-2 mx-6 mb-10">
             @yield('content')
           </main>
   
           {{-- Footer --}}
-          <footer class="mb-2 mx-6 fixed bottom-0">
+          <footer class="mb-2 mx-6 fixed bottom-0 right-0">
             @yield('footer')
           </footer>
   

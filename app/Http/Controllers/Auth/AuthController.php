@@ -32,6 +32,11 @@ class AuthController extends Controller
     public function postLogin(LoginRequest $request)
     {
         $email = $request->input('email');
+        $user = User::where('email', $email)->first();
+        if (!$user) {
+            session()->flash('account-not-exists', 'Account does not exist');
+            return redirect()->route('login');
+        }
         $credentials = $request->only('email', 'password');
         if (Auth::guard('web')->attempt($credentials)) {
             $user = $this->userRepository->getUserByEmail($email);

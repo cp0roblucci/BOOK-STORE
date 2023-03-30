@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ResetPasswordRequest;
+use App\Models\Cart;
 use App\Models\User;
 use App\Repositories\UserRepositoryRepository;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
@@ -40,7 +41,8 @@ class UserController extends Controller
 //      echo $url;
 
       $file = $request->file('file');
-      $result = $request->file->storeOnCloudinaryAs('ct299/admin', 'avatar');
+      $fileName = $file->getClientOriginalName();
+      $result = $request->file->storeOnCloudinaryAs('ct299/admin', 'avatar' .$fileName);
       $avatar = $result->getPath();
       $role = $request->input('role');
       $lastname = $request->input('lastname');
@@ -50,7 +52,7 @@ class UserController extends Controller
       $password = Hash::make($request->input('password'));
       $address= $request->input('address');
 
-      User::create(
+      $user = User::create(
         [
           'role_id' => $role,
           'first_name' => $firstname,
@@ -62,6 +64,10 @@ class UserController extends Controller
           'link_avt' => $avatar
         ]
       );
+
+      Cart::create([
+        'user_id' => $user->id,
+      ]);
       Session::flash('message', 'Create User successfully.');
       return redirect()->route('admin-users');
     }
@@ -81,9 +87,14 @@ class UserController extends Controller
 
     }
 
-    public function edit($id) {
-      $user = User::find($id)->first();
+    public function editUser($id) {
+      $user = User::find($id);
       return view('admin.edit-user', compact('user'));
+    }
+
+    public function updateUser(Request $request) {
+      $file = $request->file('avatar');
+      dd($request, $file);
     }
 
     public function editProfile(Request $request) {
@@ -109,7 +120,6 @@ class UserController extends Controller
       $user = Auth::user();
       $user->password = Hash::make($newPassword);
       $user->save();
-
       return redirect()->route('admin-profile')->with('success', 'Change Password Successfully!');
     }
 }

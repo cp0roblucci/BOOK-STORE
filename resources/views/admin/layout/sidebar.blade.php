@@ -37,6 +37,7 @@
           request()->is('admin/fish')
           || request()->is('admin/accessories')
           || request()->is('admin/create-new-fish')
+          || request()->is('admin/create-new-species')
           || request()->is('admin/create-new-ph')
           || request()->is('admin/create-new-color')
           || request()->is('admin/create-new-accessories-type')
@@ -45,11 +46,12 @@
           : ''
         }}">
           <div class="hover:bg-slate-200 hover:text-blue-100 ml-2 py-1 rounded-sm">
-            <button class="icon__btn--slidebar w-6 h-6 rounded-full hover:bg-blue-100
+            <button class="icon__btn--slidebar w-6 h-6 rounded-full hover:bg-blue-100 hover:text-white
             {{
               request()->is('admin/fish')
               || request()->is('admin/accessories')
               || request()->is('admin/create-new-fish')
+              || request()->is('admin/create-new-species')
               || request()->is('admin/create-new-ph')
               || request()->is('admin/create-new-color')
               || request()->is('admin/create-new-accessories-type')
@@ -67,6 +69,7 @@
           request()->is('admin/fish')
           || request()->is('admin/accessories')
           || request()->is('admin/create-new-fish')
+          || request()->is('admin/create-new-species')
           || request()->is('admin/create-new-ph')
           || request()->is('admin/create-new-color')
           || request()->is('admin/create-new-accessories-type')
@@ -93,6 +96,7 @@
           <div class="btn__slidebar2 cursor-pointer
             {{
               request()->is('admin/create-new-fish')
+              || request()->is('admin/create-new-species')
               || request()->is('admin/create-new-ph')
               || request()->is('admin/create-new-color')
               || request()->is('admin/create-new-accessories-type')
@@ -104,6 +108,7 @@
             <button class="icon__btn--slidebar2 w-4 h-4 rounded-full hover:bg-blue-100 hover:text-white
             {{
               request()->is('admin/create-new-fish')
+              || request()->is('admin/create-new-species')
               || request()->is('admin/create-new-ph')
               || request()->is('admin/create-new-color')
               || request()->is('admin/create-new-accessories-type')
@@ -120,6 +125,7 @@
             class="menu__slidebar2 flex flex-col ml-6 text-14 mt-1 mb-4 transform transition-all duration-200 overflow-hidden
             {{
               request()->is('admin/create-new-fish')
+              || request()->is('admin/create-new-species')
               || request()->is('admin/create-new-ph')
               || request()->is('admin/create-new-color')
               || request()->is('admin/create-new-accessories-type')
@@ -153,6 +159,14 @@
               Fish
             </a>
             <a
+              href="{{ route('new-species') }}"
+              class="transition-all hover:bg-slate-100 py-1 rounded-sm
+              {{ request()->is('admin/create-new-species') ? 'text-blue-100' : '' }}"
+            >
+              <i class="fa-solid fa-circle-dot text-10 text-blue-100 mr-1"></i>
+              Species
+            </a>
+            <a
               href="{{route('new-ph')}}"
               class="transition-all hover:bg-slate-100 py-1 rounded-sm
               {{ request()->is('admin/create-new-ph') ? 'text-blue-100' : '' }}"
@@ -176,7 +190,7 @@
         <div class="btn__slidebar cursor-pointer
         {{ request()->is('admin/users') || request()->is('admin/create-new-user')  ? 'text-purple-400' : ''}}">
           <div class="hover:bg-slate-200 hover:text-purple-400 ml-2 py-1 rounded-sm">
-            <button class="icon__btn--slidebar hover:bg-purple-200 w-6 h-6 rounded-full
+            <button class="icon__btn--slidebar hover:bg-purple-400 hover:text-white w-6 h-6 rounded-full
             {{ request()->is('admin/users') || request()->is('admin/create-new-user') ? 'bg-purple-400 text-white' : '' }}">
               <i class="fa-solid fa-angle-right transform transition-all duration-200"></i>
             </button>
@@ -208,7 +222,7 @@
         <div class="btn__slidebar cursor-pointer
         {{ request()->is('admin/orders') ? 'text-blue-200' : ''}} ">
           <div class="hover:bg-slate-200 hover:text-blue-100 ml-2 py-1 rounded-sm">
-            <button class="icon__btn--slidebar hover:bg-blue-100 w-6 h-6 rounded-full">
+            <button class="icon__btn--slidebar hover:bg-blue-100 hover:text-white w-6 h-6 rounded-full">
               <i class="fa-solid fa-angle-right transform transition-all duration-200"></i>
             </button>
             Orders

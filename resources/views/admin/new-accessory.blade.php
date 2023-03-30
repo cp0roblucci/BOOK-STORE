@@ -14,7 +14,7 @@
       @include('admin.layout.header')
     @endsection
 
-    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Create new Accessories</div>
+    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Add new Accessories</div>
     <div class="">
       <div class="col-span-3 border p-4">
         <form action="" method="post">

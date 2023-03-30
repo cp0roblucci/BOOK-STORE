@@ -54,7 +54,7 @@
                   <i class="fa-solid fa-circle-user cursor-pointer"></i>
                 @else
                   <div class="rounded-md">
-                    <img src="{{ Auth::user()->link_avt }}" alt="avatar" class="w-[18px] h-[18px] rounded-md">
+                    <img src="{{ Auth::user()->link_avt != null ? Auth::user()->link_avt : URL::to('/images/admin/avatar-default.png') }}" alt="avatar" class="w-[18px] h-[18px] rounded-md">
                   </div>
                 @endif
                 <span  class="icon-dropdown cursor-pointer px-2">
@@ -120,7 +120,7 @@
         <div class="py-4 px-6">
           <h4 class="mb-6 mt-4 text-slate-500 font-sora italic">Edit Profile</h4>
           @if(session('success'))
-            <div id="message" class="mébackdrop-blur-2xl absolute top-2 left-[40%] rounded-lg border-l-8 border-l-blue-500 opacity-80">
+            <div id="message" class="backdrop-blur-2xl absolute top-2 left-[40%] rounded-lg border-l-8 border-l-blue-500 opacity-80">
               <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
                 <span class="px-4">{{ session('success') }}</span>
               </div>

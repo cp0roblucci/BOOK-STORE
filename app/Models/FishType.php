@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FishType extends Model
 {
-    protected $table = 'fishtype';
+    protected $table = 'fishspecies';
 
     use HasFactory;
 }

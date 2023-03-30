@@ -14,7 +14,7 @@
       @include('admin.layout.header')
     @endsection
 
-    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Create new PH</div>
+    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Add new PH</div>
     <div class="">
       <div class="col-span-3 border p-4">
         <form action="" method="post">
@@ -42,7 +42,7 @@
             type="submit"
             class="border-2 border-blue-500 p-2 px-6 mt-4 flex hover:bg-slate-100"
           >
-            Create
+            ADD
           </button>
 
         </form>

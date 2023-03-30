@@ -48,6 +48,13 @@
               <div class="flex p-2 py-4 items-center justify-between">
                 <h3 class="text-[#344767] text-20 font-sora">Fish</h3>
               </div>
+              @if(session('success'))
+                <div id="message" class="backdrop-blur-2xl absolute top-2 left-[40%] rounded-lg border-l-8 border-l-blue-500 opacity-80">
+                  <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
+                    <span class="px-4">{{ session('success') }}</span>
+                  </div>
+                </div>
+              @endif
               <div class="flex-auto px-0 pt-0">
                 <div class="p-0 overflow-x-auto place-self-auto">
                   <table class="items-center w-full mb-0 align-top border-collapse text-slate-500">

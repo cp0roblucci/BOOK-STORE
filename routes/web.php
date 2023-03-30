@@ -24,13 +24,9 @@ Route::get('/', function () {
     return view('homepage');
 });
 
-<<<<<<< HEAD
-=======
-
 Route::get('/home', function () {
-    return view('homepage');
-})->name('home');
->>>>>>> 93d54805d16cf62a1d1831583e92c570333894cf
+    return view('home');
+});
 
 Route::get('/products_detail', function () {
     return view('products_detail');
@@ -44,6 +40,9 @@ Route::get('/cart', function () {
     return view('cart');
 });
 
+Route::get('/test', function () {
+    return view('test');
+});
 
 // auth
 

@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 
 class UserController extends Controller
 {
@@ -27,23 +29,9 @@ class UserController extends Controller
 
     public function createUser(Request $request)
     {
-//      dd($request);
-//      $file = $request->file('file');
-//      $response = Cloudinary::upload($file->getRealPath())->getSecurePath();
-
-//      upload vào thư mục ct299/admin ten file la avatar
-      $result = $request->file->storeOnCloudinaryAs('ct299/admin', 'avatar');
-//      echo $result->getPath();
-//      echo "</br>";
-//      echo $result->getPublicId();
-
-//      $url = cloudinary()->getUrl($result->getPublicId());
-//      echo $url;
-
-      $file = $request->file('file');
-      $fileName = $file->getClientOriginalName();
-      $result = $request->file->storeOnCloudinaryAs('ct299/admin', 'avatar' .$fileName);
-      $avatar = $result->getPath();
+      $avatar = $request->file('file');
+      $avatarPath = $avatar->store('public/images/users');
+      $avatarUrl = Storage::url($avatarPath);
       $role = $request->input('role');
       $lastname = $request->input('lastname');
       $firstname = $request->input('firstname');
@@ -61,10 +49,10 @@ class UserController extends Controller
           'email' => $email,
           'password' => $password,
           'user_address' => $address,
-          'link_avt' => $avatar
+          'link_avt' => $avatarUrl
         ]
       );
-
+      // tao cart moi cho nguoi dung
       Cart::create([
         'user_id' => $user->id,
       ]);
@@ -92,9 +80,32 @@ class UserController extends Controller
       return view('admin.edit-user', compact('user'));
     }
 
-    public function updateUser(Request $request) {
-      $file = $request->file('avatar');
-      dd($request, $file);
+    public function updateUser(Request $request, $id) {
+      $file = $request->file('file');
+      $fileName = $file->getClientOriginalName();
+      $result = $request->file->storeOnCloudinaryAs('ct299/admin', 'avatar-' . $fileName);
+      $avatar = $result->getPath();
+
+      $role = $request->input('role');
+      $lastname = $request->input('lastname');
+      $firstname = $request->input('firstname');
+      $phonenumber = $request->input('phonenumber');
+      $email = $request->input('email');
+      $address= $request->input('address');
+
+      DB::table('users')
+        ->whereBetween('id', $id)
+        ->update([
+          'role_id' => $role,
+          'first_name' => $firstname,
+          'last_name' => $lastname,
+          'phone_number' => $phonenumber,
+          'email' => $email,
+          'user_address' => $address,
+          'link_avt' => $avatar
+        ]);
+      Session::flash('message', 'Update User successfully.');
+      return redirect()->route('admin-users');
     }
 
     public function editProfile(Request $request) {

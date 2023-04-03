@@ -1,8 +1,8 @@
-<div class=" select-none items-center ml-2 mr-6 py-2">
+<div class="select-none items-center ml-2 mr-6 py-2">
 
   <div class="flex items-center justify-between">
     <div class="">
-      <div class="text-12 text-slate-400"><span class="text-slate-300">Pages </span> / @yield('path')</div>
+      <div class="text-12 text-slate-400"><span class="text-slate-300">Trang </span> / @yield('path')</div>
     </div>
     {{-- @include('components.admin.form-input') --}}
     <div class="items-center">
@@ -26,7 +26,7 @@
               <div class="w-6 h-6">
                 {{-- <img src="{{Auth::user()->link_avt}}" alt=""> --}}
                 <img
-                  src="{{Auth::user()->link_avt != null ? Auth::user()->link_avt : URL::to('/images/admin/avatar-default.png')}}"
+                  src="{{ Auth::user()->link_avt != null ?  asset(Auth::user()->link_avt) : URL::to('/images/admin/avatar-default.png')}}"
                   alt="avatar"
                   class="w-full h-full rounded-full"
                 >
@@ -46,17 +46,17 @@
             </form>
           </div> --}}
 
-          <div class="menu-dropdown bg-slate-50 min-w-[116px] top-10 right-6 absolute hidden shadow-md text-blue-900 animate-topToBottom leading-[40px] rounded-sm z-10">
+          <div class="menu-dropdown bg-slate-50 min-w-[116px] top-8 right-6 absolute hidden shadow-md text-blue-900 animate-topToBottom leading-[40px] rounded-sm z-10">
             <ul class="">
               <li class="hover:bg-slate-200 hover:rounded-sm px-2 text-center border-b transform transition-all duration-300">
                   <a href="{{ route('admin-profile') }}" type="submit" class="">
-                    My Account
+                    Tài khoản của tôi
                   </a>
                 </form ><li>
               <li class="hover:bg-slate-200 hover:rounded-sm px-2 text-center transform transition-all duration-300">
                 <form action="{{ route('admin-logout')}}" method="post">
                     @csrf
-                  <button type="submit">Logout</button>
+                  <button type="submit">Đăng xuất</button>
                 </form>
               </li>
             </ul>

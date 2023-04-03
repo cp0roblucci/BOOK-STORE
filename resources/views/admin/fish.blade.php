@@ -2,7 +2,7 @@
 
 {{-- set title --}}
 @section('title', 'List Fish')
-@section('path', 'Products / List Fish')
+@section('path', 'Sản phẩm / Danh sách cá')
 
 @section('sidebar')
   @include('admin.layout.sidebar')

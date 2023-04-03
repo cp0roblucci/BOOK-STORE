@@ -25,7 +25,7 @@
               {{-- <img src="{{ URL::to('/images/admin/fish.png')}}" alt="fish" class="w-16 h-16"> --}}
               <div class="flex flex-col text-white">
                 <h2 class="uppercase text-14">Total Products</h2>
-                <span class="font-bold mt-6 text-20">1000+</span>
+                <span class="font-bold mt-6 text-20">{{ $totalProduct }}</span>
               </div>
               <div class="mr-10">
                 <i class="fa-solid fa-basket-shopping text-white text-32"></i>
@@ -51,7 +51,7 @@
               {{-- <img src="{{ URL::to('/images/admin/cart.png')}}" alt="cart" class="w-16 h-16"> --}}
               <div class="flex flex-col text-white">
                 <h2 class="uppercase text-14 ">New Orders</h2>
-                <span class="font-bold mt-6 text-20">45</span>
+                <span class="font-bold mt-6 text-20">{{ $totalOrder }}</span>
               </div>
               <div class="mr-10">
                 <i class="fa-solid fa-cart-shopping text-white text-32"></i>
@@ -62,29 +62,11 @@
         </div>
       </div>
 
-      {{-- Chart --}}
-      <div class="grid grid-cols-4 gap-4 mt-2">
-          <div class="col-span-3">
-              <div class="bar-chart text-center rounded-2xl shadow-md w-full">
-                  <canvas id="barChart"></canvas>
-              </div>
-              <div class="line-chart bg-white rounded-2xl shadow-md hidden">
-                  <canvas id="lineChart"></canvas>
-              </div>
-          </div>
-          <div class="">
-            <span class="flex flex-col bg-white rounded-xl shadow-md h-full">
-              <span class="btn-bar-chart m-2 border border-blue-500 text-center rounded-xl py-2 cursor-pointer hover:opacity-80 shadow-sm">Bar Chart</span>
-              <span class="btn-line-chart m-2 mt-1 border border-purple-500 text-center rounded-xl py-2 cursor-pointer hover:opacity-80 shadow-sm">Line Chart</span>
-            </span>
-          </div>
-        </div>
-
       <div class="grid grid-cols-4 gap-4 mt-6">
         <div class="col-span-3 rounded-2xl">
           <div class="flex flex-wrap -mx-3">
             <div class="flex flex-none w-full max-w-full px-3">
-              <div class="relative flex flex-col w-full h-full mb-6 shadow-md bg-slate-50 rounded-2xl">
+              <div class="flex flex-col w-full h-full mb-6 shadow-md bg-slate-50 rounded-2xl">
                 <div class="p-6 pb-2">
                   <h3 class="text-[#344767] uppercase text-14 font-thin">Top products</h3>
                 </div>
@@ -163,6 +145,17 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+
+      {{-- Chart --}}
+      <div class="grid grid-cols-4 gap-4 mt-6">
+        <div class="bar-chart col-span-4 text-center rounded-2xl shadow-md w-full">
+          <canvas id="barChart"></canvas>
+        </div>
+        <div class="col-span-2 text-center rounded-2xl shadow-md w-full">
+          <canvas id="barChart"></canvas>
         </div>
       </div>
 @endsection

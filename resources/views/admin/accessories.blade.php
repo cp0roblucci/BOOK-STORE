@@ -2,7 +2,7 @@
 
 {{-- set title --}}
 @section('title', 'Products')
-@section('path', 'Products / List Accessories')
+@section('path', 'Sản phẩm / Phụ kiện')
 
 @section('sidebar')
   @include('admin.layout.sidebar')
@@ -18,13 +18,13 @@
       @include('components.admin.form-input')
 
       <div class="bg-slate-50 pt-4 mt-2 rounded-md shadow-md">
-        <h2 class="px-4 uppercase font-semibold text-slate-400">Top Accessories</h2>
+        <h2 class="px-4 uppercase font-semibold text-slate-400">Phụ kiện nổi bật</h2>
         <div class="flex space-x-2 mt-4 px-4 pb-4">
           @for ($i = 1; $i <= 5; $i++)
             <div class="flex w-[190px] shrink-0 flex-col">
               <img
-                src="{{ URL::to('/images/vang.png')}}"
-                alt=""
+                src="{{ URL::to('/storage/images/vang.png')}}"
+                alt="product"
                 class="rounded-2xl"
               >
               <div class="justify-between bg-white mx-4 -mt-8 rounded-xl p-2 shadow-sm">
@@ -46,7 +46,7 @@
           <div class="flex flex-col w-full max-w-full px-3">
             <div class="flex flex-col min-w-[980px] mb-6 bg-white border-0 shadow-md rounded-lg ">
               <div class="flex p-2 py-4 items-center justify-between">
-                <h3 class="text-[#344767] text-20 font-sora">Accessories</h3>
+                <h3 class="text-[#344767] text-20 font-sora">Danh sách Phụ Kiện</h3>
               </div>
               <div class="flex-auto px-0 pt-0">
                 <div class="p-0 overflow-x-auto place-self-auto">
@@ -54,9 +54,10 @@
                     <thead class="align-bottom bg-slate-200 rounded-2xl">
                     <tr class="text-black uppercase text-left text-12">
                       <th class="px-4 py-3 font-bold opacity">#</th>
-                      <th class="px-4 py-3 font-bold ">Accessories Type</th>
-                      <th class="px-4 py-3 font-bold ">Accessories Name</th>
-                      <th class="px-4 py-3 font-bold ">Price</th>
+                      <th class="px-4 py-3 font-bold ">Loại</th>
+                      <th class="px-4 py-3 font-bold ">Tên</th>
+                      <th class="px-4 py-3 font-bold ">Giá</th>
+                      <th class="px-4 py-3 font-bold ">Số lượng</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -82,6 +83,11 @@
                             <h6 class="mb-0 text-sm leading-normal">{{ $accessory->$accessories_price }}</h6>
                           </div>
                         </td>
+                        {{-- <td class="p-4 bg-transparent">
+                          <div class="px-2 py-1">
+                            <h6 class="mb-0 text-sm leading-normal">{{ $accessory->$accessories_quantity }}</h6>
+                          </div>
+                        </td> --}}
                         <td class="p-4 bg-transparent">
                           <form action="" method="post" class="px-2 py-1">
                             @csrf

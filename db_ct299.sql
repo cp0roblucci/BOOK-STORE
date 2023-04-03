@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2023 at 06:21 PM
+-- Generation Time: Apr 03, 2023 at 07:26 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ornamental-fish-store`
+-- Database: `ornamental-fish-store1`
 --
 
 -- --------------------------------------------------------
@@ -39,31 +39,6 @@ CREATE TABLE `accessories` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accessoriescartdetail`
---
-
-CREATE TABLE `accessoriescartdetail` (
-  `CART_ID` char(6) NOT NULL,
-  `ACCESSORIES_ID` char(6) NOT NULL,
-  `ACD_QUANTITY` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accessoriesorderdetail`
---
-
-CREATE TABLE `accessoriesorderdetail` (
-  `ORDER_ID` char(6) NOT NULL,
-  `ACCESSORIES_ID` char(6) NOT NULL,
-  `AOD_PRICE` int(11) DEFAULT NULL,
-  `AOD_QUANTITY` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `accessoriestype`
 --
 
@@ -79,17 +54,30 @@ CREATE TABLE `accessoriestype` (
 --
 
 CREATE TABLE `cart` (
-  `CART_ID` char(6) NOT NULL,
-  `ID` char(6) NOT NULL
+  `CART_ID` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`CART_ID`, `ID`) VALUES
-('1', '1'),
-('2', '2');
+INSERT INTO `cart` (`CART_ID`, `user_id`, `created_at`, `updated_at`) VALUES
+(4, 24, '2023-04-03 17:04:24', '2023-04-03 17:04:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cartdetail`
+--
+
+CREATE TABLE `cartdetail` (
+  `CART_ID` int(11) NOT NULL,
+  `product_id` char(6) NOT NULL,
+  `QUANTITY` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -133,31 +121,6 @@ CREATE TABLE `fish` (
   `FISH_HABIT` varchar(30) DEFAULT NULL,
   `FISH_DESC` text DEFAULT NULL,
   `FISH_LINK_IMG` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `fishcartdetail`
---
-
-CREATE TABLE `fishcartdetail` (
-  `CART_ID` char(6) NOT NULL,
-  `FISH_ID` char(6) NOT NULL,
-  `FCD_QUANTITY` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `fishorderdetail`
---
-
-CREATE TABLE `fishorderdetail` (
-  `ORDER_ID` char(6) NOT NULL,
-  `FISH_ID` char(6) NOT NULL,
-  `FOD_PRICE` float DEFAULT NULL,
-  `FOD_QUANTITY` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -238,6 +201,19 @@ CREATE TABLE `order` (
   `ID` char(6) NOT NULL,
   `ORDER_DATE` datetime DEFAULT NULL,
   `ORDER_DELIVERY_ADDRESS` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orderdetail`
+--
+
+CREATE TABLE `orderdetail` (
+  `ORDER_ID` char(6) NOT NULL,
+  `product_id` char(6) NOT NULL,
+  `PRICE` float DEFAULT NULL,
+  `QUANTITY` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -351,10 +327,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `first_name`, `last_name`, `phone_number`, `user_address`, `google_id`, `link_avt`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, '1', 'Truong', 'Tran Van', '123123124', 'An Khanh, Ninh Kieu, Can Tho', NULL, '', 'vantruong@gmail.com', '$2y$10$yVvF2s4mhtYbp/cti4YgyexZ4D7ntwMJh2HXFGhGkwSnopfLcLSVe', '57rLVVBDlSBkAlRLVjnV0vMwB2VxRV4ipfexVtGxSnWqtbEgVDfnWy8Nxljb', NULL, NULL),
+(1, '1', 'Truong', 'Tran Van', '123123124', 'An Khanh, Ninh Kieu, Can Tho', NULL, '', 'vantruong@gmail.com', '$2y$10$yVvF2s4mhtYbp/cti4YgyexZ4D7ntwMJh2HXFGhGkwSnopfLcLSVe', '3VaffTFfnr2CkVkNN7P5mdqksWeN2R168mtqbskmbMATvDmUq9rJuRH0ZtoG', NULL, NULL),
 (2, '0', 'Truong 2', 'Tran Van', '1412312', 'An Khanh, Ninh Kieu, Can Tho', NULL, '', 'vantruong2@gmail.com', '$2y$10$x8dJV84R/9.yAI.cwozA2.5tCcVET2ztAMRnL1MaGWCiAM.ZXU8yK', 'P4RV5SCsUypP8FncWVVSHCnPW7ooxAtcBr43fmWE6wkdhHwMNC9D5SZTyAII', NULL, NULL),
 (19, '0', 'Van', 'Truong', NULL, NULL, NULL, NULL, 'vantruong3@gmail.com', '$2y$10$WwCQ5IjAi7n4ZhklezO8wuFgZ9//Uq4LZ7Clw/f2rvV597UFycg2y', NULL, '2023-03-13 09:07:58', '2023-03-13 09:07:58'),
-(22, '0', 'Van', 'Truong', NULL, NULL, '103144632167425600074', NULL, 'vantruongvtd02@gmail.com', '', NULL, '2023-03-13 09:23:27', '2023-03-13 09:23:27');
+(22, '0', 'Van', 'Truong', NULL, NULL, '103144632167425600074', NULL, 'vantruongvtd02@gmail.com', '', NULL, '2023-03-13 09:23:27', '2023-03-13 09:23:27'),
+(24, '1', 'Trường', 'Trần Văn', '0123123123', 'Ninh Kiều, Cần Thơ', NULL, '/storage/images/users/nA9cbCoQLgYLJz6tvO5LUFrQREwnceu4BInBfh01.png', 'admin@gmail.com', '$2y$10$Zi3w9kihSDcpYsUbOoJGvehcS.cCJz15i79P7sJhOgPN0.HbiNypi', NULL, '2023-04-03 17:04:24', '2023-04-03 17:04:24');
 
 --
 -- Indexes for dumped tables
@@ -368,20 +345,6 @@ ALTER TABLE `accessories`
   ADD KEY `FK_ACCESSOR_GOM_NHUNG_ACCESSOR` (`ACCESSORIES_TYPE_ID`);
 
 --
--- Indexes for table `accessoriescartdetail`
---
-ALTER TABLE `accessoriescartdetail`
-  ADD PRIMARY KEY (`CART_ID`,`ACCESSORIES_ID`),
-  ADD KEY `FK_ACCESSOR_RELATIONS_ACCESSOR` (`ACCESSORIES_ID`);
-
---
--- Indexes for table `accessoriesorderdetail`
---
-ALTER TABLE `accessoriesorderdetail`
-  ADD PRIMARY KEY (`ORDER_ID`,`ACCESSORIES_ID`),
-  ADD KEY `fk_accessories_accessories` (`ACCESSORIES_ID`);
-
---
 -- Indexes for table `accessoriestype`
 --
 ALTER TABLE `accessoriestype`
@@ -392,7 +355,14 @@ ALTER TABLE `accessoriestype`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`CART_ID`),
-  ADD KEY `ID` (`ID`);
+  ADD KEY `ID` (`user_id`);
+
+--
+-- Indexes for table `cartdetail`
+--
+ALTER TABLE `cartdetail`
+  ADD PRIMARY KEY (`CART_ID`),
+  ADD KEY `FK_ACCESSOR_RELATIONS_ACCESSOR` (`product_id`);
 
 --
 -- Indexes for table `color`
@@ -416,20 +386,6 @@ ALTER TABLE `fish`
   ADD KEY `FK_FISH_SONG_O_PH` (`PH_LEVEL`),
   ADD KEY `FK_FISH_THUOCLOAI_FISHTYPE` (`FISH_TYPE`),
   ADD KEY `fk_fish_size` (`fish_size`);
-
---
--- Indexes for table `fishcartdetail`
---
-ALTER TABLE `fishcartdetail`
-  ADD PRIMARY KEY (`CART_ID`,`FISH_ID`),
-  ADD KEY `FK_FISHCART_RELATIONS_FISH` (`FISH_ID`);
-
---
--- Indexes for table `fishorderdetail`
---
-ALTER TABLE `fishorderdetail`
-  ADD PRIMARY KEY (`ORDER_ID`,`FISH_ID`),
-  ADD KEY `FK_FISHORDE_RELATIONS_FISH` (`FISH_ID`);
 
 --
 -- Indexes for table `fishspecies`
@@ -468,6 +424,13 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `order`
   ADD PRIMARY KEY (`ORDER_ID`);
+
+--
+-- Indexes for table `orderdetail`
+--
+ALTER TABLE `orderdetail`
+  ADD PRIMARY KEY (`ORDER_ID`),
+  ADD KEY `fk_accessories_accessories` (`product_id`);
 
 --
 -- Indexes for table `password_reset_tokens`
@@ -522,6 +485,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `CART_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -543,7 +512,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
@@ -556,18 +525,16 @@ ALTER TABLE `accessories`
   ADD CONSTRAINT `FK_ACCESSOR_GOM_NHUNG_ACCESSOR` FOREIGN KEY (`ACCESSORIES_TYPE_ID`) REFERENCES `accessoriestype` (`ACCESSORIES_TYPE_ID`);
 
 --
--- Constraints for table `accessoriescartdetail`
+-- Constraints for table `cart`
 --
-ALTER TABLE `accessoriescartdetail`
-  ADD CONSTRAINT `FK_ACCESSOR_RELATIONS_ACCESSOR` FOREIGN KEY (`ACCESSORIES_ID`) REFERENCES `accessories` (`ACCESSORIES_ID`),
-  ADD CONSTRAINT `FK_ACCESSOR_RELATIONS_CART` FOREIGN KEY (`CART_ID`) REFERENCES `cart` (`CART_ID`);
+ALTER TABLE `cart`
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `accessoriesorderdetail`
+-- Constraints for table `cartdetail`
 --
-ALTER TABLE `accessoriesorderdetail`
-  ADD CONSTRAINT `fk_accessories_accessories` FOREIGN KEY (`ACCESSORIES_ID`) REFERENCES `accessories` (`ACCESSORIES_ID`),
-  ADD CONSTRAINT `fk_accessories_order` FOREIGN KEY (`ORDER_ID`) REFERENCES `order` (`ORDER_ID`);
+ALTER TABLE `cartdetail`
+  ADD CONSTRAINT `fk_cart` FOREIGN KEY (`CART_ID`) REFERENCES `cart` (`CART_ID`);
 
 --
 -- Constraints for table `fish`
@@ -577,20 +544,6 @@ ALTER TABLE `fish`
   ADD CONSTRAINT `FK_FISH_SONG_O_PH` FOREIGN KEY (`PH_LEVEL`) REFERENCES `ph` (`PH_LEVEL`),
   ADD CONSTRAINT `FK_FISH_THUOCLOAI_FISHTYPE` FOREIGN KEY (`FISH_TYPE`) REFERENCES `fishspecies` (`fish_species`),
   ADD CONSTRAINT `fk_fish_size` FOREIGN KEY (`fish_size`) REFERENCES `size` (`size`);
-
---
--- Constraints for table `fishcartdetail`
---
-ALTER TABLE `fishcartdetail`
-  ADD CONSTRAINT `FK_FISHCART_RELATIONS_CART` FOREIGN KEY (`CART_ID`) REFERENCES `cart` (`CART_ID`),
-  ADD CONSTRAINT `FK_FISHCART_RELATIONS_FISH` FOREIGN KEY (`FISH_ID`) REFERENCES `fish` (`FISH_ID`);
-
---
--- Constraints for table `fishorderdetail`
---
-ALTER TABLE `fishorderdetail`
-  ADD CONSTRAINT `FK_FISHORDE_RELATIONS_FISH` FOREIGN KEY (`FISH_ID`) REFERENCES `fish` (`FISH_ID`),
-  ADD CONSTRAINT `FK_FISHORDE_RELATIONS_ORDER` FOREIGN KEY (`ORDER_ID`) REFERENCES `order` (`ORDER_ID`);
 
 --
 -- Constraints for table `fish_food`
@@ -605,6 +558,12 @@ ALTER TABLE `fish_food`
 ALTER TABLE `has_size`
   ADD CONSTRAINT `fk_size` FOREIGN KEY (`size`) REFERENCES `size` (`size`),
   ADD CONSTRAINT `fk_species` FOREIGN KEY (`fish_species`) REFERENCES `fishspecies` (`fish_species`);
+
+--
+-- Constraints for table `orderdetail`
+--
+ALTER TABLE `orderdetail`
+  ADD CONSTRAINT `fk_accessories_order` FOREIGN KEY (`ORDER_ID`) REFERENCES `order` (`ORDER_ID`);
 
 --
 -- Constraints for table `supplierinvoice`

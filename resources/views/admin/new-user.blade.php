@@ -14,7 +14,7 @@
       @include('admin.layout.header')
     @endsection
 
-    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Create new User</div>
+    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Tạo mới người dùng</div>
     <div class="border p-4">
       <form action="" method="post" enctype="multipart/form-data">
         @csrf
@@ -28,7 +28,7 @@
               > --}}
               <img
                 id="img-preview"
-                src="{{ URL::to('/images/admin/avatar-default.png')}}"
+                src="{{ URL::to('/storage/images/admin/avatar-default.png')}}"
                 alt="avatar"
                 class="w-full h-full rounded-full"
               >
@@ -53,7 +53,7 @@
                 class="h-4 w-4 cursor-pointer peer/customer"
                 checked
               >
-              <label for="customer" class="peer-checked/customer:text-blue-200">Customer</label>
+              <label for="customer" class="peer-checked/customer:text-blue-200">Khách Hàng</label>
             </div>
             <div class="">
               <input
@@ -63,7 +63,7 @@
                 value="1"
                 class="h-4 w-4 cursor-pointer peer/admin"
               >
-              <label for="admin" class="peer-checked/admin:text-blue-200">Admin</label>
+              <label for="admin" class="peer-checked/admin:text-blue-200">Quản Trị Viên</label>
             </div>
 
           </div>
@@ -75,14 +75,14 @@
               for="lastname"
               class="text-slate-500 text-14"
             >
-              Last name
+              Họ
             </label><br>
             <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
               <i class="fa-regular fa-user px-2"></i>
               <input
                 type="text"
                 name="lastname"
-                placeholder="Last name"
+                placeholder="Vd: Nguyễn Văn"
                 class="py-1.5 w-full outline-none rounded-lg placeholder:text-14 text-14"
               >
             </div>
@@ -93,14 +93,14 @@
               for="firstname"
               class="text-slate-500 text-14"
             >
-              First name
+              Tên
             </label><br>
             <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
               <i class="fa-regular fa-user px-2 group"></i>
               <input
                 type="text"
                 name="firstname"
-                placeholder="First name"
+                placeholder="Vd: A"
                 class="py-1.5 w-full outline-none rounded-lg placeholder:text-14 text-14"
               >
             </div>
@@ -111,7 +111,7 @@
               for="phonenumber"
               class="text-slate-500 text-14"
             >
-              Phone number
+              Số điện thoại
             </label><br>
             <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
               <i class="fa-solid fa-mobile-screen px-2"></i>
@@ -148,7 +148,7 @@
             for="address"
             class="text-slate-500 text-14"
           >
-            Address
+            Địa chỉ
           </label><br>
           <div class="border-[1.5px] mt-1">
             <input
@@ -165,7 +165,7 @@
             for="password"
             class="text-slate-500 text-14"
           >
-            Password
+            Mật khẩu
           </label><br>
           <div class="border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
             <input
@@ -181,7 +181,7 @@
           type="submit"
           class="border-2 border-blue-500 p-2 px-6 mt-4 flex hover:bg-slate-100"
         >
-          ADD
+          Thêm
         </button>
 
       </form>

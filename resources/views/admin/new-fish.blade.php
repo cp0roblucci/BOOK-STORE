@@ -2,7 +2,7 @@
 
 {{-- set title --}}
 @section('title', 'Create new Fish')
-@section('path', 'Create new / Fish')
+@section('path', 'Thêm mới / Cá')
 
 @section('sidebar')
   @include('admin.layout.sidebar')
@@ -14,7 +14,7 @@
       @include('admin.layout.header')
     @endsection
 
-    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Add new Fish</div>
+    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Thêm Cá mới</div>
     <div class="">
       <div class="col-span-3 border p-4">
         <form action="" method="post">
@@ -28,7 +28,7 @@
               > --}}
               <img
                 id="img-preview"
-                src="{{ URL::to('/images/admin/fish-default.png')}}"
+                src="{{ URL::to('/storage/images/admin/fish-default.png')}}"
                 alt="image-product"
                 class="w-full h-full"
               >
@@ -50,7 +50,7 @@
                 for="species"
                 class="text-slate-500 text-14"
               >
-              Species
+              Loài cá
               </label><br>
               <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
                 <select
@@ -69,13 +69,13 @@
                 for="fish_id"
                 class="text-slate-500 text-14"
               >
-                ID
+                Mã sản phẩm
               </label><br>
               <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
                 <input
                   type="text"
                   name="fish_id"
-                  placeholder="Id"
+                  placeholder="Nhập mã"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14"
                 >
               </div>
@@ -87,13 +87,13 @@
                 for="fish_name"
                 class="text-slate-500 text-14"
               >
-                Name
+                Tên
               </label><br>
               <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
                 <input
                   type="text"
                   name="fish_name"
-                  placeholder="Name"
+                  placeholder="Nhập tên"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14"
                 >
               </div>
@@ -105,7 +105,7 @@
                 for="ph_level"
                 class="text-slate-500 text-14"
               >
-                PH Level
+                Độ PH
               </label><br>
               <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
                 <select
@@ -168,13 +168,13 @@
               for="habit"
               class="text-slate-500 text-14"
             >
-              Habit
+              Thói quen, tập tính
             </label><br>
             <div class="border-[1.5px] mt-1">
               <input
                 type="text"
                 name="habit"
-                placeholder="Habit"
+                placeholder="Nhập"
                 class="pb-11 pt-1 w-full outline-none focus-within:border-blue-500 px-2 placeholder:text-14 text-14"
               >
             </div>
@@ -185,13 +185,13 @@
               for="description"
               class="text-slate-500 text-14"
             >
-              Description
+              Mô tả
             </label><br>
             <div class="border-[1.5px] mt-1">
               <input
                 type="text"
                 name="description"
-                placeholder="Description"
+                placeholder="Nhập"
                 class="pb-11 pt-1 w-full outline-none focus-within:border-blue-500 px-2 placeholder:text-14 text-14"
               >
             </div>
@@ -202,7 +202,7 @@
             type="submit"
             class="border-2 border-blue-500 p-2 px-6 mt-4 flex hover:bg-slate-100"
           >
-            ADD
+            Thêm
           </button>
 
         </form>

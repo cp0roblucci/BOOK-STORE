@@ -20,7 +20,7 @@
 <body class="scrollbar-thin scroll-smooth scrollbar-thumb-rounded-lg scrollbar-thumb-slate-400 scrollbar-track-gray-100 bg-slate-200">
 
   <div
-    style="background-image: url('/images/admin/cover-image-profile.jpg")
+    style="background-image: url('/storage/images/admin/cover-image-profile.jpg")
     class="absolute w-full min-h-[50%] bg-cover">
   </div>
   <div class="app p-4 px-20">

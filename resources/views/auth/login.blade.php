@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Sign In</title>
+  <title>Đăng nhập</title>
   @vite(['./resources/css/app.css', './resources/js/login.js'])
   <link rel="shortcut icon" sizes="114x114" href="{{  URL::to('/images/logo.png') }}">
   <link
@@ -34,8 +34,8 @@
         <div id="formLogin" class="login flex w-[70%] h-[90%] ml-8">
           <div class="p-6 w-full">
             <div class="mt-10 mb-6">
-              <h2 class="text-26 font-bold text-[#344767] font-sora mb-1">Sign In</h2>
-              <span class="text-16 text-slate-400">Enter your email and password to sign in</span>
+              <h2 class="text-26 font-bold text-[#344767] font-sora mb-1">Đăng nhập</h2>
+              <span class="text-14 text-slate-400">Nhập email và mật khẩu của bạn để đăng nhập</span>
             </div>
             <form action="{{ route('login') }}" method="post">
               @csrf
@@ -62,7 +62,7 @@
                     id="password-login"
                     type="password"
                     name="password"
-                    placeholder="Password"
+                    placeholder="Mật khẩu"
                     class=" p-[10px] text-14 outline-none w-full placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-blue-500' }}"
                   >
                   @if ($errors->has('password'))
@@ -77,32 +77,32 @@
                   <i id="iconShowPassLogin" class="fa-regular fa-eye hidden absolute text-14 right-6 top-4 cursor-pointer text-slate-500"></i>
                 </div>
               </div>
-                <div class="flex mb-4 relative">
-                  <input
-                    id="rememberMe"
-                    type="checkbox"
-                    name="rememberme"
-                    class="appearance-none w-10 h-5 rounded-[10px] bg-zinc-700/10 border transform transition-all
-                    after:content[''] after:bg-white after:w-4 after:h-4 after:rounded-[10px] after:shadow-2xl after:duration-[250ms] relative after:absolute after:top-[1px] after:left-[1px] checked:after:translate-x-5 checked:bg-blue-400 checked:border-slate-300 cursor-pointer"
-                  >
-                  <label for="rememberMe" class="text-slate-600 text-14 ml-2">Remember me</label>
-                </div>
+{{--                <div class="flex mb-4 relative">--}}
+{{--                  <input--}}
+{{--                    id="rememberMe"--}}
+{{--                    type="checkbox"--}}
+{{--                    name="rememberme"--}}
+{{--                    class="appearance-none w-10 h-5 rounded-[10px] bg-zinc-700/10 border transform transition-all--}}
+{{--                    after:content[''] after:bg-white after:w-4 after:h-4 after:rounded-[10px] after:shadow-2xl after:duration-[250ms] relative after:absolute after:top-[1px] after:left-[1px] checked:after:translate-x-5 checked:bg-blue-400 checked:border-slate-300 cursor-pointer"--}}
+{{--                  >--}}
+{{--                  <label for="rememberMe" class="text-slate-600 text-14 ml-2">Ghi nhớ tôi</label>--}}
+{{--                </div>--}}
                 <button
                   type="submit"
                   class="bg-blue-200 w-full rounded-lg py-[10px] font-bold text-14 text-slate-100 transform transition-all duration-300 active:shadow-none active:translate-y-[5px] hover:bg-blue-400"
                 >
-                  Sign in
+                  Đăng nhập
                 </button>
             </form>
             <div class="mt-2 text-12 text-blue-100">
-                <a href="{{ route('forgot-password') }}" class="">Forgot password?</a>
+                <a href="{{ route('forgot-password') }}" class="">Quên mật khẩu</a>
             </div>
             <div class="relative mt-6">
               <div class="w-full border-b h-0.5 text-center">
               </div>
                 <label class=""></label>
                 <span class="inline px-2 bg-white absolute left-[45%] -top-3 text-14">
-                  Or
+                  Hoặc
                 </span>
             </div>
 
@@ -123,8 +123,8 @@
 
             <div class="mt-4 text-center text-14">
               <h4>
-                Don't have an account?
-                <a href="/register" id="sign-up" class="text-blue-200">Sign up</a>
+                Bạn chưa có tài khoản?
+                <a href="/register" id="sign-up" class="text-blue-200">Đăng ký</a>
               </h4>
             </div>
 

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Accessories;
+use App\Models\Fish;
+use App\Models\Order;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,9 +16,19 @@ use Illuminate\Support\Facades\DB;
 class AdminController extends Controller
 {
     public function dashboard() {
-        $totalCustomer = User::where('role_id', '=',  0)->count();
-        // dd($totalCustomers);
-        return view('admin.dashboard', compact('totalCustomer'));
+      // tong sl ca
+      $fish = Fish::all()->count();
+      // tong sl phu kien
+      $accessories = Accessories::all()->count();
+      // tong sl san pham
+      $totalProduct = $fish + $accessories;
+      // tong sl customer
+      $totalCustomer = User::where('role_id', '=',  0)->count();
+      // dd($totalCustomers);
+
+      $totalOrder = Order::all()->count();
+
+      return view('admin.dashboard', compact('totalCustomer', 'totalProduct', 'totalOrder'));
     }
 
     public function accessories(Request $request) {

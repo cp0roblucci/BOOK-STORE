@@ -30,17 +30,16 @@
 
   {{-- <div class="fixed w-full min-h-[18.75rem]"></div> --}}
   <div class="app">
-      
+
       <div @click.outside class="flex">
-        
+
         <aside class="slide-bar max-h-[100vh] w-[20%] bg-white sticky top-0 transform transition-all duration-500">
           @yield('sidebar')
         </aside>
-      
-        
+
+
         <div class="content bg-white w-full ml-auto mr-auto transform transition-all duration-500">
 
-          
           {{-- Header --}}
           <header class="bg-white sticky top-0 border-b">
             @yield('header')
@@ -49,17 +48,17 @@
           <main class="mt-2 mx-6 mb-10">
             @yield('content')
           </main>
-  
+
           {{-- Footer --}}
           <footer class="mb-2 mx-6 fixed bottom-0 right-0">
             @yield('footer')
           </footer>
-  
+
         </div>
-  
+
       </div>
     </div>
-  
+
   </div >
 
 </body>

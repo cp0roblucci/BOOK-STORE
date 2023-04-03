@@ -97,7 +97,7 @@
       <div class="backdrop-blur-xl flex justify-between items-center mb-6 p-4 rounded-md shadow-md">
         <div class="flex">
           <div class="rounded-md relative">
-            <img src="{{ Auth::user()->link_avt }}" alt="avatar" class="w-20 h-20 rounded-md border border-white">
+            <img src="{{ Auth::user()->link_avt != null ? Auth::user()->link_avt : URL::to('/images/admin/avatar-default.png') }}" alt="avatar" class="w-20 h-20 rounded-md">
 {{--            <a href="" class="absolute -bottom-3 -right-3 text-white py-1 px-2 bg-slate-400 rounded-full">--}}
 {{--              <i class="fa-solid fa-camera"></i>--}}
 {{--            </a>--}}

@@ -23,7 +23,7 @@
   <div class="app p-2 h-screen relative">
     <div
       id="imageLogin1"
-      style="background-image: url('/images/login/login.jpg')"
+      style="background-image: url('/storage/images/login/login.jpg')"
       class="w-[50%] h-[96%] mt-0.5 rounded-xl absolute z-10 bg-cover translate-x-[96%] transform transition-all ease-linear duration-700">
     </div>
 

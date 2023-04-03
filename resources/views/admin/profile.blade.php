@@ -54,7 +54,7 @@
                   <i class="fa-solid fa-circle-user cursor-pointer"></i>
                 @else
                   <div class="rounded-md">
-                    <img src="{{ Auth::user()->link_avt != null ? Auth::user()->link_avt : URL::to('/images/admin/avatar-default.png') }}" alt="avatar" class="w-[18px] h-[18px] rounded-md">
+                    <img src="{{ Auth::user()->link_avt != null ? Auth::user()->link_avt : URL::to('/storage/images/admin/avatar-default.png') }}" alt="avatar" class="w-[18px] h-[18px] rounded-md">
                   </div>
                 @endif
                 <span  class="icon-dropdown cursor-pointer px-2">

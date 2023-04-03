@@ -2,7 +2,7 @@
 
 {{-- set title --}}
 @section('title', 'Create new User')
-@section('path', 'Users / New User')
+@section('path', 'Người dùng / Chỉnh sửa')
 
 @section('sidebar')
   @include('admin.layout.sidebar')

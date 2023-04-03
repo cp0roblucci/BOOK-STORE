@@ -15,7 +15,7 @@
     './resources/js/admin/modal.js',
     './resources/js/complete-info.js',
   ])
-  <link rel="shortcut icon" sizes="114x114" href="{{  URL::to('/images/logo.png') }}">
+  <link rel="shortcut icon" sizes="114x114" href="{{  URL::to('/storage/images/logo.png') }}">
   <link
   href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&display=swap"
   rel="stylesheet"
@@ -44,6 +44,7 @@
           <header class="bg-white sticky top-0 border-b">
             @yield('header')
           </header>
+          
           {{-- Content --}}
           <main class="mt-2 mx-6 mb-10">
             @yield('content')

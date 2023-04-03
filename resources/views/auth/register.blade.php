@@ -24,7 +24,7 @@
 
     <div
       id="imageLogin2"
-      style="background-image: url('/images/login/login2.jpg')"
+      style="background-image: url('/storage/images/login/login2.jpg')"
       class="w-[50%] h-[96%] mt-0.5 rounded-xl absolute bg-cover translate-x-2 transform transition-all ease-linear duration-700">
     </div>
 

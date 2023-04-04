@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Sign Up</title>
+  <title>Đăng Ký</title>
   @vite(['./resources/css/app.css', './resources/js/login.js'])
   <link rel="shortcut icon" sizes="114x114" href="{{  URL::to('/images/logo.png') }}">
   <link
@@ -24,7 +24,7 @@
 
     <div
       id="imageLogin2"
-      style="background-image: url('/images/login/login2.jpg')"
+      style="background-image: url('/storage/images/login/login2.jpg')"
       class="w-[50%] h-[96%] mt-0.5 rounded-xl absolute bg-cover translate-x-2 transform transition-all ease-linear duration-700">
     </div>
 
@@ -40,8 +40,8 @@
           <div class="px-6 py-2 w-full">
             <div class="mb-4">
               <h2 class="text-24 text-center font-bold text-[#344767] font-sora mb-1">
-                Sign Up
-                <span class="text-16 text-slate-400">with</span >
+                Đăng Ký
+                <span class="text-14 text-slate-400">với</span >
               </h2>
               <div class="flex justify-center">
                 <a href="{{ route('login-google') }}" class="inline-block border px-4 py-2 rounded-lg">
@@ -57,11 +57,11 @@
                     </svg>
                 </a>
               </div>
-              <h6 class="text-16 text-center text-slate-400 mb-2">or</h6>
+              <h6 class="text-16 text-center text-slate-400 mb-2">Hoặc</h6>
                 @if(session()->has('email-exists'))
                     <span class="text-16 text-red-400 ml-1">
-                        Account already exists.
-                        <a href="/login" class="text-purple-400 ml-2 p-1 rounded-lg border hover:bg-purple-50">Sign in now</a>
+                        Tài khoản đã tồn tại.
+                        <a href="/login" class="text-purple-400 ml-2 p-1 rounded-lg border hover:bg-purple-50">Đăng nhập ngay</a>
                     </span>
                 @endif
 
@@ -73,29 +73,29 @@
                 <div class="grid grid-cols-2 gap-2 mb-2">
                   <div class="flex flex-col">
                     <input
+                      id="last-name"
+                      type="text"
+                      name="lastname"
+                      placeholder="Họ"
+                      class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}"
+                    >
+                    @if ($errors->has('lastname'))
+                      @foreach ($errors->get('lastname') as $error)
+                        <span id="message-lastname" class="text-10 ml-2 text-red-500">* {{ $error }}</span>
+                      @endforeach
+                    @endif
+                  </div>
+                  <div class="flex flex-col">
+                    <input
                     id="first-name"
                     type="text"
                     name="firstname"
-                    placeholder="First name"
+                    placeholder="Tên"
                     class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}"
                   >
                   @if ($errors->has('firstname'))
                   @foreach ($errors->get('firstname') as $error)
                     <span id="message-firstname" class="text-10 ml-2 text-red-500">* {{ $error }}</span>
-                  @endforeach
-                  @endif
-                  </div>
-                  <div class="flex flex-col">
-                    <input
-                    id="last-name"
-                    type="text"
-                    name="lastname"
-                    placeholder="Lastname"
-                    class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}"
-                  >
-                  @if ($errors->has('lastname'))
-                  @foreach ($errors->get('lastname') as $error)
-                    <span id="message-lastname" class="text-10 ml-2 text-red-500">* {{ $error }}</span>
                   @endforeach
                   @endif
                   </div>
@@ -119,7 +119,7 @@
                     id="password-register"
                     type="password"
                     name="password"
-                    placeholder="Password"
+                    placeholder="Mật khẩu"
                     class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}"
                   >
                   <div id="message-password-register"   class="" >
@@ -137,7 +137,7 @@
                     id="confirm-password-register"
                     type="password"
                     name="password_confirmation"
-                    placeholder="Confirm password"
+                    placeholder="Xác nhận mật khẩu"
                     class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}"
                   >
                   @if ($errors->has('password_confirmation'))
@@ -158,7 +158,7 @@
                             class="appearance-none w-10 h-5 rounded-[10px] bg-zinc-700/10 border transform transition-all after:content[''] after:bg-white after:w-4 after:h-4 after:rounded-[10px] after:shadow-2xl after:duration-[250ms] relative after:absolute after:top-[1px] after:left-[1px] checked:after:translate-x-5 checked:bg-purple-400 checked:border-slate-300 cursor-pointer"
                         >
                         <label for="condition" class="text-slate-600 text-14 ml-2">
-                            I agree the <span class="font-bold">Terms and Conditions</span>
+                          Tôi đồng ý với các <span class="font-bold">Điều khoản và Điều kiện</span>
                         </label>
                     </div>
 
@@ -172,14 +172,14 @@
                   type="submit"
                   class="bg-purple-400 w-full rounded-lg py-[10px] font-bold text-14 text-slate-100 transform transition-all duration-300 active:shadow-none active:translate-y-[5px] hover:bg-purple-500"
                 >
-                  Sign Up
+                  Đăng Ký
                 </button>
             </form>
 
             <div class="mt-2 text-center text-14">
               <h4>
-                Already have an account?
-                <a href="/login" id="sign-in" class="text-purple-400">Sign in</a>
+                Bạn đã có tài khoản?
+                <a href="/login" id="sign-in" class="text-purple-400">Đăng nhập</a>
               </h4>
             </div>
 

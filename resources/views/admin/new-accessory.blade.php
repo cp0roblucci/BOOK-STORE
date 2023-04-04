@@ -2,7 +2,7 @@
 
 {{-- set title --}}
 @section('title', 'Create new Accessories')
-@section('path', 'Create new / Accessories')
+@section('path', 'Tạo mới / Phụ kiện')
 
 @section('sidebar')
   @include('admin.layout.sidebar')
@@ -14,7 +14,7 @@
       @include('admin.layout.header')
     @endsection
 
-    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Create new Accessories</div>
+    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Thêm phụ kiện mới</div>
     <div class="">
       <div class="col-span-3 border p-4">
         <form action="" method="post">
@@ -28,7 +28,7 @@
                 > --}}
                 <img
                   id="img-preview"
-                  src="{{ URL::to('/images/admin/menu.png')}}"
+                  src="{{ URL::to('/storage/images/admin/menu.png')}}"
                   alt="accessories-img"
                   class="w-full h-full"
                 >
@@ -47,15 +47,14 @@
           <div class="grid grid-cols-2 gap-4">
             <div class="">
               <label
-                for="phonenumber"
+                for="accessories-type"
                 class="text-slate-500 text-14"
               >
-              Accessories Type
+              Loại phụ kiện
               </label><br>
               <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
                 <select
-                  name="phlevel"
-                  id="ph_level"
+                  name="accessories-type"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14 cursor-pointer"
                 >
                   <option value="red">Red</option>
@@ -72,13 +71,13 @@
                 for="name"
                 class="text-slate-500 text-14"
               >
-                Price
+                Giá
               </label><br>
               <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
                 <input
                   type="number"
                   name="price"
-                  placeholder="Price"
+                  placeholder="Nhập giá"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14"
                 >
               </div>
@@ -89,13 +88,13 @@
                 for="name"
                 class="text-slate-500 text-14"
               >
-                Name
+                Tên
               </label><br>
               <div class="border-[1.5px] mt-1 focus-within:border-blue-500">
                 <input
                   type="text"
-                  name="name"
-                  placeholder="Name"
+                  name="accessories-name"
+                  placeholder="Nhập tên"
                   class="pb-11 pt-1 w-full outline-none px-2 placeholder:text-14 text-14"
                 >
               </div>
@@ -107,13 +106,13 @@
                 for="description"
                 class="text-slate-500 text-14"
               >
-                Description
+                Mô tả
               </label><br>
               <div class="border-[1.5px] mt-1 focus-within:border-blue-500">
                 <input
                   type="text"
                   name="description"
-                  placeholder="Description"
+                  placeholder="Nhập"
                   class="pb-11 pt-1 w-full outline-none px-2 placeholder:text-14 text-14"
                 >
               </div>
@@ -124,7 +123,7 @@
             type="submit"
             class="border-2 border-blue-500 p-2 px-6 mt-4 flex hover:bg-slate-100"
           >
-            Create
+            Thêm
           </button>
 
         </form>

@@ -2,7 +2,7 @@
 
 {{-- set title --}}
 @section('title', 'List Fish')
-@section('path', 'Products / List Fish')
+@section('path', 'Sản phẩm / Cá')
 
 @section('sidebar')
   @include('admin.layout.sidebar')
@@ -23,7 +23,7 @@
           @for ($i = 1; $i <= 5; $i++)
             <div class="flex w-[190px] shrink-0 flex-col">
               <img
-                src="{{ URL::to('/images/vang.png')}}"
+                src="{{ URL::to('/storage/images/vang.png')}}"
                 alt=""
                 class="rounded-2xl"
               >
@@ -46,20 +46,27 @@
           <div class="flex flex-col w-full max-w-full px-3">
             <div class="flex flex-col min-w-[980px] mb-6 bg-white border-0 shadow-md rounded-lg ">
               <div class="flex p-2 py-4 items-center justify-between">
-                <h3 class="text-[#344767] text-20 font-sora">Fish</h3>
+                <h3 class="text-[#344767] text-20 font-sora">Danh sách Cá</h3>
               </div>
+              @if(session('success'))
+                <div id="message" class="backdrop-blur-2xl absolute top-2 left-[40%] rounded-lg border-l-8 border-l-blue-500 opacity-80">
+                  <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
+                    <span class="px-4">{{ session('success') }}</span>
+                  </div>
+                </div>
+              @endif
               <div class="flex-auto px-0 pt-0">
                 <div class="p-0 overflow-x-auto place-self-auto">
                   <table class="items-center w-full mb-0 align-top border-collapse text-slate-500">
                     <thead class="align-bottom bg-slate-200 rounded-2xl">
                       <tr class="text-black uppercase text-left text-12">
                         <th class="px-4 py-3 font-bold opacity">#</th>
-                        <th class="px-4 py-3 font-bold">Fish Name</th>
-                        <th class="px-4 py-3 font-bold ">Species</th>
+                        <th class="px-4 py-3 font-bold">Tên</th>
+                        <th class="px-4 py-3 font-bold ">Loài</th>
                         {{-- <th class="px-4 py-3 font-bold ">Size</th> --}}
                         {{-- <th class="px-4 py-3 font-bold ">Color</th> --}}
-                        <th class="px-4 py-3 font-bold ">Price</th>
-                        <th class="px-4 py-3 font-bold ">Quantity</th>
+                        <th class="px-4 py-3 font-bold ">Giá</th>
+                        <th class="px-4 py-3 font-bold ">Số lượng</th>
                       </tr>
                     </thead>
                     <tbody>

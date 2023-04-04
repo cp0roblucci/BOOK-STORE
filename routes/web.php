@@ -29,11 +29,9 @@ Route::get('/', function () {
     return view('clients.homepage');
 });
 
-
 Route::get('/home', function () {
-    return view('clients.homepage');
+    return view('homepage');
 })->name('home');
-
 
 Route::get('/products_detail', function () {
     return view('products_detail');
@@ -55,6 +53,9 @@ Route::get('/cart', function () {
 //     return view('layouts.footer');
 // });
 
+Route::get('/test', function () {
+    return view('test');
+});
 
 // auth
 
@@ -117,7 +118,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     })->name('new-user');
     Route::post('create-new-user', [UserController::class, 'createUser']);
 
-    Route::get('users/{id}/edit', [UserController::class, 'edit'])->name('edit-user');
+    Route::get('users/{id}/edit', [UserController::class, 'editUser'])->name('edit-user');
+    Route::post('users/{id}/edit', [UserController::class, 'updateUser']);
 
     // PRODUCT
 
@@ -138,6 +140,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         return view('admin.new-fish');
     })->name('new-fish');
     Route::post('create-new-fish', [FishController::class, 'create']);
+
+    // new species
+    Route::get('create-new-species', function() {
+      return view('admin.new-species');
+    })->name('new-species');
+    Route::post('create-new-species', [SpeciesController::class, 'create']);
 
     // new ph
     Route::get('create-new-ph', function() {

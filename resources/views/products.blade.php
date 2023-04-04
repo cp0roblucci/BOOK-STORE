@@ -28,7 +28,7 @@
                 <a href="/product" class="px-8 py-4 border-b-2 border-slate-300 rounded-xl hover:text-blue-500 hover:bg-gray-100">Lien He</a>
               </div>
     </div>
-  
+
     <div class="leading-[80px]">
             <a href="/login" class="hover:text-slate-400">
                 <i class="fa-solid fa-user text-slate-500"></i>
@@ -57,10 +57,10 @@
 {{-- container products --}}
 <section class="py-5  bg-white">
     {{-- container filter --}}
-    <div class="container_filter flex mx-6 relative ml-28">  
+    <div class="container_filter flex mx-6 relative ml-28">
         <div class="flex mr-6 border border-gray-300 px-4 py-1 rounded-md text-sm bg-gray-50 hover:text-blue-500 active:bg-red-500">
-            <button onclick="" class="">Tất cả</button>
-        </div>      
+            <button id="all-products-btn" class="category-btn">Tất cả</button>
+        </div>
        <div class="inline-block">
         <button id="filter_btn" class="relative flex justify-center items-center bg-gray-50 border-gray-300 focus:outline-none outline-none border group z-10 rounded-md hover:bg-gray-200" onclick="">
             <p class="px-2 text-sm group-hover:text-blue-500">Loại sản phẩm </p>
@@ -71,13 +71,13 @@
                 id=""
                 name="">
                 <ul class="text-left border rounded text-sm w-40">
-                    <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 category" data-category="dragon-fish">Cá Rồng</li>
-                    <li class="px-4 py-1 border-b hover:bg-gray-100  hover:text-blue-500 category" data-category="phoenix-fish">Cá Phượng Hoàng</li>
-                    <li class="px-4 py-1 border-b hover:bg-gray-100  hover:text-blue-500 category" >Cá Betta</li>
-                    <li class="px-4 py-1 border-b hover:bg-gray-100  hover:text-blue-500 category">Cá Bảy Màu</li>
-                    <li class="px-4 py-1 border-b hover:bg-gray-100  hover:text-blue-500 category">Cá Vàng</li>
-                    <li class="px-4 py-1 border-b hover:bg-gray-100  hover:text-blue-500">Thức Ăn</li>
-                    <li class="px-4 py-1 border-b hover:bg-gray-100  hover:text-blue-500">Phụ Kiện</li>
+                    <li class="category-btn px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 category" >Cá Rồng</li>
+                    <li class="category-btn px-4 py-1 border-b hover:bg-gray-100  hover:text-blue-500 category" >Cá Phượng Hoàng</li>
+                    <li class="category-btn px-4 py-1 border-b hover:bg-gray-100  hover:text-blue-500 category" >Cá Betta</li>
+                    <li class="category-btn px-4 py-1 border-b hover:bg-gray-100  hover:text-blue-500 category">Cá Bảy Màu</li>
+                    <li class="category-btn px-4 py-1 border-b hover:bg-gray-100  hover:text-blue-500 category">Cá Vàng</li>
+                    <li class="category-btn px-4 py-1 border-b hover:bg-gray-100  hover:text-blue-500">Thức Ăn</li>
+                    <li class="category-btn px-4 py-1 border-b hover:bg-gray-100  hover:text-blue-500">Phụ Kiện</li>
                 </ul>
             </div>
         </button>
@@ -101,7 +101,7 @@
                 </div>
             </button>
         </div>
-         
+
         <div class="inline-block">
             <button class="relative flex justify-center items-center bg-gray-50 border-gray-300 focus:outline-none outline-none border group z-10 rounded-md ml-4 hover:bg-gray-200">
                 <p class="px-4 text-sm group-hover:text-blue-500">Kích thước</p>
@@ -128,18 +128,18 @@
         <input class="w-5 h-5 mr-1" type="radio" name="radio-check" id=""> <span class="text-sm -translate-y-0.5">Giá cao xuống thấp</span>
     </div>
     {{-- container product --}}
-    <div id="products" class="container_product mt-10 mx-20 ">
+    <div id="product-container" class=" mt-10 mx-20 ">
         <div class="mb-6 text-32 font-bold text-center py-2 border-b border-b-gray-100">
             <h2 class="">TẤT CẢ SẢN PHẨM</h2>
         </div>
         <div id="dragon-fish" class="product dragon-fish border md:w-1/5 float-left border-gray-100 relative overflow-hidden group ">
 
             <a class="block img h-auto w-full my-5 px-0.5" href="#">
-                <img class=" h-48 w-full " src="/images/img_products/pd4.jpg" alt="">
+                <img class=" h-48 w-full " src="/images/img_products/dragon_fish/dragon_fish_1.jpg" alt="">
             </a>
                 {{-- button --}}
             <div class="absolute w-full flex -translate-y-10 opacity-0 group-hover:opacity-100 items-center justify-center transition-all ">
-                    
+
                 <button id="btnProductDetail" class="px-5 py-2 mx-0.5 w-full bg-blue-500 text-white rounded-md font-semibold">
                     <i class="fa-solid fa-link text-14"></i>
                     Tùy chọn
@@ -156,9 +156,11 @@
             </div>
         </div>
 
-        <div id="phoenix-fish" class="product phoenix-fish border w-1/5 float-left border-gray-100 relative overflow-hidden group">
+        <div
+          id="phoenix-fish"
+          class="product phoenix-fish border w-1/5 float-left border-gray-100 relative overflow-hidden group">
             <a class="block img h-auto w-full my-5 px-0.5" href="#">
-                <img class=" h-48 w-full" src="/images/img_products/pd1.jpg" alt="">
+                <img class=" h-48 w-full" src="/images/img_products/dragon_fish/dragon_fish_2.jpg" alt="">
             </a>
 
             <div class="absolute w-full flex -translate-y-10 opacity-0 group-hover:opacity-100 items-center justify-center transition-all">
@@ -169,7 +171,7 @@
             </div>
 
             <div class="item-content my-4 mx-2 mt-2">
-                
+
                 <div class="font-semibold text-sm my-2 mt-6">
                     <a class=" hover:text-red-500" href="#">Cá Siêu Saiyan SSJ 2</a>
                 </div>
@@ -182,7 +184,7 @@
 
         <div class="border w-1/5 float-left border-gray-100 relative overflow-hidden group">
             <a class="block img h-auto w-full my-5 px-0.5" href="#">
-                <img class=" h-48 w-full " src="/images/img_products/pd5.jpg" alt="">
+                <img class=" h-48 w-full " src="/images/img_products/dragon_fish/dragon_fish_3.jpg" alt="">
             </a>
 
             <div class="absolute w-full flex -translate-y-10 opacity-0 group-hover:opacity-100 items-center justify-center transition-all">
@@ -193,149 +195,13 @@
             </div>
 
             <div class="item-content my-4 mx-2 mt-2">
-                
+
                 <div class="font-semibold text-sm my-2 mt-6">
                     <a class=" hover:text-red-500" href="#">Cá Siêu Saiyan SSJ 3</a>
                 </div>
                 <div class="price flex">
                     <span class="text-red-500 text-16 font-bold">50000đ</span>
                     <span class="block ml-2 mt-0.5 opacity-70 line-through text-sm">60000d</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="border w-1/5 float-left border-gray-100 relative overflow-hidden group">
-            <a class="block img h-auto w-full my-5 px-0.5" href="#">
-                <img class=" h-48 w-full" src="/images/img_products/pd2.jpg" alt="">
-            </a>
-
-            <div class="absolute w-full flex -translate-y-10 opacity-0 group-hover:opacity-100 items-center justify-center transition-all">
-                <button class="px-5 py-2 mx-0.5 w-full bg-blue-500 text-white rounded-md font-semibold">
-                    <i class="fa-solid fa-link text-14"></i>
-                    Tùy chọn
-                </button>
-            </div>
-
-            <div class="item-content my-4 mx-2 mt-2">
-                
-                <div class="font-semibold text-sm my-2 mt-6">
-                    <a class=" hover:text-red-500" href="#">Cá Siêu Saiyan SSJ 4</a>
-                </div>
-                <div class="price flex">
-                    <span class="text-red-500 text-16 font-bold">50000đ</span>
-                    <span class="block ml-2 mt-0.5 opacity-70 line-through text-sm">60000d</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="border w-1/5 float-left border-gray-100 relative overflow-hidden group">
-            <a class="block img h-auto w-full my-5 px-0.5" href="#">
-                <img class=" h-48 w-full " src="/images/img_products/pd3.jpg" alt="">
-            </a>
-
-            <div class="absolute w-full flex -translate-y-10 opacity-0 group-hover:opacity-100 items-center justify-center transition-all">
-                <button class="px-5 py-2 mx-0.5 w-full bg-blue-500 text-white rounded-md font-semibold">
-                    <i class="fa-solid fa-link text-14"></i>
-                    Tùy chọn
-                </button>
-            </div>
-
-            <div class="item-content my-4 mx-2 mt-2">
-                
-                <div class="font-semibold text-sm my-2 mt-6">
-                    <a class=" hover:text-red-500" href="#">Cá Siêu Saiyan SSJ 5</a>
-                </div>
-                <div class="price flex">
-                    <span class="text-red-500 text-16 font-bold">50000đ</span>
-                    <span class="block ml-2 mt-0.5 opacity-70 line-through text-sm">60000d</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="border w-1/5 float-left border-gray-100 relative overflow-hidden group">
-            <a class="block img h-auto w-full my-5 px-0.5" href="#">
-                <img class=" h-48 w-full" src="/images/img_products/pd6.jpg" alt="">
-            </a>
-
-            <div class="absolute w-full flex -translate-y-10 opacity-0 group-hover:opacity-100 items-center justify-center transition-all">
-                <button class="px-5 py-2 mx-0.5 w-full bg-blue-500 text-white rounded-md font-semibold">
-                    <i class="fa-solid fa-link text-14"></i>
-                    Tùy chọn
-                </button>
-            </div>
-
-            <div class="item-content my-4 mx-2">
-                
-                <div class="font-semibold text-sm my-2 mt-6">
-                    <a class=" hover:text-red-500" href="#">Cá Siêu Saiyan SSJ 6</a>
-                </div>
-                <div class="price flex">
-                    <span class="text-red-500 text-sm">50000đ</span>
-                    <span class="block ml-2 opacity-70 line-through text-12 text-sm">60000d</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="border w-1/5 float-left border-gray-100 relative overflow-hidden group">
-            <a class="block img h-auto w-full my-5 px-0.5" href="#">
-                <img class=" h-48 w-full" src="/images/img_products/pd7.jpg" alt="">
-            </a>
-            <div class="item-content my-4 mx-2">
-                
-                <div class="font-semibold text-sm my-2 mt-6">
-                    <a class=" hover:text-red-500" href="#">Cá Siêu Saiyan SSJ 7</a>
-                </div>
-                <div class="price flex">
-                    <span class="text-red-500 text-sm">50000đ</span>
-                    <span class="block ml-2 opacity-70 line-through text-12 text-sm">60000d</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="border w-1/5 float-left border-gray-100 relative overflow-hidden group">
-            <a class="block img h-auto w-full my-5" href="#">
-                <img class=" h-48 w-full px-1" src="/images/img_products/pd2.jpg" alt="">
-            </a>
-            <div class="item-content my-4 mx-2">
-                
-                <div class="font-semibold text-sm my-2 mt-6">
-                    <a class=" hover:text-red-500" href="#">Cá Siêu Saiyan SSJ 8</a>
-                </div>
-                <div class="price flex">
-                    <span class="text-red-500 text-sm">50000đ</span>
-                    <span class="block ml-2 opacity-70 line-through text-12 text-sm">60000d</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="border w-1/5 float-left border-gray-100">
-            <a class="block img h-auto w-full my-5" href="#">
-                <img class=" h-48 w-full px-1" src="/images/img_products/pd8.jpg" alt="">
-            </a>
-            <div class="item-content my-4 mx-2">
-                
-                <div class="font-semibold text-sm my-2 mt-6">
-                    <a class=" hover:text-red-500" href="#">Cá Siêu Saiyan SSJ 9</a>
-                </div>
-                <div class="price flex">
-                    <span class="text-red-500 text-sm">50000đ</span>
-                    <span class="block ml-2 opacity-70 line-through text-12 text-sm">60000d</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="border w-1/5 float-left border-gray-100">
-            <a class="block img h-auto w-full my-5" href="#">
-                <img class=" h-48 w-full px-1" src="/images/img_products/pd9.jpg" alt="">
-            </a>
-            <div class="item-content my-4 mx-2">
-                
-                <div class="font-semibold text-sm my-2 mt-6">
-                    <a class=" hover:text-red-500" href="#">Cá Siêu Saiyan SSJ 10</a>
-                </div>
-                <div class="price flex">
-                    <span class="text-red-500 text-sm">50000đ</span>
-                    <span class="block ml-2 opacity-70 line-through text-12 text-sm">60000d</span>
                 </div>
             </div>
         </div>
@@ -407,5 +273,28 @@
     </div>
 </div>
 </body>
+
+<script>
+		// Lấy all btn
+		const categoryBtns = document.querySelectorAll('.category-btn');
+
+		// Lấy ctn-pd
+		const productContainer = document.getElementById('product-container');
+		// Lặp qua từng button & create event
+		categoryBtns.forEach(function(btn) {
+			btn.addEventListener('click', function() {
+				// Lấy id của button
+				const categoryId = this.id;
+				productContainer.querySelectorAll('.product').forEach(function(product) {
+					if (categoryId === 'all-products-btn' || product.classList.contains(categoryId)) {
+						product.style.display = 'block';
+					} else {
+						product.style.display = 'none';
+					}
+				});
+			});
+		});
+</script>
+
 </html>
 

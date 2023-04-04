@@ -2,7 +2,7 @@
 
 {{-- set title --}}
 @section('title', 'Users')
-@section('path', 'Users')
+@section('path', 'Người dùng')
 
 @section('sidebar')
   @include('admin.layout.sidebar')
@@ -18,7 +18,7 @@
       <div class="flex flex-col w-full max-w-full px-3">
         <div class="flex flex-col min-w-[980px] mb-6 break-words bg-white border-0 border-transparent border-solid shadow-md rounded-lg bg-clip-border overflow-hidden">
           <div class="flex p-2 py-2 items-center justify-between">
-            <h3 class="text-[#344767] text-20 font-sora">Users</h3>
+            <h3 class="text-[#344767] text-20 font-sora">Danh sách người dùng</h3>
           </div>
           <div class="flex-auto px-0 pt-0">
             <div class="p-0 overflow-x-auto place-self-auto">
@@ -26,10 +26,10 @@
                 <thead class="align-bottom bg-slate-200 rounded-2xl">
                   <tr class="text-black uppercase text-left text-12">
                     <th class="px-4 py-3 font-bold opacity">#</th>
-                    <th class="px-4 py-3 font-bold ">Name</th>
-                    <th class="px-4 py-3 font-bold ">Phone number</th>
-                    <th class="px-4 py-3 font-bold ">Address</th>
-                    <th class="px-4 py-3 font-bold text-center">Role</th>
+                    <th class="px-4 py-3 font-bold ">Họ Tên</th>
+                    <th class="px-4 py-3 font-bold ">Số điện thoại</th>
+                    <th class="px-4 py-3 font-bold ">Địa chỉ</th>
+                    <th class="px-4 py-3 font-bold text-center">Phân quyền</th>
                     <th class="px-4 py-3 font-bold "></th>
                   </tr>
                 </thead>
@@ -57,12 +57,14 @@
                         </div>
                       </td>
                       <td class="p-4 bg-transparent text-center">
-                        <div class="px-2 py-1 rounded-full {{ $user->role_id == 1  ? 'bg-blue-100 text-white' : ''}}">
-                            <h6 class="mb-0 text-sm leading-normal capitalize"> {{ $user->role_name }}</h6>
+                        <div class="py-1 rounded-full {{ $user->role_id == 1  ? 'bg-blue-100 text-white' : ''}}">
+                            <h6 class="text-sm leading-normal capitalize"> {{ $user->role_name }}</h6>
                         </div>
                       </td>
                       <td class="p-4 bg-transparent">
-                        <a href="users/{{$user->id}}/edit" class="mb-0 text-sm leading-normal text-red-300">Edit</a>
+                        <a href="users/{{$user->id}}/edit" class="mb-0 text-sm leading-normal text-red-300">
+                          <i class="fa-regular fa-pen-to-square"></i>
+                        </a>
                       </td>
                     </tr>
                   @endforeach

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -52,6 +53,11 @@ class GoogleController extends Controller
                     'password' => '',
                 ]
             );
+            // tao cart moi cho nguoi dung
+            Cart::create([
+              'user_id' => $user->id,
+            ]);
+
             Auth::login($user);
             return redirect(RouteServiceProvider::HOME);
         } catch (\Exception $exception) {

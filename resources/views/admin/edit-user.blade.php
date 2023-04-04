@@ -2,7 +2,7 @@
 
 {{-- set title --}}
 @section('title', 'Create new User')
-@section('path', 'Users / New User')
+@section('path', 'Người dùng / Chỉnh sửa')
 
 @section('sidebar')
   @include('admin.layout.sidebar')
@@ -28,7 +28,7 @@
               > --}}
               <img
                 id="img-preview"
-                src="{{ Auth::user()->link_avt  }}"
+                src="{{ Auth::user()->link_avt != null ? Auth::user()->link_avt : URL::to('/images/admin/avatar-default.png')  }}"
                 alt="avatar"
                 class="w-full h-full rounded-full"
               >
@@ -37,8 +37,7 @@
             <input
               id="input-file-img"
               type="file"
-              name="file"
-              placeholder=""
+              name="avatar"
               class="py-8 text-14 border border-slate-500 file:ml-2 rounded-lg border-dashed text-slate-500 cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-none file:bg-[#5490f0] file:text-white file:cursor-pointer file:hover:bg-blue-100"
             >
           </div>
@@ -102,7 +101,7 @@
                 type="text"
                 name="firstname"
                 placeholder="First name"
-                value="{{ Auth::user()->first_name}}"
+                value="{{ $user->first_name }}"
                 class="py-1.5 w-full outline-none rounded-lg placeholder:text-14 text-14"
               >
             </div>
@@ -121,7 +120,7 @@
                 type="number"
                 name="phonenumber"
                 placeholder="(012) 345-6789"
-                value="{{ Auth::user()->phone_number}}"
+                value="{{ $user->phone_number }}"
                 class="py-1.5 w-full outline-none rounded-lg placeholder:text-14 text-14"
               >
             </div>
@@ -140,7 +139,7 @@
                 type="email"
                 name="email"
                 placeholder="Email address"
-                value="{{ Auth::user()->email}}"
+                value="{{ $user->email}}"
                 class="py-1.5 w-full outline-none rounded-lg placeholder:text-14 text-14"
               >
             </div>
@@ -159,7 +158,7 @@
               type="text"
               name="address"
               placeholder="Address"
-              value="{{ Auth::user()->user_address}}"
+              value="{{ $user->user_address }}"
               class="pb-11 pt-1 w-full outline-none focus-within:border-blue-500 px-2 placeholder:text-14 text-14"
             >
           </div>

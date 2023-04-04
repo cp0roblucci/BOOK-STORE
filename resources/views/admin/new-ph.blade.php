@@ -2,7 +2,7 @@
 
 {{-- set title --}}
 @section('title', 'Create new PH')
-@section('path', 'Create new / PH')
+@section('path', 'Tạo mới / Độ PH')
 
 @section('sidebar')
   @include('admin.layout.sidebar')
@@ -14,7 +14,7 @@
       @include('admin.layout.header')
     @endsection
 
-    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Create new PH</div>
+    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Tạo mới Độ PH</div>
     <div class="">
       <div class="col-span-3 border p-4">
         <form action="" method="post">
@@ -25,13 +25,13 @@
               for="ph-level"
               class="text-slate-500 text-14"
             >
-              PH Level
+              Độ PH
             </label><br>
             <div class="border-[1.5px] mt-1">
               <input
                 type="number"
                 name="ph-level"
-                placeholder="PH Level"
+                placeholder="Nhập"
                 class="pb-6 pt-1 w-full outline-none focus-within:border-blue-500 px-2 placeholder:text-14 text-14"
               >
             </div>
@@ -42,7 +42,7 @@
             type="submit"
             class="border-2 border-blue-500 p-2 px-6 mt-4 flex hover:bg-slate-100"
           >
-            Create
+            Thêm
           </button>
 
         </form>

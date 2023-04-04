@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Constant\EndpointConstant;
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -71,7 +72,7 @@ class AuthController extends Controller
             session()->flash('email-exists', 'Email is existed.');
             return redirect()->route('register');
         }
-        User::create(
+        $user = User::create(
             [
                 'first_name' => $firstname,
                 'last_name' => $lastname,
@@ -79,7 +80,11 @@ class AuthController extends Controller
                 'password' => $password,
             ]
         );
-        return redirect(RouteServiceProvider::HOME);
+        // tao cart moi cho nguoi dung
+        Cart::create([
+          'user_id' => $user->id,
+        ]);
+          return redirect(RouteServiceProvider::HOME);
     }
 
 

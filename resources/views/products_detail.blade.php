@@ -82,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col w-1/2 mr-16  mt-4">
+                <div class="flex flex-col w-1/2 mr-16  mt-4" data-key="1">
                     <div class="">
                         <h2 class="text-24 font-semibold mb-2">Cá Siêu Saiyan SJJ 1 - Super Pro VJP</h2>
                         <div class="flex text-sm font-semibold">

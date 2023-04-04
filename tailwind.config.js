@@ -115,6 +115,7 @@ module.exports = {
                 "98p" : "98%",
                 "90p" : "90%",
                 "112.5" : "450px",
+                "19" : "76px",
             },
             height: {
                 "98p" : "98%",
@@ -122,6 +123,7 @@ module.exports = {
                 "112.5" : "450px",
                 "125" : "500px",
                 "115" : "460px",
+                "19" : "76px",
             },
             blur : {
                 "10" : "10px",
@@ -131,4 +133,5 @@ module.exports = {
     plugins: [
         require('tailwind-scrollbar')({ nocompatible: true }),
     ],
+    mode: 'jit',
 }

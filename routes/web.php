@@ -26,13 +26,14 @@ use \App\Http\Controllers\Auth\GoogleController;
 */
 
 Route::get('/', function () {
-    return view('homepage');
+    return view('clients.homepage');
 });
 
 
 Route::get('/home', function () {
-    return view('homepage');
+    return view('clients.homepage');
 })->name('home');
+
 
 Route::get('/products_detail', function () {
     return view('products_detail');
@@ -43,8 +44,16 @@ Route::get('/products', function () {
 });
 
 Route::get('/cart', function () {
-    return view('cart');
+    return view('clients/cart');
 });
+ 
+// Route::get('/layouts/header', function () {
+//     return view('layouts.header');
+// });
+
+// Route::get('/layouts/footer', function () {
+//     return view('layouts.footer');
+// });
 
 
 // auth

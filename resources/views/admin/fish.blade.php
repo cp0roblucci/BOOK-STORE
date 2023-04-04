@@ -100,7 +100,9 @@
                           <td class="p-4 bg-transparent">
                             <form action="" method="post" class="px-2 py-1">
                               @csrf
-                                <button class="mb-0 text-sm leading-normal text-red-300">Edit</button>
+                                <button class="mb-0 text-sm leading-normal text-red-300">
+                                  <i class="fa-regular fa-pen-to-square"></i>
+                                </button>
                             </form>
                           </td>
                         </tr>

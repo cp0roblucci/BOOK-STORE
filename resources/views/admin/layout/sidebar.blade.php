@@ -7,7 +7,7 @@
         </div>
       </div>
     </div>
-    <ul class="mt-[40px] ml-2 text-16">
+    <ul class="mt-[40px] ml-2 text-14">
       <li class="w-full inline-block text-gray-500">
         <div class="cursor-pointer mb-4
         {{ request()->is('admin/dashboard') ? 'text-purple-400' : ''}}">

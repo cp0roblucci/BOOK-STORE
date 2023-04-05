@@ -13,7 +13,14 @@
     @section('header')
       @include('admin.layout.header')
     @endsection
-    @include('components.admin.form-input')
+
+    <div class="w-[40%] pl-4 bg-white rounded-md border-[1.5px] focus-within:border-[1.5px] focus-within:border-blue-200 my-4">
+      <form action="" method="post" class="flex justify-between">
+        @csrf
+        @include('components.admin.form-input')
+      </form>
+    </div>
+
     <div class="flex flex-wrap -mx-3 mb-10 mt-2">
       <div class="flex flex-col w-full max-w-full px-3">
         <div class="flex flex-col min-w-[980px] mb-6 break-words bg-white border-0 border-transparent border-solid shadow-md rounded-lg bg-clip-border overflow-hidden">
@@ -28,6 +35,7 @@
                     <th class="px-4 py-3 font-bold opacity">#</th>
                     <th class="px-4 py-3 font-bold ">Họ Tên</th>
                     <th class="px-4 py-3 font-bold ">Số điện thoại</th>
+                    <th class="px-4 py-3 font-bold ">Email</th>
                     <th class="px-4 py-3 font-bold ">Địa chỉ</th>
                     <th class="px-4 py-3 font-bold text-center">Phân quyền</th>
                     <th class="px-4 py-3 font-bold "></th>
@@ -35,36 +43,48 @@
                 </thead>
                 <tbody>
                   @foreach($users as $key => $user)
-                    <tr class="border-t hover:bg-slate-100">
+                    <tr class="border-t even:bg-gray-100 odd:bg-white">
                       <td class="p-4 bg-transparent ">
-                        <div class="px-2 py-1">
+                        <div class="py-1">
                             <h6 class="mb-0 text-sm leading-normal">{{ ++$key }}</h6>
                         </div>
                       </td>
                       <td class="p-4 bg-transparent">
-                        <div class="px-2 py-1">
+                        <div class="py-1">
                             <h6 class="mb-0 text-sm leading-normal">{{ $user->last_name . ' ' . $user->first_name }}</h6>
                         </div>
                       </td>
                       <td class="p-4 bg-transparent text-left">
-                        <div class="px-2 py-1">
+                        <div class="py-1">
                             <h6 class="mb-0 text-sm leading-normal">{{ $user->phone_number }}</h6>
                         </div>
                       </td>
                       <td class="p-4 bg-transparent">
-                        <div class="px-2 py-1 w-56">
+                        <div class="py-1">
+                            <h6 class="mb-0 text-sm leading-normal truncate">{{ $user->email }}</h6>
+                        </div>
+                      </td>
+                      <td class="p-4 bg-transparent">
+                        <div class="py-1">
                             <h6 class="mb-0 text-sm leading-normal truncate">{{ $user->user_address }}</h6>
                         </div>
                       </td>
                       <td class="p-4 bg-transparent text-center">
-                        <div class="py-1 rounded-full {{ $user->role_id == 1  ? 'bg-blue-100 text-white' : ''}}">
+                        <div class="px-2 py-1 rounded-full {{ $user->role_id == 1  ? 'bg-blue-100 text-white' : ''}}">
                             <h6 class="text-sm leading-normal capitalize"> {{ $user->role_name }}</h6>
                         </div>
                       </td>
-                      <td class="p-4 bg-transparent">
-                        <a href="users/{{$user->id}}/edit" class="mb-0 text-sm leading-normal text-red-300">
+                      <td class="flex bg-transparent mt-4 items-center w-[40px]">
+                        <a href="users/{{$user->id}}/edit" class="text-sm mt-0.5 mr-2 text-blue-100">
                           <i class="fa-regular fa-pen-to-square"></i>
                         </a>
+                        <form action="/users/{{$user->id}}" method="post">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="mb-0 text-sm leading-normal text-red-300">
+                            <i class="fa-regular fa-trash-can"></i>
+                          </button>
+                        </form>
                       </td>
                     </tr>
                   @endforeach

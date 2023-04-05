@@ -14,8 +14,13 @@
       @include('admin.layout.header')
     @endsection
     <div class="w-full">
-
-      @include('components.admin.form-input')
+      
+      <div class="w-[40%] pl-4 bg-white rounded-md border-[1.5px] focus-within:border-[1.5px] focus-within:border-blue-200 my-4">
+        <form action="" method="post" class="flex justify-between">
+          @csrf
+          @include('components.admin.form-input')
+        </form>
+      </div>
 
       <div class="bg-slate-50 pt-4 mt-2 rounded-md shadow-md">
         <h2 class="px-4 uppercase font-semibold text-slate-400">Top Fish</h2>

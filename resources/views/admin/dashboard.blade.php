@@ -1,8 +1,8 @@
 @extends('admin.layout.main')
 
 {{-- set title --}}
-@section('title', 'DashBoard')
-@section('path', 'DashBoard')
+@section('title', 'Thống Kê')
+@section('path', 'Thống kê')
 
 @section('sidebar')
   @include('admin.layout.sidebar')
@@ -63,50 +63,67 @@
       </div>
 
       {{-- Chart --}}
-      <div class="grid grid-cols-4 gap-4 mt-6">
+      <div class="grid grid-cols-4 gap-4 mt-4">
         <div class="last-week-chart col-span-3 text-center rounded-2xl shadow-md w-full">
-          <canvas id="barChart"></canvas>
+          <canvas id="lastWeekChart"></canvas>
+          <div class="loading1 hidden">
+            <div class="w-12 h-12 absolute top-[35%] left-[33.5%] rounded-full animate-spin
+                    border-y-8 border-solid border-blue-100 border-t-transparent shadow-md"></div>
+            <div class="w-12 h-12 absolute top-[35%] left-[36.5%] rounded-full animate-spin
+                    border-y-8 border-solid border-purple-400 border-b-transparent shadow-md"></div>
+          </div>
         </div>
-        <div class="last-seven-day-chart col-span-3 text-center rounded-2xl shadow-md w-full">
+        <div class="last-seven-day-chart col-span-3 text-center rounded-2xl shadow-md w-full hidden">
+          <div class="loading2">
+            <div class="w-12 h-12 absolute top-[35%] left-[33.5%] rounded-full animate-spin
+                    border-y-8 border-solid border-blue-100 border-t-transparent shadow-md"></div>
+            <div class="w-12 h-12 absolute top-[35%] left-[36.5%] rounded-full animate-spin
+                    border-y-8 border-solid border-purple-400 border-b-transparent shadow-md"></div>
+          </div>
           <canvas id="lastSevenDay"></canvas>
         </div>
         <div class="period-chart relative col-span-3 text-center rounded-2xl shadow-md w-full hidden">
-          <div class="loading">
-            <div class="absolute top-[35%] left-[48%] w-12 h-12 rounded-full animate-spin
+          <canvas id="Period"></canvas>
+          <div class="loading3">
+            <div class="w-12 h-12 absolute top-[35%] left-[43%] rounded-full animate-spin
                     border-y-8 border-solid border-blue-100 border-t-transparent shadow-md"></div>
-            <div class="absolute top-[35%] left-[52%] w-12 h-12 rounded-full animate-spin
+            <div class="w-12 h-12 absolute top-[35%] left-[47%] rounded-full animate-spin
                     border-y-8 border-solid border-purple-400 border-b-transparent shadow-md"></div>
           </div>
-          <canvas id="Period"></canvas>
         </div>
         <div class="flex flex-col p-2 rounded-2xl shadow-md">
           <div class="p-2 mb-4 rounded-2xl shadow-md">
             <div class="">
-              <h2>Thống kê theo: </h2>
-              <div class="mt-1">
-                <button class="btn-last-week-chart border py-1 px-2 rounded-md bg-slate-50 hover:bg-slate-200">Tuần Trước</button>
-                <button class="btn-last-seven-day-chart border py-1 px-2 rounded-md bg-slate-50 hover:bg-slate-200">7 Ngày Qua</button>
-                <button class="btn-period-chart w-full mt-1 border py-1 px-2 rounded-md bg-slate-50 hover:bg-slate-200">Khoảng thời gian</button>
+              <h2 class="text-center font-thin text-20">Thống kê</h2>
+              <div class="mt-2">
+                <div class="grid grid-cols-2 gap-2">
+                  <button class="btn-last-week-chart border py-1 px-2 rounded-md bg-slate-50  text-slate-700  hover:bg-slate-100 hover:text-slate-500">Tuần Trước</button>
+                  <button class="btn-last-seven-day-chart border py-1 px-2 rounded-md bg-slate-50  text-slate-700  hover:bg-slate-100 hover:text-slate-500">7 Ngày Qua</button>
+                </div>
+                <button class="btn-period-chart w-full mt-2 border py-1 px-2 rounded-md bg-slate-50  text-slate-700  hover:bg-slate-100 hover:text-slate-500">Khoảng thời gian</button>
               </div>
             </div>
             <div class="form-period mt-2 hidden">
               {{-- <form action="" method="get"> --}}
                 <div class="my-1">
                   <label for="" class="ml-2 w-8 inline-block">Từ:</label>
-                  <input type="date" name="" id="start-date" class="border">
+                  <input type="date" name="" id="start-date" class="border-2 cursor-pointer outline-none focus-within:border-blue-500 px-2 rounded-md">
                 </div>
                 <div class="">
                   <label for="" class="ml-2 w-8 inline-block">Đến:</label>
-                  <input type="date" name="" id="end-date" class="border">
+                  <input type="date" name="" id="end-date" class="border-2 cursor-pointer outline-none focus-within:border-blue-500 px-2 rounded-md">
                 </div>
               {{-- </form> --}}
             </div>
           </div>
 
           <div class="p-2 rounded-2xl h-full shadow-md">
-            <h2 class="text-center">Doanh Thu Cá:</h2>
-            <h2 class="text-center">Doanh Thu Phụ Kiện:</h2>
-            <h2 class="text-center">Tổng Doanh Thu:</h2>
+            <h2 class="text-center text-20 font-thin">Doanh Thu</h2>
+            <div class="flex flex-col mt-2">
+              <span>Cá:</span>
+              <span class="my-2">Phụ kiện:</span>
+              <span class="">Tổng: {{number_format(500000000, 0, '.', '.')}} vnđ</span>
+            </div>
           </div>
 
 

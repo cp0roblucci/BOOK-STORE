@@ -33,7 +33,7 @@
 
       <div @click.outside class="flex">
 
-        <aside class="slide-bar max-h-[100vh] w-[20%] bg-white sticky top-0 transform transition-all duration-500">
+        <aside class="slide-bar max-h-[100vh] w-[18%] bg-white sticky top-0 transform transition-all duration-500">
           @yield('sidebar')
         </aside>
 

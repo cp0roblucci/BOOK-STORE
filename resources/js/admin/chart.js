@@ -1,7 +1,8 @@
 import { Chart } from "chart.js/auto";
+import constants from "../constants";
 
 const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
+// const $$ = document.querySelectorAll.bind(document);
 
 // chart element
 const lastWeekChart = document.getElementById('lastWeekChart');
@@ -11,6 +12,11 @@ const periodChart = document.getElementById('Period');
 const loading1 = $('.loading1');
 const loading2 = $('.loading2');
 const loading3 = $('.loading3');
+
+// doanh thu
+const revenueFish = document.getElementById('revenue-fish');
+const revenueAccessories = document.getElementById('revenue-accessories');
+const totalRevenue = document.getElementById('total-revenue');
 
 // 3 bien luu 3 bieu do khi duoc ve ra
 let lastWeekChartDraw;
@@ -27,25 +33,8 @@ const dayOfWeek = [
   { day: 'Chủ nhật' },
 ];
 
-const dataFish = [
-  { value: 26 },
-  { value: 26 },
-  { value: 16 },
-  { value: 17 },
-  { value: 55 },
-  { value: 45 },
-  { value: 29 },
-];
-
-const dataAccessories = [
-  { value: 26 },
-  { value: 26 },
-  { value: 16 },
-  { value: 17 },
-  { value: 55 },
-  { value: 45 },
-  { value: 29 },
-];
+let dataFish;
+let dataAccessories;
 
 // draw chart function
 function drawChart(chartElement, time, dataFish, dataAccessories) {
@@ -57,7 +46,7 @@ function drawChart(chartElement, time, dataFish, dataAccessories) {
       datasets: [
         {
           label: 'Cá',
-          data: dataFish.map(row => row.value),
+          data: dataFish.map(row => row.total_quantity),
           backgroundColor: 'rgba(54, 162, 235, 0.8)',
           borderColor: 'rgb(54, 162, 235)',
           borderWidth: 2,
@@ -66,7 +55,7 @@ function drawChart(chartElement, time, dataFish, dataAccessories) {
         },
         {
           label: 'Phụ kiện',
-          data: dataAccessories.map(row => row.value),
+          data: dataAccessories.map(row => row.total_quantity),
           backgroundColor: 'rgba(76, 78, 231, 0.8)',
           borderColor: 'rgb(54, 162, 235)',
           borderWidth: 2,
@@ -99,7 +88,6 @@ function drawChart(chartElement, time, dataFish, dataAccessories) {
       width: 200,
     }
   });
-
   return chart;
 }
 
@@ -120,42 +108,73 @@ const periodElement = $('.period-chart');
 // form chọn mốc thời gian
 const formPeriod = $('.form-period');
 
-// // không ẩn ngay từ ban đầu, bị vỡ
-// setTimeout(() => {
-//   lastSevenDayElement.classList.add('hidden');
-// }, 1);
+function fetchDataApi($endpointApi, options) {
+  return fetch($endpointApi, options)
+    .then(response => response.json())
+    .then(data => {
+      // console.log(data);
+      dataFish = data[0];
+      dataAccessories = data[1];
 
-if (lastWeekChart) {
-  lastWeekChartDraw = drawChart(lastWeekChart, dayOfWeek, dataFish, dataAccessories);
+      let totalRevenueFish = 0;
+      let totalRevenueAccessories = 0;
+      for (let i = 0; i < dataFish.length; i++) {
+        totalRevenueFish += data[0][i].total_price;
+        totalRevenueAccessories += data[1][i].total_price;
+      }
+      // toLocaleString('vi-VN') format 500000000 = 500.000.000;
+      revenueFish.innerHTML = totalRevenueFish.toLocaleString('vi-VN');
+      revenueAccessories.innerHTML = totalRevenueAccessories.toLocaleString('vi-VN');
+      totalRevenue.innerHTML = (totalRevenueFish + totalRevenueAccessories).toLocaleString('vi-VN');
+
+      return data;
+    });
 }
+function fecthApiDataLastWeek() {
+  fetchDataApi(constants.LAST_WEEK);
+
+  setTimeout(() => {
+    if (lastWeekChartDraw) {
+      lastWeekChartDraw.destroy();
+    }
+    if (lastWeekChart) {
+      lastWeekChartDraw = drawChart(lastWeekChart, dayOfWeek, dataFish, dataAccessories);
+      if (lastSevenDayChartDraw) {
+        lastSevenDayChartDraw.destroy();
+      }
+      if (periodChartDraw) {
+        periodChartDraw.destroy();
+      }
+    }
+    loading1.classList.add('hidden');
+  }, 500);
+}
+
+// lan dau load trang
+fecthApiDataLastWeek();
 
 if(btnlastWeek) {
   btnlastWeek.addEventListener('click', function() {
     // những xử lí của biểu đồ này
     lastWeekElement.classList.remove('hidden');
     lastSevenDayElement.classList.add('hidden');
-    
-    // fake delay loading
-    setTimeout(() => {
-      if (lastWeekChartDraw) {
-        lastWeekChartDraw.destroy();
-      }
-      if (lastWeekChart) {
-        lastWeekChartDraw = drawChart(lastWeekChart, dayOfWeek, dataFish, dataAccessories);
-        if (lastSevenDayChartDraw) {
-          lastSevenDayChartDraw.destroy();
-        }
-        if (periodChartDraw) {
-          periodChartDraw.destroy();
-        }
-      }
-    loading1.classList.add('hidden');
-    }, 1000);
+
+    btnlastWeek.classList.add('bg-blue-100');
+    btnlastWeek.classList.add('text-white');
+
+    fecthApiDataLastWeek();
+
     // những xử lí của các biểu đồ còn lại
     periodElement.classList.add('hidden');
     formPeriod.classList.add('hidden');
     loading2.classList.remove('hidden');
     loading3.classList.remove('hidden');
+
+    btnlastSevenDay.classList.remove('bg-blue-100');
+    btnlastSevenDay.classList.remove('text-white');
+
+    btnPeriod.classList.remove('bg-blue-100');
+    btnPeriod.classList.remove('text-white');
 
     // khi chuyển biểu đồ đặt lại mốc thời gian ban đầu (chưa chọn)
     startDateInput.value = '';
@@ -173,7 +192,7 @@ const dayOfWeekNames = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 
 const currentDate = new Date();
 // lấy số thứ tự ngày trong tuần
 const currentDayOfWeek = currentDate.getDay();
-// lấy số thứ tự của ngày trong tuần của thời gian hiện tại (0-6 : Chủ nhật - thứ 7) 
+// lấy số thứ tự của ngày trong tuần của thời gian hiện tại (0-6 : Chủ nhật - thứ 7)
 const lastWeekStart = new Date(currentDate);
 
 lastWeekStart.setDate(currentDate.getDate() - currentDayOfWeek - 7);
@@ -183,6 +202,9 @@ for(let i = 0; i <= 6; i++) {
   const dayOfWeek = (currentDayOfWeek + i) % 7;
   const date = new Date(lastWeekStart);
   date.setDate(date.getDate() + i);
+  if (i === 6) {
+    dayOfWeekNames[dayOfWeek] = 'Hôm qua';
+  }
   const dayOfMonthName = dayOfWeekNames[dayOfWeek];
   dayOfMonth.push({ day: dayOfMonthName });
 }
@@ -191,6 +213,11 @@ if(btnlastSevenDay) {
     // những xử lí của biểu đồ này
     lastSevenDayElement.classList.remove('hidden');
     lastWeekElement.classList.add('hidden');
+
+    btnlastSevenDay.classList.add('bg-blue-100');
+    btnlastSevenDay.classList.add('text-white');
+
+    fetchDataApi(constants.LAST_SEVEN_DAYS);
 
     // fake delay loading
     setTimeout(() => {
@@ -207,7 +234,7 @@ if(btnlastSevenDay) {
         }
       }
       loading2.classList.add('hidden');
-    }, 1000);
+    }, 500);
 
     // những xử lí của các biểu đồ còn lại
     periodElement.classList.add('hidden');
@@ -217,10 +244,12 @@ if(btnlastSevenDay) {
     startDateInput.value = '';
     endDateInput.value = '';
     endDateSelected = false;
-    
-    // if(periodChartDraw) {
-    //   periodChartDraw.destroy();
-    // }
+
+    btnlastWeek.classList.remove('bg-blue-100');
+    btnlastWeek.classList.remove('text-white');
+
+    btnPeriod.classList.remove('bg-blue-100');
+    btnPeriod.classList.remove('text-white');
   });
 }
 
@@ -250,7 +279,10 @@ function getDaysInRange(startDate, endDate) {
   return dateArray;
 }
 
-function updateResult() {
+function updateResult(data) {
+  const dataFish = data[0];
+  const dataAccessories = data[1];
+
   const startDate = new Date(startDateInput.value);
   const endDate= new Date(endDateInput.value);
   const days = getDaysInRange(startDate, endDate);
@@ -262,14 +294,40 @@ function updateResult() {
   loading3.classList.add('hidden');
 }
 
+function updateData() {
+  const dataDate = {
+    start_date: startDateInput.value,
+    end_date: endDateInput.value
+  }
+  // token dinh nghia trong the meta phan head layout admin
+  const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': token,
+    },
+    body: JSON.stringify(dataDate)
+  }
+  return fetchDataApi(constants.PERIOD, options);
+}
+
+// nếu chưa chon ngày kết thúc thì chọn ngày bắt đầu chưa cho render chart
 let endDateSelected = false;
 endDateInput.addEventListener('change', () => {
   endDateSelected = true;
-  updateResult()
+  updateData()
+    .then(data => {
+      updateResult(data);
+    });
+
 });
 startDateInput.addEventListener('change', () => {
   if(endDateSelected) {
-    updateResult();
+    updateData()
+      .then(data => {
+        updateResult(data);
+      });
   }
 });
 
@@ -280,6 +338,14 @@ if(btnPeriod) {
     lastWeekElement.classList.add('hidden');
     lastSevenDayElement.classList.add('hidden');
 
+    btnPeriod.classList.add('bg-blue-100');
+    btnPeriod.classList.add('text-white');
+
+    // reset = 0
+    revenueFish.innerHTML = 0;
+    revenueAccessories.innerHTML = 0;
+    totalRevenue.innerHTML = 0;
+
     if (lastWeekChartDraw) {
       lastWeekChartDraw.destroy();
     }
@@ -289,117 +355,11 @@ if(btnPeriod) {
 
     loading1.classList.remove('hidden');
     loading2.classList.remove('hidden');
+
+    btnlastWeek.classList.remove('bg-blue-100');
+    btnlastWeek.classList.remove('text-white');
+
+    btnlastSevenDay.classList.remove('bg-blue-100');
+    btnlastSevenDay.classList.remove('text-white');
   });
 }
-
-
-// if(barChart) {
-//   (async function() {
-//     new Chart(barChart, {
-//       type: 'bar',
-//       data: {
-//         labels: dayOfWeek.map(row => row.day),
-//         datasets: [
-//           {
-//             label: 'Cá',
-//             data: fish.map(row => row.value),
-//             backgroundColor: 'rgba(54, 162, 235, 0.8)',
-//             borderColor: 'rgb(54, 162, 235)',
-//             borderWidth: 2,
-//             borderRadius: 20,
-//             barThickness: 20
-//           },
-//           {
-//             label: 'Phụ kiện',
-//             data: accessories.map(row => row.value),
-//             backgroundColor: 'rgba(76, 78, 231, 0.8)',
-//             borderColor: 'rgb(54, 162, 235)',
-//             borderWidth: 2,
-//             borderRadius: 20,
-//             barThickness: 20
-//           }
-//         ],
-//       },
-
-//       options: {
-//         scales: {
-//           y: {
-//             beginAtZero: true
-//           },
-//         },
-//         plugins: {
-//           legend: {
-//             labels: {
-//               font: {
-//                 size: 16,
-//                 style: 'italic',
-//               }
-//             }
-//           }
-//         },
-//         responsive: true,
-//         maintainAspectRatio: true,
-//         // aspectRatio: 2,
-//         height: 10,
-//         width: 200,
-//       }
-//     });
-//   })();
-// }
-
-
-// if(lastSevenDays) {
-//   (async function() {
-//     new Chart(lastSevenDays, {
-//       type: 'bar',
-//       data: {
-//         labels: dayOfMonth.map(row => row.day),
-//         datasets: [
-//           {
-//             label: 'Cá',
-//             data: fish1.map(row => row.value),
-//             backgroundColor: 'rgba(54, 162, 235, 0.8)',
-//             borderColor: 'rgb(54, 162, 235)',
-//             borderWidth: 2,
-//             borderRadius: 20,
-//             barThickness: 20
-//           },
-//           {
-//             label: 'Phụ kiện',
-//             data: accessories1.map(row => row.value),
-//             backgroundColor: 'rgba(76, 78, 231, 0.8)',
-//             borderColor: 'rgb(54, 162, 235)',
-//             borderWidth: 2,
-//             borderRadius: 20,
-//             barThickness: 20
-//           }
-//         ],
-//       },
-
-//       options: {
-//         scales: {
-//           y: {
-//             beginAtZero: true
-//           },
-//         },
-//         plugins: {
-//           legend: {
-//             labels: {
-//               font: {
-//                 size: 16,
-//                 style: 'italic',
-//               }
-//             }
-//           }
-//         },
-//         responsive: true,
-//         maintainAspectRatio: true,
-//         // aspectRatio: 2,
-//         height: 10,
-//         width: 200,
-//       }
-//     });
-//   })();
-// }
-
-

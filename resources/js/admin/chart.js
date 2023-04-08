@@ -134,6 +134,7 @@ function fecthApiDataLastWeek() {
   fetchDataApi(constants.LAST_WEEK);
 
   setTimeout(() => {
+
     if (lastWeekChartDraw) {
       lastWeekChartDraw.destroy();
     }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccessoriesController;
 use App\Http\Controllers\AccessoriesTypeController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ColorController;
@@ -44,7 +45,7 @@ Route::get('/products', function () {
 Route::get('/cart', function () {
     return view('clients/cart');
 });
- 
+
 // Route::get('/layouts/header', function () {
 //     return view('layouts.header');
 // });
@@ -159,5 +160,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     })->name('new-color');
     Route::post('create-new-color', [ColorController::class, 'create']);
 
+
+//  Statistics
+  Route::get('/last-week', [StatisticsController::class, 'dataLastWeek']);
+  Route::get('/last-seven-days', [StatisticsController::class, 'dataLastSevenDays']);
+  Route::post('/period', [StatisticsController::class, 'dataPeriod']);
 });
 

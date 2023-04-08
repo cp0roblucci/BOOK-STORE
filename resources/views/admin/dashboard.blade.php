@@ -66,7 +66,7 @@
       <div class="grid grid-cols-4 gap-4 mt-4">
         <div class="last-week-chart col-span-3 text-center rounded-2xl shadow-md w-full">
           <canvas id="lastWeekChart"></canvas>
-          <div class="loading1 hidden">
+          <div class="loading1">
             <div class="w-12 h-12 absolute top-[35%] left-[33.5%] rounded-full animate-spin
                     border-y-8 border-solid border-blue-100 border-t-transparent shadow-md"></div>
             <div class="w-12 h-12 absolute top-[35%] left-[36.5%] rounded-full animate-spin
@@ -85,9 +85,9 @@
         <div class="period-chart relative col-span-3 text-center rounded-2xl shadow-md w-full hidden">
           <canvas id="Period"></canvas>
           <div class="loading3">
-            <div class="w-12 h-12 absolute top-[35%] left-[43%] rounded-full animate-spin
+            <div class="w-12 h-12 absolute top-[40%] left-[43%] rounded-full animate-spin
                     border-y-8 border-solid border-blue-100 border-t-transparent shadow-md"></div>
-            <div class="w-12 h-12 absolute top-[35%] left-[47%] rounded-full animate-spin
+            <div class="w-12 h-12 absolute top-[40%] left-[47%] rounded-full animate-spin
                     border-y-8 border-solid border-purple-400 border-b-transparent shadow-md"></div>
           </div>
         </div>
@@ -120,9 +120,21 @@
           <div class="p-2 rounded-2xl h-full shadow-md">
             <h2 class="text-center text-20 font-thin">Doanh Thu</h2>
             <div class="flex flex-col mt-2">
-              <span>Cá:</span>
-              <span class="my-2">Phụ kiện:</span>
-              <span class="">Tổng: {{number_format(500000000, 0, '.', '.')}} vnđ</span>
+              <div class="flex">
+                <p class="w-20">Cá:</p>
+                <span id="revenue-fish" class="text-blue-500 w-[80px] text-right mr-2"></span>
+                <p>vnđ</p>
+              </div>
+              <div class="flex py-2">
+                <p class="w-20">Phụ kiện:</p>
+                <span id="revenue-accessories" class="text-blue-500 w-[80px] text-right mr-2"></span>
+                <p>vnđ</p>
+              </div>
+              <div class="flex text-20">
+                <p class="w-20">Tổng:</p>
+                <span id="total-revenue" class="text-blue-500 w-[80px] text-right mr-2"></span>
+                <p>vnđ</p>
+              </div>
             </div>
           </div>
 

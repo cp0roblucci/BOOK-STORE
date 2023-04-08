@@ -12,7 +12,6 @@
     './resources/js/admin/chart.js',
     './resources/js/admin/user.js',
     './resources/js/admin/slidebar.js',
-    './resources/js/admin/modal.js',
     './resources/js/complete-info.js',
   ])
   <link rel="shortcut icon" sizes="114x114" href="{{  URL::to('/storage/images/logo.png') }}">
@@ -44,7 +43,7 @@
           <header class="bg-white sticky top-0 border-b">
             @yield('header')
           </header>
-          
+
           {{-- Content --}}
           <main class="mt-2 mx-6 mb-10">
             @yield('content')

@@ -4,6 +4,8 @@ module.exports = {
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.vue",
+        "./src/**/*.{html,js}",
+        "./node_modules/tw-elements/dist/js/**/*.js"
     ],
     theme: {
         fontFamily: {
@@ -102,8 +104,8 @@ module.exports = {
                     },
                 },
                 before: {
-                  "0%": { width: "100%" },
-                  "100%": { width: "0" }
+                    "0%": { width: "100%" },
+                    "100%": { width: "0" }
                 }
             },
             spacing: {
@@ -132,6 +134,7 @@ module.exports = {
     },
     plugins: [
         require('tailwind-scrollbar')({ nocompatible: true }),
+        require('tw-elements/dist/plugin'),
     ],
     mode: 'jit',
 }

@@ -58,7 +58,7 @@ module.exports = {
                 cus: "29px 29px 58px #b8b8b8, -29px -29px 58px #ffffff",
             },
             animation: {
-                fadeIn: "fadeIn 1s linear",
+                fadeIn: "fadeIn .2s linear",
                 fadeOut: "fadeOut 1s linear",
                 topToBottom: "topToBottom 0.3s linear",
                 bottomToTop: "bottomToTop 0.3s linear",

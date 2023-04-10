@@ -173,7 +173,7 @@
               <a href="{{ route('change-password') }}">
                 <span class=" bg-blue-200 pl-2 pr-4 py-2 rounded-lg text-white transform transition-all duration-500 group hover:bg-blue-700">
                   <i class="fa-solid fa-retweet px-1 group-hover:rotate-90 transform transition-all duration-500"></i>
-                     Change password
+                    Change password
                 </span>
               </a>
             </div>

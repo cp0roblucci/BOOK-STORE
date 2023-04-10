@@ -1,4 +1,4 @@
-<input type="text" placeholder="Tìm kiếm..." name="users-search" class="caret-blue-500 rounded-md outline-none w-full bg-white" required>
+<input type="text" placeholder="Tìm kiếm..." name="data-search" class="caret-blue-500 rounded-md outline-none w-full bg-white" required>
   <button type="submit" class="inline-block mr-4 mt-2">
     {{-- <i class="fa-solid fa-magnifying-glass text-slate-500"></i> --}}
     <lord-icon

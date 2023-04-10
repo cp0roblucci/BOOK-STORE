@@ -102,6 +102,14 @@
                                 <h6 class="mb-0 text-sm leading-normal"> {{ $fish->price }}</h6>
                             </div>
                           </td>
+                          {{-- <td class="flex bg-transparent mt-4 justify-center items-center">
+                            <a href="fish/{{$fish->id}}/edit" class="text-16 mr-2 text-blue-100">
+                              <i class="fa-regular fa-pen-to-square mr-2"></i>
+                            </a>
+                            <button class="delete-user text-16 mr-2 text-red-300 cursor-pointer" data-id="{{$fish->id}}">
+                              <i class="fa-regular fa-trash-can text-16"></i>
+                            </button>
+                          </td> --}}
                           <td class="p-4 bg-transparent">
                             <form action="" method="post" class="px-2 py-1">
                               @csrf
@@ -116,7 +124,7 @@
                   </table>
 
                   <div class="flex justify-between mx-4 py-4 border-t">
-                     <span class="text-slate-700 text-14 font-light">1 - 5 of {{ $fish->lastPage() }} entries</span>
+                    <span class="text-slate-700 text-14 font-light">1 - 5 of {{ $fish->lastPage() }} entries</span>
                     <div class="bg-slate-100 rounded-full">
                       <ol class="pagination flex text-gray-400">
 

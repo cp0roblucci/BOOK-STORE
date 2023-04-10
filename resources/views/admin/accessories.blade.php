@@ -93,6 +93,14 @@
                             <h6 class="mb-0 text-sm leading-normal">{{ $accessory->$accessories_quantity }}</h6>
                           </div>
                         </td> --}}
+                        {{-- <td class="flex bg-transparent mt-4 justify-center items-center">
+                          <a href="accessories/{{$accessories->id}}/edit" class="text-16 mr-2 text-blue-100">
+                            <i class="fa-regular fa-pen-to-square mr-2"></i>
+                          </a>
+                          <button class="delete-user text-16 mr-2 text-red-300 cursor-pointer" data-id="{{$accessories->id}}">
+                            <i class="fa-regular fa-trash-can text-16"></i>
+                          </button>
+                        </td> --}}
                         <td class="p-4 bg-transparent">
                           <form action="" method="post" class="px-2 py-1">
                             @csrf

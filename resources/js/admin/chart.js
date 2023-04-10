@@ -123,9 +123,11 @@ function fetchDataApi($endpointApi, options) {
         totalRevenueAccessories += data[1][i].total_price;
       }
       // toLocaleString('vi-VN') format 500000000 = 500.000.000;
-      revenueFish.innerHTML = totalRevenueFish.toLocaleString('vi-VN');
-      revenueAccessories.innerHTML = totalRevenueAccessories.toLocaleString('vi-VN');
-      totalRevenue.innerHTML = (totalRevenueFish + totalRevenueAccessories).toLocaleString('vi-VN');
+      if (revenueFish && revenueAccessories && totalRevenue) {
+        revenueFish.innerHTML = totalRevenueFish.toLocaleString('vi-VN');
+        revenueAccessories.innerHTML = totalRevenueAccessories.toLocaleString('vi-VN');
+        totalRevenue.innerHTML = (totalRevenueFish + totalRevenueAccessories).toLocaleString('vi-VN');
+      }
 
       return data;
     });
@@ -147,7 +149,9 @@ function fecthApiDataLastWeek() {
         periodChartDraw.destroy();
       }
     }
-    loading1.classList.add('hidden');
+    if(loading1) {
+      loading1.classList.add('hidden');
+    }
   }, 500);
 }
 
@@ -315,22 +319,26 @@ function updateData() {
 
 // nếu chưa chon ngày kết thúc thì chọn ngày bắt đầu chưa cho render chart
 let endDateSelected = false;
-endDateInput.addEventListener('change', () => {
-  endDateSelected = true;
-  updateData()
-    .then(data => {
-      updateResult(data);
-    });
-
-});
-startDateInput.addEventListener('change', () => {
-  if(endDateSelected) {
+if(endDateInput) {
+  endDateInput.addEventListener('change', () => {
+    endDateSelected = true;
     updateData()
       .then(data => {
         updateResult(data);
       });
-  }
-});
+  
+  });
+}
+if(startDateInput) {
+  startDateInput.addEventListener('change', () => {
+    if(endDateSelected) {
+      updateData()
+        .then(data => {
+          updateResult(data);
+        });
+    }
+  });
+}
 
 if(btnPeriod) {
   btnPeriod.addEventListener('click', function() {

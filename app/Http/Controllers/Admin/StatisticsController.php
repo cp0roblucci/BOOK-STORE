@@ -82,9 +82,11 @@ class StatisticsController extends Controller
     return [$dataFish, $dataAccessories];
   }
   public function dataLastWeek() {
-    $startOfWeek = now()->startOfWeek(Carbon::MONDAY)->subWeek();
-    $endOfWeek = now()->endOfWeek(Carbon::MONDAY)->subWeek()->subDay();
-
+    // $startOfWeek = now()->startOfWeek(Carbon::MONDAY)->subWeek();
+    // $endOfWeek = now()->endOfWeek(Carbon::SUNDAY)->subWeek()->subDay();
+    $startOfWeek = now()->subWeek()->startOfWeek(Carbon::MONDAY);
+    $endOfWeek = now()->subWeek()->endOfWeek(Carbon::SUNDAY);
+    // dd($startOfWeek, $endOfWeek);
     $data = $this->statisticsOverTime($startOfWeek, $endOfWeek);
 
     return response()->json($data);

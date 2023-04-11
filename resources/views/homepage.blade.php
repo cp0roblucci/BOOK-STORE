@@ -91,37 +91,8 @@
       </form>
     </div>
     <div class="content mx-20 h-auto rounded-lg">
-        <div class="flex flex-row h-auto">
-            <div class="sidebar basis-3/12 bg-slate-50 h-auto uppercase text-20 shadow-lg rounded-lg font-popins">
-                <div class="bars flex pl-1 leading-10">
-                    <i class="fa-solid fa-bars mt-2.5 text-24"></i>
-                    <h1 class="ml-2 mt-1 text-blue-400">Danh muc san pham</h1>
-                </div>
-                <ul class="">
-                    <li class="relative group  leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Rong</a>
-                    </li>
-                    <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Phuong Hoang</a>
-                    </li>
-                    <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Betta</a>
-                    </li>
-                    <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Bay Mau</a>
-                    </li>
-                    <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Ca Vang</a>
-                    </li>
-                    <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Thuc An</a>
-                    </li>
-                    <li class="relative group leading-70">
-                        <a href="#" class="block pl-8 my-2 relative group-hover:after:block after:hidden after:absolute after:bottom-0 after:left-8 after:w-0 after:animate-line">Phu Kien</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="banner ml-2 basis-9/12  w-auto bg-black h-125 relative rounded-lg">
+        <div class="banner-container h-auto">
+            <div class="banner w-auto bg-black h-125 relative rounded-lg">
                 <div class="w-full h-full img-bg-box-banner">
                     <img class="bg-img h-98p w-98p blur-10" src="/images/product1.jpg" alt="">
                 </div>
@@ -132,6 +103,7 @@
                     <h1 class="fish-name uppercase font-bold text-48 mb-4 ">Cyan Red</h1>
                     <h2 class="subname uppercase text-26 mb-2">HAFMOON BETTA FISH</h2>
                     <p class="des">Bettas are a member of the gourami family and are know to be highly territorial.</p>
+                    <button class="mt-4"><a class="px-4 py-2 bg-none text-aliceblue border rounded-lg hover:bg-blue-300" href="#">Buy Now</a></button>
                 </div>
                 <div class="btn-pre text-slate-300 text-36 p-4 absolute top-1/2 -translate-y-1/2">
                     <button ><i class="fa-solid fa-angle-left"></i></button>

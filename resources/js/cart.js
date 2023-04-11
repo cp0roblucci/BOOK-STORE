@@ -125,6 +125,16 @@ function removefromcart() {
     console.log(delete_btns.length);
     for(var i = 0; i<delete_btns.length; i++) {
         delete_btns[i].addEventListener('click', (event) => {
+            let item_rm = event.target.parentElement.parentElement;
+            let list_item_buy = $$('.item-buy')
+            if(list_item_buy.length > 0) {
+                list_item_buy.forEach(element => {
+                    if(element.getAttribute('data-key') == item_rm.getAttribute('data-key'))
+                        element.remove();
+                        totalbuy();
+                });
+            }
+            console.log(item_rm.getAttribute('data-key'), list_item_buy);
             event.target.parentElement.parentElement.remove();
             checkcartempty();
         });

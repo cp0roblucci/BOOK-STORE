@@ -26,7 +26,7 @@
               <div class="w-6 h-6">
                 {{-- <img src="{{Auth::user()->link_avt}}" alt=""> --}}
                 <img
-                  src="{{ Auth::user()->link_avt != null ?  asset(Auth::user()->link_avt) : URL::to('/images/admin/avatar-default.png')}}"
+                  src="{{ Auth::user()->link_avt != null ?  Auth::user()->link_avt : URL::to('/images/admin/avatar-default.png')}}"
                   alt="avatar"
                   class="w-full h-full rounded-full"
                 >

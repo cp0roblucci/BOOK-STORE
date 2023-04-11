@@ -1,8 +1,8 @@
 @extends('admin.layout.main')
 
 {{-- set title --}}
-@section('title', 'DashBoard')
-@section('path', 'DashBoard')
+@section('title', 'Thống Kê')
+@section('path', 'Thống kê')
 
 @section('sidebar')
   @include('admin.layout.sidebar')
@@ -24,8 +24,8 @@
             <div class="p-2 flex items-center justify-between">
               {{-- <img src="{{ URL::to('/images/admin/fish.png')}}" alt="fish" class="w-16 h-16"> --}}
               <div class="flex flex-col text-white">
-                <h2 class="uppercase text-14">Total Products</h2>
-                <span class="font-bold mt-6 text-20">{{ $totalProduct }}</span>
+                <h2 class="uppercase text-14">Số lượng sản phẩm</h2>
+                <span class="font-bold mt-6 text-20">{{ $totalProduct }}+</span>
               </div>
               <div class="mr-10">
                 <i class="fa-solid fa-basket-shopping text-white text-32"></i>
@@ -36,7 +36,7 @@
           <div class="border border-white h-24  rounded-xl bg-gradient-to-br from-[#ffffff55] to-[#ffffff20]">
             <div class="p-2 flex items-center justify-between">
               <div class="flex flex-col text-white">
-                <h2 class="uppercase text-14">New Clients</h2>
+                <h2 class="uppercase text-14">Tổng số khách hàng</h2>
                 <span class="font-bold mt-6 text-20">{{ $totalCustomer }}</span>
               </div>
               <div class="mr-10">
@@ -50,7 +50,7 @@
             <div class="p-2 flex items-center justify-between">
               {{-- <img src="{{ URL::to('/images/admin/cart.png')}}" alt="cart" class="w-16 h-16"> --}}
               <div class="flex flex-col text-white">
-                <h2 class="uppercase text-14 ">New Orders</h2>
+                <h2 class="uppercase text-14 ">Đơn đặt hàng mới</h2>
                 <span class="font-bold mt-6 text-20">{{ $totalOrder }}</span>
               </div>
               <div class="mr-10">
@@ -60,6 +60,89 @@
           </div>
 
         </div>
+      </div>
+
+      {{-- Chart --}}
+      <div class="grid grid-cols-4 gap-4 mt-4">
+        <div class="last-week-chart col-span-3 text-center rounded-2xl shadow-md w-full">
+          <canvas id="lastWeekChart"></canvas>
+          <div class="loading1">
+            <div class="w-12 h-12 absolute top-[35%] left-[33.5%] rounded-full animate-spin
+                    border-y-8 border-solid border-blue-100 border-t-transparent shadow-md"></div>
+            <div class="w-12 h-12 absolute top-[35%] left-[36.5%] rounded-full animate-spin
+                    border-y-8 border-solid border-purple-400 border-b-transparent shadow-md"></div>
+          </div>
+        </div>
+        <div class="last-seven-day-chart col-span-3 text-center rounded-2xl shadow-md w-full hidden">
+          <div class="loading2">
+            <div class="w-12 h-12 absolute top-[35%] left-[33.5%] rounded-full animate-spin
+                    border-y-8 border-solid border-blue-100 border-t-transparent shadow-md"></div>
+            <div class="w-12 h-12 absolute top-[35%] left-[36.5%] rounded-full animate-spin
+                    border-y-8 border-solid border-purple-400 border-b-transparent shadow-md"></div>
+          </div>
+          <canvas id="lastSevenDay"></canvas>
+        </div>
+        <div class="period-chart relative col-span-3 text-center rounded-2xl shadow-md w-full hidden">
+          <canvas id="Period"></canvas>
+          <div class="loading3">
+            <div class="w-12 h-12 absolute top-[40%] left-[43%] rounded-full animate-spin
+                    border-y-8 border-solid border-blue-100 border-t-transparent shadow-md"></div>
+            <div class="w-12 h-12 absolute top-[40%] left-[47%] rounded-full animate-spin
+                    border-y-8 border-solid border-purple-400 border-b-transparent shadow-md"></div>
+          </div>
+        </div>
+        <div class="flex flex-col p-2 rounded-2xl shadow-md">
+          <div class="p-2 mb-4 rounded-2xl shadow-md">
+            <div class="">
+              <h2 class="text-center font-thin text-20">Thống kê</h2>
+              <div class="mt-2">
+                <div class="grid grid-cols-2 gap-2">
+                  <button class="btn-last-week-chart border py-1 px-2 rounded-md bg-blue-100 text-white text-slate-700  hover:opacity-60 transition-all">Tuần Trước</button>
+                  <button class="btn-last-seven-day-chart border py-1 px-2 rounded-md text-slate-700  hover:opacity-60 transition-all">7 Ngày Qua</button>
+                </div>
+                <button class="btn-period-chart w-full mt-2 border py-1 px-2 rounded-md text-slate-700  hover:opacity-60 transition-all">Khoảng thời gian</button>
+              </div>
+            </div>
+            <div class="form-period mt-2 hidden">
+              {{-- <form action="" method="get"> --}}
+                <div class="my-1">
+                  <label for="" class="ml-2 w-8 inline-block">Từ:</label>
+                  <input type="date" name="" id="start-date" class="border-2 cursor-pointer outline-none focus-within:border-blue-500 px-2 rounded-md">
+                </div>
+                <div class="">
+                  <label for="" class="ml-2 w-8 inline-block">Đến:</label>
+                  <input type="date" name="" id="end-date" class="border-2 cursor-pointer outline-none focus-within:border-blue-500 px-2 rounded-md">
+                </div>
+              {{-- </form> --}}
+            </div>
+          </div>
+
+          <div class="p-2 rounded-2xl h-full shadow-md">
+            <h2 class="text-center text-20 font-thin">Doanh Thu</h2>
+            <div class="flex flex-col mt-2">
+              <div class="flex">
+                <p class="w-20">Cá:</p>
+                <span id="revenue-fish" class="text-blue-500 w-[80px] text-right mr-2"></span>
+                <p>vnđ</p>
+              </div>
+              <div class="flex py-2">
+                <p class="w-20">Phụ kiện:</p>
+                <span id="revenue-accessories" class="text-blue-500 w-[80px] text-right mr-2"></span>
+                <p>vnđ</p>
+              </div>
+              <div class="flex text-20">
+                <p class="w-20">Tổng:</p>
+                <span id="total-revenue" class="text-blue-500 w-[80px] text-right mr-2"></span>
+                <p>vnđ</p>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        {{-- <div class="col-span-2 text-center rounded-2xl shadow-md w-full">
+          <canvas id="barChart"></canvas>
+        </div> --}}
       </div>
 
       <div class="grid grid-cols-4 gap-4 mt-6">
@@ -145,17 +228,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-
-      {{-- Chart --}}
-      <div class="grid grid-cols-4 gap-4 mt-6">
-        <div class="bar-chart col-span-4 text-center rounded-2xl shadow-md w-full">
-          <canvas id="barChart"></canvas>
-        </div>
-        <div class="col-span-2 text-center rounded-2xl shadow-md w-full">
-          <canvas id="barChart"></canvas>
         </div>
       </div>
 @endsection

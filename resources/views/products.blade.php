@@ -13,7 +13,7 @@
     <div class="header flex justify-between mx-20 px-4 h-20">
         <div class="logo h-auto py-1 col-span-1 relative text-center">
             <a href="/">
-                <img class="w-12 h-12 m-auto" src="{{ URL::to('/images/logo.png')}}" alt="">
+                <img class="w-12 h-12 m-auto" src="{{ URL::to('/storage/images/logo.png')}}" alt="">
             </a>
             <h1 class=""><a class="hover:text-red-500 font-bold" href="#">BETTA3TL.<span class="font-normal">COM</span></a></h1>
         </div>

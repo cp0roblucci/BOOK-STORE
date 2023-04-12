@@ -91,7 +91,7 @@
         @for($i = 0; $i<5; $i++)
         <div id="dragon-fish" class="product dragon-fish border md:w-1/5 float-left border-gray-100 relative overflow-hidden group">
 
-            <a class="block img h-auto w-full my-5 px-0.5" href="#">
+            <a class="block img h-auto w-full my-5 px-0.5" href="/products_detail">
                 <img class=" h-48 w-full " src="/storage/images/img_products/pd1.jpg" alt="">
             </a>
                 {{-- button --}}

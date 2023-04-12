@@ -88,23 +88,27 @@
         <div class="mb-6 text-32 font-bold text-center py-2 border-b border-b-gray-100">
             <h2 class="">TẤT CẢ SẢN PHẨM</h2>
         </div>
-        @for($i = 0; $i<5; $i++)
-        <div id="dragon-fish" class="product dragon-fish border md:w-1/5 float-left border-gray-100 relative overflow-hidden group">
+        {{-- @for
+            
+
+        @endfor --}}
+        
+        <div id="dragon-fish" class="product dragon-fish border md:w-1/5 float-left border-gray-100 relative overflow-hidden group ">
 
             <a class="block img h-auto w-full my-5 px-0.5" href="#">
-                <img class=" h-48 w-full " src="/storage/images/img_products/pd1.jpg" alt="">
+                <img class=" h-48 w-full " src="/images/img_products/dragon_fish/dragon_fish_1.jpg" alt="">
             </a>
                 {{-- button --}}
             <div class="absolute w-full flex -translate-y-10 opacity-0 group-hover:opacity-100 items-center justify-center transition-all ">
-                    
-                <button id="btnProductDetail" href="/products_detail" class="px-5 py-2 mx-0.5 w-full bg-blue-500 text-white rounded-md font-semibold">
-                    <i class="fa-solid fa-link text-14 " ></i>
+
+                <button id="btnProductDetail" class="px-5 py-2 mx-0.5 w-full bg-blue-500 text-white rounded-md font-semibold">
+                    <i class="fa-solid fa-link text-14"></i>
                     Tùy chọn
                 </button>
             </div>
             <div class="item-content my-4 mx-2">
                 <div class="font-semibold text-sm my-2 mt-6">
-                    <a class="hover:text-red-500" href="/products_detail">Cá Siêu Saiyan SSJ 1</a>
+                    <a class="hover:text-red-500" href="#">Cá Siêu Saiyan SSJ 1</a>
                 </div>
                 <div class="price flex">
                     <span class="text-red-500 text-16 font-bold">50000đ</span>
@@ -112,11 +116,7 @@
                 </div>
             </div>
         </div>
-        
-
-        @endfor
         <div class="clear-left"></div>
-       
     </div>
     {{-- paging --}}
     <div class="text-center pt-10">
@@ -131,15 +131,30 @@
         </div>
     </div>
 </section>
-
 @endsection
 
 @section('footer')
     @include('layouts.footer')
 @endsection
 
-@section('scripts')
-    @vite('./resources/js/products.js')
-@endsection
+<script>
+    // Lấy all btn
+    const categoryBtns = document.querySelectorAll('.category-btn');
 
-
+    // Lấy ctn-pd
+    const productContainer = document.getElementById('product-container');
+    // Lặp qua từng button & create event
+    categoryBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            // Lấy id của button
+            const categoryId = this.id;
+            productContainer.querySelectorAll('.product').forEach(function(product) {
+                if (categoryId === 'all-products-btn' || product.classList.contains(categoryId)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>

@@ -28,7 +28,7 @@
               > --}}
               <img
                 id="img-preview"
-                src="{{ URL::to('/storage/images/admin/avatar-default.png')}}"
+                src="{{ URL::to('/storage/images/admin/add-user.png')}}"
                 alt="avatar"
                 class="w-full h-full rounded-full"
               >

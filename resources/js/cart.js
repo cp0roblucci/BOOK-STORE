@@ -22,7 +22,7 @@ function quantitycart() {
             let quantity_item = item_cart.getElementsByClassName('num')[0];
             let sum_item = item_cart.getElementsByClassName('total')[0];
             let price_item = item_cart.getElementsByClassName('price')[0];
-            if(quantity_item.value > 0) {
+            if(quantity_item.value > 1) {
                 quantity_item.value--;
                 sum_item.innerHTML = parseFloat(price_item.innerText)*quantity_item.value + "₫";
                 quantity_updatetotalbuy(item_cart);
@@ -64,7 +64,7 @@ function totalbuy() {
         
         ordered_container.innerHTML += `
             <div class="warning w-fulll h-16 text-24 flex justify-center items-center text-blue-100">
-                <h1 class="font-bold uppercase">Add Your Favourite Items to buy</h1>
+                <h1 class="font-bold uppercase">Add Items to buy</h1>
             </div>
         `;
     }

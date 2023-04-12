@@ -2,14 +2,14 @@ var $ = document.querySelector.bind(document);
 var $$ = document.querySelectorAll.bind(document);
 
 var bg_img = [
-    '/images/xanhdam-trang.png',
-    '/images/vang.png',
-    '/images/xam-trang.jpg'
+    '/storage/images/xanhdam-trang.png',
+    '/storage/images/vang.png',
+    '/storage/images/xam-trang.jpg'
 ];
 var content_img = [
-    '/images/xanhdam-trang-nobg.png',
-    '/images/vang-nobg.png',
-    '/images/xam-trang-nobg.png'
+    '/storage/images/xanhdam-trang-nobg.png',
+    '/storage/images/vang-nobg.png',
+    '/storage/images/xam-trang-nobg.png'
 
 ];
 

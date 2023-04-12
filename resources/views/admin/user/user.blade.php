@@ -33,6 +33,12 @@
             <span class="px-4">{{ session('update-success') ? session('update-success') : session('delete-success') }}</span>
           </div>
         </div>
+      @elseif(session('delete-failed'))
+        <div id="message" class="bg-slate-200 absolute top-12 right-7 rounded-lg border-l-8 border-l-red-500 opacity-80">
+          <div class="py-4 text-red-500 relative before:absolute before:bottom-0 before:content-[''] before:bg-red-500 before:h-0.5 before:w-full before:animate-before">
+            <span class="px-4">{{ session('delete-failed') }}</span>
+          </div>
+        </div>
       @endif
     {{-- Danh sách người dùng --}}
     <div class="flex flex-wrap -mx-3 mb-10 mt-2">
@@ -57,7 +63,7 @@
                 </thead>
                 <tbody>
                   @foreach($users as $key => $user)
-                    @continue($user->id === Auth::user()->id)
+{{--                      @continue($user->id === Auth::user()->id)--}}
                     <tr class="border-t even:bg-gray-100 odd:bg-white">
                       <td class="p-4 bg-transparent ">
                         <div class="py-1">
@@ -85,7 +91,7 @@
                         </div>
                       </td>
                       <td class="p-4 bg-transparent text-center">
-                        <div class="px-2 py-1 rounded-full {{ $user->role_id == 1  ? 'bg-blue-100 text-white' : ''}}">
+                        <div class="px-2 py-1 rounded-full {{ $user->id === Auth::user()->id  ? 'bg-purple-400 text-white' : ($user->role_id == 1 ? 'bg-blue-100 text-white' :  '')}}">
                             <h6 class="text-sm leading-normal capitalize"> {{ $user->role_name }}</h6>
                         </div>
                       </td>
@@ -93,9 +99,15 @@
                         <a href="users/{{$user->id}}/edit" class="text-16 mr-2 text-blue-100">
                           <i class="fa-regular fa-pen-to-square mr-2"></i>
                         </a>
-                        <button class="delete-user text-16 mr-2 text-red-300 cursor-pointer" data-id="{{$user->id}}">
-                          <i class="fa-regular fa-trash-can text-16"></i>
-                        </button>
+                        @if($user->id === Auth::user()->id )
+                          <button class="delete-user text-16 mr-2 text-red-300 cursor-pointer">
+                            <i class="fa-regular fa-trash-can text-16"></i>
+                          </button>
+                        @else
+                          <button class="delete-user text-16 mr-2 text-red-300 cursor-pointer" data-id="{{$user->id}}">
+                            <i class="fa-regular fa-trash-can text-16"></i>
+                          </button>
+                        @endif
                       </td>
                     </tr>
                   @endforeach
@@ -105,7 +117,7 @@
 
 
               <div class="flex justify-between mx-4 py-4 border-t">
-                <span class="text-slate-700 text-14 font-light">1 - @if($users->count() < 6) {{ $users->count() - 1 }} @else 5 @endif of {{ $users->lastPage() }} entries</span>
+                <span class="text-slate-700 text-14 font-light">1 - @if($users->count() < 5) {{ $users->count() }} @else 5 @endif of {{ $users->lastPage() }} entries</span>
                 <div class="bg-slate-100 rounded-full">
                   <ol class="pagination flex text-gray-400">
 

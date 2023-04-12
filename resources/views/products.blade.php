@@ -89,22 +89,74 @@
             <h2 class="">TẤT CẢ SẢN PHẨM</h2>
         </div>
         @for($i = 0; $i<5; $i++)
-        <div id="dragon-fish" class="product dragon-fish border md:w-1/5 float-left border-gray-100 relative overflow-hidden group">
+          <div id="dragon-fish" class="product dragon-fish border md:w-1/5 float-left border-gray-100 relative overflow-hidden group">
 
+              <a class="block img h-auto w-full my-5 px-0.5" href="#">
+                  <img class=" h-48 w-full " src="/storage/images/img_products/pd1.jpg" alt="">
+              </a>
+                  {{-- button --}}
+              <div class="absolute w-full flex -translate-y-10 opacity-0 group-hover:opacity-100 items-center justify-center transition-all ">
+
+                  <button id="btnProductDetail" href="/products_detail" class="px-5 py-2 mx-0.5 w-full bg-blue-500 text-white rounded-md font-semibold">
+                      <i class="fa-solid fa-link text-14 " ></i>
+                      Tùy chọn
+                  </button>
+              </div>
+              <div class="item-content my-4 mx-2">
+                  <div class="font-semibold text-sm my-2 mt-6">
+                      <a class="hover:text-red-500" href="/products_detail">Cá Siêu Saiyan SSJ 1</a>
+                  </div>
+                  <div class="price flex">
+                      <span class="text-red-500 text-16 font-bold">50000đ</span>
+                      <span class="block ml-2 mt-0.5 opacity-70 line-through text-sm">60000d</span>
+                  </div>
+              </div>
+          </div>
+        @endfor
+        
+        
+        <div
+          id="phoenix-fish"
+          class="product phoenix-fish border w-1/5 float-left border-gray-100 relative overflow-hidden group">
             <a class="block img h-auto w-full my-5 px-0.5" href="#">
-                <img class=" h-48 w-full " src="/storage/images/img_products/pd1.jpg" alt="">
+                <img class=" h-48 w-full" src="/storage/images/img_products/dragon_fish/dragon_fish_2.jpg" alt="">
             </a>
-                {{-- button --}}
-            <div class="absolute w-full flex -translate-y-10 opacity-0 group-hover:opacity-100 items-center justify-center transition-all ">
-                    
-                <button id="btnProductDetail" href="/products_detail" class="px-5 py-2 mx-0.5 w-full bg-blue-500 text-white rounded-md font-semibold">
-                    <i class="fa-solid fa-link text-14 " ></i>
+
+            <div class="absolute w-full flex -translate-y-10 opacity-0 group-hover:opacity-100 items-center justify-center transition-all">
+                <button class="px-5 py-2 mx-0.5 w-full bg-blue-500 text-white rounded-md font-semibold">
+                    <i class="fa-solid fa-link text-14"></i>
                     Tùy chọn
                 </button>
             </div>
-            <div class="item-content my-4 mx-2">
+
+            <div class="item-content my-4 mx-2 mt-2">
+
                 <div class="font-semibold text-sm my-2 mt-6">
-                    <a class="hover:text-red-500" href="/products_detail">Cá Siêu Saiyan SSJ 1</a>
+                    <a class=" hover:text-red-500" href="#">Cá Siêu Saiyan SSJ 2</a>
+                </div>
+                <div class="price flex">
+                    <span class="text-red-500 text-16 font-bold">50000đ</span>
+                    <span class="block ml-2 mt-0.5 opacity-70 line-through text-sm">60000d</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="border w-1/5 float-left border-gray-100 relative overflow-hidden group">
+            <a class="block img h-auto w-full my-5 px-0.5" href="#">
+                <img class=" h-48 w-full " src="/images/img_products/dragon_fish/dragon_fish_3.jpg" alt="">
+            </a>
+
+            <div class="absolute w-full flex -translate-y-10 opacity-0 group-hover:opacity-100 items-center justify-center transition-all">
+                <button class="px-5 py-2 mx-0.5 w-full bg-blue-500 text-white rounded-md font-semibold">
+                    <i class="fa-solid fa-link text-14"></i>
+                    Tùy chọn
+                </button>
+            </div>
+
+            <div class="item-content my-4 mx-2 mt-2">
+
+                <div class="font-semibold text-sm my-2 mt-6">
+                    <a class=" hover:text-red-500" href="#">Cá Siêu Saiyan SSJ 3</a>
                 </div>
                 <div class="price flex">
                     <span class="text-red-500 text-16 font-bold">50000đ</span>
@@ -113,8 +165,6 @@
             </div>
         </div>
         
-
-        @endfor
         <div class="clear-left"></div>
        
     </div>

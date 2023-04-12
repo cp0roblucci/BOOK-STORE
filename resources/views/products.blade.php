@@ -160,7 +160,7 @@
           id="phoenix-fish"
           class="product phoenix-fish border w-1/5 float-left border-gray-100 relative overflow-hidden group">
             <a class="block img h-auto w-full my-5 px-0.5" href="#">
-                <img class=" h-48 w-full" src="/images/img_products/dragon_fish/dragon_fish_2.jpg" alt="">
+                <img class=" h-48 w-full" src="/storage/images/img_products/dragon_fish/dragon_fish_2.jpg" alt="">
             </a>
 
             <div class="absolute w-full flex -translate-y-10 opacity-0 group-hover:opacity-100 items-center justify-center transition-all">

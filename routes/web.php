@@ -42,7 +42,11 @@ Route::get('/products', function () {
 });
 
 Route::get('/cart', function () {
-    return view('clients/cart');
+    return view('clients.cart');
+});
+
+Route::get('/transaction', function () {
+    return view('clients.transaction');
 });
  
 // Route::get('/layouts/header', function () {

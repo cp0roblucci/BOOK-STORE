@@ -11,7 +11,7 @@
       <li class="w-full inline-block text-gray-500">
         <div class="cursor-pointer mb-4
         {{ request()->is('admin/dashboard') ? 'text-purple-400' : ''}}">
-          <a href="{{ route('admin-dashboard')}}" class="hover:bg-slate-200 ml-2 py-1 rounded-sm block">
+          <a href="{{ route('admin-dashboard')}}" id="Statistics" class="hover:bg-slate-200 ml-2 py-1 rounded-sm block">
             <button class="hover:bg-purple-200 w-6 h-6 rounded-full">
               <i class="fa-solid fa-circle-dot text-14 {{ request()->is('admin/dashboard') ? 'text-purple-400' : 'text-slate-400' }} mr-1"></i>
             </button>
@@ -25,6 +25,10 @@
         {{
           request()->is('admin/fish')
           || request()->is('admin/accessories')
+          || request()->is('admin/list-price')
+          || request()->is('admin/search-price-fish')
+          || request()->is('admin/search-fish')
+          || request()->is('admin/search-accessories')
           || request()->is('admin/create-new-fish')
           || request()->is('admin/create-new-species')
           || request()->is('admin/create-new-ph')
@@ -39,6 +43,11 @@
             {{
               request()->is('admin/fish')
               || request()->is('admin/accessories')
+              || request()->is('admin/accessories/*/edit')
+              || request()->is('admin/search-accessories')
+              || request()->is('admin/list-price')
+              || request()->is('admin/search-price-fish')
+              || request()->is('admin/search-fish')
               || request()->is('admin/create-new-fish')
               || request()->is('admin/create-new-species')
               || request()->is('admin/create-new-ph')
@@ -57,6 +66,11 @@
         {{
           request()->is('admin/fish')
           || request()->is('admin/accessories')
+          || request()->is('admin/accessories/*/edit')
+          || request()->is('admin/search-accessories')
+          || request()->is('admin/list-price')
+          || request()->is('admin/search-price-fish')
+          || request()->is('admin/search-fish')
           || request()->is('admin/create-new-fish')
           || request()->is('admin/create-new-species')
           || request()->is('admin/create-new-ph')
@@ -69,7 +83,13 @@
           <a
             href="{{route('admin-accessories')}}"
             class="transition-all hover:bg-slate-100 py-1 rounded-sm
-            {{ request()->is('admin/accessories') ? ' text-blue-200' : ''}}"
+            {{
+              request()->is('admin/accessories')
+              || request()->is('admin/search-accessories')
+              || request()->is('admin/accessories/*/edit')
+              ? ' text-blue-200'
+              : ''
+            }}"
           >
             <i class="fa-solid fa-circle-dot text-10 text-blue-400 mr-1"></i>
             Danh sách phụ kiện
@@ -77,10 +97,26 @@
           <a
             href="{{route('admin-fish')}}"
             class="transition-all hover:bg-slate-100 py-1 rounded-sm
-            {{ request()->is('admin/fish') ? ' text-blue-200' : ''}}"
+            {{ request()->is('admin/fish') || request()->is('admin/search-fish') ? ' text-blue-200' : ''}}"
           >
             <i class="fa-solid fa-circle-dot text-10 text-blue-400 mr-1"></i>
             Danh sách cá
+          </a>
+          <a
+            href="{{route('admin-list-price')}}"
+            class="transition-all hover:bg-slate-100 py-1 rounded-sm
+            {{ request()->is('admin/list-price') || request()->is('admin/search-price-fish')  ? ' text-blue-200' : ''}}"
+          >
+            <i class="fa-solid fa-circle-dot text-10 text-blue-400 mr-1"></i>
+            Bảng giá Cá
+          </a>
+          <a
+            href="{{route('admin-store')}}"
+            class="transition-all hover:bg-slate-100 py-1 rounded-sm
+            {{ request()->is('admin/list-price') || request()->is('admin/search-price-fish')  ? ' text-blue-200' : ''}}"
+          >
+            <i class="fa-solid fa-circle-dot text-10 text-blue-400 mr-1"></i>
+            Kho Hàng
           </a>
           <div class="btn__slidebar2 cursor-pointer
             {{

@@ -9,6 +9,9 @@ const lastWeekChart = document.getElementById('lastWeekChart');
 const lastSevenDaysChart = document.getElementById('lastSevenDay');
 const periodChart = document.getElementById('Period');
 
+// lay phan tu thong ke o slidebar
+const statisticsElement = document.getElementById('Statistics');
+
 const loading1 = $('.loading1');
 const loading2 = $('.loading2');
 const loading3 = $('.loading3');
@@ -156,7 +159,12 @@ function fecthApiDataLastWeek() {
 }
 
 // lan dau load trang
-fecthApiDataLastWeek();
+document.addEventListener("DOMContentLoaded", function() {
+  fecthApiDataLastWeek();
+});
+
+// click thong ke o slidebar
+statisticsElement.addEventListener('click', fecthApiDataLastWeek);
 
 if(btnlastWeek) {
   btnlastWeek.addEventListener('click', function() {
@@ -326,7 +334,7 @@ if(endDateInput) {
       .then(data => {
         updateResult(data);
       });
-  
+
   });
 }
 if(startDateInput) {

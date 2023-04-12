@@ -94,7 +94,7 @@
         <div class="flex flex-col p-2 rounded-2xl shadow-md">
           <div class="p-2 mb-4 rounded-2xl shadow-md">
             <div class="">
-              <h2 class="text-center font-thin text-20">Thống kê</h2>
+              <h2 class="text-center font-thin text-20">Thống kê số lượng bán</h2>
               <div class="mt-2">
                 <div class="grid grid-cols-2 gap-2">
                   <button class="btn-last-week-chart border py-1 px-2 rounded-md bg-blue-100 text-white text-slate-700  hover:opacity-60 transition-all">Tuần Trước</button>

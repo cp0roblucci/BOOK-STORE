@@ -81,7 +81,7 @@
                           </div>
                         </td>
                         <td class="p-4 bg-transparent text-center">
-                          <div class="px-2 py-1 rounded-full {{ $user->role_id == 1  ? 'bg-blue-100 text-white' : ''}}">
+                          <div class="px-2 py-1 rounded-full {{ $user->id === Auth::user()->id  ? 'bg-purple-400 text-white' : ($user->role_id == 1 ? 'bg-blue-100 text-white' :  '')}}">
                               <h6 class="text-sm leading-normal capitalize"> {{ $user->role_name }}</h6>
                           </div>
                         </td>
@@ -99,7 +99,7 @@
                   </tbody>
                 </table>
 
-                            
+
 
                 <div class="flex justify-between mx-4 py-4 border-t">
                   <span class="text-slate-700 text-14 font-light">1 - 5 of {{ $results->lastPage() }} entries</span>

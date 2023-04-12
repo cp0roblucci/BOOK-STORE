@@ -100,6 +100,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 
     Route::get('fish', [AdminController::class, 'fish'])->name('admin-fish');
 
+    Route::get('list-price', [FishController::class, 'listPriceProduct'])->name('admin-list-price');
+
+    Route::get('store', [AdminController::class, 'store'])->name('admin-store');
+
     Route::get('orders', [AdminController::class, 'order'])->name('admin-order');
 
     Route::get('categories', [AdminController::class, 'category'])->name('admin-categories');
@@ -119,7 +123,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     //  USER
     // new user
     Route::get('create-new-user', function() {
-        return view('admin.new-user');
+        return view('admin.user.new-user');
     })->name('new-user');
     Route::post('create-new-user', [UserController::class, 'createUser']);
 
@@ -128,49 +132,69 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 
     Route::get('search-user', [UserController::class, 'searchByName'])->name('admin-search-user-by-name');
 
-    Route::get('result-search-user', function() {
-        return view('admin.result-search-user');
-    });
-
     Route::post('delete-user', [UserController::class, 'delete'])->name('delete-user');
 
     // PRODUCT
 
+    // Accessories
     // accessories type
     Route::get('create-new-accessories-type', function() {
-        return view('admin.new-accessories-type');
+        return view('admin.accessories.new-accessories-type');
     })->name('new-accessories-type');
     Route::post('create-new-accessories-type', [AccessoriesTypeController::class, 'create']);
 
     // accessories
     Route::get('create-new-accessory', function() {
-        return view('admin.new-accessory');
+        return view('admin.accessories.new-accessory');
     })->name('new-accessory');
     Route::post('create-new-accessory', [AccessoriesController::class, 'create']);
 
+    // edit accessories
+    Route::get('accessories/{id}/edit', [AccessoriesController::class, 'editAccessories']);
+    // search accessories
+    Route::get('search-accessories', [AccessoriesController::class, 'searchAccessories'])->name('search-accessories');
+    // delete accessories
+    Route::post('delete-accessories', [AccessoriesController::class, 'delete'])->name('delete-accessories');
+
+    // Fish
     // new product
     Route::get('create-new-fish', function() {
-        return view('admin.new-fish');
+        return view('admin.fish.new-fish');
     })->name('new-fish');
     Route::post('create-new-fish', [FishController::class, 'create']);
+    // edit fish
+    Route::get('fish/{id}/edit', [FishController::class, 'editFish']);
+
 
     // new species
     Route::get('create-new-species', function() {
-        return view('admin.new-species');
+        return view('admin.fish.new-species');
     })->name('new-species');
     Route::post('create-new-species', [SpeciesController::class, 'create']);
 
     // new ph
     Route::get('create-new-ph', function() {
-        return view('admin.new-ph');
+        return view('admin.fish.new-ph');
     })->name('new-ph');
     Route::post('create-new-ph', [PHController::class, 'create']);
 
     // new color
     Route::get('create-new-color', function() {
-        return view('admin.new-color');
+        return view('admin.fish.new-color');
     })->name('new-color');
     Route::post('create-new-color', [ColorController::class, 'create']);
+
+    // update price
+    Route::post('update-price', [FishController::class, 'updatePrice'])->name('update-price');
+
+    // search fish
+    Route::get('search-fish', [FishController::class, 'searchFish'])->name('search-fish');
+    // search price
+    Route::get('search-price-fish', [FishController::class, 'searchPriceFish'])->name('search-price');
+
+
+    // delete fish
+    Route::post('delete-fish', [FishController::class, 'delete'])->name('delete-fish');
 
 
 //  Statistics

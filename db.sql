@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2023 at 08:42 PM
+-- Generation Time: Apr 11, 2023 at 04:53 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ornamental-fish-store1`
+-- Database: `ornamental-fish-store`
 --
 
 -- --------------------------------------------------------
@@ -28,14 +28,36 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `accessories` (
-  `ACCESSORIES_ID` char(6) NOT NULL,
+  `accessories_id` char(6) NOT NULL,
   `category_id` int(11) NOT NULL,
-  `ACCESSORIES_TYPE_ID` char(6) NOT NULL,
-  `ACCESSORIES_NAME` varchar(50) DEFAULT NULL,
-  `ACCESSORIES_PRICE` int(11) DEFAULT NULL,
-  `ACCESSORIES_DESC` text DEFAULT NULL,
-  `ACCESSORIES_LINK_IMG` text DEFAULT NULL
+  `accessories_type_id` char(6) NOT NULL,
+  `accessories_name` varchar(50) DEFAULT NULL,
+  `accessories_price` int(11) DEFAULT NULL,
+  `accessories_desc` text DEFAULT NULL,
+  `accessories_link_img` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `accessories`
+--
+
+INSERT INTO `accessories` (`accessories_id`, `category_id`, `accessories_type_id`, `accessories_name`, `accessories_price`, `accessories_desc`, `accessories_link_img`) VALUES
+('ARM01', 0, 'ACCS01', 'Hồ Thủy Sinh STYLE 1', 650000, 'Hồ Thủy Sinh STYLE 1', '/storage/images/img_products/accessories/aquarium/aquarium_type1.jpg'),
+('ARM02', 0, 'ACCS01', 'Hồ Thủy Sinh STYLE 2', 850000, 'Hồ Thủy Sinh STYLE 2', '/storage/images/img_products/accessories/aquarium/aquarium_type2.jpg'),
+('ARM03', 0, 'ACCS01', 'Hồ Thủy Sinh STYLE 3', 1400000, 'Hồ Thủy Sinh STYLE 3', '/storage/images/img_products/accessories/aquarium/aquarium_type3.jpg'),
+('ARM04', 0, 'ACCS01', 'Hồ Thủy Sinh STYLE 4', 2300000, 'Hồ Thủy Sinh STYLE 4', '/storage/images/img_products/accessories/aquarium/aquarium_type4.jpg'),
+('ARM05', 0, 'ACCS01', 'Hồ Thủy Sinh STYLE 5', 740000, 'Hồ Thủy Sinh STYLE 5', '/storage/images/img_products/accessories/aquarium/aquarium_type5.jpg'),
+('ARM06', 0, 'ACCS02', 'Sera SiPoRax Algovec Professional', 70000, 'Sứ lọc khử và ngăn ngừa rêu hại phát triển', '/storage/images/img_products/accessories/aquatic_accessories/aaccs_1.jpg'),
+('ARM07', 0, 'ACCS02', 'Seachem Zip Bag', 45000, 'Túi đựng vật liệu lọc', '/storage/images/img_products/accessories/aquatic_accessories/aaccs_2.jpg'),
+('ARM08', 0, 'ACCS02', 'Sera pH Test', 72000, 'Kiểm tra độ pH trong môi trường nước', '/storage/images/img_products/accessories/aquatic_accessories/aaccs_4.jpg'),
+('ARM09', 0, 'ACCS02', 'Gex Clean Bio-N', 83000, 'Vật liệu lọc nước', '/storage/images/img_products/accessories/aquatic_accessories/aaccs_3.jpg'),
+('ARM10', 0, 'ACCS02', 'JBL Test Combi Set Marine', 240000, 'Bộ test nước cao cấp dành cho hồ cá biển ( pH , kH , NH4 , NO2 , NO3 , PO4 )', '/storage/images/img_products/accessories/aquatic_accessories/aaccs_5.jpg'),
+('ARM11', 0, 'ACCS03', 'Cây Bonsai Thủy Sinh STYLE 1', 150000, 'Cây Bonsai Thủy Sinh STYLE 1', '/storage/images/img_products/accessories/bonsai/bonsai_type1.jpg'),
+('ARM12', 0, 'ACCS03', 'Cây Bonsai Thủy Sinh STYLE 2', 150000, 'Cây Bonsai Thủy Sinh STYLE 2', '/storage/images/img_products/accessories/bonsai/bonsai_type2.jpg'),
+('ARM13', 0, 'ACCS03', 'Cây Bonsai Thủy Sinh STYLE 3', 150000, 'Cây Bonsai Thủy Sinh STYLE 1', '/storage/images/img_products/accessories/bonsai/bonsai_type3.jpg'),
+('ARM14', 0, 'ACCS03', 'Cây Bonsai Thủy Sinh STYLE 4', 150000, 'Cây Bonsai Thủy Sinh STYLE 4', '/storage/images/img_products/accessories/bonsai/bonsai_type4.jpg'),
+('ARM15', 0, 'ACCS03', 'Cây Bonsai Thủy Sinh STYLE 5', 150000, 'Cây Bonsai Thủy Sinh STYLE 5', '/storage/images/img_products/accessories/bonsai/bonsai_type5.jpg'),
+('ARM16', 0, 'ACCS03', 'Cây Bonsai Thủy Sinh STYLE 6', 150000, 'Cây Bonsai Thủy Sinh STYLE 6', '/storage/images/img_products/accessories/bonsai/bonsai_type6.jpg');
 
 -- --------------------------------------------------------
 
@@ -47,6 +69,50 @@ CREATE TABLE `accessoriestype` (
   `ACCESSORIES_TYPE_ID` char(6) NOT NULL,
   `ACCESSORIES_TYPE_NAME` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `accessoriestype`
+--
+
+INSERT INTO `accessoriestype` (`ACCESSORIES_TYPE_ID`, `ACCESSORIES_TYPE_NAME`) VALUES
+('ACCS01', 'Hồ Cá Thủy Sinh'),
+('ACCS02', 'Phụ Kiện Thủy Sinh'),
+('ACCS03', 'Cây Trang Trí');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accessories_import_batches`
+--
+
+CREATE TABLE `accessories_import_batches` (
+  `id` int(11) NOT NULL,
+  `accessories_id` char(6) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `import_date` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `accessories_import_batches`
+--
+
+INSERT INTO `accessories_import_batches` (`id`, `accessories_id`, `quantity`, `import_date`) VALUES
+(11, 'ARM01', 5, '2023-04-11'),
+(12, 'ARM02', 5, '2023-04-11'),
+(13, 'ARM03', 5, '2023-04-11'),
+(14, 'ARM04', 5, '2023-04-11'),
+(15, 'ARM05', 5, '2023-04-11'),
+(16, 'ARM06', 5, '2023-04-11'),
+(17, 'ARM07', 5, '2023-04-11'),
+(18, 'ARM08', 5, '2023-04-11'),
+(19, 'ARM09', 5, '2023-04-11'),
+(31, 'ARM10', 5, '2023-04-11'),
+(33, 'ARM11', 10, '2023-04-11'),
+(34, 'ARM12', 10, '2023-04-11'),
+(35, 'ARM13', 12, '2023-04-11'),
+(36, 'ARM14', 12, '2023-04-11'),
+(37, 'ARM15', 14, '2023-04-11'),
+(38, 'ARM16', 14, '2023-04-11');
 
 -- --------------------------------------------------------
 
@@ -92,6 +158,14 @@ CREATE TABLE `categories` (
   `category_name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`category_id`, `category_name`) VALUES
+(0, 'Phụ kiện'),
+(1, 'Cá');
+
 -- --------------------------------------------------------
 
 --
@@ -101,6 +175,24 @@ CREATE TABLE `categories` (
 CREATE TABLE `color` (
   `COLOR` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `color`
+--
+
+INSERT INTO `color` (`COLOR`) VALUES
+('Cam'),
+('Hồng'),
+('Nâu'),
+('Neon'),
+('Tím'),
+('Trắng'),
+('Vàng'),
+('Xám'),
+('Xanh Lá'),
+('Xanh Lam'),
+('Đen'),
+('Đỏ');
 
 -- --------------------------------------------------------
 
@@ -138,27 +230,59 @@ CREATE TABLE `failed_jobs` (
 --
 
 CREATE TABLE `fish` (
-  `FISH_ID` char(6) NOT NULL,
-  `FISH_TYPE` varchar(50) NOT NULL,
+  `fish_id` char(6) NOT NULL,
+  `fish_species` varchar(50) NOT NULL,
   `category_id` int(11) NOT NULL,
-  `PH_LEVEL` int(11) NOT NULL,
-  `COLOR` varchar(10) NOT NULL,
+  `ph_level` int(11) NOT NULL,
+  `color` varchar(10) NOT NULL,
   `fish_size` varchar(20) NOT NULL,
-  `FISH_NAME` varchar(30) DEFAULT NULL,
-  `FISH_HABIT` varchar(30) DEFAULT NULL,
-  `FISH_DESC` text DEFAULT NULL,
-  `FISH_LINK_IMG` text DEFAULT NULL
+  `fish_name` varchar(30) DEFAULT NULL,
+  `fish_habit` varchar(30) DEFAULT NULL,
+  `fish_desc` text DEFAULT NULL,
+  `fish_link_img` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `fishspecies`
+-- Dumping data for table `fish`
 --
 
-CREATE TABLE `fishspecies` (
-  `fish_species` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `fish` (`fish_id`, `fish_species`, `category_id`, `ph_level`, `color`, `fish_size`, `fish_name`, `fish_habit`, `fish_desc`, `fish_link_img`) VALUES
+('AG01', 'Cá Ông Tiên', 1, 7, 'Xanh Lam', '2 - 4 cm', 'Cá Ông Tiên Xanh', 'sống theo đàn', 'Cá Ông Tiên Xanh', '/storage/images/img_products/fish/angels_fish/angels_fish_1.jpg\r\n'),
+('AG02', 'Cá Ông Tiên', 1, 7, 'Vàng', '2 - 4 cm', 'Cá Ông Tiên Vàng Kim Sa', 'sống theo đàn', 'Cá Ông Tiên Vàng Kim Sa', '/storage/images/img_products/fish/angels_fish/angels_fish_2.jpg\r\n'),
+('AG03', 'Cá Ông Tiên', 1, 7, 'Cam', '2 - 4 cm', 'Cá Ông Tiên Koi', 'sống theo đàn', 'Cá Ông Tiên Koi', '/storage/images/img_products/fish/angels_fish/angels_fish_3.jpg\r\n'),
+('BF01', 'Cá Betta', 1, 7, 'Trắng', '3-5 cm', 'Cá Betta Rồng Đen', 'sống riêng lẻ', 'Cá Betta Rồng Đen', '/storage/images/img_products/fish/betta_fish/btf_1.jpg'),
+('BF02', 'Cá Betta', 1, 7, 'Xanh Lam', '3-5 cm', 'Cá Betta Xanh Hafmoon', 'sống riêng lẻ', 'Cá Betta Xanh Hafmoon', '/storage/images/img_products/fish/betta_fish/btf_2.jpg'),
+('BF03', 'Cá Betta', 1, 7, 'Đỏ', '3-5 cm', 'Cá Betta Rồng Đỏ', 'sống riêng lẻ', 'Cá Betta Rồng Đỏ', '/storage/images/img_products/fish/betta_fish/btf_3.jpg'),
+('BF04', 'Cá Betta', 1, 7, 'Trắng', '3-5 cm', 'Cá Betta Rồng Trắng', 'sống riêng lẻ', 'Cá Betta Rồng Trắng', '/storage/images/img_products/fish/betta_fish/btf_4.jpg'),
+('BF05', 'Cá Betta', 1, 7, 'Trắng', '3-5 cm', 'Cá Betta Fancy Cooper', 'sống riêng lẻ', 'Cá Betta Fancy Cooper', '/storage/images/img_products/fish/betta_fish/btf_5.jpg'),
+('BR01', 'Cá Cầu Vồng', 1, 7, 'Xanh Lam', '3 cm', 'Cá Cầu Vồng Xanh', 'sống theo đàn', 'Cá Cầu Vồng Xanh', '/storage/images/img_products/fish/rainbow_fish/rainbow_fish_1.jpg\r\n'),
+('BR02', 'Cá Cầu Vồng', 1, 7, 'Neon', '1.8 - 2 cm', 'Cá Cầu Vồng Red Neon', 'sống theo đàn', 'Cá Cầu Vồng Red Neon', '/storage/images/img_products/fish/rainbow_fish/rainbow_fish_2.jpg\r\n'),
+('BR03', 'Cá Cầu Vồng', 1, 7, 'Vàng', '3-5 cm', 'Cá Cầu Vông Parkinsoni', 'sống theo đàn', 'Cá Cầu Vông Parkinsoni', '/storage/images/img_products/fish/rainbow_fish/rainbow_fish_3.jpg\n'),
+('BR04', 'Cá Cầu Vồng', 1, 7, 'Nâu', '3-5 cm', 'Cá Cầu Vồng Madagascar', 'sống theo đàn', 'Cá Cầu Vồng Madagascar', '/storage/images/img_products/fish/rainbow_fish/rainbow_fish_4.jpg'),
+('BR05', 'Cá Cầu Vồng', 1, 7, 'Vàng', '5-7 cm', 'Cá Cầu Vồng Thạch Mỹ Nhân', 'sống theo đàn', 'Cá Cầu Vồng Thạch Mỹ Nhân', '/storage/images/img_products/fish/rainbow_fish/rainbow_fish_5.jpg\r\n'),
+('DA01', 'Cá Ngựa', 1, 6, 'Xanh Lá', '2.5 cm', 'Cá Ngựa Xanh Dạ Quang', 'sống bày đàn', 'Cá Ngựa Xanh Dạ Quang', '/storage/images/img_products/fish/danio_fish/danio_fish_1.jpg'),
+('DA02', 'Cá Ngựa', 1, 6, 'Xanh Lam', '2 - 2.5 cm', 'Cá Ngựa Sọc', 'sống bày đàn', 'Cá Ngựa Sọc', '/storage/images/img_products/fish/danio_fish/danio_fish_2.jpg'),
+('DA03', 'Cá Ngựa', 1, 6, 'Cam', '2 - 2.5 cm', 'Cá Ngựa Cam', 'sống bày đàn', 'Cá Ngựa Cam', '/storage/images/img_products/fish/danio_fish/danio_fish_1.jpg'),
+('DC01', 'Cá Dĩa', 1, 7, 'Vàng', '5 - 6 cm', 'Cá Dĩa Vàng Mắt Đỏ', 'sống bày đàn', 'Cá Dĩa Vàng Mắt Đỏ', '/storage/images/img_products/fish/discus_fish/discus_fish_1.jpg\r\n'),
+('DC02', 'Cá Dĩa', 1, 7, 'Trắng', '7 - 8 cm', 'Cá Dĩa Trắng', 'sống bày đàn', 'Cá Dĩa Trắng', '/storage/images/img_products/fish/discus_fish/discus_fish_2.jpg\r\n'),
+('DC03', 'Cá Dĩa', 1, 7, 'Đỏ', '9 - 10 cm', 'Cá Dĩa Man Đỏ', 'sống bày đàn', 'Cá Dĩa Man Đỏ', '/storage/images/img_products/fish/discus_fish/discus_fish_3.jpg\r\n'),
+('DC04', 'Cá Dĩa', 1, 7, 'Xanh Lam', '10-12 cm', 'Cá Dĩa Lam Colban', 'sống bày đàn', 'Cá Dĩa Lam Colban', '/storage/images/img_products/fish/discus_fish/discus_fish_4.jpg\r\n'),
+('DC05', 'Cá Dĩa', 1, 7, 'Vàng', '4 – 10 cm', 'Cá Dĩa Man Vàng', 'sống bày đàn', 'Cá Dĩa Man Vàng', '/storage/images/img_products/fish/discus_fish/discus_fish_5.jpg\r\n'),
+('DGF01', 'Cá Rồng', 1, 7, 'Hồng', '1.2 m', 'Cá Rồng Hồng Long', 'sống riêng lẻ', 'Cá Rồng Hồng Long', '/storage/images/img_products/fish/dragon_fish/dragon_fish_1.jpg'),
+('DGF02', 'Cá Rồng', 1, 7, 'Đỏ', '1.2 m', 'Cá Rồng Huyết Long', 'sống riêng lẻ', 'Cá Rồng Huyết Long', '/storage/images/img_products/fish/dragon_fish/dragon_fish_2.jpg'),
+('DGF03', 'Cá Rồng', 1, 7, 'Trắng', '1.2 m', 'Cá Rồng Ngân Long', 'sống riêng lẻ', 'Cá Rồng Ngân Long', '/storage/images/img_products/fish/dragon_fish/dragon_fish_3.jpg'),
+('DGF04', 'Cá Rồng', 1, 7, 'Vàng', '1.2 m', 'Cá Rồng Kim Long', 'sống riêng lẻ', 'Cá Rồng Kim Long', '/storage/images/img_products/fish/dragon_fish/dragon_fish_4.png'),
+('DGF05', 'Cá Rồng', 1, 7, 'Đen', '1.2 m', 'Cá Rồng Hắc Long', 'sống riêng lẻ', 'Cá Rồng Hắc Long', '/storage/images/img_products/fish/dragon_fish/dragon_fish_5.png'),
+('PF01', 'Cá Phượng Hoàng', 1, 6, 'Neon', '4 – 10 cm', 'Cá Phượng Hoàng Ngũ Sắc', 'sống theo đàn', 'Cá Phượng Hoàng Ngũ Sắc', '/storage/images/img_products/fish/phoenix_fish/pf_1.jpg'),
+('PF02', 'Cá Phượng Hoàng', 1, 6, 'Neon', '4 – 10 cm', 'Cá Phượng Hoàng Bolivia', 'sống theo đàn', 'Cá Phượng Hoàng Bolivia', '/storage/images/img_products/fish/phoenix_fish/pf_2.jpg'),
+('PF03', 'Cá Phượng Hoàng', 1, 6, 'Neon', '4 – 10 cm', 'Cá Phượng Hoàng Đá Quý', 'sống theo đàn', 'Cá Phượng Hoàng Đá Quý', '/storage/images/img_products/fish/phoenix_fish/pf_3.jpg'),
+('PF04', 'Cá Phượng Hoàng', 1, 7, 'Trắng', '4 – 10 cm', 'Cá Phượng Hoàng Peru Đỏ', 'sống theo đàn', 'Cá Phượng Hoàng Peru Đỏ', '/storage/images/img_products/fish/phoenix_fish/pf_4.jpg'),
+('PF05', 'Cá Phượng Hoàng', 1, 7, 'Xanh Lam', '4 – 10 cm', 'Cá Phượng Hoàng Araca', 'sống theo đàn', 'Cá Phượng Hoàng Araca', '/storage/images/img_products/fish/phoenix_fish/pf_5.jpg'),
+('SCF01', 'Cá Bảy Màu', 1, 7, 'Trắng', '2 - 4 cm', 'Cá Bảy Màu Dumlbo', 'sống bầy đàn', 'Cá Bảy Màu Dumlbo', '/storage/images/img_products/fish/sevencolor_fish/svc_1.jpg'),
+('SCF02', 'Cá Bảy Màu', 1, 7, 'Vàng', '2 - 4 cm', 'Cá Bảy Màu Full Gold', 'sống bầy đàn', 'Cá Bảy Màu Full Gold', '/storage/images/img_products/fish/sevencolor_fish/svc_2.jpg'),
+('SCF03', 'Cá Bảy Màu', 1, 7, 'Neon', '2 - 4 cm', 'Cá Bảy Màu Hoa Hồng', 'sống bầy đàn', 'Cá Bảy Màu Hoa Hồng - 1 Cặp', '/storage/images/img_products/fish/sevencolor_fish/svc_3.jpg'),
+('SCF04', 'Cá Bảy Màu', 1, 7, 'Xanh lam', '2 - 4 cm', 'Cá Bảy Màu Rồng Xanh', 'sống bầy đàn', 'Cá Bảy Màu Rồng Xanh', '/storage/images/img_products/fish/sevencolor_fish/svc_4.jpg'),
+('SCF05', 'Cá Bảy Màu', 1, 7, 'Trắng', '2 - 4 cm', 'Cá Bảy Màu Dumlbo Red Tail', 'sống bầy đàn', 'Cá Bảy Màu Dumlbo Red Tail', '/storage/images/img_products/fish/sevencolor_fish/svc_5.png');
 
 -- --------------------------------------------------------
 
@@ -167,19 +291,129 @@ CREATE TABLE `fishspecies` (
 --
 
 CREATE TABLE `fish_food` (
-  `FOOD_TYPE` varchar(20) NOT NULL,
-  `FISH_ID` char(6) NOT NULL
+  `food_id` varchar(20) NOT NULL,
+  `species_fish` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `fish_food`
+--
+
+INSERT INTO `fish_food` (`food_id`, `species_fish`) VALUES
+('Cám Thái Inve', 'Cá Bảy Màu'),
+('Giun, Trùn Chỉ, Trùn', 'Cá Betta'),
+('Giun, Trùn Chỉ, Trùn', 'Cá Cầu Vồng'),
+('Giun, Trùn Chỉ, Trùn', 'Cá Ngựa'),
+('Giun, Trùn Chỉ, Trùn', 'Cá Phượng Hoàng'),
+('Thức Ăn Artemia', 'Cá Rồng'),
+('Thức Ăn JBL', 'Cá Dĩa'),
+('Thức Ăn Tropical', 'Cá Vàng'),
+('Tim Bò Kích Đỏ', 'Cá Rồng'),
+('Trùn Huyết Sấy Khô', 'Cá Ông Tiên');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `foodtype`
+-- Table structure for table `fish_import_batches`
 --
 
-CREATE TABLE `foodtype` (
+CREATE TABLE `fish_import_batches` (
+  `id` int(11) NOT NULL,
+  `fish_id` char(6) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `import_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `fish_import_batches`
+--
+
+INSERT INTO `fish_import_batches` (`id`, `fish_id`, `quantity`, `import_date`) VALUES
+(1, 'BF01', 10, '2023-04-11 09:47:06'),
+(2, 'BF02', 10, '2023-04-11 09:47:06'),
+(3, 'BF03', 10, '2023-04-11 09:47:06'),
+(4, 'BF04', 10, '2023-04-11 09:47:06'),
+(5, 'BF05', 10, '2023-04-11 09:47:06'),
+(6, 'DGF01', 15, '2023-04-11 09:47:06'),
+(7, 'DGF02', 15, '2023-04-11 09:47:06'),
+(8, 'DGF03', 15, '2023-04-11 09:47:06'),
+(9, 'DGF04', 15, '2023-04-11 09:47:06'),
+(10, 'DGF05', 15, '2023-04-11 09:47:06'),
+(11, 'PF01', 20, '2023-04-11 09:47:06'),
+(12, 'PF02', 20, '2023-04-11 09:47:06'),
+(13, 'PF03', 20, '2023-04-11 09:47:06'),
+(14, 'PF04', 20, '2023-04-11 09:47:06'),
+(15, 'PF05', 20, '2023-04-11 09:47:06'),
+(16, 'SCF01', 25, '2023-04-11 09:47:06'),
+(17, 'SCF02', 25, '2023-04-11 09:47:06'),
+(18, 'SCF03', 25, '2023-04-11 09:47:06'),
+(19, 'SCF04', 25, '2023-04-11 09:47:06'),
+(20, 'SCF05', 25, '2023-04-11 09:47:06'),
+(21, 'AG01', 10, '2023-04-11 14:05:34'),
+(22, 'AG02', 15, '2023-04-11 14:05:34'),
+(23, 'AG03', 25, '2023-04-11 14:05:34'),
+(24, 'BR01', 5, '2023-04-11 14:06:20'),
+(25, 'BR02', 10, '2023-04-11 14:06:20'),
+(26, 'BR03', 15, '2023-04-11 14:06:20'),
+(27, 'BR04', 20, '2023-04-11 14:06:20'),
+(28, 'BR05', 25, '2023-04-11 14:06:20'),
+(29, 'DA01', 10, '2023-04-11 14:06:45'),
+(30, 'DA02', 20, '2023-04-11 14:06:45'),
+(31, 'DA03', 30, '2023-04-11 14:06:45'),
+(32, 'DC01', 10, '2023-04-11 14:07:23'),
+(33, 'DC02', 20, '2023-04-11 14:07:23'),
+(34, 'DC03', 30, '2023-04-11 14:07:23'),
+(35, 'DC04', 40, '2023-04-11 14:07:23'),
+(36, 'DC05', 50, '2023-04-11 14:07:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fish_species`
+--
+
+CREATE TABLE `fish_species` (
+  `fish_species` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `fish_species`
+--
+
+INSERT INTO `fish_species` (`fish_species`) VALUES
+('Cá Bảy Màu'),
+('Cá Betta'),
+('Cá Cầu Vồng'),
+('Cá Dĩa'),
+('Cá Ngựa'),
+('Cá Ông Tiên'),
+('Cá Phượng Hoàng'),
+('Cá Rồng'),
+('Cá Vàng');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `food_type`
+--
+
+CREATE TABLE `food_type` (
   `FOOD_TYPE` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `food_type`
+--
+
+INSERT INTO `food_type` (`FOOD_TYPE`) VALUES
+('Cám Thái Inve'),
+('Giun, Trùn Chỉ, Trùn'),
+('Thức Ăn Artemia'),
+('Thức Ăn JBL'),
+('Thức Ăn Tetra'),
+('Thức Ăn Tropical'),
+('Tim Bò Kích Đỏ'),
+('Trùn Huyết Sấy Khô');
 
 -- --------------------------------------------------------
 
@@ -193,18 +427,45 @@ CREATE TABLE `has_size` (
   `HAS_PRICE` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `import_batches`
+-- Dumping data for table `has_size`
 --
 
-CREATE TABLE `import_batches` (
-  `id` int(11) NOT NULL,
-  `product_id` char(6) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `import_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `has_size` (`fish_species`, `size`, `HAS_PRICE`) VALUES
+('Cá Bảy Màu', '2 - 4 cm', 25000),
+('Cá Bảy Màu', '3 cm', 35000),
+('Cá Bảy Màu', '3.5-5 cm', 50000),
+('Cá Betta', '3 cm', 80000),
+('Cá Betta', '3-5 cm', 120000),
+('Cá Betta', '5.5-7 cm', 160000),
+('Cá Cầu Vồng', '1.8 - 2 cm', 25000),
+('Cá Cầu Vồng', '3 cm', 8000),
+('Cá Cầu Vồng', '3-5 cm', 30000),
+('Cá Cầu Vồng', '3.5 - 4 cm', 10000),
+('Cá Cầu Vồng', '4 – 10 cm', 50000),
+('Cá Cầu Vồng', '5-7 cm', 65000),
+('Cá Dĩa', '10-12 cm', 400000),
+('Cá Dĩa', '11 - 12 cm', 480000),
+('Cá Dĩa', '5 - 6 cm', 180000),
+('Cá Dĩa', '7 - 8 cm', 280000),
+('Cá Dĩa', '9 - 10 cm', 380000),
+('Cá Ngựa', '2 - 2.5 cm', 8000),
+('Cá Ngựa', '2.5 cm', 9000),
+('Cá Ông Tiên', '2 - 2.5 cm', 12000),
+('Cá Ông Tiên', '2.8 - 3 cm', 20000),
+('Cá Ông Tiên', '3.5 - 4 cm', 30000),
+('Cá Ông Tiên', '4.5 - 5 cm', 50000),
+('Cá Phượng Hoàng', '2.5 cm', 70000),
+('Cá Phượng Hoàng', '3-5 cm', 120000),
+('Cá Phượng Hoàng', '4 – 10 cm', 160000),
+('Cá Phượng Hoàng', '5.5-7 cm', 140000),
+('Cá Phượng Hoàng', 'XL', 190000),
+('Cá Phượng Hoàng', 'XXL', 220000),
+('Cá Rồng', '1.2 m', 1500000),
+('Cá Rồng', '10-12 cm', 220000),
+('Cá Rồng', '14-16 cm', 250000),
+('Cá Rồng', '18-20 cm', 280000),
+('Cá Rồng', '20-22 cm', 320000);
 
 -- --------------------------------------------------------
 
@@ -322,6 +583,30 @@ CREATE TABLE `ph` (
   `PH_LEVEL` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `ph`
+--
+
+INSERT INTO `ph` (`PH_LEVEL`) VALUES
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `product_ids`
+-- (See below for the actual view)
+--
+CREATE TABLE `product_ids` (
+`fish_id` char(6)
+,`type` varchar(11)
+);
+
 -- --------------------------------------------------------
 
 --
@@ -350,6 +635,37 @@ INSERT INTO `role` (`role_id`, `ROLE_NAME`) VALUES
 CREATE TABLE `size` (
   `size` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `size`
+--
+
+INSERT INTO `size` (`size`) VALUES
+('1.2 m'),
+('1.8 - 2 cm'),
+('10-12 cm'),
+('11 - 12 cm'),
+('14-16 cm'),
+('16 - 20 cm'),
+('18-20 cm'),
+('2 - 2.5 cm'),
+('2 - 4 cm'),
+('2.5 cm'),
+('2.8 - 3 cm'),
+('20-22 cm'),
+('3 cm'),
+('3-5 cm'),
+('3.5 - 4 cm'),
+('3.5-5 cm'),
+('4 – 10 cm'),
+('4.5 - 5 cm'),
+('5 - 6 cm'),
+('5-7 cm'),
+('5.5-7 cm'),
+('7 - 8 cm'),
+('9 - 10 cm'),
+('XL'),
+('XXL');
 
 -- --------------------------------------------------------
 
@@ -397,6 +713,15 @@ INSERT INTO `users` (`id`, `role_id`, `first_name`, `last_name`, `phone_number`,
 (24, '1', 'Trường', 'Trần Văn', '0123123123', 'An Khánh, Ninh Kiều, Cần Thơ', NULL, '/storage/images/users/JIiMbNO15guSO4LGDH0sB0VdcXHx1yy4bbChCTtj.png', 'admin@gmail.com', '$2y$10$Zi3w9kihSDcpYsUbOoJGvehcS.cCJz15i79P7sJhOgPN0.HbiNypi', NULL, '2023-04-03 17:04:24', '2023-04-03 17:04:24'),
 (25, '0', 'Van', 'Truong', NULL, NULL, '103144632167425600074', NULL, 'vantruongvtd02@gmail.com', '', NULL, '2023-04-10 18:41:58', '2023-04-10 18:41:58');
 
+-- --------------------------------------------------------
+
+--
+-- Structure for view `product_ids`
+--
+DROP TABLE IF EXISTS `product_ids`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `product_ids`  AS SELECT `fish`.`fish_id` AS `fish_id`, 'fish' AS `type` FROM `fish` union select `accessories`.`accessories_id` AS `accessories_id`,'accessories' AS `type` from `accessories`  ;
+
 --
 -- Indexes for dumped tables
 --
@@ -405,14 +730,22 @@ INSERT INTO `users` (`id`, `role_id`, `first_name`, `last_name`, `phone_number`,
 -- Indexes for table `accessories`
 --
 ALTER TABLE `accessories`
-  ADD PRIMARY KEY (`ACCESSORIES_ID`),
-  ADD KEY `FK_ACCESSOR_GOM_NHUNG_ACCESSOR` (`ACCESSORIES_TYPE_ID`);
+  ADD PRIMARY KEY (`accessories_id`),
+  ADD KEY `FK_ACCESSOR_GOM_NHUNG_ACCESSOR` (`accessories_type_id`),
+  ADD KEY `fk_categories` (`category_id`);
 
 --
 -- Indexes for table `accessoriestype`
 --
 ALTER TABLE `accessoriestype`
   ADD PRIMARY KEY (`ACCESSORIES_TYPE_ID`);
+
+--
+-- Indexes for table `accessories_import_batches`
+--
+ALTER TABLE `accessories_import_batches`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `accessories_id` (`accessories_id`);
 
 --
 -- Indexes for table `carts`
@@ -457,30 +790,38 @@ ALTER TABLE `failed_jobs`
 -- Indexes for table `fish`
 --
 ALTER TABLE `fish`
-  ADD PRIMARY KEY (`FISH_ID`),
-  ADD KEY `FK_FISH_CO_MAU_COLOR` (`COLOR`),
-  ADD KEY `FK_FISH_SONG_O_PH` (`PH_LEVEL`),
-  ADD KEY `FK_FISH_THUOCLOAI_FISHTYPE` (`FISH_TYPE`),
+  ADD PRIMARY KEY (`fish_id`),
+  ADD KEY `FK_FISH_CO_MAU_COLOR` (`color`),
+  ADD KEY `FK_FISH_SONG_O_PH` (`ph_level`),
+  ADD KEY `FK_FISH_THUOCLOAI_FISHTYPE` (`fish_species`),
   ADD KEY `fk_fish_size` (`fish_size`),
   ADD KEY `fk_category` (`category_id`);
-
---
--- Indexes for table `fishspecies`
---
-ALTER TABLE `fishspecies`
-  ADD PRIMARY KEY (`fish_species`);
 
 --
 -- Indexes for table `fish_food`
 --
 ALTER TABLE `fish_food`
-  ADD PRIMARY KEY (`FOOD_TYPE`,`FISH_ID`),
-  ADD KEY `FK_FISH_FOO_FISH_FOOD_FISH` (`FISH_ID`);
+  ADD PRIMARY KEY (`food_id`,`species_fish`),
+  ADD KEY `FK_FISH_FOO_FISH_FOOD_FISH` (`species_fish`);
 
 --
--- Indexes for table `foodtype`
+-- Indexes for table `fish_import_batches`
 --
-ALTER TABLE `foodtype`
+ALTER TABLE `fish_import_batches`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `fish_id_2` (`fish_id`),
+  ADD KEY `fish_id` (`fish_id`);
+
+--
+-- Indexes for table `fish_species`
+--
+ALTER TABLE `fish_species`
+  ADD PRIMARY KEY (`fish_species`);
+
+--
+-- Indexes for table `food_type`
+--
+ALTER TABLE `food_type`
   ADD PRIMARY KEY (`FOOD_TYPE`);
 
 --
@@ -488,13 +829,8 @@ ALTER TABLE `foodtype`
 --
 ALTER TABLE `has_size`
   ADD PRIMARY KEY (`fish_species`,`size`),
-  ADD KEY `FK_HAS_SIZE_RELATIONS_TYPEOFDI` (`size`);
-
---
--- Indexes for table `import_batches`
---
-ALTER TABLE `import_batches`
-  ADD PRIMARY KEY (`id`);
+  ADD KEY `FK_HAS_SIZE_RELATIONS_TYPEOFDI` (`size`),
+  ADD KEY `fish_species` (`fish_species`);
 
 --
 -- Indexes for table `migrations`
@@ -569,6 +905,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `accessories_import_batches`
+--
+ALTER TABLE `accessories_import_batches`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
+--
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
@@ -578,7 +920,7 @@ ALTER TABLE `carts`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `export_batches`
@@ -593,10 +935,10 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `import_batches`
+-- AUTO_INCREMENT for table `fish_import_batches`
 --
-ALTER TABLE `import_batches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `fish_import_batches`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -642,7 +984,14 @@ ALTER TABLE `users`
 -- Constraints for table `accessories`
 --
 ALTER TABLE `accessories`
-  ADD CONSTRAINT `FK_ACCESSOR_GOM_NHUNG_ACCESSOR` FOREIGN KEY (`ACCESSORIES_TYPE_ID`) REFERENCES `accessoriestype` (`ACCESSORIES_TYPE_ID`);
+  ADD CONSTRAINT `FK_ACCESSOR_GOM_NHUNG_ACCESSOR` FOREIGN KEY (`accessories_type_id`) REFERENCES `accessoriestype` (`ACCESSORIES_TYPE_ID`),
+  ADD CONSTRAINT `fk_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
+
+--
+-- Constraints for table `accessories_import_batches`
+--
+ALTER TABLE `accessories_import_batches`
+  ADD CONSTRAINT `fk_accessories` FOREIGN KEY (`accessories_id`) REFERENCES `accessories` (`ACCESSORIES_ID`);
 
 --
 -- Constraints for table `carts`
@@ -660,9 +1009,9 @@ ALTER TABLE `cart_details`
 -- Constraints for table `fish`
 --
 ALTER TABLE `fish`
-  ADD CONSTRAINT `FK_FISH_CO_MAU_COLOR` FOREIGN KEY (`COLOR`) REFERENCES `color` (`COLOR`),
-  ADD CONSTRAINT `FK_FISH_SONG_O_PH` FOREIGN KEY (`PH_LEVEL`) REFERENCES `ph` (`PH_LEVEL`),
-  ADD CONSTRAINT `FK_FISH_THUOCLOAI_FISHTYPE` FOREIGN KEY (`FISH_TYPE`) REFERENCES `fishspecies` (`fish_species`),
+  ADD CONSTRAINT `FK_FISH_CO_MAU_COLOR` FOREIGN KEY (`color`) REFERENCES `color` (`COLOR`),
+  ADD CONSTRAINT `FK_FISH_SONG_O_PH` FOREIGN KEY (`ph_level`) REFERENCES `ph` (`PH_LEVEL`),
+  ADD CONSTRAINT `FK_FISH_THUOCLOAI_FISHTYPE` FOREIGN KEY (`fish_species`) REFERENCES `fish_species` (`fish_species`),
   ADD CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`),
   ADD CONSTRAINT `fk_fish_size` FOREIGN KEY (`fish_size`) REFERENCES `size` (`size`);
 
@@ -670,15 +1019,21 @@ ALTER TABLE `fish`
 -- Constraints for table `fish_food`
 --
 ALTER TABLE `fish_food`
-  ADD CONSTRAINT `FK_FISH_FOO_FISH_FOOD_FISH` FOREIGN KEY (`FISH_ID`) REFERENCES `fish` (`FISH_ID`),
-  ADD CONSTRAINT `FK_FISH_FOO_FISH_FOOD_FOODTYPE` FOREIGN KEY (`FOOD_TYPE`) REFERENCES `foodtype` (`FOOD_TYPE`);
+  ADD CONSTRAINT `FK_FISH_FOO_FISH_FOOD_FISH` FOREIGN KEY (`species_fish`) REFERENCES `fish_species` (`fish_species`),
+  ADD CONSTRAINT `FK_FISH_FOO_FISH_FOOD_FOODTYPE` FOREIGN KEY (`food_id`) REFERENCES `food_type` (`FOOD_TYPE`);
+
+--
+-- Constraints for table `fish_import_batches`
+--
+ALTER TABLE `fish_import_batches`
+  ADD CONSTRAINT `fk_fish` FOREIGN KEY (`fish_id`) REFERENCES `fish` (`FISH_ID`);
 
 --
 -- Constraints for table `has_size`
 --
 ALTER TABLE `has_size`
   ADD CONSTRAINT `fk_size` FOREIGN KEY (`size`) REFERENCES `size` (`size`),
-  ADD CONSTRAINT `fk_species` FOREIGN KEY (`fish_species`) REFERENCES `fishspecies` (`fish_species`);
+  ADD CONSTRAINT `fk_species` FOREIGN KEY (`fish_species`) REFERENCES `fish_species` (`fish_species`);
 
 --
 -- Constraints for table `order_details`

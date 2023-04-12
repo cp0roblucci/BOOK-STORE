@@ -16,38 +16,22 @@
     <div class="w-full">
 
       <div class="w-[40%] pl-4 bg-white rounded-md border-[1.5px] focus-within:border-[1.5px] focus-within:border-blue-200 my-4">
-        <form action="" method="post" class="flex justify-between">
+        <form action="{{ route('search-accessories') }}" method="get" class="flex justify-between">
           @csrf
-          @include('components.admin.form-input')
+          <input type="text" placeholder="Tìm kiếm..." name="accessories_name" class="caret-blue-500 rounded-md outline-none w-full bg-white" required>
+          <button type="submit" class="inline-block mr-4 mt-2">
+            <lord-icon
+              src="https://cdn.lordicon.com/zniqnylq.json"
+              trigger="click"
+              style="width:24px;height:24px">
+            </lord-icon>
+          </button>
         </form>
-      </div>
-
-      <div class="bg-slate-50 pt-4 mt-2 rounded-md shadow-md">
-        <h2 class="px-4 uppercase font-semibold text-slate-400">Phụ kiện nổi bật</h2>
-        <div class="flex space-x-2 mt-4 px-4 pb-4">
-          @for ($i = 1; $i <= 5; $i++)
-            <div class="flex w-[190px] shrink-0 flex-col">
-              <img
-                src="{{ URL::to('/storage/images/vang.png')}}"
-                alt="product"
-                class="rounded-2xl"
-              >
-              <div class="justify-between bg-white mx-4 -mt-8 rounded-xl p-2 shadow-sm">
-                <h3 class="truncate">Cá vàng </h3>
-                <div >
-                  <span>35.000đ</span>
-                  <span class="ml-8 text-12 font-light opacity-60">36+ <span class="text-red-500">sold</span></span>
-                </div>
-              </div>
-            </div>
-          @endfor
-        </div>
-
       </div>
 
       {{-- Table --}}
       <div class="">
-        <div class="flex flex-wrap -mx-3 mb-10 mt-6">
+        <div class="flex flex-wrap -mx-3 mb-10 mt-2">
           <div class="flex flex-col w-full max-w-full px-3">
             <div class="flex flex-col min-w-[980px] mb-6 bg-white border-0 shadow-md rounded-lg ">
               <div class="flex p-2 py-4 items-center justify-between">
@@ -61,13 +45,14 @@
                       <th class="px-4 py-3 font-bold opacity">#</th>
                       <th class="px-4 py-3 font-bold ">Loại</th>
                       <th class="px-4 py-3 font-bold ">Tên</th>
-                      <th class="px-4 py-3 font-bold ">Giá</th>
-                      <th class="px-4 py-3 font-bold ">Số lượng</th>
+                      <th class="px-4 py-3 font-bold ">Giá (vnđ)</th>
+                      <th class="px-4 py-3 font-bold "></th>
+                      {{-- <th class="px-4 py-3 font-bold ">Số lượng</th> --}}
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($accessories as $key => $accessory)
-                      <tr class="border-t hover:bg-slate-100">
+                      <tr class="border-t even:bg-gray-100 odd:bg-white ">
                         <td class="p-4 bg-transparent ">
                           <div class="px-2 py-1">
                             <h6 class="mb-0 text-sm leading-normal">{{ ++$key }}</h6>
@@ -75,39 +60,27 @@
                         </td>
                         <td class="p-4 bg-transparent">
                           <div class="px-2 py-1">
-                            <h6 class="mb-0 text-sm leading-normal">{{ $accessory->$accessories_type_id }}</h6>
+                            <h6 class="mb-0 text-sm leading-normal">{{ $accessory->accessories_type_name }}</h6>
                           </div>
                         </td>
                         <td class="p-4 bg-transparent text-left">
                           <div class="px-2 py-1">
-                            <h6 class="mb-0 text-sm leading-normal">{{ $accessory->$accessories_name }}</h6>
+                            <h6 class="mb-0 text-sm leading-normal">{{ $accessory->accessories_name }}</h6>
                           </div>
                         </td>
                         <td class="p-4 bg-transparent">
                           <div class="px-2 py-1">
-                            <h6 class="mb-0 text-sm leading-normal">{{ $accessory->$accessories_price }}</h6>
+                            <h6 class="mb-0 text-sm leading-normal">{{ number_format($accessory->accessories_price, 0, ',', '.') }}</h6>
                           </div>
                         </td>
-                        {{-- <td class="p-4 bg-transparent">
-                          <div class="px-2 py-1">
-                            <h6 class="mb-0 text-sm leading-normal">{{ $accessory->$accessories_quantity }}</h6>
-                          </div>
-                        </td> --}}
-                        {{-- <td class="flex bg-transparent mt-4 justify-center items-center">
-                          <a href="accessories/{{$accessories->id}}/edit" class="text-16 mr-2 text-blue-100">
+
+                        <td class="flex bg-transparent mt-4 justify-center items-center">
+                          <a href="accessories/{{$accessory->accessories_id}}/edit" class="text-16 mr-2 text-blue-100">
                             <i class="fa-regular fa-pen-to-square mr-2"></i>
                           </a>
-                          <button class="delete-user text-16 mr-2 text-red-300 cursor-pointer" data-id="{{$accessories->id}}">
+                          <button class="delete-accessories text-16 mr-2 text-red-300 cursor-pointer" data-id="{{$accessory->accessories_id}}">
                             <i class="fa-regular fa-trash-can text-16"></i>
                           </button>
-                        </td> --}}
-                        <td class="p-4 bg-transparent">
-                          <form action="" method="post" class="px-2 py-1">
-                            @csrf
-                            <button class="mb-0 text-sm leading-normal text-red-300">
-                              <i class="fa-regular fa-pen-to-square"></i>
-                            </button>
-                          </form>
                         </td>
                       </tr>
                     @endforeach

@@ -70,10 +70,12 @@ class UserController extends Controller
     public function delete(Request $request)
     {
       $id = $request->input('user_id');
+      if ($id === 'undefined') {
+        Session::flash('delete-failed', 'không thể xóa người dùng này.');
+        return redirect()->route('admin-users');
+      }
       $user = User::find($id);
       $user->delete();
-
-
       Session::flash('delete-success', 'Xóa người dùng thành công.');
       return redirect()->route('admin-users');
 
@@ -86,7 +88,7 @@ class UserController extends Controller
 
     public function editUser($id) {
       $user = User::find($id);
-      return view('admin.edit-user', compact('user'));
+      return view('admin.user.edit-user', compact('user'));
     }
 
     public function updateUser(Request $request, $id) {
@@ -165,6 +167,6 @@ class UserController extends Controller
       ->whereRaw("CONCAT(users.last_name, ' ', users.first_name) LIKE '%{$name}%'")
       ->paginate(5);
 
-      return view('admin.result-search-user', compact('results', 'page', 'name'));
+      return view('admin.user.result-search-user', compact('results', 'page', 'name'));
     }
 }

@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class AccessoriesType extends Model
 {
-    protected $table = 'accessoriestype';
+    protected $table = 'accessories_type';
     use HasFactory;
 }

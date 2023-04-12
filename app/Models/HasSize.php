@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AccessoriesCartDetail extends Model
+class HasSize extends Model
 {
-    protected $table = 'accessoriescartdetail';
+    protected $table = 'has_size';
     use HasFactory;
 }

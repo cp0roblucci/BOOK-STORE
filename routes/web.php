@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccessoriesController;
 use App\Http\Controllers\AccessoriesTypeController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ColorController;
@@ -48,7 +49,7 @@ Route::get('/cart', function () {
 Route::get('/transaction', function () {
     return view('clients.transaction');
 });
- 
+
 // Route::get('/layouts/header', function () {
 //     return view('layouts.header');
 // });
@@ -106,12 +107,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::get('users', [AdminController::class, 'users'])->name('admin-users');
 
     Route::get('profile', function () {
-      return view('admin.profile');
+        return view('admin.profile');
     })->name('admin-profile');
     Route::post('profile', [UserController::class, 'editProfile'])->name('edit-profile');
 
     Route::get('change-password', function () {
-      return view('admin.change-password');
+        return view('admin.change-password');
     })->name('change-password');
     Route::post('change-password', [UserController::class, 'changePassword']);
 
@@ -124,6 +125,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 
     Route::get('users/{id}/edit', [UserController::class, 'editUser'])->name('edit-user');
     Route::post('users/{id}/edit', [UserController::class, 'updateUser']);
+
+    Route::get('search-user', [UserController::class, 'searchByName'])->name('admin-search-user-by-name');
+
+    Route::get('result-search-user', function() {
+        return view('admin.result-search-user');
+    });
+
+    Route::post('delete-user', [UserController::class, 'delete'])->name('delete-user');
 
     // PRODUCT
 
@@ -147,7 +156,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 
     // new species
     Route::get('create-new-species', function() {
-      return view('admin.new-species');
+        return view('admin.new-species');
     })->name('new-species');
     Route::post('create-new-species', [SpeciesController::class, 'create']);
 
@@ -163,5 +172,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     })->name('new-color');
     Route::post('create-new-color', [ColorController::class, 'create']);
 
+
+//  Statistics
+    Route::get('/last-week', [StatisticsController::class, 'dataLastWeek']);
+    Route::get('/last-seven-days', [StatisticsController::class, 'dataLastSevenDays']);
+    Route::post('/period', [StatisticsController::class, 'dataPeriod']);
 });
 

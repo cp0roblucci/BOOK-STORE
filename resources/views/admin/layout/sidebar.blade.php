@@ -2,12 +2,12 @@
   <aside class="">
     <div class="flex bg-white border-b border-r w-full items-center text-[18px] h-[32px] fixed">
       <div class="px-4 text-20 font-sora text-slate-405">
-      <div class=" ml-2">
+      <div class="ml-1">
           Trang Quản Trị
         </div>
       </div>
     </div>
-    <ul class="mt-[40px] ml-2 text-16">
+    <ul class="mt-[50px] ml-1 text-14">
       <li class="w-full inline-block text-gray-500">
         <div class="cursor-pointer mb-4
         {{ request()->is('admin/dashboard') ? 'text-purple-400' : ''}}">
@@ -77,7 +77,7 @@
           <a
             href="{{route('admin-fish')}}"
             class="transition-all hover:bg-slate-100 py-1 rounded-sm
-            {{ request()->is('admin/fish ') ? ' text-blue-200' : ''}}"
+            {{ request()->is('admin/fish') ? ' text-blue-200' : ''}}"
           >
             <i class="fa-solid fa-circle-dot text-10 text-blue-400 mr-1"></i>
             Danh sách cá
@@ -177,17 +177,38 @@
 
       <li class="w-full inline-block text-gray-500">
         <div class="btn__slidebar cursor-pointer
-        {{ request()->is('admin/users') || request()->is('admin/create-new-user')  ? 'text-purple-400' : ''}}">
+        {{
+          request()->is('admin/users')
+          || request()->is('admin/create-new-user')
+          || request()->is('admin/search-user')
+          || request()->is('admin/users/*/edit')
+          ? 'text-purple-400'
+          : ''
+        }}">
           <div class="hover:bg-slate-200 hover:text-purple-400 ml-2 py-1 rounded-sm">
             <button class="icon__btn--slidebar hover:bg-purple-400 hover:text-white w-6 h-6 rounded-full
-            {{ request()->is('admin/users') || request()->is('admin/create-new-user') ? 'bg-purple-400 text-white' : '' }}">
+            {{
+              request()->is('admin/users')
+              || request()->is('admin/create-new-user')
+              || request()->is('admin/search-user')
+              || request()->is('admin/users/*/edit')
+              ? 'bg-purple-400 text-white'
+              : ''
+            }}">
               <i class="fa-solid fa-angle-right transform transition-all duration-200"></i>
             </button>
             Người dùng
           </div>
         </div>
         <div class="menu__slidebar flex flex-col ml-6 text-14 mt-1 mb-4 transform transition-all duration-200 overflow-hidden
-        {{ request()->is('admin/users') || request()->is('admin/create-new-user') ? 'max-h-screen' : 'max-h-0' }}">
+        {{
+          request()->is('admin/users')
+          || request()->is('admin/create-new-user')
+          || request()->is('admin/search-user')
+          || request()->is('admin/users/*/edit')
+          ? 'max-h-screen'
+          : 'max-h-0'
+        }}">
           <a
             href="{{route('admin-users')}}"
             class="transition-all hover:bg-slate-100 py-1 rounded-sm

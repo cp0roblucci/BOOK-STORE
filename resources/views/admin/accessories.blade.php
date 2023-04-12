@@ -15,7 +15,12 @@
     @endsection
     <div class="w-full">
 
-      @include('components.admin.form-input')
+      <div class="w-[40%] pl-4 bg-white rounded-md border-[1.5px] focus-within:border-[1.5px] focus-within:border-blue-200 my-4">
+        <form action="" method="post" class="flex justify-between">
+          @csrf
+          @include('components.admin.form-input')
+        </form>
+      </div>
 
       <div class="bg-slate-50 pt-4 mt-2 rounded-md shadow-md">
         <h2 class="px-4 uppercase font-semibold text-slate-400">Phụ kiện nổi bật</h2>
@@ -88,10 +93,20 @@
                             <h6 class="mb-0 text-sm leading-normal">{{ $accessory->$accessories_quantity }}</h6>
                           </div>
                         </td> --}}
+                        {{-- <td class="flex bg-transparent mt-4 justify-center items-center">
+                          <a href="accessories/{{$accessories->id}}/edit" class="text-16 mr-2 text-blue-100">
+                            <i class="fa-regular fa-pen-to-square mr-2"></i>
+                          </a>
+                          <button class="delete-user text-16 mr-2 text-red-300 cursor-pointer" data-id="{{$accessories->id}}">
+                            <i class="fa-regular fa-trash-can text-16"></i>
+                          </button>
+                        </td> --}}
                         <td class="p-4 bg-transparent">
                           <form action="" method="post" class="px-2 py-1">
                             @csrf
-                            <button class="mb-0 text-sm leading-normal text-red-300">Edit</button>
+                            <button class="mb-0 text-sm leading-normal text-red-300">
+                              <i class="fa-regular fa-pen-to-square"></i>
+                            </button>
                           </form>
                         </td>
                       </tr>

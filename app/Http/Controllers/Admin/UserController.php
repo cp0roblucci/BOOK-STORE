@@ -13,6 +13,7 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -29,8 +30,9 @@ class UserController extends Controller
 
     public function createUser(Request $request)
     {
-      $avatar = $request->file('file');
+      $avatar = $request->file('avatar');
       $avatarPath = $avatar->store('public/images/users');
+
       $avatarUrl = Storage::url($avatarPath);
       $role = $request->input('role');
       $lastname = $request->input('lastname');
@@ -65,8 +67,15 @@ class UserController extends Controller
 
     }
 
-    public function delete()
+    public function delete(Request $request)
     {
+      $id = $request->input('user_id');
+      $user = User::find($id);
+      $user->delete();
+
+
+      Session::flash('delete-success', 'Xóa người dùng thành công.');
+      return redirect()->route('admin-users');
 
     }
 
@@ -81,10 +90,21 @@ class UserController extends Controller
     }
 
     public function updateUser(Request $request, $id) {
-      $file = $request->file('file');
-      $fileName = $file->getClientOriginalName();
-      $result = $request->file->storeOnCloudinaryAs('ct299/admin', 'avatar-' . $fileName);
-      $avatar = $result->getPath();
+      $user = User::find($id);
+      // tìm xóa avatar cũ
+      $avatar = $request->file('avatar');
+      if ($avatar) {
+        $avatarPath = $avatar->store('public/images/users');
+        $avatarUrl = Storage::url($avatarPath);
+        $filePath = public_path($user->link_avt);
+        if (File::exists($filePath)) {
+          File::delete($filePath);
+        }
+      } else if($user->link_avt) {
+        $avatarUrl = $user->link_avt;
+      } else {
+        $avatarUrl = Storage::url('images/admin/avatar-default.png');
+      }
 
       $role = $request->input('role');
       $lastname = $request->input('lastname');
@@ -94,7 +114,7 @@ class UserController extends Controller
       $address= $request->input('address');
 
       DB::table('users')
-        ->whereBetween('id', $id)
+        ->where('id', $id)
         ->update([
           'role_id' => $role,
           'first_name' => $firstname,
@@ -102,9 +122,9 @@ class UserController extends Controller
           'phone_number' => $phonenumber,
           'email' => $email,
           'user_address' => $address,
-          'link_avt' => $avatar
+          'link_avt' => $avatarUrl
         ]);
-      Session::flash('message', 'Update User successfully.');
+      Session::flash('update-success', 'Cập nhật người dùng thành công.');
       return redirect()->route('admin-users');
     }
 
@@ -132,5 +152,19 @@ class UserController extends Controller
       $user->password = Hash::make($newPassword);
       $user->save();
       return redirect()->route('admin-profile')->with('success', 'Change Password Successfully!');
+    }
+
+
+    public function searchByName(Request $request) {
+      $name = $request->input('user-name');
+
+      $page = $request->query('page', 1);
+      $results = DB::table('users')
+      ->join('role', 'users.role_id', '=', 'role.role_id')
+      ->select('users.*', 'role.role_name')
+      ->whereRaw("CONCAT(users.last_name, ' ', users.first_name) LIKE '%{$name}%'")
+      ->paginate(5);
+
+      return view('admin.result-search-user', compact('results', 'page', 'name'));
     }
 }

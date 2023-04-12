@@ -13,7 +13,28 @@
     @section('header')
       @include('admin.layout.header')
     @endsection
-    @include('components.admin.form-input')
+
+    <div class="w-[40%] pl-4 bg-white rounded-md border-[1.5px] focus-within:border-[1.5px] focus-within:border-blue-200 my-4">
+      <form action="{{route('admin-search-user-by-name')}}" method="get" class="flex justify-between">
+        <input type="text" placeholder="Tìm kiếm..." name="user-name" class="caret-blue-500 rounded-md outline-none w-full bg-white" required>
+          <button type="submit" class="inline-block mr-4 mt-2">
+            {{-- <i class="fa-solid fa-magnifying-glass text-slate-500"></i> --}}
+            <lord-icon
+              src="https://cdn.lordicon.com/zniqnylq.json"
+              trigger="click"
+              style="width:24px;height:24px">
+          </lord-icon>
+          </button>
+      </form>
+    </div>
+      @if(session('update-success') || session('delete-success'))
+        <div id="message" class="bg-slate-200 absolute top-12 right-7 rounded-lg border-l-8 border-l-blue-500 opacity-80">
+          <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
+            <span class="px-4">{{ session('update-success') ? session('update-success') : session('delete-success') }}</span>
+          </div>
+        </div>
+      @endif
+    {{-- Danh sách người dùng --}}
     <div class="flex flex-wrap -mx-3 mb-10 mt-2">
       <div class="flex flex-col w-full max-w-full px-3">
         <div class="flex flex-col min-w-[980px] mb-6 break-words bg-white border-0 border-transparent border-solid shadow-md rounded-lg bg-clip-border overflow-hidden">
@@ -28,51 +49,63 @@
                     <th class="px-4 py-3 font-bold opacity">#</th>
                     <th class="px-4 py-3 font-bold ">Họ Tên</th>
                     <th class="px-4 py-3 font-bold ">Số điện thoại</th>
+                    <th class="px-4 py-3 font-bold ">Email</th>
                     <th class="px-4 py-3 font-bold ">Địa chỉ</th>
                     <th class="px-4 py-3 font-bold text-center">Phân quyền</th>
-                    <th class="px-4 py-3 font-bold "></th>
+                    <th class="px-4 py-3 font-bold w-[100px] "></th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach($users as $key => $user)
-                    <tr class="border-t hover:bg-slate-100">
+                    @continue($user->id === Auth::user()->id)
+                    <tr class="border-t even:bg-gray-100 odd:bg-white">
                       <td class="p-4 bg-transparent ">
-                        <div class="px-2 py-1">
+                        <div class="py-1">
                             <h6 class="mb-0 text-sm leading-normal">{{ ++$key }}</h6>
                         </div>
                       </td>
                       <td class="p-4 bg-transparent">
-                        <div class="px-2 py-1">
+                        <div class="py-1">
                             <h6 class="mb-0 text-sm leading-normal">{{ $user->last_name . ' ' . $user->first_name }}</h6>
                         </div>
                       </td>
                       <td class="p-4 bg-transparent text-left">
-                        <div class="px-2 py-1">
+                        <div class="py-1">
                             <h6 class="mb-0 text-sm leading-normal">{{ $user->phone_number }}</h6>
                         </div>
                       </td>
                       <td class="p-4 bg-transparent">
-                        <div class="px-2 py-1 w-56">
+                        <div class="py-1">
+                            <h6 class="mb-0 text-sm leading-normal truncate">{{ $user->email }}</h6>
+                        </div>
+                      </td>
+                      <td class="p-4 bg-transparent">
+                        <div class="py-1">
                             <h6 class="mb-0 text-sm leading-normal truncate">{{ $user->user_address }}</h6>
                         </div>
                       </td>
                       <td class="p-4 bg-transparent text-center">
-                        <div class="py-1 rounded-full {{ $user->role_id == 1  ? 'bg-blue-100 text-white' : ''}}">
+                        <div class="px-2 py-1 rounded-full {{ $user->role_id == 1  ? 'bg-blue-100 text-white' : ''}}">
                             <h6 class="text-sm leading-normal capitalize"> {{ $user->role_name }}</h6>
                         </div>
                       </td>
-                      <td class="p-4 bg-transparent">
-                        <a href="users/{{$user->id}}/edit" class="mb-0 text-sm leading-normal text-red-300">
-                          <i class="fa-regular fa-pen-to-square"></i>
+                      <td class="flex bg-transparent mt-4 justify-center items-center">
+                        <a href="users/{{$user->id}}/edit" class="text-16 mr-2 text-blue-100">
+                          <i class="fa-regular fa-pen-to-square mr-2"></i>
                         </a>
+                        <button class="delete-user text-16 mr-2 text-red-300 cursor-pointer" data-id="{{$user->id}}">
+                          <i class="fa-regular fa-trash-can text-16"></i>
+                        </button>
                       </td>
                     </tr>
                   @endforeach
                 </tbody>
               </table>
 
+
+
               <div class="flex justify-between mx-4 py-4 border-t">
-                <span class="text-slate-700 text-14 font-light">1 - 5 of {{ $users->lastPage() }} entries</span>
+                <span class="text-slate-700 text-14 font-light">1 - @if($users->count() < 6) {{ $users->count() - 1 }} @else 5 @endif of {{ $users->lastPage() }} entries</span>
                 <div class="bg-slate-100 rounded-full">
                   <ol class="pagination flex text-gray-400">
 

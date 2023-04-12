@@ -19,7 +19,7 @@
       <form action="" method="post" enctype="multipart/form-data">
         @csrf
         <div class="flex items-center justify-between mt-1 mb-6">
-          <div class="flex">
+          <div class="flex items-center">
             <div class="w-28 h-28 mr-10">
               {{-- <img
                 src="{{ URL::to('/images/admin/vtd.png')}}"
@@ -28,16 +28,24 @@
               > --}}
               <img
                 id="img-preview"
-                src="{{ Auth::user()->link_avt != null ? Auth::user()->link_avt : URL::to('/images/admin/avatar-default.png')  }}"
+                src="{{ $user->link_avt ? $user->link_avt : URL::to('/storage/images/admin/avatar-default.png')  }}"
                 alt="avatar"
                 class="w-full h-full rounded-full"
               >
             </div>
 
+            <div class="px-4 py-2 border-2 rounded-full hover:bg-blue-100 hover:text-white transition-all duration-300 cursor-pointer">
+              <label for="input-file-img" class="cursor-pointer inline-block rounded-lg">
+                Chọn ảnh
+              </label>
+            </div>
             <input
               id="input-file-img"
               type="file"
               name="avatar"
+              accept="input-file-img/*"
+              value=""
+              hidden
               class="py-8 text-14 border border-slate-500 file:ml-2 rounded-lg border-dashed text-slate-500 cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-none file:bg-[#5490f0] file:text-white file:cursor-pointer file:hover:bg-blue-100"
             >
           </div>
@@ -52,7 +60,7 @@
                 class="h-4 w-4 cursor-pointer peer/customer"
                 checked
               >
-              <label for="customer" class="peer-checked/customer:text-blue-200">Customer</label>
+              <label for="customer" class="peer-checked/customer:text-blue-200">Khách Hàng</label>
             </div>
             <div class="">
               <input
@@ -62,7 +70,7 @@
                 value="1"
                 class="h-4 w-4 cursor-pointer peer/admin"
               >
-              <label for="admin" class="peer-checked/admin:text-blue-200">Admin</label>
+              <label for="admin" class="peer-checked/admin:text-blue-200">Quản trị Viên</label>
             </div>
 
           </div>
@@ -74,7 +82,7 @@
               for="lastname"
               class="text-slate-500 text-14"
             >
-              Last name
+              Họ
             </label><br>
             <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
               <i class="fa-regular fa-user px-2"></i>
@@ -82,7 +90,7 @@
                 type="text"
                 name="lastname"
                 placeholder="Last name"
-                value="{{ Auth::user()->last_name}}"
+                value="{{ $user->last_name}}"
                 class="py-1.5 w-full outline-none rounded-lg placeholder:text-14 text-14"
               >
             </div>
@@ -93,7 +101,7 @@
               for="firstname"
               class="text-slate-500 text-14"
             >
-              First name
+              Tên
             </label><br>
             <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
               <i class="fa-regular fa-user px-2 group"></i>
@@ -112,7 +120,7 @@
               for="phonenumber"
               class="text-slate-500 text-14"
             >
-              Phone number
+              Số điện thoại
             </label><br>
             <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
               <i class="fa-solid fa-mobile-screen px-2"></i>
@@ -151,7 +159,7 @@
             for="address"
             class="text-slate-500 text-14"
           >
-            Address
+            Địa chỉ
           </label><br>
           <div class="border-[1.5px] mt-1">
             <input
@@ -168,7 +176,7 @@
           type="submit"
           class="border-2 border-blue-500 p-2 px-6 mt-4 flex hover:bg-slate-100"
         >
-          Update
+          Lưu
         </button>
 
       </form>

@@ -14,8 +14,13 @@
       @include('admin.layout.header')
     @endsection
     <div class="w-full">
-
-      @include('components.admin.form-input')
+      
+      <div class="w-[40%] pl-4 bg-white rounded-md border-[1.5px] focus-within:border-[1.5px] focus-within:border-blue-200 my-4">
+        <form action="" method="post" class="flex justify-between">
+          @csrf
+          @include('components.admin.form-input')
+        </form>
+      </div>
 
       <div class="bg-slate-50 pt-4 mt-2 rounded-md shadow-md">
         <h2 class="px-4 uppercase font-semibold text-slate-400">Top Fish</h2>
@@ -97,10 +102,20 @@
                                 <h6 class="mb-0 text-sm leading-normal"> {{ $fish->price }}</h6>
                             </div>
                           </td>
+                          {{-- <td class="flex bg-transparent mt-4 justify-center items-center">
+                            <a href="fish/{{$fish->id}}/edit" class="text-16 mr-2 text-blue-100">
+                              <i class="fa-regular fa-pen-to-square mr-2"></i>
+                            </a>
+                            <button class="delete-user text-16 mr-2 text-red-300 cursor-pointer" data-id="{{$fish->id}}">
+                              <i class="fa-regular fa-trash-can text-16"></i>
+                            </button>
+                          </td> --}}
                           <td class="p-4 bg-transparent">
                             <form action="" method="post" class="px-2 py-1">
                               @csrf
-                                <button class="mb-0 text-sm leading-normal text-red-300">Edit</button>
+                                <button class="mb-0 text-sm leading-normal text-red-300">
+                                  <i class="fa-regular fa-pen-to-square"></i>
+                                </button>
                             </form>
                           </td>
                         </tr>
@@ -109,7 +124,7 @@
                   </table>
 
                   <div class="flex justify-between mx-4 py-4 border-t">
-                     <span class="text-slate-700 text-14 font-light">1 - 5 of {{ $fish->lastPage() }} entries</span>
+                    <span class="text-slate-700 text-14 font-light">1 - 5 of {{ $fish->lastPage() }} entries</span>
                     <div class="bg-slate-100 rounded-full">
                       <ol class="pagination flex text-gray-400">
 

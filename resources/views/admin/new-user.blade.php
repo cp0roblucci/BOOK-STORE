@@ -19,7 +19,7 @@
       <form action="" method="post" enctype="multipart/form-data">
         @csrf
         <div class="flex items-center justify-between mt-1 mb-6">
-          <div class="flex">
+          <div class="flex items-center">
             <div class="w-28 h-28 mr-10">
               {{-- <img
                 src="{{ URL::to('/images/admin/vtd.png')}}"
@@ -34,11 +34,16 @@
               >
             </div>
 
+            <div class="px-4 py-2 border-2 rounded-full hover:bg-blue-100 hover:text-white transition-all duration-300 cursor-pointer">
+              <label for="input-file-img" class="cursor-pointer inline-block rounded-lg">
+                Chọn ảnh
+              </label>
+            </div>
             <input
               id="input-file-img"
               type="file"
-              name="file"
-              placeholder=""
+              name="avatar"
+              hidden
               class="py-8 text-14 border border-slate-500 file:ml-2 rounded-lg border-dashed text-slate-500 cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-none file:bg-[#5490f0] file:text-white file:cursor-pointer file:hover:bg-blue-100"
             >
           </div>

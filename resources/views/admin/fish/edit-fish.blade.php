@@ -14,7 +14,7 @@
       @include('admin.layout.header')
     @endsection
 
-    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Thêm Cá mới</div>
+    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Cập nhật Cá</div>
     <div class="">
       <div class="col-span-3 border p-4">
         <form action="" method="post">
@@ -28,7 +28,7 @@
               > --}}
               <img
                 id="img-preview"
-                src="{{ URL::to('/storage/images/admin/fish-default.png')}}"
+                src="{{ $fish->fish_link_img ? $fish->fish_link_img : URL::to('/storage/images/admin/fish-default.png')}}"
                 alt="image-product"
                 class="w-full h-full"
               >
@@ -50,16 +50,16 @@
                 for="species"
                 class="text-slate-500 text-14"
               >
-              Loài cá
+                Loài cá
               </label><br>
               <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
                 <select
                   name="species"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14 cursor-pointer"
                 >
-                  <option value="rong">Cá Rồng</option>
-                  <option value="phuonghoang">Cá Phượng Hoàng</option>
-                  <option value="betta">Cá Betta</option>
+                  @foreach($fish_species as $species)
+                    <option {{ $species->fish_species === $fish->fish_species ? 'selected' : '' }} value="{{ $species->fish_species }}">{{ $species->fish_species }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
@@ -75,7 +75,7 @@
                 <input
                   type="text"
                   name="fish_id"
-                  placeholder="Nhập mã"
+                  value="{{ $fish->fish_id }}"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14"
                 >
               </div>
@@ -93,7 +93,7 @@
                 <input
                   type="text"
                   name="fish_name"
-                  placeholder="Nhập tên"
+                  value="{{ $fish->fish_name }}"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14"
                 >
               </div>
@@ -112,11 +112,9 @@
                   name="ph_level"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14 cursor-pointer"
                 >
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
+                  @foreach($ph as $value)
+                    <option {{ $value->ph_level === $fish->ph_level ? 'selected' : '' }} value="{{ $value->ph_level }}">{{ $value->ph_level }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
@@ -133,11 +131,9 @@
                   name="color"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14 cursor-pointer"
                 >
-                  <option value="red">Red</option>
-                  <option value="blue">Blue</option>
-                  <option value="green">Green</option>
-                  <option value="gold">Gold</option>
-                  <option value="yellow">Yellow</option>
+                  @foreach($color as $value)
+                    <option {{ $value->color === $fish->color ? 'selected' : '' }} value="{{ $value->color }}">{{ $value->color }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
@@ -153,9 +149,9 @@
                   name="size"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14 cursor-pointer"
                 >
-                  <option value="2-4">2-4 cm</option>
-                  <option value="5-7">5-7 cm</option>
-                  <option value="8-10">8-10 cm</option>
+                  @foreach($size as $value)
+                    <option {{ $value->size === $fish->fish_size ? 'selected' : '' }} value="{{ $value->size }}">{{ $value->size }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
@@ -174,7 +170,7 @@
               <input
                 type="text"
                 name="habit"
-                placeholder="Nhập"
+                value="{{ $fish->fish_habit }}"
                 class="pb-11 pt-1 w-full outline-none focus-within:border-blue-500 px-2 placeholder:text-14 text-14"
               >
             </div>
@@ -191,7 +187,7 @@
               <input
                 type="text"
                 name="description"
-                placeholder="Nhập"
+                value="{{ $fish->fish_desc }}"
                 class="pb-11 pt-1 w-full outline-none focus-within:border-blue-500 px-2 placeholder:text-14 text-14"
               >
             </div>

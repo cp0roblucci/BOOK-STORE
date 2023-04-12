@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Color;
 use App\Models\Fish;
+use App\Models\FishSpecies;
+use App\Models\PH;
+use App\Models\Size;
 use App\Models\SupplierInvoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class FishController extends Controller
@@ -63,8 +68,81 @@ class FishController extends Controller
   {
     dd($request);
   }
-  public function delete($id)
+
+  public function editFish($id) {
+    $fish_species = FishSpecies::all();
+    $ph = PH::all();
+    $color = Color::all();
+    $size = Size::all();
+
+    $fish = DB::table('fish')
+      ->where('fish_id', '=', $id)
+      ->first();
+    return view('admin.fish.edit-fish', compact('fish', 'fish_species', 'ph', 'color', 'size'));
+  }
+
+  public function searchFish(Request $request) {
+    $fish_name = $request->input('fish_name');
+    $results = DB::table('fish')
+      ->join('has_size', function ($join) {
+        $join->on('fish.fish_species', '=', 'has_size.fish_species')
+          ->on('fish.fish_size', '=', 'has_size.size');
+      })
+      ->join('fish_import_batches', 'fish.fish_id', '=', 'fish_import_batches.fish_id')
+      ->where('fish.fish_name', 'LIKE', '%'. $fish_name .'%')
+      ->select('fish.*', 'has_size.has_price', 'fish_import_batches.quantity')
+      ->get();
+
+    return view('admin.fish.result-search-fish', compact('results', 'fish_name'));
+  }
+
+  public function listPriceProduct()
   {
-    dd($id);
+    $dataArr = array();
+    $listSpecies = FishSpecies::all();
+    foreach ($listSpecies as $key => $data) {
+      $values = DB::table('has_size')
+        ->where('has_size.fish_species', '=', $data->fish_species)
+        ->get();
+      if ($values->count() != 0) {
+        $dataArr[$key] = DB::table('has_size')
+          ->where('has_size.fish_species', '=', $data->fish_species)
+          ->get();
+      }
+    }
+    return view('admin.fish.list-price-product', compact('dataArr', 'listSpecies'));
+  }
+  public function updatePrice(Request $request) {
+    $species = $request->input('species');
+    $size = $request->input('size');
+    $newPrice = $request->input('new-price');
+
+    DB::table('has_size')
+      ->where('fish_species', '=', $species)
+      ->where('size', '=', $size)
+      ->update(['has_price' => $newPrice]);
+
+//    Session::flash('update-price-success', 'Cập nhật giá thành công.');
+    return redirect()->back()->with('update-price-success', 'Cập nhật giá thành công.');
+//    return redirect()->route('admin-list-price');
+  }
+
+  public function searchPriceFish(Request $request) {
+    $fish_species = $request->input('fish_species');
+    $species = DB::table('fish_species')
+      ->where('fish_species.fish_species', 'LIKE', '%'. $fish_species .'%')
+      ->first();
+//    $listSpecies = FishSpecies::all();
+    $data = DB::table('has_size')
+      ->where('has_size.fish_species', 'LIKE', '%'. $fish_species .'%')
+      ->get();
+
+    return view('admin.fish.result-search-price', compact('data', 'species'));
+  }
+
+  public function delete(Request $request)
+  {
+    $fish_id = $request->input('fish_id');
+    dd($fish_id);
   }
 }

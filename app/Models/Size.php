@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FishType extends Model
+class Size extends Model
 {
-    protected $table = 'fishspecies';
+    protected $table = 'size';
 
     use HasFactory;
 }

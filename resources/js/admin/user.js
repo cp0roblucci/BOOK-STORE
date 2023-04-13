@@ -2,16 +2,13 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
 
-
-const overlayDeleteUser = $('.overlay-delete-user');
+const overlayDeleteUser = $('.overlay-delete');
 const modalDeleteUser = $('.modal-delete-user');
 const cancelDeleteUser = $('.cancel-delete-user');
 
 const listBtnDeleteUser = $$('.delete-user');
 
 const idUser = document.getElementById('idUser');
-
-console.log(idUser);
 
 if(listBtnDeleteUser) {
   listBtnDeleteUser.forEach(btnDeleteUser => {

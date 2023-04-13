@@ -12,8 +12,11 @@ use App\Http\Controllers\PHController;
 use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\clients\CartController;
+use App\Http\Controllers\clients\HomeController;
 
 use \App\Http\Controllers\Auth\GoogleController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +37,8 @@ Route::get('/home', function () {
     return view('homepage');
 })->name('home');
 
+Route::get('/home', [HomeController::class, 'getHome']);
+
 Route::get('/products_detail', function () {
     return view('products_detail');
 });
@@ -42,9 +47,11 @@ Route::get('/products', function () {
     return view('products');
 });
 
-Route::get('/cart', function () {
-    return view('clients.cart');
-});
+// Route::get('/cart', function () {
+//     return view('clients.cart');
+// });
+
+Route::get('/cart', [CartController::class, 'getCart']);
 
 Route::get('/transaction', function () {
     return view('clients.transaction');

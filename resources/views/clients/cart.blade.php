@@ -65,7 +65,8 @@
             <h1>Your Cart</h1>
         </div>
         <div class="items-cart mx-2 text-18">
-            @for($i = 1; $i<5; $i++)
+            {{-- Base --}}
+            {{-- @for($i = 1; $i<5; $i++)
             <div class="item-cart bg-slate-200 my-5 grid grid-cols-10 gap-2 items-center border " data-key="{{$i}}">
                 <div class="check">
                     <input class="add-buy w-5 h-5 ml-2" type="checkbox">
@@ -86,6 +87,38 @@
                     <div class="quantity  absolute top-1/2 -translate-y-1/2">
                         <i class="fa-solid fa-minus minus p-2 border rounded-lg cursor-pointer inline-block hover:bg-white"></i>
                         <input class="num w-1/4 inline-block h-8 text-center rounded-lg " type="text" value="1">
+                        <i class="fa-solid fa-plus plus p-2 border rounded-lg cursor-pointer inline-block hover:bg-white "></i>
+                    </div>
+                </div>
+                <div class="total-box">
+                    <span class="total">{{$i*50000}}₫</span>
+                </div>
+                <div class="delete cursor-pointer relative">
+                    <i class="fa-solid fa-trash-can delete-btn p-2 absolute right-5 top-0 -translate-y-1/2"></i>
+                </div>
+            </div>
+            @endfor --}}
+            @for($i = 1; $i<5; $i++)
+            <div class="item-cart bg-slate-200 my-5 grid grid-cols-10 gap-2 items-center border " data-key="{{$i}}">
+                <div class="check">
+                    <input class="add-buy w-5 h-5 ml-2" type="checkbox">
+                </div>
+                <div class="img-item-cart-box w-16 h-16 col-span-1">
+                    <img class="img-item-cart w-full h-full" src="{{$cart[0]->fish_link_img}}" alt="">
+                </div>
+                <div class="name-product-box col-span-2">
+                    <span class="name-product">{{$cart[0]->fish_name}}</span>
+                </div>
+                <div class="category-box">
+                    <span class="category">{{$cart[0]->fish_species}}</span>
+                </div>
+                <div class="price-box">
+                    <span class="price">{{$i*50000}}₫</span>
+                </div>
+                <div class="quantity-box relative col-span-2 flex justify-center">
+                    <div class="quantity  absolute top-1/2 -translate-y-1/2">
+                        <i class="fa-solid fa-minus minus p-2 border rounded-lg cursor-pointer inline-block hover:bg-white"></i>
+                        <input class="num w-1/4 inline-block h-8 text-center rounded-lg " type="text" value="{{$cart[0]->QUANTITY}}">
                         <i class="fa-solid fa-plus plus p-2 border rounded-lg cursor-pointer inline-block hover:bg-white "></i>
                     </div>
                 </div>

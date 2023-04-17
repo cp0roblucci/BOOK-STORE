@@ -14,6 +14,7 @@
       @include('admin.layout.header')
     @endsection
 
+    {{-- search --}}
     <div class="w-[40%] pl-4 bg-white rounded-md border-[1.5px] focus-within:border-[1.5px] focus-within:border-blue-200 my-4">
       <form action="{{route('admin-search-user-by-name')}}" method="get" class="flex justify-between">
         <input type="text" placeholder="Tìm kiếm..." name="user-name" class="caret-blue-500 rounded-md outline-none w-full bg-white" required>
@@ -27,19 +28,20 @@
           </button>
       </form>
     </div>
-      @if(session('update-success') || session('delete-success'))
-        <div id="message" class="bg-slate-200 absolute top-12 right-7 rounded-lg border-l-8 border-l-blue-500 opacity-80">
-          <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
-            <span class="px-4">{{ session('update-success') ? session('update-success') : session('delete-success') }}</span>
-          </div>
+
+    @if(session('update-success') || session('delete-success'))
+      <div id="message" class="bg-slate-200 absolute top-12 right-7 rounded-lg border-l-8 border-l-blue-500 opacity-80">
+        <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
+          <span class="px-4">{{ session('update-success') ? session('update-success') : session('delete-success') }}</span>
         </div>
-      @elseif(session('delete-failed'))
-        <div id="message" class="bg-slate-200 absolute top-12 right-7 rounded-lg border-l-8 border-l-red-500 opacity-80">
-          <div class="py-4 text-red-500 relative before:absolute before:bottom-0 before:content-[''] before:bg-red-500 before:h-0.5 before:w-full before:animate-before">
-            <span class="px-4">{{ session('delete-failed') }}</span>
-          </div>
+      </div>
+    @elseif(session('delete-failed'))
+      <div id="message" class="bg-slate-200 absolute top-12 right-7 rounded-lg border-l-8 border-l-red-500 opacity-80">
+        <div class="py-4 text-red-500 relative before:absolute before:bottom-0 before:content-[''] before:bg-red-500 before:h-0.5 before:w-full before:animate-before">
+          <span class="px-4">{{ session('delete-failed') }}</span>
         </div>
-      @endif
+      </div>
+    @endif
     {{-- Danh sách người dùng --}}
     <div class="flex flex-wrap -mx-3 mb-10 mt-2">
       <div class="flex flex-col w-full max-w-full px-3">
@@ -55,15 +57,14 @@
                     <th class="px-4 py-3 font-bold opacity">#</th>
                     <th class="px-4 py-3 font-bold ">Họ Tên</th>
                     <th class="px-4 py-3 font-bold ">Số điện thoại</th>
-                    <th class="px-4 py-3 font-bold ">Email</th>
                     <th class="px-4 py-3 font-bold ">Địa chỉ</th>
+                    <th class="px-4 py-3 font-bold text-center">Trạng thái</th>
                     <th class="px-4 py-3 font-bold text-center">Phân quyền</th>
                     <th class="px-4 py-3 font-bold w-[100px] "></th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach($users as $key => $user)
-{{--                      @continue($user->id === Auth::user()->id)--}}
                     <tr class="border-t even:bg-gray-100 odd:bg-white">
                       <td class="p-4 bg-transparent ">
                         <div class="py-1">
@@ -82,12 +83,12 @@
                       </td>
                       <td class="p-4 bg-transparent">
                         <div class="py-1">
-                            <h6 class="mb-0 text-sm leading-normal truncate">{{ $user->email }}</h6>
+                            <h6 class="mb-0 text-sm leading-normal">{{ $user->user_address }}</h6>
                         </div>
                       </td>
                       <td class="p-4 bg-transparent">
                         <div class="py-1">
-                            <h6 class="mb-0 text-sm leading-normal truncate">{{ $user->user_address }}</h6>
+                          <h6 class="mb-0 text-sm leading-normal text-center {{ $user->status_id === 0 ? 'text-blue-100' : 'text-red-200' }} capitalize">{{ $user->status_name }}</h6>
                         </div>
                       </td>
                       <td class="p-4 bg-transparent text-center">
@@ -163,9 +164,6 @@
 
     </div>
 
-    <div class="">
-
-    </div>
   </div>
 @endsection
 

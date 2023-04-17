@@ -7,6 +7,10 @@ use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ColorController;
+//
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ProductsDetailController;
+
 use App\Http\Controllers\FishController;
 use App\Http\Controllers\PHController;
 use App\Http\Controllers\ResetPasswordController;
@@ -25,9 +29,6 @@ use \App\Http\Controllers\Auth\GoogleController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/test', function () {
-    return view('test');
-});
 
 Route::get('/', function () {
     return view('clients.homepage');
@@ -36,14 +37,22 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('homepage');
 })->name('home');
+// products route
 
-Route::get('/products_detail', function () {
-    return view('products_detail');
-});
+Route::get('/products', [ProductsController::class, 'index']);
+//Route::get('/products/{fish_species}',[ProductsController::class, 'filterProductsBySpecies'])->name('filter-products-by-species');
+Route::get('/products/{category_id}/filter-condition/{price_filter}', [ProductsController::class, 'filterProductsByPrice'])->name('filter-products-by-price');
+Route::get('/products/{category_id}',[ProductsController::class, 'getProducts'])->name('get-product');
+Route::get('/products/{category_id}/filter-product-fish/{fish_species}',[ProductsController::class, 'filterProductsByFish'])->name('filter-products-by-fish');
 
-Route::get('/products', function () {
-    return view('products');
-});
+Route::get('/products/{category_id}/filter-products-accessories/{accessories_type_name}',[ProductsController::class, 'filterProductsByAccessories'])->name('filter-products-by-accessories');
+
+Route::get('/products_detail/{id}', [ProductsDetailController::class, 'getProductsDetail'])->name('get-products-detail');
+// Route::get('/products_detail', function () {
+//     return view('products_detail');
+// });
+
+Route::get('fish', [AdminController::class, 'fish'])->name('admin-fish');
 
 Route::get('/cart', function () {
     return view('clients.cart');
@@ -52,14 +61,6 @@ Route::get('/cart', function () {
 Route::get('/transaction', function () {
     return view('clients.transaction');
 });
-
-// Route::get('/layouts/header', function () {
-//     return view('layouts.header');
-// });
-
-// Route::get('/layouts/footer', function () {
-//     return view('layouts.footer');
-// });
 
 Route::get('/test', function () {
     return view('test');
@@ -87,7 +88,6 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 // 403
 Route::view('/403', '403')->name('403');
-
 
 // google login
 Route::get('/get-google-sign-in', [GoogleController::class, 'getGoogleSignIn'])->name('login-google');
@@ -165,8 +165,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         return view('admin.fish.new-fish');
     })->name('new-fish');
     Route::post('create-new-fish', [FishController::class, 'create']);
-    // edit fish
-    Route::get('fish/{id}/edit', [FishController::class, 'editFish']);
+    // edit fis
 
 
     // new species
@@ -205,4 +204,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::get('/last-seven-days', [StatisticsController::class, 'dataLastSevenDays']);
     Route::post('/period', [StatisticsController::class, 'dataPeriod']);
 });
-
+//
+//
+    

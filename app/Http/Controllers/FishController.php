@@ -39,7 +39,7 @@ class FishController extends Controller
         $product = SupplierInvoice::where('supplier_invoice_product_id', $fish)->first();
         // tăng sl lên 1
         $product->increment('supplier_invoice_quantity');
-        $productImport->supplier_invoice_total_price = $productImport->supplier_invoice_quantity * $productImport->supplier_invoice_price;
+        // $productImport->supplier_invoice_total_price = $productImport->supplier_invoice_quantity * $productImport->supplier_invoice_price;
         $product->save();
 
         Session::flash('message', 'Add Fish successfully.');

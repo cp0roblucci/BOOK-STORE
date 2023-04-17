@@ -12,15 +12,15 @@ use Illuminate\Support\Facades\DB;
 
 
 class ProductsController extends Controller
-{   
+{
     public function create(Request $request)
     {
       dd($request);
     }
     public function index() {
-      return redirect()->route('get-product',['category_id' => 1]);
+      return redirect()->route('get-product', ['category_id' => 1]);
     }
-    
+
     public function getProducts($categoryId) {
       $fishSpecies = FishSpecies::all();
       $accessoriesType = AccessoriesType::all();
@@ -33,11 +33,11 @@ class ProductsController extends Controller
         ->select('fish.*', 'has_size.has_price')
         ->get();
         // dd($data);
-        
+
       } else {
         $data = Accessories::all();
       }
-      
+
       return view('/products', compact('data','categoryId','fishSpecies','accessoriesType'));
     }
     public function filterProductsByPrice($categoryId,$priceFilter) {
@@ -52,17 +52,17 @@ class ProductsController extends Controller
      ->select('fish.*', 'has_size.has_price')
      ->orderBy('has_size.has_price', $priceFilter)
      ->get();
-     
+
     } else {
       $data = DB::table('accessories')
       ->orderBy('accessories.accessories_price',$priceFilter)
       ->get();
-      
+
     }
     // dd($data);
      return view('/products', compact('data','categoryId','priceFilter','fishSpecies','accessoriesType'));
     }
-    
+
 
     public function filterProductsByFish($categoryId, $fishSpeciesId) {
       $fishSpecies = FishSpecies::all();
@@ -75,8 +75,8 @@ class ProductsController extends Controller
           })
           ->select('fish.*', 'has_size.has_price')
           ->get();
-      
-      
+
+
       return view('/products', compact('data', 'categoryId', 'fishSpecies','accessoriesType'));
   }
   public function filterProductsByAccessories($categoryId, $accessoriesTypeId) {

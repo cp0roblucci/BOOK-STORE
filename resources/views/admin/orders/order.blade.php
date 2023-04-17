@@ -288,7 +288,7 @@
                       <div class="py-1">
                         <form action="{{ route('confirm-order') }}" method="post">
 {{--                          @csrf--}}
-                          <button t ype="submit" class="text-12 text-primary-purple leading-normal border-2 border-primary-purple px-4 py-2 rounded-xl hover:bg-primary-purple hover:text-white transition-all duration-200">Xác nhận</button>
+                          <button type="submit" class="text-12 text-primary-purple leading-normal border-2 border-primary-purple px-4 py-2 rounded-xl hover:bg-primary-purple hover:text-white transition-all duration-200">Xác nhận</button>
                         </form>
                       </div>
                     </td>

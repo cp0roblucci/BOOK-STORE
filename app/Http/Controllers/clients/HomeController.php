@@ -16,7 +16,9 @@ class HomeController extends Controller
                                         where fish_link_img like '%betta_fish%' or fish_link_img like '%dragon_fish%'
                                         limit 5;
                                 ");
-        $accessories = DB::select("select * from accessories join accessories_type on accessories.accessories_type_id = accessories_type.accessories_type_id limit 5");
+        $accessories = DB::select("select * 
+                                    from accessories join accessories_type on accessories.accessories_type_id = accessories_type.accessories_type_id 
+                                    limit 5");
         //dd($fishselling);
         return view('clients.homepage', compact('fishselling', 'accessories'));
     }

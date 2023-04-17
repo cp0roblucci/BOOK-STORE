@@ -133,6 +133,13 @@ module.exports = {
                 "4.5" : "18px",
                 "25" : "100px",
             },
+
+            blur : {
+                "10" : "10px",
+            },
+            backgroundImage: {
+                "bg-header" : "url('/storage/images/bg-header.jpg')",
+            }
             blur : {
                 "10" : "10px",
             },

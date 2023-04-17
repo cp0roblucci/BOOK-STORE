@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccessoriesController;
 use App\Http\Controllers\AccessoriesTypeController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
@@ -51,6 +52,10 @@ Route::get('/cart', function () {
 
 Route::get('/transaction', function () {
     return view('clients.transaction');
+});
+
+Route::group( ['middleware' => 'auth'], function() {
+
 });
 
 // Route::get('/layouts/header', function () {
@@ -107,7 +112,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 
     Route::get('store', [AdminController::class, 'store'])->name('admin-store');
 
-    Route::get('orders', [AdminController::class, 'order'])->name('admin-order');
+    Route::get('orders', [OrderController::class, 'index'])->name('admin-orders');
 
     Route::get('categories', [AdminController::class, 'category'])->name('admin-categories');
 
@@ -161,9 +166,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 
     // Fish
     // new product
-    Route::get('create-new-fish', function() {
-        return view('admin.fish.new-fish');
-    })->name('new-fish');
+    Route::get('create-new-fish', [FishController::class, 'newFish'])->name('new-fish');
     Route::post('create-new-fish', [FishController::class, 'create']);
     // edit fish
     Route::get('fish/{id}/edit', [FishController::class, 'editFish']);
@@ -189,20 +192,41 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 
     // update price
     Route::post('update-price', [FishController::class, 'updatePrice'])->name('update-price');
+    // update quantity
+    Route::post('update-quantity', [AdminController::class, 'updateQuantity'])->name('update-quantity');
 
     // search fish
     Route::get('search-fish', [FishController::class, 'searchFish'])->name('search-fish');
     // search price
     Route::get('search-price-fish', [FishController::class, 'searchPriceFish'])->name('search-price');
+    // search quantity
+    Route::get('search-quantity', [AdminController::class, 'searchQuantity'])->name('search-quantity');
 
 
     // delete fish
     Route::post('delete-fish', [FishController::class, 'delete'])->name('delete-fish');
 
 
-//  Statistics
+    //  Statistics
     Route::get('/last-week', [StatisticsController::class, 'dataLastWeek']);
     Route::get('/last-seven-days', [StatisticsController::class, 'dataLastSevenDays']);
     Route::post('/period', [StatisticsController::class, 'dataPeriod']);
+
+
+    // ORDER
+    Route::get('orders/{data_id}', [OrderController::class, 'filter'])->name('order-filter');
+    // order detail
+    Route::get('orders/order-detail/{order_id}', [OrderController::class, 'orderDetail'])->name('order-detail');
+    // search
+    Route::post('order-search', [OrderController::class, 'searchOrder'])->name('order-search');
+
+    // confirm an order
+    Route::post('/confirm-order', [OrderController::class, 'confirmOrder'])->name('confirm-order');
+    // confirm orders
+    Route::post('/confirm-orders', [OrderController::class, 'confirmAllOrder']);
+    // delete order
+    Route::post('/delete-order', [OrderController::class, 'deleteOrder']);
+
+
 });
 

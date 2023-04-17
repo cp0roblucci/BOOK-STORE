@@ -16,33 +16,33 @@
     <div class="bg-white">
         <div class="flex ">
             <div class="flex flex-col w-1/2">
-                <img src="/storage/images/img_products/pd1.jpg" alt=""
+                <img src="{{$detail[0]->fish_link_img}}" alt="" 
                 class="py-6 px-10">
                 <div class="flex space-x-4 ml-12">
                     <div class="w-24 h-24 border-2 hover:border-blue-400">
-                        <img src="images/img_products/pd1.jpg" alt=""
+                        <img src="{{$detail[0]->fish_link_img}}" alt=""
                         class="h-full px-2 py-2">
                     </div>
                     <div class="w-24 h-24 border-2 hover:border-blue-400">
-                        <img src="images/img_products/pd1.jpg" alt=""
+                        <img src="{{$detail[0]->fish_link_img}}" alt=""
                         class="h-full px-2 py-2">
                     </div>
                     <div class="w-24 h-24 border-2 hover:border-blue-400">
-                        <img src="images/img_products/pd1.jpg" alt=""
+                        <img src="{{$detail[0]->fish_link_img}}" alt=""
                         class="h-full px-2 py-2">
                     </div>
                     <div class="w-24 h-24 border-2 hover:border-blue-400">
-                        <img src="images/img_products/pd1.jpg" alt=""
+                        <img src="{{$detail[0]->fish_link_img}}" alt=""
                         class="h-full px-2 py-2">
                     </div>
                 </div>
             </div>
             <div class="flex flex-col w-1/2 mr-16  mt-4" data-key="1">
                 <div class="">
-                    <h2 class="text-24 font-semibold mb-2">Cá Siêu Saiyan SJJ 1 - Super Pro VJP</h2>
+                    <h2 class="text-24 font-semibold mb-2">{{$detail[0]->fish_name}}</h2>
                     <div class="flex text-sm font-semibold">
                         <p class="mr-2">SKU: </p> 
-                        <span class="text-red-500">TT1101</span>
+                        <span class="text-red-500">{{$detail[0]->fish_id}}</span>
                         <p class="mx-4">|</p>
                         <p class="mr-2">Thương Hiệu:</p>
                         <span class="text-red-500">3TL</span>     
@@ -50,7 +50,7 @@
                 </div>
                 <div class="price flex mt-6">
                     <span class="text-red-500 mr-2 font-bold text-20">Giá:</span>
-                    <span class="text-red-500 text-20 font-bold">50000đ</span>
+                    <span class="text-red-500 text-20 font-bold">{{$detail[1]->has_price}}đ</span>
                     <span class="block ml-2 opacity-70 mt-1 line-through text-sm">60000d</span>
                 </div>
                 <div class="flex text-sm mt-1 font-semibold">
@@ -68,7 +68,7 @@
                         <ul class="mb-4">
                             <li class="flex mt-4">
                                 <p class="text-gray-700 text-sm font-bold mr-1">pH:</p>
-                                <p class="text-sm font-normal">6</p>
+                                <p class="text-sm font-normal">{{$detail[0]->ph_level}}</p>
                             </li>
                             <li class="flex mt-4">
                                 <p class="text-gray-700 text-sm font-bold mr-1">Nhiệt độ:</p>
@@ -76,15 +76,22 @@
                             </li>
                             <li class="flex mt-4">
                                 <p class="text-gray-700 text-sm font-bold mr-1">Thức ăn:</p>
-                                <p class="text-sm font-normal">cám,trùn chỉ,bobo,...</p>
+                                <p class="text-sm font-normal">{{$detail[0]->food_id}}</p>
                             </li>
                             <li class="flex mt-4">
-                                <p class="text-gray-700 text-sm font-bold mr-1">Tập tính:</p>
-                                <p class="text-sm font-normal">Đánh lẻ, solo Q</p>
+                                <p class="text-gray-700 text-sm font-bold mr-1">Tập  tính:</p>
+                                <p class="text-sm font-normal">{{$detail[0]->fish_habit}}</p>
                             </li>
                             <li class="flex mt-4">
-                                <p class="text-gray-700 text-sm font-bold mr-1">Kích thước:</p>
-                                <p class="text-sm font-normal">24cm</p>
+                                <label for="">Kích Thước: </label>
+                                <select class= " ml-2 border border-slate-500" name="size" id="">
+                                    @foreach($detail as $key => $value)
+                                    <option value="{{$value->size}}">{{$value->size}}</option>
+                                    @endforeach
+                                </select>
+
+                                {{-- <p class="text-gray-700 text-sm font-bold mr-1">Kích thước:</p>
+                                <p class="text-sm font-normal">{{$detail[0]->size}} - {{$detail[2]->size}}</p> --}}
                             </li>
                         </ul>
                     </div>

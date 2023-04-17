@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\clients\CartController;
 use App\Http\Controllers\clients\HomeController;
+use App\Http\Controllers\clients\ProductDetailController;
 
 use \App\Http\Controllers\Auth\GoogleController;
 
@@ -32,19 +33,15 @@ Route::get('/test', function () {
     return view('test');
 });
 
-Route::get('/', function () {
-    return view('clients.homepage');
-});
+Route::get('/', [HomeController::class, 'getHome']);
 
-Route::get('/home', function () {
-    return view('homepage');
-})->name('home');
+// Route::get('/home', function () {
+//     return view('homepage');
+// })->name('home');
 
-Route::get('/home', [HomeController::class, 'getHome']);
+Route::get('/home', [HomeController::class, 'getHome'])->name('home');
 
-Route::get('/products_detail', function () {
-    return view('products_detail');
-});
+Route::get('/products_detail/{id}', [ProductDetailController::class, 'getProductDetail'])->name('products_detail');
 
 Route::get('/products', function () {
     return view('products');
@@ -60,9 +57,9 @@ Route::get('/transaction', function () {
     return view('clients.transaction');
 });
 
-// Route::get('/layouts/header', function () {
-//     return view('layouts.header');
-// });
+Route::get('/header', function () {
+    return view('header');
+});
 
 // Route::get('/layouts/footer', function () {
 //     return view('layouts.footer');

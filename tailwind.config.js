@@ -128,9 +128,14 @@ module.exports = {
                 "115" : "460px",
                 "19" : "76px",
                 "22" : "88px",
+                "150" : "600px",
+                "banner" : "calc(100vh - 150px)",
             },
             blur : {
                 "10" : "10px",
+            },
+            backgroundImage: {
+                "bg-header" : "url('/storage/images/bg-header.jpg')",
             }
         },
     },

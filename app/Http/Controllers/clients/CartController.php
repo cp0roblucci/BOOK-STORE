@@ -18,7 +18,7 @@ class CartController extends Controller
                                 and fish.fish_link_img like '%betta_fish%'
                                 or fish.fish_link_img like '%dragon_fish%'
                             limit 5");
-        //dd($cart);
+        dd($cart);
 
 
         return view('clients.cart', compact('cart'));

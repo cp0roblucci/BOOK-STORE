@@ -57,7 +57,7 @@
                                 <a class=" hover:text-red-500" href="/products_detail/{{$fish->fish_id}}">{{$fish->fish_name}}</a>
                             </div>
                             <div class="price flex">
-                                <span class="text-red-400">{{$fish->HAS_PRICE}}d</span>
+                                <span class="text-red-400">{{number_format($fish->HAS_PRICE, 0, '', '.')}}d</span>
                             </div>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                                 <a class=" hover:text-red-500" href="/products_detail/{{$access->accessories_id}}">{{$access->accessories_name}}</a>
                             </div>
                             <div class="price flex">
-                                <span class="text-red-400">{{$access->accessories_price}}d</span>
+                                <span class="text-red-400">{{number_format($access->accessories_price,0, '', '.')}}d</span>
                             </div>
                         </div>
                     </div>

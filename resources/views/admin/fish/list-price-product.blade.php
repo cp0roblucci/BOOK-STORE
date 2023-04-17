@@ -68,7 +68,10 @@
                               </div>
                             </td>
                             <td class="bg-transparent justify-center">
-                                <button class="update-price text-16 mr-2 text-blue-100 underline cursor-pointer" data-species="{{ $value->fish_species }}" data-size="{{ $value->size }}">
+                                <button class="update-price text-16 mr-2 text-blue-100 underline cursor-pointer"
+                                        data-species="{{ $value->fish_species }}"
+                                        data-size="{{ $value->size }}"
+                                        data-price="{{ $value->has_price }}">
                                   Cập nhật giá
                                 </button>
                             </td>

@@ -36,13 +36,13 @@
         </div>
       @endif
 
-      <h1>Cá</h1>
-      <div class="flex flex-wrap -mx-3 mb-10 mt-4">
-        <div class="grid grid-cols-2 gap-8 w-full max-w-full px-3">
-          @foreach ($dataFish as $key => $data)
+      @if($typeProduct != null)
+        <h1>Cá</h1>
+        <div class="flex flex-wrap -mx-3 mb-10 mt-4">
+          <div class="w-full max-w-full px-3">
             <div class="flex flex-col bg-white border-0 shadow-md rounded-xl">
               <div class="p-2 py-2">
-                <h3 class="text-[#344767] text-20 font-sora"> {{ $listSpecies[$key]->fish_species}}</h3>
+                <h3 class="text-[#344767] text-20 font-sora"> {{ $typeProduct->fish_species }}</h3>
               </div>
               <div class="flex-auto px-0 pt-0">
                 <div class="p-0 overflow-x-auto place-self-auto">
@@ -80,60 +80,59 @@
                 </div>
               </div>
             </div>
-          @endforeach
 
+          </div>
         </div>
-      </div>
 
-
-      <h1>Phụ Kiện</h1>
-      <div class="flex flex-wrap -mx-3 mb-10 mt-4">
-        <div class="grid grid-cols-2 gap-8 w-full max-w-full px-3">
-          @foreach ($dataAccessories as $key => $data)
-            <div class="flex flex-col bg-white border-0 shadow-md rounded-xl">
-              <div class="p-2 py-2">
-                <h3 class="text-[#344767] text-20 font-sora"> {{ $listAccessoriesType[$key]->accessories_type_name}}</h3>
-              </div>
-              <div class="flex-auto px-0 pt-0">
-                <div class="p-0 overflow-x-auto place-self-auto">
-                  <table class="items-center w-full mb-0 align-top border-collapse text-slate-500 rounded-xl">
-                    <thead class="align-bottom bg-slate-200 rounded-2xl">
-                    <tr class="text-slate-600 uppercase text-left text-12">
-                      <th class="px-4 py-3 font-bold">Tên phụ kiện</th>
-                      <th class="px-4 py-3 font-bold">Số lượng</th>
-                      <th class="px-4 py-3 font-bold "></th>
-                    </tr>
-                    </thead>
-                    <tbody class="rounded-2xl">
-                    @foreach($data as $key => $value)
-                      <tr class="border-t">
-                        <td class="px-4 py-4 bg-transparent text-left">
-                          <div class="px-2">
-                            <h6 class="mb-0 text-sm leading-normal">{{ $value->accessories_name }}</h6>
-                          </div>
-                        </td>
-                        <td class="px-4 bg-transparent ">
-                          <div class="px-2">
-                            <h6 class="mb-0 text-sm leading-normal text-purple-400">{{ $value->quantity }}</h6>
-                          </div>
-                        </td>
-                        <td class="bg-transparent justify-center">
-                          <button class="update-quantity text-16 mr-2 text-blue-100 underline cursor-pointer" data-accessories_name="{{ $value->accessories_name }}" data-accessories_id="{{ $value->accessories_id }}" data-quantity="{{ $value->quantity}}">
-                            Cập nhật số lượng
-                          </button>
-                        </td>
+      @else
+        <h1>Phụ kiện</h1>
+        <div class="flex flex-wrap -mx-3 mb-10 mt-4">
+          <div class="w-full max-w-full px-3">
+              <div class="flex flex-col bg-white border-0 shadow-md rounded-xl">
+                <div class="p-2 py-2">
+                  <h3 class="text-[#344767] text-20 font-sora"> {{ $typeAccessories->accessories_type_name}}</h3>
+                </div>
+                <div class="flex-auto px-0 pt-0">
+                  <div class="p-0 overflow-x-auto place-self-auto">
+                    <table class="items-center w-full mb-0 align-top border-collapse text-slate-500 rounded-xl">
+                      <thead class="align-bottom bg-slate-200 rounded-2xl">
+                      <tr class="text-slate-600 uppercase text-left text-12">
+                        <th class="px-4 py-3 font-bold">Tên phụ kiện</th>
+                        <th class="px-4 py-3 font-bold">Số lượng</th>
+                        <th class="px-4 py-3 font-bold "></th>
                       </tr>
-                    @endforeach
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody class="rounded-2xl">
+                      @foreach($data as $key => $value)
+                        <tr class="border-t">
+                          <td class="px-4 py-4 bg-transparent text-left">
+                            <div class="px-2">
+                              <h6 class="mb-0 text-sm leading-normal">{{ $value->accessories_name }}</h6>
+                            </div>
+                          </td>
+                          <td class="px-4 bg-transparent ">
+                            <div class="px-2">
+                              <h6 class="mb-0 text-sm leading-normal text-purple-400">{{ $value->quantity }}</h6>
+                            </div>
+                          </td>
+                          <td class="bg-transparent justify-center">
+                            <button class="update-quantity text-16 mr-2 text-blue-100 underline cursor-pointer" data-accessories_name="{{ $value->accessories_name }}" data-accessories_id="{{ $value->accessories_id }}" data-quantity="{{ $value->quantity}}">
+                              Cập nhật số lượng
+                            </button>
+                          </td>
+                        </tr>
+                      @endforeach
+                      </tbody>
+                    </table>
 
+                  </div>
                 </div>
               </div>
-            </div>
-          @endforeach
 
+          </div>
         </div>
-      </div>
+
+      @endif
 
     </div>
 

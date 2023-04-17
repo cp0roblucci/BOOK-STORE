@@ -69,6 +69,16 @@ class FishController extends Controller
     dd($request);
   }
 
+  public function newFish() {
+
+    $fish_species = FishSpecies::all();
+    $ph = PH::all();
+    $color = Color::all();
+    $size = Size::all();
+
+    return view('admin.fish.new-fish', compact( 'fish_species', 'ph', 'color', 'size'));
+  }
+
   public function editFish($id) {
     $fish_species = FishSpecies::all();
     $ph = PH::all();

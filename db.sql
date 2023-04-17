@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2023 at 04:53 PM
+-- Generation Time: Apr 16, 2023 at 10:58 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -62,26 +62,6 @@ INSERT INTO `accessories` (`accessories_id`, `category_id`, `accessories_type_id
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accessoriestype`
---
-
-CREATE TABLE `accessoriestype` (
-  `ACCESSORIES_TYPE_ID` char(6) NOT NULL,
-  `ACCESSORIES_TYPE_NAME` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `accessoriestype`
---
-
-INSERT INTO `accessoriestype` (`ACCESSORIES_TYPE_ID`, `ACCESSORIES_TYPE_NAME`) VALUES
-('ACCS01', 'Hồ Cá Thủy Sinh'),
-('ACCS02', 'Phụ Kiện Thủy Sinh'),
-('ACCS03', 'Cây Trang Trí');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `accessories_import_batches`
 --
 
@@ -112,7 +92,46 @@ INSERT INTO `accessories_import_batches` (`id`, `accessories_id`, `quantity`, `i
 (35, 'ARM13', 12, '2023-04-11'),
 (36, 'ARM14', 12, '2023-04-11'),
 (37, 'ARM15', 14, '2023-04-11'),
-(38, 'ARM16', 14, '2023-04-11');
+(38, 'ARM16', 16, '2023-04-11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accessories_type`
+--
+
+CREATE TABLE `accessories_type` (
+  `accessories_type_id` char(6) NOT NULL,
+  `accessories_type_name` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `accessories_type`
+--
+
+INSERT INTO `accessories_type` (`accessories_type_id`, `accessories_type_name`) VALUES
+('ACCS01', 'Hồ Cá Thủy Sinh'),
+('ACCS02', 'Phụ Kiện Thủy Sinh'),
+('ACCS03', 'Cây Trang Trí');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account_status`
+--
+
+CREATE TABLE `account_status` (
+  `status_id` int(11) NOT NULL,
+  `status_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `account_status`
+--
+
+INSERT INTO `account_status` (`status_id`, `status_name`) VALUES
+(0, 'Hoạt động'),
+(1, 'Bị chặn');
 
 -- --------------------------------------------------------
 
@@ -133,7 +152,7 @@ CREATE TABLE `carts` (
 
 INSERT INTO `carts` (`CART_ID`, `user_id`, `created_at`, `updated_at`) VALUES
 (4, 24, '2023-04-03 17:04:24', '2023-04-03 17:04:24'),
-(5, 25, '2023-04-10 18:41:58', '2023-04-10 18:41:58');
+(6, 3, '2023-04-12 17:39:44', '2023-04-12 17:39:44');
 
 -- --------------------------------------------------------
 
@@ -142,6 +161,7 @@ INSERT INTO `carts` (`CART_ID`, `user_id`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `cart_details` (
+  `id` int(11) NOT NULL,
   `CART_ID` int(11) NOT NULL,
   `product_id` char(6) NOT NULL,
   `QUANTITY` int(11) DEFAULT NULL
@@ -173,14 +193,14 @@ INSERT INTO `categories` (`category_id`, `category_name`) VALUES
 --
 
 CREATE TABLE `color` (
-  `COLOR` varchar(10) NOT NULL
+  `color` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `color`
 --
 
-INSERT INTO `color` (`COLOR`) VALUES
+INSERT INTO `color` (`color`) VALUES
 ('Cam'),
 ('Hồng'),
 ('Nâu'),
@@ -193,6 +213,27 @@ INSERT INTO `color` (`COLOR`) VALUES
 ('Xanh Lam'),
 ('Đen'),
 ('Đỏ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `delivery_status`
+--
+
+CREATE TABLE `delivery_status` (
+  `delivery_id` int(11) NOT NULL,
+  `delivery_status` varchar(100) NOT NULL,
+  `delivery_desc` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `delivery_status`
+--
+
+INSERT INTO `delivery_status` (`delivery_id`, `delivery_status`, `delivery_desc`) VALUES
+(0, 'Chưa giao hàng', 'Đang đợi lấy hàng'),
+(1, 'Đang vận chuyển', 'Đơn hàng đang được giao'),
+(2, 'Đã giao hàng', 'Đã giao hàng thành công');
 
 -- --------------------------------------------------------
 
@@ -352,7 +393,7 @@ INSERT INTO `fish_import_batches` (`id`, `fish_id`, `quantity`, `import_date`) V
 (21, 'AG01', 10, '2023-04-11 14:05:34'),
 (22, 'AG02', 15, '2023-04-11 14:05:34'),
 (23, 'AG03', 25, '2023-04-11 14:05:34'),
-(24, 'BR01', 5, '2023-04-11 14:06:20'),
+(24, 'BR01', 10, '2023-04-11 14:06:20'),
 (25, 'BR02', 10, '2023-04-11 14:06:20'),
 (26, 'BR03', 15, '2023-04-11 14:06:20'),
 (27, 'BR04', 20, '2023-04-11 14:06:20'),
@@ -424,14 +465,14 @@ INSERT INTO `food_type` (`FOOD_TYPE`) VALUES
 CREATE TABLE `has_size` (
   `fish_species` varchar(50) NOT NULL,
   `size` varchar(20) NOT NULL,
-  `HAS_PRICE` float DEFAULT NULL
+  `has_price` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `has_size`
 --
 
-INSERT INTO `has_size` (`fish_species`, `size`, `HAS_PRICE`) VALUES
+INSERT INTO `has_size` (`fish_species`, `size`, `has_price`) VALUES
 ('Cá Bảy Màu', '2 - 4 cm', 25000),
 ('Cá Bảy Màu', '3 cm', 35000),
 ('Cá Bảy Màu', '3.5-5 cm', 50000),
@@ -498,20 +539,32 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `orders` (
-  `ORDER_ID` int(11) NOT NULL,
+  `order_id` char(8) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `ORDER_DATE` datetime DEFAULT NULL,
-  `ORDER_DELIVERY_ADDRESS` varchar(200) DEFAULT NULL
+  `order_date` datetime DEFAULT current_timestamp(),
+  `status_id` int(11) NOT NULL,
+  `delivery_id` int(11) NOT NULL,
+  `payment_id` int(11) NOT NULL,
+  `full_name` varchar(50) NOT NULL,
+  `order_phone_number` char(11) NOT NULL,
+  `order_delivery_address` varchar(200) DEFAULT NULL,
+  `order_notes` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`ORDER_ID`, `user_id`, `ORDER_DATE`, `ORDER_DELIVERY_ADDRESS`) VALUES
-(2, 2, '2023-03-28 01:25:19', 'Lap Vo'),
-(3, 2, '2023-03-29 01:26:24', 'Lap Vo'),
-(4, 3, '2023-04-05 01:27:18', 'Can Tho');
+INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `status_id`, `delivery_id`, `payment_id`, `full_name`, `order_phone_number`, `order_delivery_address`, `order_notes`) VALUES
+('BT0001', 2, '2023-03-28 01:25:19', 0, 0, 0, 'Trần Văn Trường', '0123123123', 'Lấp Vò, Đồng Tháp', ''),
+('BT0002', 2, '2023-03-29 01:26:24', 4, 1, 0, 'Võ Đức Duy', '0456456456', 'Kiên Giang', ''),
+('BT0003', 3, '2023-04-05 01:27:18', 2, 2, 1, 'Lê Thanh Hùng', '0123456456', 'An Giang', ''),
+('BT0004', 2, '2023-04-11 12:04:22', 4, 1, 0, 'Lê Minh Toàn', '0123123456', 'Thốt Nốt, Cần Thơ', ''),
+('BT0005', 3, '2023-04-09 12:03:56', 0, 0, 0, 'Nguyễn Hữu Phúc', '0456789789', 'Kiên Giang', ''),
+('BT0006', 2, '2023-04-14 00:38:58', 2, 2, 1, 'Trần Văn Trường', '0123123123', 'Ninh Kiều, Cần Thơ', ''),
+('BT0007', 1, '2023-04-12 12:04:33', 0, 0, 0, 'Võ Đức Duy', '0456456456', 'Ninh Kiều, Cần Thơ', ''),
+('BT0008', 3, '2023-04-07 12:04:50', 3, 0, 0, 'Lê Minh Toàn', '', 'Ninh Kiều, Cần Thơ', ''),
+('BT0009', 2, '2023-04-16 23:04:22', 1, 0, 0, 'Trần Văn Trường', '0123123123', 'An Khánh, Ninh Kiều, Cần Thơ', 'Giao hàng vào buổi chiều');
 
 -- --------------------------------------------------------
 
@@ -521,24 +574,56 @@ INSERT INTO `orders` (`ORDER_ID`, `user_id`, `ORDER_DATE`, `ORDER_DELIVERY_ADDRE
 
 CREATE TABLE `order_details` (
   `order_detail_id` int(11) NOT NULL,
-  `ORDER_ID` int(11) NOT NULL,
+  `order_id` char(8) NOT NULL,
   `category_id` int(11) NOT NULL,
   `product_id` char(6) NOT NULL,
-  `PRICE` float DEFAULT NULL,
-  `QUANTITY` int(11) DEFAULT NULL
+  `price` float DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `order_details`
 --
 
-INSERT INTO `order_details` (`order_detail_id`, `ORDER_ID`, `category_id`, `product_id`, `PRICE`, `QUANTITY`) VALUES
-(3, 2, 1, '1', 20000, 25),
-(4, 3, 1, '1', 20000, 50),
-(5, 3, 2, '1', 20000, 15),
-(6, 2, 1, '1', 20000, 30),
-(8, 4, 1, '1', 32000, 15),
-(9, 4, 2, '1', 26000, 35);
+INSERT INTO `order_details` (`order_detail_id`, `order_id`, `category_id`, `product_id`, `price`, `quantity`) VALUES
+(3, 'BT0002', 1, 'DC01', 20000, 25),
+(4, 'BT0003', 1, 'DC02', 20000, 50),
+(5, 'BT0004', 0, 'ARM05', 20000, 15),
+(6, 'BT0002', 1, 'DA01', 20000, 30),
+(8, 'BT0001', 1, 'BF02', 32000, 15),
+(9, 'BT0004', 0, 'ARM14', 26000, 35),
+(10, 'BT0005', 1, 'AG01', 12000, 32),
+(11, 'BT0006', 1, 'BF01', 120000, 26),
+(12, 'BT0005', 0, 'ARM01', 650000, 1),
+(13, 'BT0007', 1, 'BR03', 30000, 15),
+(14, 'BT0008', 1, 'DA02', 8000, 10),
+(15, 'BT0006', 0, 'ARM06', 70000, 3),
+(16, 'BT0007', 0, 'ARM14', 150000, 2),
+(17, 'BT0008', 0, 'ARM06', 70000, 5),
+(18, 'BT0009', 1, 'DGF02', 1500000, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_status`
+--
+
+CREATE TABLE `order_status` (
+  `status_id` int(11) NOT NULL,
+  `status_name` varchar(100) NOT NULL,
+  `status_desc` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_status`
+--
+
+INSERT INTO `order_status` (`status_id`, `status_name`, `status_desc`) VALUES
+(0, 'Chờ xác nhận', 'Đơn hàng mới đang chờ xác nhận'),
+(1, 'Đang xử lý', 'Người bán đang chuẩn bị hàng'),
+(2, 'Hoàn thành', 'Đơn hàng đã được giao thành công'),
+(3, 'Đã hủy', 'Người mua đã hủy đặt hàng'),
+(4, 'Đã gửi hàng', 'Người bán đã giao cho đơn vị vận chuyển');
 
 -- --------------------------------------------------------
 
@@ -553,6 +638,26 @@ CREATE TABLE `password_reset_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_status`
+--
+
+CREATE TABLE `payment_status` (
+  `payment_id` int(11) NOT NULL,
+  `payment_status` varchar(100) NOT NULL,
+  `payment_desc` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payment_status`
+--
+
+INSERT INTO `payment_status` (`payment_id`, `payment_status`, `payment_desc`) VALUES
+(0, 'Chưa thanh toán', 'Người mua chưa thanh toán'),
+(1, 'Đã thanh toán', 'Đã thanh toán thành công');
 
 -- --------------------------------------------------------
 
@@ -580,14 +685,14 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 CREATE TABLE `ph` (
-  `PH_LEVEL` int(11) NOT NULL
+  `ph_level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `ph`
 --
 
-INSERT INTO `ph` (`PH_LEVEL`) VALUES
+INSERT INTO `ph` (`ph_level`) VALUES
 (1),
 (2),
 (3),
@@ -595,17 +700,6 @@ INSERT INTO `ph` (`PH_LEVEL`) VALUES
 (5),
 (6),
 (7);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `product_ids`
--- (See below for the actual view)
---
-CREATE TABLE `product_ids` (
-`fish_id` char(6)
-,`type` varchar(11)
-);
 
 -- --------------------------------------------------------
 
@@ -698,6 +792,7 @@ CREATE TABLE `users` (
   `link_avt` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `status_id` int(11) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -707,20 +802,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `role_id`, `first_name`, `last_name`, `phone_number`, `user_address`, `google_id`, `link_avt`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, '1', 'Truong', 'Tran Van', '123123124', 'An Khanh, Ninh Kieu, Can Tho', NULL, '/storage/images/users/tSnbbSgIO5OGbL3SK6UrZfddv4Xyf2iYaAGXUFfS.png', 'vantruong@gmail.com', '$2y$10$NsK.7f6S43ICDsjwKr2NPO42f/faBXRXEXWJMfFH09uE8MDT4ZQRe', 'hGsvIfzCBEnirFiMuoSwRCoDuF1TKfexm87gMaBGTLI9q4lfs1UdeC0BUtFj', NULL, '2023-04-10 17:53:41'),
-(2, '0', 'Truong 2', 'Tran Van', '1412312', 'An Khanh, Ninh Kieu, Can Tho', NULL, '', 'vantruong2@gmail.com', '$2y$10$x8dJV84R/9.yAI.cwozA2.5tCcVET2ztAMRnL1MaGWCiAM.ZXU8yK', 'P4RV5SCsUypP8FncWVVSHCnPW7ooxAtcBr43fmWE6wkdhHwMNC9D5SZTyAII', NULL, NULL),
-(24, '1', 'Trường', 'Trần Văn', '0123123123', 'An Khánh, Ninh Kiều, Cần Thơ', NULL, '/storage/images/users/JIiMbNO15guSO4LGDH0sB0VdcXHx1yy4bbChCTtj.png', 'admin@gmail.com', '$2y$10$Zi3w9kihSDcpYsUbOoJGvehcS.cCJz15i79P7sJhOgPN0.HbiNypi', NULL, '2023-04-03 17:04:24', '2023-04-03 17:04:24'),
-(25, '0', 'Van', 'Truong', NULL, NULL, '103144632167425600074', NULL, 'vantruongvtd02@gmail.com', '', NULL, '2023-04-10 18:41:58', '2023-04-10 18:41:58');
-
--- --------------------------------------------------------
-
---
--- Structure for view `product_ids`
---
-DROP TABLE IF EXISTS `product_ids`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `product_ids`  AS SELECT `fish`.`fish_id` AS `fish_id`, 'fish' AS `type` FROM `fish` union select `accessories`.`accessories_id` AS `accessories_id`,'accessories' AS `type` from `accessories`  ;
+INSERT INTO `users` (`id`, `role_id`, `first_name`, `last_name`, `phone_number`, `user_address`, `google_id`, `link_avt`, `email`, `password`, `status_id`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, '1', 'Truong', 'Tran Van', '123123124', 'An Khanh, Ninh Kieu, Can Tho', NULL, '/storage/images/users/tSnbbSgIO5OGbL3SK6UrZfddv4Xyf2iYaAGXUFfS.png', 'vantruong@gmail.com', '$2y$10$NsK.7f6S43ICDsjwKr2NPO42f/faBXRXEXWJMfFH09uE8MDT4ZQRe', 0, 'n1NoPyD1E57UixvRr4xxaytivhOKb1Iap3W4ZIjBuiTzNmpZbPknAPMbzjCk', NULL, '2023-04-10 17:53:41'),
+(2, '0', 'Truong 2', 'Tran Van', '1412312', 'An Khanh, Ninh Kieu, Can Tho', NULL, '', 'vantruong2@gmail.com', '$2y$10$x8dJV84R/9.yAI.cwozA2.5tCcVET2ztAMRnL1MaGWCiAM.ZXU8yK', 0, 'P4RV5SCsUypP8FncWVVSHCnPW7ooxAtcBr43fmWE6wkdhHwMNC9D5SZTyAII', NULL, NULL),
+(3, '0', 'Van', 'Truong', NULL, NULL, '103144632167425600074', NULL, 'vantruongvtd02@gmail.com', '', 0, NULL, '2023-04-12 17:39:44', '2023-04-12 17:39:44'),
+(24, '1', 'Trường', 'Trần Văn', '0123123123', 'An Khánh, Ninh Kiều, Cần Thơ', NULL, '/storage/images/users/JIiMbNO15guSO4LGDH0sB0VdcXHx1yy4bbChCTtj.png', 'admin@gmail.com', '$2y$10$Zi3w9kihSDcpYsUbOoJGvehcS.cCJz15i79P7sJhOgPN0.HbiNypi', 0, NULL, '2023-04-03 17:04:24', '2023-04-03 17:04:24');
 
 --
 -- Indexes for dumped tables
@@ -735,17 +821,23 @@ ALTER TABLE `accessories`
   ADD KEY `fk_categories` (`category_id`);
 
 --
--- Indexes for table `accessoriestype`
---
-ALTER TABLE `accessoriestype`
-  ADD PRIMARY KEY (`ACCESSORIES_TYPE_ID`);
-
---
 -- Indexes for table `accessories_import_batches`
 --
 ALTER TABLE `accessories_import_batches`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `accessories_id` (`accessories_id`);
+
+--
+-- Indexes for table `accessories_type`
+--
+ALTER TABLE `accessories_type`
+  ADD PRIMARY KEY (`accessories_type_id`);
+
+--
+-- Indexes for table `account_status`
+--
+ALTER TABLE `account_status`
+  ADD PRIMARY KEY (`status_id`);
 
 --
 -- Indexes for table `carts`
@@ -758,8 +850,9 @@ ALTER TABLE `carts`
 -- Indexes for table `cart_details`
 --
 ALTER TABLE `cart_details`
-  ADD PRIMARY KEY (`CART_ID`),
-  ADD KEY `FK_ACCESSOR_RELATIONS_ACCESSOR` (`product_id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_ACCESSOR_RELATIONS_ACCESSOR` (`product_id`),
+  ADD KEY `CART_ID` (`CART_ID`);
 
 --
 -- Indexes for table `categories`
@@ -771,7 +864,13 @@ ALTER TABLE `categories`
 -- Indexes for table `color`
 --
 ALTER TABLE `color`
-  ADD PRIMARY KEY (`COLOR`);
+  ADD PRIMARY KEY (`color`);
+
+--
+-- Indexes for table `delivery_status`
+--
+ALTER TABLE `delivery_status`
+  ADD PRIMARY KEY (`delivery_id`);
 
 --
 -- Indexes for table `export_batches`
@@ -842,7 +941,11 @@ ALTER TABLE `migrations`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`ORDER_ID`);
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `fk_delivery` (`delivery_id`),
+  ADD KEY `fk_payment` (`payment_id`),
+  ADD KEY `fk_user_id` (`user_id`),
+  ADD KEY `fk_status` (`status_id`);
 
 --
 -- Indexes for table `order_details`
@@ -850,13 +953,26 @@ ALTER TABLE `orders`
 ALTER TABLE `order_details`
   ADD PRIMARY KEY (`order_detail_id`),
   ADD KEY `fk_accessories_accessories` (`product_id`),
-  ADD KEY `fk_order` (`ORDER_ID`);
+  ADD KEY `fk_category_id` (`category_id`),
+  ADD KEY `fk_order` (`order_id`);
+
+--
+-- Indexes for table `order_status`
+--
+ALTER TABLE `order_status`
+  ADD PRIMARY KEY (`status_id`);
 
 --
 -- Indexes for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment_status`
+--
+ALTER TABLE `payment_status`
+  ADD PRIMARY KEY (`payment_id`);
 
 --
 -- Indexes for table `personal_access_tokens`
@@ -870,7 +986,7 @@ ALTER TABLE `personal_access_tokens`
 -- Indexes for table `ph`
 --
 ALTER TABLE `ph`
-  ADD PRIMARY KEY (`PH_LEVEL`);
+  ADD PRIMARY KEY (`ph_level`);
 
 --
 -- Indexes for table `role`
@@ -898,7 +1014,8 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`),
   ADD UNIQUE KEY `users_phone_number_unique` (`phone_number`),
-  ADD KEY `fk_user_role` (`role_id`);
+  ADD KEY `fk_user_role` (`role_id`),
+  ADD KEY `fk_status_id` (`status_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -908,13 +1025,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `accessories_import_batches`
 --
 ALTER TABLE `accessories_import_batches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `CART_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `CART_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `cart_details`
+--
+ALTER TABLE `cart_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -947,16 +1070,10 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `ORDER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `password_reset_tokens`
@@ -974,7 +1091,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables
@@ -984,14 +1101,14 @@ ALTER TABLE `users`
 -- Constraints for table `accessories`
 --
 ALTER TABLE `accessories`
-  ADD CONSTRAINT `FK_ACCESSOR_GOM_NHUNG_ACCESSOR` FOREIGN KEY (`accessories_type_id`) REFERENCES `accessoriestype` (`ACCESSORIES_TYPE_ID`),
+  ADD CONSTRAINT `FK_ACCESSOR_GOM_NHUNG_ACCESSOR` FOREIGN KEY (`accessories_type_id`) REFERENCES `accessories_type` (`accessories_type_id`),
   ADD CONSTRAINT `fk_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
 
 --
 -- Constraints for table `accessories_import_batches`
 --
 ALTER TABLE `accessories_import_batches`
-  ADD CONSTRAINT `fk_accessories` FOREIGN KEY (`accessories_id`) REFERENCES `accessories` (`ACCESSORIES_ID`);
+  ADD CONSTRAINT `fk_accessories` FOREIGN KEY (`accessories_id`) REFERENCES `accessories` (`accessories_id`);
 
 --
 -- Constraints for table `carts`
@@ -1009,8 +1126,8 @@ ALTER TABLE `cart_details`
 -- Constraints for table `fish`
 --
 ALTER TABLE `fish`
-  ADD CONSTRAINT `FK_FISH_CO_MAU_COLOR` FOREIGN KEY (`color`) REFERENCES `color` (`COLOR`),
-  ADD CONSTRAINT `FK_FISH_SONG_O_PH` FOREIGN KEY (`ph_level`) REFERENCES `ph` (`PH_LEVEL`),
+  ADD CONSTRAINT `FK_FISH_CO_MAU_COLOR` FOREIGN KEY (`color`) REFERENCES `color` (`color`),
+  ADD CONSTRAINT `FK_FISH_SONG_O_PH` FOREIGN KEY (`ph_level`) REFERENCES `ph` (`ph_level`),
   ADD CONSTRAINT `FK_FISH_THUOCLOAI_FISHTYPE` FOREIGN KEY (`fish_species`) REFERENCES `fish_species` (`fish_species`),
   ADD CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`),
   ADD CONSTRAINT `fk_fish_size` FOREIGN KEY (`fish_size`) REFERENCES `size` (`size`);
@@ -1026,7 +1143,7 @@ ALTER TABLE `fish_food`
 -- Constraints for table `fish_import_batches`
 --
 ALTER TABLE `fish_import_batches`
-  ADD CONSTRAINT `fk_fish` FOREIGN KEY (`fish_id`) REFERENCES `fish` (`FISH_ID`);
+  ADD CONSTRAINT `fk_fish` FOREIGN KEY (`fish_id`) REFERENCES `fish` (`fish_id`);
 
 --
 -- Constraints for table `has_size`
@@ -1036,16 +1153,33 @@ ALTER TABLE `has_size`
   ADD CONSTRAINT `fk_species` FOREIGN KEY (`fish_species`) REFERENCES `fish_species` (`fish_species`);
 
 --
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `fk_delivery` FOREIGN KEY (`delivery_id`) REFERENCES `delivery_status` (`delivery_id`),
+  ADD CONSTRAINT `fk_payment` FOREIGN KEY (`payment_id`) REFERENCES `payment_status` (`payment_id`),
+  ADD CONSTRAINT `fk_status` FOREIGN KEY (`status_id`) REFERENCES `order_status` (`status_id`),
+  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
 -- Constraints for table `order_details`
 --
 ALTER TABLE `order_details`
-  ADD CONSTRAINT `fk_order` FOREIGN KEY (`ORDER_ID`) REFERENCES `orders` (`ORDER_ID`);
+  ADD CONSTRAINT `fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`),
+  ADD CONSTRAINT `fk_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
 
 --
 -- Constraints for table `supplierinvoice`
 --
 ALTER TABLE `supplierinvoice`
   ADD CONSTRAINT `fk_supplier_user` FOREIGN KEY (`ID`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `fk_status_id` FOREIGN KEY (`status_id`) REFERENCES `account_status` (`status_id`),
+  ADD CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

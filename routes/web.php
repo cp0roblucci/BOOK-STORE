@@ -210,7 +210,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::get('/last-seven-days', [StatisticsController::class, 'dataLastSevenDays']);
     Route::post('/period', [StatisticsController::class, 'dataPeriod']);
 
-
     // ORDER
     Route::get('orders/{data_id}', [OrderController::class, 'filter'])->name('order-filter');
     // order detail

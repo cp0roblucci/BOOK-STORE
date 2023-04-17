@@ -42,15 +42,16 @@ Route::get('/', [HomeController::class, 'getHome']);
 
 Route::get('/home', [HomeController::class, 'getHome'])->name('home');
 
-Route::get('/products_detail/{id}', [ProductDetailController::class, 'getProductDetail'])->name('products_detail');
 
+Route::get('/products', [ProductsController::class, 'index']);
+//Route::get('/products/{fish_species}',[ProductsController::class, 'filterProductsBySpecies'])->name('filter-products-by-species');
+Route::get('/products/{category_id}/filter-condition/{price_filter}', [ProductsController::class, 'filterProductsByPrice'])->name('filter-products-by-price');
+Route::get('/products/{category_id}',[ProductsController::class, 'getProducts'])->name('get-product');
+Route::get('/products/{category_id}/filter-product-fish/{fish_species}',[ProductsController::class, 'filterProductsByFish'])->name('filter-products-by-fish');
 Route::get('/products', function () {
     return view('products');
 });
 
-// Route::get('/cart', function () {
-//     return view('clients.cart');
-// });
 
 Route::get('/cart', [CartController::class, 'getCart']);
 
@@ -65,19 +66,6 @@ Route::get('/header', function () {
 
 Route::group( ['middleware' => 'auth'], function() {
 
-});
-
-// Route::get('/layouts/header', function () {
-//     return view('layouts.header');
-// });
-
-
-// Route::get('/layouts/footer', function () {
-//     return view('layouts.footer');
-// });
-
-Route::get('/test', function () {
-    return view('test');
 });
 
 // auth
@@ -236,7 +224,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::post('/confirm-orders', [OrderController::class, 'confirmAllOrder']);
     // delete order
     Route::post('/delete-order', [OrderController::class, 'deleteOrder']);
-
 
 });
 

@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 
 {{-- set title --}}
-@section('title', 'Products')
+@section('title', 'Danh Sách Phụ Kiện')
 @section('path', 'Sản phẩm / Phụ kiện')
 
 @section('sidebar')
@@ -88,7 +88,7 @@
                   </table>
 
                   <div class="flex justify-between mx-4 py-4 border-t">
-                    <span class="text-slate-700 text-14 font-light">1 - 5 of {{ $accessories->lastPage() }} entries</span>
+                    <span class="text-slate-700 text-14 font-light">1 - {{ $accessories->count() < 5 ? $accessories->count() : 5 }} of {{ $accessories->lastPage() }} entries</span>
                     <div class="bg-slate-100 rounded-full">
                       <ol class="pagination flex text-gray-400">
 

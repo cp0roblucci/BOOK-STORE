@@ -1,6 +1,6 @@
-<div class="border flex flex-col top-0 w-full py-2 h-screen bg-white text-14 overflow-y-scroll scrollbar-thin scroll-smooth scrollbar-thumb-rounded-lg scrollbar-thumb-blue-200 scrollbar-track-gray-100">
+<div class="border flex flex-col top-0 w-full h-screen bg-white text-14 overflow-y-scroll scrollbar-thin scroll-smooth scrollbar-thumb-rounded-lg scrollbar-thumb-blue-200 scrollbar-track-gray-100">
   <aside class="">
-    <div class="flex bg-white border-b border-r w-full items-center text-[18px] h-[32px] fixed">
+    <div class="flex bg-white border-b border-r-2 w-full items-center text-[18px] h-[40px] fixed">
       <div class="px-4 text-20 font-sora text-slate-405">
       <div class="ml-1">
           Trang Quản Trị
@@ -9,11 +9,11 @@
     </div>
     <ul class="mt-[50px] ml-1 text-14">
       <li class="w-full inline-block text-gray-500">
-        <div class="cursor-pointer mb-4
-        {{ request()->is('admin/dashboard') ? 'text-purple-400' : ''}}">
-          <a href="{{ route('admin-dashboard')}}" id="Statistics" class="hover:bg-slate-200 ml-2 py-1 rounded-sm block">
-            <button class="hover:bg-purple-200 w-6 h-6 rounded-full">
-              <i class="fa-solid fa-circle-dot text-14 {{ request()->is('admin/dashboard') ? 'text-purple-400' : 'text-slate-400' }} mr-1"></i>
+        <div class="cursor-pointer mb-4 border mx-2 rounded-xl
+        {{ request()->is('admin/dashboard') ? 'bg-primary-purple text-white' : ''}}">
+          <a href="{{ route('admin-dashboard')}}" id="Statistics" class="hover:opacity-60 ml-2 py-1 rounded-sm block">
+            <button class=" w-5 h-5 rounded-full">
+              <i class="fa-solid fa-circle-dot text-14 {{ request()->is('admin/dashboard') ? 'text-white' : 'text-slate-400' }} mr-1"></i>
             </button>
             Thống Kê
           </a>
@@ -21,13 +21,16 @@
       </li>
 
       <li class="w-full inline-block text-gray-500">
-        <div class="btn__slidebar cursor-pointer
+        <div class="btn__slidebar cursor-pointer border mx-2 rounded-xl
         {{
           request()->is('admin/fish')
           || request()->is('admin/accessories')
           || request()->is('admin/list-price')
+          || request()->is('admin/store')
           || request()->is('admin/search-price-fish')
           || request()->is('admin/search-fish')
+          || request()->is('admin/fish/*/edit')
+          || request()->is('admin/search-quantity')
           || request()->is('admin/search-accessories')
           || request()->is('admin/create-new-fish')
           || request()->is('admin/create-new-species')
@@ -35,26 +38,29 @@
           || request()->is('admin/create-new-color')
           || request()->is('admin/create-new-accessories-type')
           || request()->is('admin/create-new-accessory')
-          ? ' text-blue-200'
+          ? 'bg-primary-blue text-white'
           : ''
         }}">
-          <div class="hover:bg-slate-200 hover:text-blue-100 ml-2 py-1 rounded-sm">
-            <button class="icon__btn--slidebar w-6 h-6 rounded-full hover:bg-blue-100 hover:text-white
-            {{
+          <div class="hover:text-opacity-60 py-1 rounded-xl">
+            <button class="icon__btn--slidebar w-5 h-5 rounded-full
+          {{
               request()->is('admin/fish')
               || request()->is('admin/accessories')
               || request()->is('admin/accessories/*/edit')
               || request()->is('admin/search-accessories')
               || request()->is('admin/list-price')
+              || request()->is('admin/store')
               || request()->is('admin/search-price-fish')
               || request()->is('admin/search-fish')
+              || request()->is('admin/fish/*/edit')
+              || request()->is('admin/search-quantity')
               || request()->is('admin/create-new-fish')
               || request()->is('admin/create-new-species')
               || request()->is('admin/create-new-ph')
               || request()->is('admin/create-new-color')
               || request()->is('admin/create-new-accessories-type')
               || request()->is('admin/create-new-accessory')
-              ? ' bg-blue-100 text-white'
+              ? 'bg-primary-blue text-white'
               : ''
             }}">
               <i class="fa-solid fa-angle-right transform transition-all duration-200"></i>
@@ -69,8 +75,11 @@
           || request()->is('admin/accessories/*/edit')
           || request()->is('admin/search-accessories')
           || request()->is('admin/list-price')
+          || request()->is('admin/store')
           || request()->is('admin/search-price-fish')
           || request()->is('admin/search-fish')
+          || request()->is('admin/fish/*/edit')
+          || request()->is('admin/search-quantity')
           || request()->is('admin/create-new-fish')
           || request()->is('admin/create-new-species')
           || request()->is('admin/create-new-ph')
@@ -87,35 +96,36 @@
               request()->is('admin/accessories')
               || request()->is('admin/search-accessories')
               || request()->is('admin/accessories/*/edit')
-              ? ' text-blue-200'
+              ? ' text-primary-blue'
               : ''
             }}"
           >
-            <i class="fa-solid fa-circle-dot text-10 text-blue-400 mr-1"></i>
+            <i class="fa-solid fa-circle-dot text-10 text-primary-blue mr-1"></i>
             Danh sách phụ kiện
           </a>
           <a
             href="{{route('admin-fish')}}"
             class="transition-all hover:bg-slate-100 py-1 rounded-sm
-            {{ request()->is('admin/fish') || request()->is('admin/search-fish') ? ' text-blue-200' : ''}}"
+            {{ request()->is('admin/fish') || request()->is('admin/search-fish') || request()->is('admin/fish/*/edit')
+  ? ' text-primary-blue' : ''}}"
           >
-            <i class="fa-solid fa-circle-dot text-10 text-blue-400 mr-1"></i>
+            <i class="fa-solid fa-circle-dot text-10 text-primary-blue mr-1"></i>
             Danh sách cá
           </a>
           <a
             href="{{route('admin-list-price')}}"
             class="transition-all hover:bg-slate-100 py-1 rounded-sm
-            {{ request()->is('admin/list-price') || request()->is('admin/search-price-fish')  ? ' text-blue-200' : ''}}"
+            {{ request()->is('admin/list-price') || request()->is('admin/search-price-fish')  ? ' text-primary-blue' : ''}}"
           >
-            <i class="fa-solid fa-circle-dot text-10 text-blue-400 mr-1"></i>
+            <i class="fa-solid fa-circle-dot text-10 text-primary-blue mr-1"></i>
             Bảng giá Cá
           </a>
           <a
             href="{{route('admin-store')}}"
             class="transition-all hover:bg-slate-100 py-1 rounded-sm
-            {{ request()->is('admin/list-price') || request()->is('admin/search-price-fish')  ? ' text-blue-200' : ''}}"
+            {{  request()->is('admin/store') || request()->is('admin/search-quantity')  ? ' text-primary-blue' : ''}}"
           >
-            <i class="fa-solid fa-circle-dot text-10 text-blue-400 mr-1"></i>
+            <i class="fa-solid fa-circle-dot text-10 text-primary-blue mr-1"></i>
             Kho Hàng
           </a>
           <div class="btn__slidebar2 cursor-pointer
@@ -126,11 +136,11 @@
               || request()->is('admin/create-new-color')
               || request()->is('admin/create-new-accessories-type')
               ||request()->is('admin/create-new-accessory')
-              ? ' text-blue-200'
+              ? ' text-primary-blue'
               : ''
             }}">
           <div class="hover:bg-slate-200 py-1 rounded-sm">
-            <button class="icon__btn--slidebar2 w-4 h-4 rounded-full hover:bg-blue-100 hover:text-white
+            <button class="icon__btn--slidebar2 w-4 h-4 rounded-full hover:bg-primary-blue hover:text-white
             {{
               request()->is('admin/create-new-fish')
               || request()->is('admin/create-new-species')
@@ -138,7 +148,7 @@
               || request()->is('admin/create-new-color')
               || request()->is('admin/create-new-accessories-type')
               || request()->is('admin/create-new-accessory')
-              ? ' bg-blue-100 text-white'
+              ? 'bg-primary-blue text-white'
               : ''
             }}">
               <i class="fa-solid fa-angle-right flex items-center ml-[5px] transform transition-all duration-200 text-10"></i>
@@ -162,49 +172,49 @@
             <a
               href="{{route('new-accessories-type')}}"
               class="transition-all hover:bg-slate-100 py-1 rounded-sm
-              {{ request()->is('admin/create-new-accessories-type') ? 'text-blue-900' : '' }}"
+              {{ request()->is('admin/create-new-accessories-type') ? 'text-primary-blue' : '' }}"
             >
-              <i class="fa-solid fa-circle-dot text-10 text-blue-900 mr-1"></i>
+              <i class="fa-solid fa-circle-dot text-10 text-primary-blue mr-1"></i>
               Loại phụ kiện
             </a>
             <a
               href="{{route('new-accessory')}}"
               class="transition-all hover:bg-slate-100 py-1 rounded-sm
-              {{ request()->is('admin/create-new-accessory') ? 'text-blue-900' : '' }}"
+              {{ request()->is('admin/create-new-accessory') ? 'text-primary-blue' : '' }}"
             >
-              <i class="fa-solid fa-circle-dot text-10 text-blue-900 mr-1"></i>
+              <i class="fa-solid fa-circle-dot text-10 text-primary-blue mr-1"></i>
               Phụ kiện
             </a>
             <a
               href="{{route('new-fish')}}"
               class="transition-all hover:bg-slate-100 py-1 rounded-sm
-              {{ request()->is('admin/create-new-fish') ? 'text-blue-100' : '' }}"
+              {{ request()->is('admin/create-new-fish') ? 'text-primary-blue' : '' }}"
             >
-              <i class="fa-solid fa-circle-dot text-10 text-blue-100 mr-1"></i>
+              <i class="fa-solid fa-circle-dot text-10 text-primary-blue mr-1"></i>
               Cá
             </a>
             <a
               href="{{ route('new-species') }}"
               class="transition-all hover:bg-slate-100 py-1 rounded-sm
-              {{ request()->is('admin/create-new-species') ? 'text-blue-100' : '' }}"
+              {{ request()->is('admin/create-new-species') ? 'text-primary-blue' : '' }}"
             >
-              <i class="fa-solid fa-circle-dot text-10 text-blue-100 mr-1"></i>
+              <i class="fa-solid fa-circle-dot text-10 text-primary-blue mr-1"></i>
               Loài
             </a>
             <a
               href="{{route('new-ph')}}"
               class="transition-all hover:bg-slate-100 py-1 rounded-sm
-              {{ request()->is('admin/create-new-ph') ? 'text-blue-100' : '' }}"
+              {{ request()->is('admin/create-new-ph') ? 'text-primary-blue' : '' }}"
             >
-              <i class="fa-solid fa-circle-dot text-10 text-blue-100 mr-1"></i>
+              <i class="fa-solid fa-circle-dot text-10 text-primary-blue mr-1"></i>
               Độ PH
             </a>
             <a
               href="{{route('new-color')}}"
               class="transition-all hover:bg-slate-100 py-1 rounded-sm
-              {{ request()->is('admin/create-new-color') ? 'text-blue-100' : '' }}"
+              {{ request()->is('admin/create-new-color') ? 'text-primary-blue' : '' }}"
             >
-              <i class="fa-solid fa-circle-dot text-10 text-blue-100 mr-1"></i>
+              <i class="fa-solid fa-circle-dot text-10 text-primary-blue mr-1"></i>
               Màu sắc
             </a>
           </div>
@@ -212,28 +222,28 @@
       </li>
 
       <li class="w-full inline-block text-gray-500">
-        <div class="btn__slidebar cursor-pointer
+        <div class="btn__slidebar cursor-pointer border mx-2 rounded-xl
         {{
           request()->is('admin/users')
           || request()->is('admin/create-new-user')
           || request()->is('admin/search-user')
           || request()->is('admin/users/*/edit')
-          ? 'text-purple-400'
+          ? 'bg-primary-purple text-white'
           : ''
         }}">
-          <div class="hover:bg-slate-200 hover:text-purple-400 ml-2 py-1 rounded-sm">
-            <button class="icon__btn--slidebar hover:bg-purple-400 hover:text-white w-6 h-6 rounded-full
+          <div class="hover:text-opacity-60 py-1 rounded-sm">
+            <button class="icon__btn--slidebar w-5 h-5 rounded-full
             {{
               request()->is('admin/users')
               || request()->is('admin/create-new-user')
               || request()->is('admin/search-user')
               || request()->is('admin/users/*/edit')
-              ? 'bg-purple-400 text-white'
+              ? 'bg-primary-purple text-white'
               : ''
             }}">
               <i class="fa-solid fa-angle-right transform transition-all duration-200"></i>
             </button>
-            Người dùng
+            Người Dùng
           </div>
         </div>
         <div class="menu__slidebar flex flex-col ml-6 text-14 mt-1 mb-4 transform transition-all duration-200 overflow-hidden
@@ -248,41 +258,31 @@
           <a
             href="{{route('admin-users')}}"
             class="transition-all hover:bg-slate-100 py-1 rounded-sm
-            {{ request()->is('admin/users') ? 'text-purple-400' : '' }}"
+            {{ request()->is('admin/users') ? 'text-primary-purple' : '' }}"
           >
-            <i class="fa-solid fa-circle-dot text-10 text-purple-400 mr-1"></i>
+            <i class="fa-solid fa-circle-dot text-10 text-primary-purple mr-1"></i>
             Danh sách người dùng
           </a>
           <a
             href="{{route('new-user')}}"
             class="transition-all hover:bg-slate-100 py-1 rounded-sm
-            {{ request()->is('admin/create-new-user') ? 'text-purple-400' : '' }}"
+            {{ request()->is('admin/create-new-user') ? 'text-primary-purple' : '' }}"
           >
-            <i class="fa-solid fa-circle-dot text-10 text-purple-400 mr-1"></i>
-            Tạo mới
+            <i class="fa-solid fa-circle-dot text-10 text-primary-purple mr-1"></i>
+            Thêm người dùng mới
           </a>
         </div>
       </li>
 
       <li class="w-full inline-block text-gray-500">
-        <div class="btn__slidebar cursor-pointer
-        {{ request()->is('admin/orders') ? 'text-blue-200' : ''}} ">
-          <div class="hover:bg-slate-200 hover:text-blue-100 ml-2 py-1 rounded-sm">
-            <button class="icon__btn--slidebar hover:bg-blue-100 hover:text-white w-6 h-6 rounded-full">
-              <i class="fa-solid fa-angle-right transform transition-all duration-200"></i>
+        <div class="cursor-pointer mb-4 border mx-2 rounded-xl
+        {{ request()->is('admin/orders/*') || request()->is('admin/order-detail/*') ? 'bg-primary-blue text-white' : ''}}">
+          <a href="{{ route('admin-orders')}}" class="hover:opacity-60 ml-2 py-1 rounded-sm block">
+            <button class=" w-5 h-5 rounded-full">
+              <i class="fa-solid fa-circle-dot text-14 {{ request()->is('admin/orders/*') || request()->is('admin/order-detail/*') ? 'text-white' : 'text-slate-400' }} mr-1"></i>
             </button>
             Đơn Hàng
-          </div>
-        </div>
-        <div class="menu__slidebar flex flex-col ml-6 text-14 mt-1 mb-4 transform transition-all duration-200 max-h-0 overflow-hidden">
-          <a href="" class="transition-all hover:bg-slate-100 py-1 rounded-sm">
-            <i class="fa-solid fa-circle-dot text-10 text-blue-400 mr-1"></i>
-            Xác nhận đơn hàng
           </a>
-          {{-- <a href="" class="transition-all hover:bg-slate-100 py-1 rounded-sm">
-            <i class="fa-solid fa-circle-dot text-10 text-blue-400 mr-1"></i>
-            Create new
-          </a> --}}
         </div>
       </li>
 

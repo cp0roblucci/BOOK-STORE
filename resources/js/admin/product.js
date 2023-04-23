@@ -90,6 +90,7 @@ const listBtnUpdatePrice = $$('.update-price');
 
 const titleSpecies = document.getElementById('title-species');
 const titleSize = document.getElementById('title-size');
+
 const newPrice = document.getElementById('new-price');
 
 
@@ -103,6 +104,9 @@ if(listBtnUpdatePrice) {
       modalUpdatePrice.classList.remove('hidden');
       const UpdatePriceSpecies = btnUpdatePrice.dataset.species;
       const UpdatePriceSize = btnUpdatePrice.dataset.size;
+      const oldPrice = btnUpdatePrice.dataset.price;
+
+      newPrice.value = oldPrice;
 
       if(inputUpdatePriceSpecies && inputUpdatePriceSize) {
         inputUpdatePriceSpecies.value = UpdatePriceSpecies;
@@ -112,8 +116,6 @@ if(listBtnUpdatePrice) {
       titleSpecies.innerHTML = UpdatePriceSpecies;
       titleSize.innerHTML = UpdatePriceSize;
 
-      console.log(inputUpdatePriceSpecies.value);
-      console.log(inputUpdatePriceSize.value);
     })
   });
 }
@@ -131,5 +133,67 @@ if(cancelUpdatePrice) {
     overlayDelete.classList.add('hidden');
     modalUpdatePrice.classList.add('hidden');
     newPrice.value = '';
+  })
+}
+
+
+const modalUpdateQuantity = $('.modal-update-quantity');
+const cancelUpdateQuantity = $('.cancel-update-quantity');
+
+const listBtnUpdateQuantity = $$('.update-quantity');
+
+const productName = document.getElementById('product-name');
+const productQuantity = document.getElementById('product-quantity');
+
+const newQuantity = document.getElementById('new-quantity');
+
+
+const idProduct = document.getElementById('idProduct');
+
+if(listBtnUpdateQuantity) {
+  listBtnUpdateQuantity.forEach(btnUpdateQuantity => {
+    btnUpdateQuantity.addEventListener('click', function() {
+      overlayDelete.classList.remove('hidden');
+      modalUpdateQuantity.classList.remove('hidden');
+
+      const fishName = btnUpdateQuantity.dataset.fish_name;
+      const fishId = btnUpdateQuantity.dataset.fish_id;
+
+      const accessoriesName = btnUpdateQuantity.dataset.accessories_name;
+      const accessoriesId = btnUpdateQuantity.dataset.accessories_id;
+
+      const quantity = btnUpdateQuantity.dataset.quantity;
+
+      newQuantity.value = quantity;
+
+
+      if (fishName && fishId) {
+        productName.innerHTML = fishName;
+
+        idProduct.value = fishId;
+      } else {
+        productName.innerHTML = accessoriesName;
+
+        idProduct.value = accessoriesId;
+      }
+
+      console.log(idProduct.value);
+    })
+  });
+}
+
+if(overlayDelete) {
+  overlayDelete.addEventListener('click', function() {
+    overlayDelete.classList.add('hidden');
+    modalUpdateQuantity.classList.add('hidden');
+    newQuantity.value = '';
+  })
+}
+
+if(cancelUpdateQuantity) {
+  cancelUpdateQuantity.addEventListener('click', function() {
+    overlayDelete.classList.add('hidden');
+    modalUpdateQuantity.classList.add('hidden');
+    newQuantity.value = '';
   })
 }

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use MongoDB\Driver\Session;
 
 class StatisticsController extends Controller
 {
@@ -56,7 +57,7 @@ class StatisticsController extends Controller
       $result = OrderDetail::join('orders', 'order_details.order_id', '=', 'orders.order_id')
         ->leftJoin('fish', 'order_details.product_id', '=', 'fish.fish_id')
         ->leftJoin('accessories', 'order_details.product_id', '=', 'accessories.accessories_id')
-        ->where('order_details.category_id', 2)
+        ->where('order_details.category_id', 0)
         ->whereDate('orders.order_date', $day)
         ->selectRaw(
           'order_details.category_id as category_id,
@@ -111,4 +112,6 @@ class StatisticsController extends Controller
 
       return response()->json($data);
     }
+
+
 }

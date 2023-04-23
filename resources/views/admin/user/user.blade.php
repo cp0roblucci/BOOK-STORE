@@ -14,8 +14,9 @@
       @include('admin.layout.header')
     @endsection
 
+    {{-- search --}}
     <div class="w-[40%] pl-4 bg-white rounded-md border-[1.5px] focus-within:border-[1.5px] focus-within:border-blue-200 my-4">
-      <form action="{{route('admin-search-user-by-name')}}" method="get" class="flex justify-between">
+      <form action="{{route('search-user-by-name')}}" method="get" class="flex justify-between">
         <input type="text" placeholder="Tìm kiếm..." name="user-name" class="caret-blue-500 rounded-md outline-none w-full bg-white" required>
           <button type="submit" class="inline-block mr-4 mt-2">
             {{-- <i class="fa-solid fa-magnifying-glass text-slate-500"></i> --}}
@@ -27,25 +28,46 @@
           </button>
       </form>
     </div>
-      @if(session('update-success') || session('delete-success'))
-        <div id="message" class="bg-slate-200 absolute top-12 right-7 rounded-lg border-l-8 border-l-blue-500 opacity-80">
-          <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
-            <span class="px-4">{{ session('update-success') ? session('update-success') : session('delete-success') }}</span>
+
+    @if(session('update-success'))
+        <div id="message" class="flex absolute top-12 right-7">
+          <div  class="bg-slate-200 rounded-lg border-l-8 border-l-blue-500 opacity-80">
+            <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
+              <span class="px-4">{{ session('update-success') ? session('update-success') : session('delete-success') }}</span>
+            </div>
           </div>
         </div>
-      @elseif(session('delete-failed'))
-        <div id="message" class="bg-slate-200 absolute top-12 right-7 rounded-lg border-l-8 border-l-red-500 opacity-80">
-          <div class="py-4 text-red-500 relative before:absolute before:bottom-0 before:content-[''] before:bg-red-500 before:h-0.5 before:w-full before:animate-before">
-            <span class="px-4">{{ session('delete-failed') }}</span>
-          </div>
+    @elseif(session('delete-failed'))
+      <div id="message" class="bg-slate-200 absolute top-12 right-7 rounded-lg border-l-8 border-l-red-500 opacity-80">
+        <div class="py-4 text-red-500 relative before:absolute before:bottom-0 before:content-[''] before:bg-red-500 before:h-0.5 before:w-full before:animate-before">
+          <span class="px-4">{{ session('delete-failed') }}</span>
         </div>
-      @endif
+      </div>
+      @elseif(session('delete-success'))
+        <div id="message" class="flex absolute top-12 right-7">
+          <div  class="bg-slate-200 rounded-lg border-l-8 border-l-blue-500 opacity-80">
+            <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
+              <span class="px-4">{{ session('update-success') ? session('update-success') : session('delete-success') }}</span>
+            </div>
+          </div>
+          <button id="btn-rollback" class="border px-4 ml-2 rounded-lg hover:bg-slate-200 hover:text-primary-blue transition-all">Hoàn tác</button>
+        </div>
+    @endif
     {{-- Danh sách người dùng --}}
     <div class="flex flex-wrap -mx-3 mb-10 mt-2">
       <div class="flex flex-col w-full max-w-full px-3">
         <div class="flex flex-col min-w-[980px] mb-6 break-words bg-white border-0 border-transparent border-solid shadow-md rounded-lg bg-clip-border overflow-hidden">
           <div class="flex p-2 py-2 items-center justify-between">
-            <h3 class="text-[#344767] text-20 font-sora">Danh sách người dùng</h3>
+            @if($userName)
+              <h3 class="text-[#344767] text-20 font-sora">Kết quả tìm kiếm người dùng tên "{{ $userName }}"</h3>
+            @else
+              <h3 class="text-[#344767] text-20 font-sora">Danh sách người dùng</h3>
+            @endif
+
+            <a href="{{ route('new-user')}}" class="border pr-4 pl-2 py-2 hover:bg-slate-100 hover:text-primary-blue transition-all">
+              <i class="fa-solid fa-plus mx-1"></i>
+              <span class="">Tạo mới</span>
+            </a>
           </div>
           <div class="flex-auto px-0 pt-0">
             <div class="p-0 overflow-x-auto place-self-auto">
@@ -55,15 +77,15 @@
                     <th class="px-4 py-3 font-bold opacity">#</th>
                     <th class="px-4 py-3 font-bold ">Họ Tên</th>
                     <th class="px-4 py-3 font-bold ">Số điện thoại</th>
-                    <th class="px-4 py-3 font-bold ">Email</th>
                     <th class="px-4 py-3 font-bold ">Địa chỉ</th>
+                    <th class="px-4 py-3 font-bold text-center">Trạng thái</th>
                     <th class="px-4 py-3 font-bold text-center">Phân quyền</th>
                     <th class="px-4 py-3 font-bold w-[100px] "></th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach($users as $key => $user)
-{{--                      @continue($user->id === Auth::user()->id)--}}
+
                     <tr class="border-t even:bg-gray-100 odd:bg-white">
                       <td class="p-4 bg-transparent ">
                         <div class="py-1">
@@ -82,12 +104,12 @@
                       </td>
                       <td class="p-4 bg-transparent">
                         <div class="py-1">
-                            <h6 class="mb-0 text-sm leading-normal truncate">{{ $user->email }}</h6>
+                            <h6 class="mb-0 text-sm leading-normal">{{ $user->user_address }}</h6>
                         </div>
                       </td>
                       <td class="p-4 bg-transparent">
                         <div class="py-1">
-                            <h6 class="mb-0 text-sm leading-normal truncate">{{ $user->user_address }}</h6>
+                          <h6 class="mb-0 text-sm leading-normal text-center {{ $user->status_id === 0 ? 'text-blue-100' : 'text-red-200' }} capitalize">{{ $user->status_name }}</h6>
                         </div>
                       </td>
                       <td class="p-4 bg-transparent text-center">
@@ -163,9 +185,6 @@
 
     </div>
 
-    <div class="">
-
-    </div>
   </div>
 @endsection
 

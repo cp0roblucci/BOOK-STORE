@@ -1,50 +1,44 @@
 @section('footer')
 <div class="footer w-full h-full">
-    <div class="content-footer mx-20 mt-2 /bg-red-600 h-auto flex justify-between py-2">
+    <div class="content-footer mx-20  /bg-red-600 h-auto flex justify-between py-5">
         <div class="footer-item ">
-            <div class="title pb-3">
+            <div class="title mb-5">
                 <h1 class="uppercase font-bold text-16">Liên hệ</h1>
             </div>
             <div class="list">
                 <ul>
-                    <li><a class="hover:text-slate-300" href="#">132/DD85, KV2, An Khánh, Ninh Kiều, Cần Thơ</a></li>
-                    <li><a class="hover:text-slate-300" href="#">Office: 024 382 43210</a></li>
+                    <li><a class="hover:text-slate-300 leading-8 " href="#">132/DD85, KV2, An Khánh, Ninh Kiều, Cần Thơ</a></li>
+                    <li><a class="hover:text-slate-300 leading-8 " href="#">Office: 024 382 43210</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-item ">
-            <div class="title pb-3">
+            <div class="title mb-5">
                 <h1 class="uppercase font-bold text-16">thông tin</h1>
             </div>
             <div class="list">
                 <ul>
-                    <li><a class="hover:text-slate-300" href="#">Trang chủ</a></li>
-                    <li><a class="hover:text-slate-300" href="#">Giới thiệu</a></li>
-                    <li><a class="hover:text-slate-300" href="#">Sản phẩm</a></li>
-                    <li><a class="hover:text-slate-300" href="#">Liên hệ cung ứng</a></li>
+                    <li><a class="hover:text-slate-300 leading-8 " href="#">Trang chủ</a></li>
+                    <li><a class="hover:text-slate-300 leading-8 " href="#">Giới thiệu</a></li>
+                    <li><a class="hover:text-slate-300 leading-8 " href="#">Sản phẩm</a></li>
+                    <li><a class="hover:text-slate-300 leading-8 " href="#">Liên hệ cung ứng</a></li>
                     {{-- <li><a class="hover:text-slate-300" href="#"></a></li> --}}
                 </ul>
             </div>
         </div>
         <div class="footer-item ">
-            <div class="title pb-3">
+            <div class="title mb-5">
                 <h1 class="uppercase font-bold text-16 ">Hỗ trợ khách hàng</h1>
             </div>
             <div class="list">
                 <ul>
-                    <li><a class="hover:text-slate-300" href="#">Hướng dẫn mua hàng</a></li>
-                    <li><a class="hover:text-slate-200" href="#">Hướng dẫn thanh toán</a></3i>
-                    <li><a class="hover:text-slate-300" href="#">Chính sách vận chuyển</a></li>
-                    {{-- <li><a class="hover:text-slate-300" href="#">Thành tích hoạt động</a></li> --}}
-                    {{-- <li><a class="hover:text-slate-300" href="#"></a></li> --}}
+                    <li><a class="hover:text-slate-300 leading-8 " href="#">Hướng dẫn mua hàng</a></li>
+                    <li><a class="hover:text-slate-300 leading-8 " href="#">Hướng dẫn thanh toán</a></3i>
+                    <li><a class="hover:text-slate-300 leading-8 " href="#">Chính sách vận chuyển</a></li>
                 </ul>
             </div>
         </div>
-        {{-- <div class="footer-item col-span-3">
-            <div class="title pb-3">
-                <h1 class="uppercase font-bold text-16">Fan page</h1>
-            </div>
-        </div> --}}
+
     </div>
 </div>
 @endsection

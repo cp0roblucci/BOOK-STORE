@@ -13,6 +13,8 @@
     './resources/js/admin/chart.js',
     './resources/js/admin/user.js',
     './resources/js/admin/product.js',
+    './resources/js/admin/order.js',
+    './resources/js/admin/common.js',
     './resources/js/admin/slidebar.js',
     './resources/js/complete-info.js',
   ])
@@ -62,8 +64,6 @@
         <div class="overlay-delete hidden fixed inset-0 bg-black bg-opacity-20 z-40 transition-all animate-fadeIn duration-500"></div>
         <div class="modal-delete-user hidden fixed top-[25%] left-[35%] bg-white p-6 py-10 min-h-[120px] rounded-lg z-50 animate-fadeIn">
           <h2 class="text-18 mb-10">Bạn có chắc chắn muốn xóa người dùng này?</h2>
-          <form action="{{ route('delete-user')}}" method="post">
-            @csrf
             <input id="idUser" type="text" name="user_id" hidden>
             <div class="flex justify-around">
               <span
@@ -72,20 +72,19 @@
                 Hủy
               </span>
               <button
-                type="submit"
+                id="btn-delete-user"
                 class="border px-6 py-2 bg-slate-100 hover:text-red-500 hover:border-red-500"
               >
                 Xóa
               </button>
             </div>
-          </form>
         </div>
 
         {{-- delete accessories --}}
         <div class="modal-delete-accessories hidden fixed top-[25%] left-[35%] bg-white p-6 py-10 min-h-[120px] rounded-lg z-50 animate-fadeIn">
           <h2 class="text-18 mb-10">Bạn có chắc chắn muốn xóa phụ kiện này?</h2>
           <form
-            action="{{ route('delete-accessories')}}" 
+            action="{{ route('delete-accessories')}}"
             method="post"
           >
             @csrf
@@ -109,9 +108,9 @@
 
         {{-- delete fish --}}
         <div class="modal-delete-fish border border-blue-500 hidden fixed top-[25%] left-[35%] bg-white p-6 py-10 min-h-[120px] rounded-lg z-50 animate-fadeIn">
-          <h2 class="text-18 mb-10">Bạn có chắc chắn muốn xóa sản phẩm cá này này?</h2>
+          <h2 class="text-18 mb-10">Bạn có chắc chắn muốn xóa sản phẩm cá này?</h2>
           <form
-            action="{{ route('delete-fish') }}" 
+            action="{{ route('delete-fish') }}"
             method="post"
           >
             @csrf
@@ -137,11 +136,11 @@
           <div>
             Nhập giá mới cho loại
             <span id="title-species" class="text-18 text-blue-200"></span>
-            có kích thước 
+            có kích thước
             <span id="title-size" class="text-18 text-blue-200"></span>
           </div>
           <form
-            action="{{ route('update-price')}}" 
+            action="{{ route('update-price')}}"
             method="post"
           >
             @csrf
@@ -149,7 +148,7 @@
             <input id="updatePriceSize" type="text" name="size" hidden>
             <input
               id="new-price"
-              type="number" 
+              type="number"
               name="new-price"
               placeholder="New price"
               required
@@ -158,6 +157,42 @@
             <div class="flex justify-around">
               <span
                 class="cancel-update-price border px-6 py-2 cursor-pointer hover:text-blue-900 hover:bg-slate-100"
+              >
+                Hủy
+              </span>
+              <button
+                type="submit"
+                class="border px-6 py-2 bg-slate-100 hover:text-blue-500 hover:border-blue-500"
+              >
+                Lưu
+              </button>
+            </div>
+          </form>
+        </div>
+
+
+        {{-- update số lượng --}}
+        <div class="modal-update-quantity fixed hidden top-[25%] left-[35%] bg-white p-6 py-10 min-w-[400px] min-h-[120px] rounded-lg z-50 animate-fadeIn">
+          <div>
+            Nhập số lượng mới cho loại
+            <span id="product-name" class="text-18 text-blue-200"></span>
+          </div>
+          <form
+            action="{{ route('update-quantity')}}"
+            method="post"
+          >
+            @csrf
+            <input id="idProduct" type="text" name="product_id" hidden>
+            <input
+              id="new-quantity"
+              type="number"
+              name="new-quantity"
+              required
+              class="border my-4 px-2 py-2 w-full bg-slate-100 outline-none"
+            >
+            <div class="flex justify-around">
+              <span
+                class="cancel-update-quantity border px-6 py-2 cursor-pointer hover:text-blue-900 hover:bg-slate-100"
               >
                 Hủy
               </span>

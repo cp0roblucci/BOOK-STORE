@@ -17,7 +17,7 @@
     <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Cập nhật phụ kiện</div>
     <div class="">
       <div class="col-span-3 border p-4">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
           @csrf
           <div class="flex items-center justify-between mt-1 mb-6">
             <div class="w-40 mr-10">
@@ -37,7 +37,7 @@
             <input
               id="input-file-img"
               type="file"
-              name="avatar"
+              name="accessories-img"
               placeholder=""
               class="w-full py-8 text-14 border border-slate-500 file:ml-2 rounded-lg border-dashed text-slate-500 cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-none file:bg-[#5490f0] file:text-white file:cursor-pointer file:hover:bg-blue-100"
             >
@@ -124,7 +124,7 @@
             type="submit"
             class="border-2 border-blue-500 p-2 px-6 mt-4 flex hover:bg-slate-100"
           >
-            Thêm
+            Cập nhật
           </button>
 
         </form>

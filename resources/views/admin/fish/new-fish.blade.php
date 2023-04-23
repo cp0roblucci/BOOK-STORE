@@ -57,9 +57,9 @@
                   name="species"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14 cursor-pointer"
                 >
-                  <option value="rong">Cá Rồng</option>
-                  <option value="phuonghoang">Cá Phượng Hoàng</option>
-                  <option value="betta">Cá Betta</option>
+                  @foreach($fish_species as $species)
+                    <option value="{{ $species->fish_species }}">{{ $species->fish_species }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
@@ -105,18 +105,16 @@
                 for="ph_level"
                 class="text-slate-500 text-14"
               >
-                Độ PH
+                Môi trường sống thích hợp (độ ph)
               </label><br>
               <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
                 <select
                   name="ph_level"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14 cursor-pointer"
                 >
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
+                  @foreach($ph as $value)
+                    <option value="{{ $value->ph_level }}">{{ $value->ph_level }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
@@ -126,18 +124,16 @@
                 for="color"
                 class="text-slate-500 text-14"
               >
-                Color
+                Màu sắc
               </label><br>
               <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
                 <select
                   name="color"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14 cursor-pointer"
                 >
-                  <option value="red">Red</option>
-                  <option value="blue">Blue</option>
-                  <option value="green">Green</option>
-                  <option value="gold">Gold</option>
-                  <option value="yellow">Yellow</option>
+                  @foreach($color as $value)
+                    <option value="{{ $value->color }}">{{ $value->color }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
@@ -146,16 +142,16 @@
                 for="size"
                 class="text-slate-500 text-14"
               >
-                Size
+                Kích thước cá trưởng thành
               </label><br>
               <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
                 <select
                   name="size"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14 cursor-pointer"
                 >
-                  <option value="2-4">2-4 cm</option>
-                  <option value="5-7">5-7 cm</option>
-                  <option value="8-10">8-10 cm</option>
+                  @foreach($size as $value)
+                    <option value="{{ $value->size }}">{{ $value->size }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>

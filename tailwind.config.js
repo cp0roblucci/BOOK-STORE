@@ -5,7 +5,9 @@ module.exports = {
         "./resources/**/*.js",
         "./resources/**/*.vue",
         "./src/**/*.{html,js}",
-        "./node_modules/tw-elements/dist/js/**/*.js"
+        "./node_modules/tw-elements/dist/js/**/*.js",
+        "./node_modules/flowbite/**/*.js",
+
     ],
     theme: {
         fontFamily: {
@@ -27,6 +29,14 @@ module.exports = {
                 "blue-900": "#0047ff",
                 "3f3f5a" :"#3f3f5a",
                 "aliceblue" : "aliceblue",
+                "primary-purple": 'rgba(76, 78, 231, 0.8)',
+                "primary-purple-1": 'rgba(76, 78, 231, 0.1)',
+                "primary-purple-2": 'rgba(76, 78, 231, 0.2)',
+                "primary-purple-3": 'rgba(76, 78, 231, 0.3)',
+                "primary-purple-4": 'rgba(76, 78, 231, 0.4)',
+                "primary-purple-5": 'rgba(76, 78, 231, 0.5)',
+                "primary-purple-6": 'rgba(76, 78, 231, 0.6)',
+                "primary-blue": 'rgba(54, 162, 235, 0.8)',
             },
             fontSize: {
                 10: "10px",
@@ -48,9 +58,23 @@ module.exports = {
                 593: "593px",
                 600: "600px",
                 650: "650px",
+              "98p" : "98%",
+              "95p" : "95%",
+              "112.5" : "450px",
+              "125" : "500px",
+              "115" : "460px",
+              "19" : "76px",
+              "22" : "88px",
+              "banner" : "calc(100vh - 150px)",
             },
             width: {
                 600: "600px",
+              "30p" :"30%",
+              "98p" : "98%",
+              "90p" : "90%",
+              "112.5" : "450px",
+              "19" : "76px",
+              "22" : "88px",
             },
             boxShadow: {
                 md: "6px 6px 16px 0 rgba(0, 0, 0, 0.25), -4px -4px 12px 0 rgba(255, 255, 255, 0.3)",
@@ -63,7 +87,7 @@ module.exports = {
                 topToBottom: "topToBottom 0.3s linear",
                 bottomToTop: "bottomToTop 0.3s linear",
                 line : "line 0.75s linear infinite",
-                before: "before 3s linear",
+                before: "before 5s linear",
             } ,
             keyframes: {
                 fadeIn: {
@@ -106,37 +130,25 @@ module.exports = {
                 before: {
                     "0%": { width: "100%" },
                     "100%": { width: "0" }
-                }
+                },
             },
             spacing: {
                 "4.5" : "18px",
                 "25" : "100px",
             },
-            width: {
-                "30p" :"30%",
-                "98p" : "98%",
-                "90p" : "90%",
-                "112.5" : "450px",
-                "19" : "76px",
-                "22" : "88px",
-            },
-            height: {
-                "98p" : "98%",
-                "95p" : "95%",
-                "112.5" : "450px",
-                "125" : "500px",
-                "115" : "460px",
-                "19" : "76px",
-                "22" : "88px",
-            },
+
             blur : {
                 "10" : "10px",
-            }
+            },
+            backgroundImage: {
+                "bg-header" : "url('/storage/images/bg-header.jpg')",
+            },
         },
     },
     plugins: [
         require('tailwind-scrollbar')({ nocompatible: true }),
         require('tw-elements/dist/plugin'),
+        require('flowbite/plugin'),
     ],
     mode: 'jit',
 }

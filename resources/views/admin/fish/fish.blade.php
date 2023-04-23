@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 
 {{-- set title --}}
-@section('title', 'List Fish')
+@section('title', 'Danh Sách Cá')
 @section('path', 'Sản phẩm / Cá')
 
 @section('sidebar')

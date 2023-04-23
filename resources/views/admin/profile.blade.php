@@ -73,13 +73,13 @@
                 <ul class="">
                   <li class="hover:bg-slate-200 hover:rounded-sm px-2 text-center border-b transform transition-all duration-300">
                       <a href="{{ route('admin-profile') }}" type="submit" class="">
-                        My Account
+                        Tài khoản của tôi
                       </a>
                     </form ><li>
                   <li class="hover:bg-slate-200 hover:rounded-sm px-2 text-center transform transition-all duration-300">
                     <form action="{{ route('admin-logout')}}" method="post">
                         @csrf
-                      <button type="submit">Logout</button>
+                      <button type="submit">Đăng xuất</button>
                     </form>
                   </li>
                 </ul>
@@ -90,7 +90,7 @@
       </div >
     </div >
     <div class="mt-6">
-      <a href="/admin/dashboard" class="px-4 py-2 border rounded-full text-white">DashBoard</a>
+      <a href="/admin/dashboard" class="px-4 py-2 border rounded-full text-white">Trang quản trị</a>
     </div>
     <div class="mt-[60px]">
 

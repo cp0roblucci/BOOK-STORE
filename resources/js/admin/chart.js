@@ -111,11 +111,10 @@ const periodElement = $('.period-chart');
 // form chọn mốc thời gian
 const formPeriod = $('.form-period');
 
-function fetchDataApi($endpointApi, options) {
-  return fetch($endpointApi, options)
+async function fetchDataApi($endpointApi, options) {
+  return await fetch($endpointApi, options)
     .then(response => response.json())
     .then(data => {
-      // console.log(data);
       dataFish = data[0];
       dataAccessories = data[1];
 
@@ -135,11 +134,10 @@ function fetchDataApi($endpointApi, options) {
       return data;
     });
 }
-function fecthApiDataLastWeek() {
-  fetchDataApi(constants.LAST_WEEK);
+function fetchApiDataLastWeek() {
+  fetchDataApi(constants.LAST_WEEK).then();
 
   setTimeout(() => {
-
     if (lastWeekChartDraw) {
       lastWeekChartDraw.destroy();
     }
@@ -159,12 +157,14 @@ function fecthApiDataLastWeek() {
 }
 
 // lan dau load trang
-document.addEventListener("DOMContentLoaded", function() {
-  fecthApiDataLastWeek();
-});
+(function() {
+  if (lastWeekChart) {
+    fetchApiDataLastWeek();
+  }
+})();
 
 // click thong ke o slidebar
-statisticsElement.addEventListener('click', fecthApiDataLastWeek);
+statisticsElement.addEventListener('click', fetchApiDataLastWeek);
 
 if(btnlastWeek) {
   btnlastWeek.addEventListener('click', function() {
@@ -175,7 +175,7 @@ if(btnlastWeek) {
     btnlastWeek.classList.add('bg-blue-100');
     btnlastWeek.classList.add('text-white');
 
-    fecthApiDataLastWeek();
+    fetchApiDataLastWeek();
 
     // những xử lí của các biểu đồ còn lại
     periodElement.classList.add('hidden');
@@ -292,19 +292,32 @@ function getDaysInRange(startDate, endDate) {
   return dateArray;
 }
 
+const notifyInvalidDate = document.getElementById('date-invalid');
 function updateResult(data) {
   const dataFish = data[0];
   const dataAccessories = data[1];
+  if (startDateInput.value > endDateInput.value) {
+    notifyInvalidDate.classList.remove('hidden');
+    startDateInput.value = '';
+    if (periodChartDraw) {
+      periodChartDraw.destroy();
+      loading3.classList.remove('hidden');
+    }
 
-  const startDate = new Date(startDateInput.value);
-  const endDate= new Date(endDateInput.value);
-  const days = getDaysInRange(startDate, endDate);
-  if (periodChartDraw) {
-    periodChartDraw.destroy();
-    loading3.classList.remove('hidden');
+    setTimeout(() => {
+      notifyInvalidDate.classList.add('hidden');
+    }, 3000);
+  } else {
+    if (periodChartDraw) {
+      periodChartDraw.destroy();
+      loading3.classList.remove('hidden');
+    }
+    const startDate = new Date(startDateInput.value);
+    const endDate = new Date(endDateInput.value);
+    const days = getDaysInRange(startDate, endDate);
+    periodChartDraw = drawChart(periodChart, days, dataFish, dataAccessories);
+    loading3.classList.add('hidden');
   }
-  periodChartDraw = drawChart(periodChart, days, dataFish, dataAccessories);
-  loading3.classList.add('hidden');
 }
 
 function updateData() {
@@ -325,21 +338,24 @@ function updateData() {
   return fetchDataApi(constants.PERIOD, options);
 }
 
-// nếu chưa chon ngày kết thúc thì chọn ngày bắt đầu chưa cho render chart
+// nếu chưa chon ngày kết thúc thì chọn ngày bắt đầu chưa cho render chart'
+let startDateSelected = false;
 let endDateSelected = false;
+if(startDateInput) {
+  startDateInput.addEventListener('change', () => {
+    startDateSelected = true;
+    if(endDateSelected) {
+      updateData()
+        .then(data => {
+          updateResult(data);
+        });
+    }
+  });
+}
 if(endDateInput) {
   endDateInput.addEventListener('change', () => {
     endDateSelected = true;
-    updateData()
-      .then(data => {
-        updateResult(data);
-      });
-
-  });
-}
-if(startDateInput) {
-  startDateInput.addEventListener('change', () => {
-    if(endDateSelected) {
+    if (startDateSelected) {
       updateData()
         .then(data => {
           updateResult(data);

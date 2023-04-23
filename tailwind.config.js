@@ -63,6 +63,7 @@ module.exports = {
               "115" : "460px",
               "19" : "76px",
               "22" : "88px",
+              "banner" : "calc(100vh - 150px)",
             },
             width: {
                 600: "600px",
@@ -127,7 +128,7 @@ module.exports = {
                 before: {
                     "0%": { width: "100%" },
                     "100%": { width: "0" }
-                }
+                },
             },
             spacing: {
                 "4.5" : "18px",

@@ -12,8 +12,9 @@ class HomeController extends Controller
 {
     public function getHome() {
         $fishselling = DB::select("select fish.fish_id, fish.fish_name, fish.fish_link_img, has_size.HAS_PRICE, fish.fish_habit   
-                                        from fish join has_size on fish.fish_species = has_size.fish_species
-                                        where fish_link_img like '%betta_fish%' or fish_link_img like '%dragon_fish%'
+                                        from fish ,has_size
+                                        where fish.fish_size = has_size.size
+                                            and fish.fish_species = has_size.fish_species
                                         limit 5;
                                 ");
         $accessories = DB::select("select * 

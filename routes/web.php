@@ -16,6 +16,8 @@ use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\clients\CartController;
 use App\Http\Controllers\clients\HomeController;
+use App\Http\Controllers\clients\TransactionController;
+use App\Http\Controllers\clients\ProfileUserController;
 //use App\Http\Controllers\clients\ProductDetailController;
 
 use \App\Http\Controllers\Auth\GoogleController;
@@ -31,9 +33,6 @@ use \App\Http\Controllers\Auth\GoogleController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/test', function () {
-    return view('test');
-});
 
 Route::get('/', [HomeController::class, 'getHome']);
 
@@ -61,11 +60,15 @@ Route::get('/products', function () {
 });
 
 
-Route::get('/cart', [CartController::class, 'getCart']);
+Route::get('/cart', [CartController::class, 'getCart'])->name('cart');
+Route::post('/cart', [CartController::class, 'postbill']);
 
-Route::get('/transaction', function () {
-    return view('clients.transaction');
-});
+Route::get('/transaction', [TransactionController::class, 'getTransaction'])->name('transaction');
+Route::post('/transaction', [TransactionController::class, 'postTransaction'])->name('order');
+
+Route::get('/ordered/{order_id}', [TransactionController::class, 'getOrderSuccess'])->name('ordered');
+
+Route::get('/profile-user/{user_id}', [ProfileUserController::class, 'getprofileUser'])->name('profileUser');
 
 
 Route::get('/header', function () {

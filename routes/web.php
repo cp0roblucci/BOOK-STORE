@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccessoriesController;
 use App\Http\Controllers\AccessoriesTypeController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CommonController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\UserController;
@@ -122,9 +123,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 
     Route::get('orders', [OrderController::class, 'index'])->name('admin-orders');
 
+    Route::get('orders', [OrderController::class, 'index'])->name('admin-orders');
+
     Route::get('categories', [AdminController::class, 'category'])->name('admin-categories');
 
-    Route::get('users', [AdminController::class, 'users'])->name('admin-users');
+    Route::get('users', [UserController::class, 'users'])->name('admin-users');
+    Route::post('users/{user_name?}', [UserController::class, 'users'])->name('search-user-by-name');
 
     Route::get('profile', function () {
         return view('admin.profile');
@@ -136,6 +140,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     })->name('change-password');
     Route::post('change-password', [UserController::class, 'changePassword']);
 
+
     //  USER
     // new user
     Route::get('create-new-user', function() {
@@ -146,17 +151,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::get('users/{id}/edit', [UserController::class, 'editUser'])->name('edit-user');
     Route::post('users/{id}/edit', [UserController::class, 'updateUser']);
 
-    Route::get('search-user', [UserController::class, 'searchByName'])->name('admin-search-user-by-name');
-
-    Route::post('delete-user', [UserController::class, 'delete'])->name('delete-user');
+    Route::post('delete-user', [UserController::class, 'delete']);
+    Route::post('rollback-delete-user', [UserController::class, 'rollback']);
+    Route::post('commit-delete-user', [UserController::class, 'commit']);
 
     // PRODUCT
 
     // Accessories
     // accessories type
-    Route::get('create-new-accessories-type', function() {
-        return view('admin.accessories.new-accessories-type');
-    })->name('new-accessories-type');
+    Route::get('create-new-accessories-type', [AccessoriesTypeController::class, 'index'])->name('new-accessories-type');
     Route::post('create-new-accessories-type', [AccessoriesTypeController::class, 'create']);
 
     // accessories
@@ -167,6 +170,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 
     // edit accessories
     Route::get('accessories/{id}/edit', [AccessoriesController::class, 'editAccessories']);
+    // edit
+    Route::post('accessories/{id}/edit', [AccessoriesController::class, 'update'])->name('edit-accessories');
     // search accessories
     Route::get('search-accessories', [AccessoriesController::class, 'searchAccessories'])->name('search-accessories');
     // delete accessories
@@ -221,18 +226,32 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::post('/period', [StatisticsController::class, 'dataPeriod']);
 
     // ORDER
-    Route::get('orders/{data_id}', [OrderController::class, 'filter'])->name('order-filter');
+    Route::get('orders/{data_id}/{user_name?}', [OrderController::class, 'filter'])->name('order-filter');
     // order detail
-    Route::get('orders/order-detail/{order_id}', [OrderController::class, 'orderDetail'])->name('order-detail');
+    Route::get('order-detail/{order_id}', [OrderController::class, 'orderDetail'])->name('order-detail');
     // search
-    Route::post('order-search', [OrderController::class, 'searchOrder'])->name('order-search');
+    Route::post('orders-search', [OrderController::class, 'searchOrder'])->name('order-search');
+
 
     // confirm an order
     Route::post('/confirm-order', [OrderController::class, 'confirmOrder'])->name('confirm-order');
+
+
     // confirm orders
-    Route::post('/confirm-orders', [OrderController::class, 'confirmAllOrder']);
-    // delete order
-    Route::post('/delete-order', [OrderController::class, 'deleteOrder']);
+    Route::post('/confirm-waiting-orders', [OrderController::class, 'confirmOrders']);
+    // confirm orders
+    Route::post('/confirm-processing-orders', [OrderController::class, 'confirmOrders']);
+    // confirm orders
+    Route::post('/confirm-sent-orders', [OrderController::class, 'confirmOrders']);
+    // delete orders
+    Route::post('/delete-archived-orders', [OrderController::class, 'confirmOrders']);
+    // delete orders
+    Route::post('/archived-orders', [OrderController::class, 'confirmOrders']);
+    // delete orders
+    Route::post('/delete-orders', [OrderController::class, 'confirmOrders']);
+
+
+
 
 });
 

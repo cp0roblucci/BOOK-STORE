@@ -30,6 +30,8 @@ module.exports = {
                 "3f3f5a" :"#3f3f5a",
                 "aliceblue" : "aliceblue",
                 "primary-purple": 'rgba(76, 78, 231, 0.8)',
+                "primary-purple-1": 'rgba(76, 78, 231, 0.1)',
+                "primary-purple-2": 'rgba(76, 78, 231, 0.2)',
                 "primary-purple-3": 'rgba(76, 78, 231, 0.3)',
                 "primary-purple-4": 'rgba(76, 78, 231, 0.4)',
                 "primary-purple-5": 'rgba(76, 78, 231, 0.5)',
@@ -85,7 +87,7 @@ module.exports = {
                 topToBottom: "topToBottom 0.3s linear",
                 bottomToTop: "bottomToTop 0.3s linear",
                 line : "line 0.75s linear infinite",
-                before: "before 3s linear",
+                before: "before 5s linear",
             } ,
             keyframes: {
                 fadeIn: {

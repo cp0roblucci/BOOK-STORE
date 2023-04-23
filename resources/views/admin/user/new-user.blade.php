@@ -1,8 +1,8 @@
 @extends('admin.layout.main')
 
 {{-- set title --}}
-@section('title', 'Create new User')
-@section('path', 'Users / New User')
+@section('title', 'Thêm người dùng mới')
+@section('path', 'Người dùng / Thêm người dùng mới')
 
 @section('sidebar')
   @include('admin.layout.sidebar')

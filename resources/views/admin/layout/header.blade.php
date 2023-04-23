@@ -9,8 +9,11 @@
       <div class="flex text-slate-500">
           <div class="relative hover:opacity-80">
             {{-- <label class="absolute bg-red-500 leading-4 w-4 h-4 top-2 left-5 text-center rounded-[50%] text-10 text-slate-200 cursor-pointer">5</label> --}}
+            @if(session('newOrders') > 0)
+              <a href="/admin/orders/0" class="rounded-full bg-primary-blue mr-2 ml-1 text-white text-12 px-1">Có {{ session('newOrders') }} đơn hàng mới</a>
               <span class="absolute inline w-2 h-2 -left-2 rounded-full bg-blue-500"></span>
               <span class="absolute inline w-2 h-2 -left-2 rounded-full animate-ping bg-blue-500"></span>
+            @endif
             <a href="" class="mx-4 absolute -left-10 p-1">
               <lord-icon
                 src="https://cdn.lordicon.com/psnhyobz.json"
@@ -52,7 +55,8 @@
                   <a href="{{ route('admin-profile') }}" type="submit" class="">
                     Tài khoản của tôi
                   </a>
-                </form ><li>
+                </form >
+              </li>
               <li class="hover:bg-slate-200 hover:rounded-sm px-2 text-center transform transition-all duration-300">
                 <form action="{{ route('admin-logout')}}" method="post">
                     @csrf

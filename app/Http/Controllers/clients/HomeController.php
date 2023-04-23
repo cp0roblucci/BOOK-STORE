@@ -23,5 +23,5 @@ class HomeController extends Controller
         //dd($fishselling);
         return view('clients.homepage', compact('fishselling', 'accessories'));
     }
-    
+
 }

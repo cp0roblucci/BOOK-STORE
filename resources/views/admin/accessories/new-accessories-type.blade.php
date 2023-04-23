@@ -14,9 +14,9 @@
       @include('admin.layout.header')
     @endsection
 
-    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Thêm loại phụ kiện mới</div>
-    <div class="">
-      <div class="col-span-3 border p-4">
+    <div class="py-4 pt-2 ml-2 text-24 font-sora text-primary-purple">Thêm loại phụ kiện mới</div>
+    <div class="border p-4 grid grid-cols-3  gap-8">
+      <div class="col-span-2">
         <form action="" method="post">
           @csrf
 
@@ -46,6 +46,18 @@
           </button>
 
         </form>
+      </div>
+
+      <div class="border">
+        <h2 class="text-24 text-center font-sora text-primary-purple">Danh sách loại phụ kiện</h2>
+        <div class="mx-2 leading-8">
+          @foreach ($accessoriesTypes as $key => $accessoriesType)
+            <div class="flex">
+              <h2 class="mr-2">{{ ++$key }}.</h2>
+              <h4 class="font-medium">{{ $accessoriesType->accessories_type_name }}</h4>
+            </div>
+          @endforeach
+        </div>
       </div>
 
     </div >

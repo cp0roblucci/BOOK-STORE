@@ -36,5 +36,5 @@ const message = document.getElementById('message');
 if (message) {
   setTimeout(() => {
     message.classList.add('hidden');
-  }, 3000);
+  }, 5000);
 }

@@ -4,24 +4,50 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
+    public function getOrderQuantityByStatus() {
+      $orderQuantityByStatus = array();
+      $numberStatus = DB::table('order_status')
+        ->select('status_id', 'status_name')
+        ->get();
+
+      $orderQuantityByStatus[10]['Tất cả'] = Order::all()->where('status_id', '!=', 5)->count();
+
+      foreach($numberStatus as $key => $status) {
+        $orderQuantityByStatus[$status->status_id][$status->status_name] = DB::table('orders')
+          ->where('status_id', '=', $key)
+        ->count();
+      }
+      return $orderQuantityByStatus;
+    }
+
     public function index() {
       return redirect()->route('order-filter', ['data_id' => 10]);
     }
 
-    public function getDataFilter($dataId) {
-      $dataOrders = DB::table('orders')
+    public function newOrderNotify() {
+      $newOrders =  Order::all()->where('status_id', '==', 0)->count();
+      return view('admin.layout.header',compact('newOrders'));
+    }
+
+    public function getDataFilter($dataId, $userName = null) {
+      $query = DB::table('orders')
         ->join('delivery_status', 'orders.delivery_id', '=', 'delivery_status.delivery_id')
         ->join('payment_status', 'orders.payment_id', '=', 'payment_status.payment_id')
         ->join('order_status', 'orders.status_id', '=', 'order_status.status_id')
         ->join('users', 'orders.user_id', '=', 'users.id')
-        ->where('orders.status_id', '=', $dataId)
+        ->where('orders.status_id', '=', $dataId);
+      if(!empty($userName)) {
+        $query->where(function ($query) use ($userName) {
+          $query->where(DB::raw("CONCAT(users.last_name, ' ', users.first_name)"), 'LIKE', '%'. $userName .'%');
+        });
+      }
+      $dataOrders = $query
         ->select('orders.*',
           'order_status.status_name',
           'order_status.status_desc',
@@ -33,86 +59,71 @@ class OrderController extends Controller
           'users.first_name',
         )
         ->get();
+
       $totalPrice = DB::table('orders')
         ->join('order_details', 'orders.order_id', '=', 'order_details.order_id')
         ->select(DB::raw('SUM(order_details.price * order_details.quantity) AS totalPrice'))
         ->groupBy('order_details.order_id')
         ->get();
-
-//      dd($dataOrders, $totalPrice);
       // them tong tien vao moi don hang
       for ($i = 0; $i < $dataOrders->count(); $i++) {
         $dataOrders[$i]->{'totalPrice'} = $totalPrice[$i]->totalPrice;
       }
-
       return $dataOrders;
     }
 
-  public function filter($dataId) {
+  public function filter($dataId, $userName = null) {
     if ($dataId == 10) {
-      $dataOrders = DB::table('orders')
+      $query= DB::table('orders')
         ->join('delivery_status', 'orders.delivery_id', '=', 'delivery_status.delivery_id')
         ->join('payment_status', 'orders.payment_id', '=', 'payment_status.payment_id')
         ->join('order_status', 'orders.status_id', '=', 'order_status.status_id')
         ->join('users', 'orders.user_id', '=', 'users.id')
-        ->select('orders.*',
-          'order_status.status_name',
-          'order_status.status_desc',
-          'delivery_status.delivery_status',
-          'delivery_status.delivery_desc',
-          'payment_status.payment_status',
-          'payment_status.payment_desc',
-          'users.last_name',
-          'users.first_name',
-        )
+        ->where('orders.status_id', '!=', 5);
+      if(!empty($userName)) {
+        $query->where(function ($query) use ($userName) {
+          $query->where(DB::raw("CONCAT(users.last_name, ' ', users.first_name)"), 'LIKE', '%'. $userName .'%');
+        });
+      }
+      $dataOrders = $query->select('orders.*',
+        'order_status.status_name',
+        'order_status.status_desc',
+        'delivery_status.delivery_status',
+        'delivery_status.delivery_desc',
+        'payment_status.payment_status',
+        'payment_status.payment_desc',
+        'users.last_name',
+        'users.first_name',
+      )
         ->orderBy('orders.order_id')
         ->get();
+
       $totalPrice = DB::table('orders')
         ->join('order_details', 'orders.order_id', '=', 'order_details.order_id')
+        ->where('orders.status_id', '!=', 5)
         ->select(DB::raw('SUM(order_details.price * order_details.quantity) AS totalPrice'))
-        ->groupBy('orders.order_id')
+        ->groupBy('order_details.order_id')
         ->get();
-
-//      dd($dataOrders, $totalPrice);
       // them tong tien vao moi don hang
       for ($i = 0; $i < $dataOrders->count(); $i++) {
         $dataOrders[$i]->{'totalPrice'} = $totalPrice[$i]->totalPrice;
       }
-
     } else {
-      $dataOrders = $this->getDataFilter($dataId);
+      $dataOrders = $this->getDataFilter($dataId, $userName);
     }
-
     // tong so luong cac don hang
-    $totalNewOrders = Order::all()->count();
-    $totalOrderWaiting = DB::table('orders')
-      ->where('status_id', '=', 0)
-      ->count();
-    $totalOrderConfirmed = DB::table('orders')
-      ->where('status_id', '=', 4)
-      ->count();
-    $totalOrderCompleted = DB::table('orders')
-      ->where('status_id', '=', 2)
-      ->count();
-    $totalOrderCanceled = DB::table('orders')
-      ->where('status_id', '=', 3)
-      ->count();
+    $orderQuantityByStatus = $this->getOrderQuantityByStatus();
 
     return view('admin.orders.order',
       compact(
         'dataOrders',
-        'totalNewOrders',
-        'totalOrderWaiting',
-        'totalOrderConfirmed',
-        'totalOrderCompleted',
-        'totalOrderCanceled',
+        'orderQuantityByStatus',
+        'userName',
       )
     );
   }
 
   public function orderDetail($orderId) {
-//       dd($orderId);
-        //
     $order = DB::table('orders')
       ->join('delivery_status', 'orders.delivery_id', '=', 'delivery_status.delivery_id')
       ->join('payment_status', 'orders.payment_id', '=', 'payment_status.payment_id')
@@ -166,36 +177,103 @@ class OrderController extends Controller
   }
 
   public function searchOrder(Request $request) {
-      dd($request);
+    $userName = $request->input('user_name');
+    $statusId = $request->input('status_id');
+
+    $this->filter($statusId, $userName);
+    return redirect()->route('order-filter', ['data_id' => $statusId, 'user_name' => $userName]);
   }
 
   public function confirmOrder(Request $request) {
+    $statusId = $request->input('status_id');
     $orderId = $request->input('order_id');
-    dd($orderId);
+    $isArchived = $request->input('is_archived');
 
-    DB::table('orders')
+//    dd($statusId, $orderId, $isArchived);
+
+    if ($statusId == 4 || $statusId == 5) {
+      DB::table('orders')
       ->where('order_id', '=', $orderId)
-      ->update([
-        'status_id' => 1
-      ]);
+      ->delete();
+    } else {
+      if ($statusId == 1) {
+          DB::table('orders')
+          ->where('order_id', '=', $orderId)
+          ->update([
+            'delivery_id' => 1
+          ]);
+      } else if ($statusId == 2) {
+          DB::table('orders')
+            ->where('order_id', '=', $orderId)
+            ->update([
+              'delivery_id' => 2,
+              'payment_id' => 1
+            ]);
+      }
+        DB::table('orders')
+        ->where('order_id', '=', $orderId)
+        ->update([
+          'status_id' => ++$statusId
+        ]);
+        $statusId--;
+    }
 
-    Session::flash('confirm-success', 'Xác nhận đơn hàng thành công.');
-    return redirect()->route('order-filter', ['data_id' => 0]);
+    Session::flash('confirm-success', $statusId === 4 ? 'Xóa đơn hàng thành công.' : ($statusId === null ? 'Lưu trữ đơn hàng thành công.' : 'Cập nhật đơn hàng thành công'));
+    return redirect()->route('order-filter', ['data_id' => $statusId]);
   }
 
-  public function confirmAllOrder(Request $request) {
-      $data = $request->all();
-      $url = route('order-filter', ['data_id' => 0]);
-      Session::flash('confirm-success', 'Xác nhận đơn hàng thành công.');
+    public function confirmOrders(Request $request) {
+      $statusId = $request->input('status_id');
+      $orderIds = $request->input('arr_order_id');
+
+      // $data = $request->all();
+
+      if ($statusId == 4 || $statusId == 5) {
+        foreach ($orderIds as $orderId) {
+          $order = DB::table('orders')
+          ->where('order_id', '=', $orderId)
+            ->first();
+          $order->delete();
+        }
+      } else {
+        if ($statusId == 1) {
+          foreach ($orderIds as $orderId) {
+            DB::table('orders')
+            ->where('order_id', '=', $orderId)
+            ->update([
+              'delivery_id' => 1
+            ]);
+          }
+        } else if ($statusId == 2) {
+          foreach ($orderIds as $orderId) {
+            DB::table('orders')
+              ->where('order_id', '=', $orderId)
+              ->update([
+                'delivery_id' => 2,
+                'payment_id' => 1
+              ]);
+          }
+        } else if ($statusId == 3) {
+          foreach ($orderIds as $orderId) {
+            DB::table('orders')
+            ->where('order_id', '=', $orderId)
+            ->update([
+              'is_archived' => 1
+            ]);
+          }
+        }
+        foreach ($orderIds as $orderId) {
+          DB::table('orders')
+          ->where('order_id', '=', $orderId)
+          ->update([
+            'status_id' => ++$statusId
+          ]);
+          $statusId--;
+        }
+      }
+
+      $url = route('order-filter', ['data_id' => $statusId ?? 3]);
+      Session::flash('confirm-success', $statusId == null ? 'Lưu trữ đơn hàng thành công.' : ($statusId == 4 || $statusId == 3 ? 'Xóa đơn hàng thành công.' : 'Cập nhật đơn hàng thành công'), 'status_id', $statusId);
       return response()->json(['url' => $url]);
   }
-
-  public function deleteOrder(Request $request) {
-    $data = $request->all();
-
-//    dd($data);
-    $url = route('order-filter', ['data_id' => 3]);
-    return response()->json(['url' => $url]);
-  }
-
 }

@@ -2,7 +2,7 @@
 
 {{-- set title --}}
 @section('title', 'Create new Fish')
-@section('path', 'Thêm mới / Cá')
+@section('path', 'Cá / Cập nhật')
 
 @section('sidebar')
   @include('admin.layout.sidebar')
@@ -193,12 +193,11 @@
             </div>
           </div>
 
-
           <button
             type="submit"
             class="border-2 border-blue-500 p-2 px-6 mt-4 flex hover:bg-slate-100"
           >
-            Thêm
+            Lưu
           </button>
 
         </form>

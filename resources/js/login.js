@@ -107,7 +107,9 @@ if(emailLogin) {
   emailLogin.addEventListener('input', function() {
       emailLogin.classList.remove('border-red-500');
       emailLogin.classList.add('focus-within:border-blue-500');
-      messageEmailLogin.classList.add('hidden');
+      if (messageEmailLogin) {
+        messageEmailLogin.classList.add('hidden');
+      }
   });
 }
 
@@ -115,7 +117,9 @@ if(passwordLogin) {
   passwordLogin.addEventListener('input', function() {
     passwordLogin.classList.remove('border-red-500');
     passwordLogin.classList.add('focus-within:border-blue-500');
-    messagePasswordLogin.classList.add('hidden');
+    if (messagePasswordLogin) {
+      messagePasswordLogin.classList.add('hidden');
+    }
   });
 
 }

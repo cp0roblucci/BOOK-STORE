@@ -4,6 +4,7 @@
 @endsection
 
 @section('scripts')
+@vite('./resources/js/products_detail.js')
 @endsection
 
 @section('header')
@@ -21,7 +22,9 @@
                 <img src="{{$data->fish_link_img}}" alt=""
                 class="py-6 px-10">
             </div>
+        
             <div class="flex flex-col w-1/2 mr-16  mt-4" data-key="1">
+                
                 <div class="">
                     <h2 class="text-24 font-semibold mb-2">{{$data->fish_name}}</h2>
                     <div class="flex text-sm font-semibold">
@@ -39,6 +42,7 @@
                 <div>
                     <button type="button" 
                     class="text-sm text-left font-medium text-red-600 mt-4 w-3/4 border-b border-b-black py-2 group">ĐẶC ĐIỂM NỔI BẬT</button>
+                    
                     <div class="">
                         <ul class="mb-4">
                             <li class="flex mt-4">
@@ -68,31 +72,35 @@
                         </ul>
                     </div>
                 </div>
-                <div class="flex mb-6 space-x-4">
-                    <p class="text-gray-700 text-sm font-bold mt-0.5">Số lượng:</p>
-                    <div class="flex items-center border rounded-sm border-gray-900/30 hover:border-black">
-                        <button onclick="countMinus()" class="mb-0.5">
-                            <i class="fa-solid fa-minus ml-1 text-12"></i>
-                        </button>
-                        <label id="count" class="w-12 h-full text-center outline-none text-sm mt-1">0</label>
-                        <button onclick="countAdd()" class="mb-0.5">
-                            <i class="fa-solid fa-plus mr-1 text-12 "></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="mb-4">
-                    <div class="flex">
-                        <button class="py-4 px-10 bg-blue-500 text-white font-medium hover:bg-red-500 mr-3">
-                            <i class="fa-solid fa-cart-shopping mr-2"></i>    
-                            MUA NGAY
-                        </button>
-                        <button class="py-4 px-6 bg-blue-500 text-white font-medium hover:bg-red-500 ">
-                            <i class="fa-solid fa-cart-shopping mr-2"></i>    
-                            THÊM VÀO GIỎ HÀNG
-                        </button>
-                    </div>
-                </div>
+                
+                <form action="{{ route('add-to-cart')}}" method="post" class="">
+                    @csrf
+                        <div class="quantity flex mb-6 space-x-4">
+                            <p class="text-gray-700 text-sm font-bold mt-0.5">Số lượng:</p>
+                            <div class="quantity-buttons flex items-center border rounded-sm border-gray-900/30 ">
+                                <button class="mb-0.5" type="button" id="quantity-down">
+                                    <i class="quantity-down fa-solid fa-minus ml-1 text-12"></i>
+                                </button>
+                                <input name="qty" class="w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="1">
+                                <input name="product_id" type="hidden" value="{{$data->fish_id}}">
+                                <button class="mb-0.5" type="button" id="quantity-up">
+                                    <i class="quantity-up fa-solid fa-plus mr-1 text-12 "></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="flex">
+                                <button type="submit" class="py-4 px-10 bg-blue-500 text-white font-medium hover:bg-red-500 mr-3">
+                                    <i class="fa-solid fa-cart-shopping mr-2"></i>
+                                    MUA NGAY
+                                </button>
+                                <button type="submit" class="py-4 px-6 bg-blue-500 text-white font-medium hover:bg-red-500" id="add-to-cart">
+                                    <i class="fa-solid fa-cart-shopping mr-2"></i>
+                                    THÊM VÀO GIỎ HÀNG
+                                </button>
+                            </div>
+                        </div>
+                </form>
                 <div class="mb-4 flex border-t pt-2 border-black">
                     <p class="text-sm mr-2.5">Hotline đặt hàng:</p>
                     <p class="text-sm text-blue-500 font-semibold hover:text-red-500">
@@ -139,31 +147,34 @@
                         </ul>
                     </div>
                 </div>
-                <div class="flex mb-6 space-x-4">
-                    <p class="text-gray-700 text-sm font-bold mt-0.5">Số lượng:</p>
-                    <div class="flex items-center border rounded-sm border-gray-900/30 hover:border-black">
-                        <button onclick="countMinus()" class="mb-0.5">
-                            <i class="fa-solid fa-minus ml-1 text-12"></i>
-                        </button>
-                        <label id="count" class="w-12 h-full text-center outline-none text-sm mt-1">0</label>
-                        <button onclick="countAdd()" class="mb-0.5">
-                            <i class="fa-solid fa-plus mr-1 text-12 "></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="mb-4">
-                    <div class="flex">
-                        <button class="py-4 px-10 bg-blue-500 text-white font-medium hover:bg-red-500 mr-3">
-                            <i class="fa-solid fa-cart-shopping mr-2"></i>    
-                            MUA NGAY
-                        </button>
-                        <button class="py-4 px-6 bg-blue-500 text-white font-medium hover:bg-red-500 ">
-                            <i class="fa-solid fa-cart-shopping mr-2"></i>    
-                            THÊM VÀO GIỎ HÀNG
-                        </button>
-                    </div>
-                </div>
+                <form action="{{ route('add-to-cart',['cart_details'])}}" method="post" class="">
+                    @csrf
+                        <div class="quantity flex mb-6 space-x-4">
+                            <p class="text-gray-700 text-sm font-bold mt-0.5">Số lượng:</p>
+                            <div class="quantity-buttons flex items-center border rounded-sm border-gray-900/30 ">
+                                <button class="mb-0.5" type="button" id="quantity-down">
+                                    <i class="quantity-down fa-solid fa-minus ml-1 text-12"></i>
+                                </button>
+                                <input name="qty" class="w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="1">
+                                <input name="product_id" type="hidden" value="{{$data->accessories_id}}">
+                                <button class="mb-0.5" type="button" id="quantity-up">
+                                    <i class="quantity-up fa-solid fa-plus mr-1 text-12 "></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="flex">
+                                <button type="submit" class="py-4 px-10 bg-blue-500 text-white font-medium hover:bg-red-500 mr-3">
+                                    <i class="fa-solid fa-cart-shopping mr-2"></i>
+                                    MUA NGAY
+                                </button>
+                                <button type="submit" class="py-4 px-6 bg-blue-500 text-white font-medium hover:bg-red-500" id="add-to-cart">
+                                    <i class="fa-solid fa-cart-shopping mr-2"></i>
+                                    THÊM VÀO GIỎ HÀNG
+                                </button>
+                            </div>
+                        </div>
+                </form>
                 <div class="mb-4 flex border-t pt-2 border-black">
                     <p class="text-sm mr-2.5">Hotline đặt hàng:</p>
                     <p class="text-sm text-blue-500 font-semibold hover:text-red-500">

@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Models\Fish;
 use App\Models\FishSpecies;
 use App\Models\Accessories;
 use App\Models\HasSize;
 use App\Models\FishFood;
+use App\Models\Cart;
+use App\Models\CartDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProductsDetailController extends Controller
 {
 
-    // public function index(){
-
-    //     return redirect()->route('get-products-detail');
-    // }
+   
     public function getProductsDetail($id) {
         
         $data = DB::table('fish')
@@ -40,4 +41,21 @@ class ProductsDetailController extends Controller
         // dd($data);
      return view('/products_detail', compact('data','id'));
     }
+
+    public function addToCart(Request $request)
+    {
+    $userId = DB::table('users')
+    ->where('users.id','=',$request->id)
+    ->select('users.id');
+    // dd($userId);
+    $product_id = $request->input('product_id');
+    $quantity = $request->input('qty');
+    
+
+
+
+    dd($product_id,$quantity,$userId);
+    return redirect()->route('/cart');
+}
+    
 }

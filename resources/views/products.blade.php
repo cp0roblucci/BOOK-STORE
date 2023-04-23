@@ -64,10 +64,18 @@
                 <div class="absolute group-hover:block hidden bg-white transition-all top-full w-max shadow-md rounded ml-5"
                     id="dropdown">
                     <ul class="text-left border rounded text-sm w-40 ">
-                        <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">Giá dưới 50.000đ</li>
-                        <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">50.000đ - 100.000đ</li>
-                        <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">100.000đ - 200.000đ</li>
-                        <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">Giá trên 200.000đ</li>
+                        <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">
+                            <a href="{{ route('filter-products-by-price', ['category_id' => 1, 'price_filter' => 'from_50000']) }}">Dưới 50.000đ</a>
+                        </li>
+                        <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">
+                            <a href="{{ route('filter-products-by-price', ['category_id' => 1, 'price_filter' => 'from_50000_to_150000']) }}">50.000đ - 150.000đ</a>
+                        </li>
+                        <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">
+                            <a href="{{ route('filter-products-by-price', ['category_id' => 1, 'price_filter' => 'from_150000_to_300000']) }}">150.000đ - 300.000đ</a>
+                        </li>
+                        <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">
+                            <a href="{{ route('filter-products-by-price', ['category_id' => 1, 'price_filter' => 'from_300000']) }}">Trên 300.000đ</a>
+                        </li>
                     </ul>
                 </div>
             </button>
@@ -83,10 +91,18 @@
                 <div class="absolute group-hover:block hidden bg-white transition-all top-full w-max shadow-md rounded ml-8"
                     id="dropdown">
                     <ul class="text-left border rounded text-sm w-44">
-                        <li id="size_20" class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">Dưới 5cm</li>
-                        <li id="size_35" name class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">5 - 10cm</li>
-                        <li id="size_75" class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">10 - 20cm</li>
-                        <li id="size_100" class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">Trên 20cm</li>
+                        <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">
+                            <a href="{{ route('filter-fish-by-size', ['category_id' => 1, 'size_filter' => 'from_5cm']) }}">Dưới 5cm</a>
+                        </li>
+                        <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">
+                            <a href="{{ route('filter-fish-by-size', ['category_id' => 1, 'size_filter' => 'from_5cm_to_10cm']) }}">Từ 5 - 10 cm</a>
+                        </li>
+                        <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">
+                            <a href="{{ route('filter-fish-by-size', ['category_id' => 1, 'size_filter' => 'from_10cm_to_50cm']) }}">Từ 10 - 50 cm</a>
+                        </li>
+                        <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">
+                            <a href="{{ route('filter-fish-by-size', ['category_id' => 1, 'size_filter' => 'from_50cm']) }}">Lớn hơn 50 cm</a>
+                        </li>
                     </ul>
                 </div>
             </button>
@@ -154,10 +170,18 @@
             <div class="absolute group-hover:block hidden bg-white transition-all top-full w-max shadow-md rounded ml-5"
                 id="dropdown">
                 <ul class="text-left border rounded text-sm w-40 ">
-                    <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">Giá dưới 50.000đ</li>
-                    <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">50.000đ - 100.000đ</li>
-                    <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">100.000đ - 200.000đ</li>
-                    <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">Giá trên 200.000đ</li>
+                    <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">
+                        <a href="{{ route('filter-products-by-price', ['category_id' => 0, 'price_filter' => 'from_50000']) }}">Dưới 50.000đ</a>
+                    </li>
+                    <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">
+                        <a href="{{ route('filter-products-by-price', ['category_id' => 0, 'price_filter' => 'from_50000_to_150000']) }}">50.000đ - 150.000đ</a>
+                    </li>
+                    <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">
+                        <a href="{{ route('filter-products-by-price', ['category_id' => 0, 'price_filter' => 'from_150000_to_300000']) }}">150.000đ - 300.000đ</a>
+                    </li>
+                    <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">
+                        <a href="{{ route('filter-products-by-price', ['category_id' => 0, 'price_filter' => 'from_300000']) }}">Trên 300.000đ</a>
+                    </li>
                 </ul>
             </div>
         </button>
@@ -245,17 +269,44 @@
         <div class="clear-left"></div>
     </div>
     {{-- paging --}}
-    <div class="text-center pt-10">
-        <div class="">
-            <a class="border px-4 py-2 hover:bg-black/20" href="">&laquo;</a>
-            <a class="border px-4 py-2 hover:bg-black/20" href="#">1</a>
-            <a class="border px-4 py-2 hover:bg-black/20" href="#">2</a>
-            <a class="border px-4 py-2 hover:bg-black/20" href="#">3</a>
-            <a class="border px-4 py-2 hover:bg-black/20" href="#">4</a>
-            <a class="border px-4 py-2 hover:bg-black/20" href="#">5</a>
-            <a class="border px-4 py-2 hover:bg-black/20" href="#">&raquo;</a>
+    <div class="flex justify-center mx-4 mt-10 py-6 border-t">
+        {{-- <span class="text-slate-700 text-14 font-light">1 - 5 of {{ $data->lastPage() }} entries</span> --}}
+        <div class="bg-white rounded-full">
+          <ol class="pagination flex text-black ">
+            <li class="pagination_li hover:bg-slate-200 rounded-full">
+              <a
+                   href="{{ $data->previousPageUrl() }}"
+                class="flex items-center h-8 px-3 rounded-full text-center"
+              >
+                <i class="fa-solid fa-angle-left text-24"></i>
+              </a>
+            </li>
+             @for ($i = 1; $i <= $data->lastPage(); $i++)
+              <li
+                class="pagination_li rounded-full
+                 {{ $data->currentPage() == $i ? 'bg-blue-500 hover:bg-blue-700 text-white' : 'hover:bg-slate-200'}}
+                "
+              >
+                <a
+                   href="{{ $data->url($i) }}"
+                  class="flex items-center h-8 px-3 rounded-full text-center text-20"
+                >
+                   {{ $i }}
+                </a>
+              </li>
+             @endfor
+
+            <li class="pagination_li hover:bg-slate-200 rounded-full">
+              <a
+                   href="{{ $data->nextPageUrl() }}"
+                class="flex items-center h-8 px-3 rounded-full text-center"
+              >
+                <i class="fa-solid fa-angle-right text-24"></i>
+              </a>
+            </li>
+          </ol>
         </div>
-    </div>
+      </div>
 </section>
 
 @endsection

@@ -65,6 +65,8 @@ class AdminController extends Controller
         ->where('status_id', '=', 0)
         ->count();
 
+      session()->put('newOrders', $totalNewOrder);
+
       // Khach hang mua nhieu nhat
       $topCustomer = DB::table('users')
         ->join('orders', 'users.id', '=', 'orders.user_id')
@@ -231,25 +233,6 @@ class AdminController extends Controller
     }
 //    dd($typeProduct);
     return view('admin.products.result-search-store', compact('data', 'typeAccessories', 'typeProduct'));
-  }
-
-  public function users(Request $request) {
-    $page = $request->query('page', 1);
-    $users = DB::table('users')
-      ->join('role', 'users.role_id', '=', 'role.role_id')
-      ->join('account_status', 'users.status_id', '=', 'account_status.status_id')
-      ->select('users.*', 'role.role_name', 'account_status.status_id', 'account_status.status_name')
-      ->paginate(5);
-
-//    $isBlock = DB::table('users')
-//      ->join('orders', 'users.id', '=', 'orders.user_id')
-//      ->where('orders.status_id', '=', 3)
-//      ->whereRaw('users.id = 3')
-//      ->count();
-//    if ($isBlock >= 1) {
-//      dd(true);
-//    }
-    return view('admin.user.user', compact('users', 'page'));
   }
 
     public function order() {

@@ -3,15 +3,15 @@ import constants from "../constants";
 const checkAll = document.getElementById('checkAll');
 
 const listOrder = document.querySelectorAll('.order-element');
-const listCheckBox = document.querySelectorAll('.order-element input');
+const listCheckBox = document.querySelectorAll('.order-element #checkBox');
 
 const listBtnCheckBox = document.querySelectorAll('.checkbox');
 
 if (checkAll) {
   checkAll.addEventListener('change', () => {
-      listCheckBox.forEach(element => {
-        element.checked = checkAll.checked;
-      })
+    listCheckBox.forEach(element => {
+      element.checked = checkAll.checked;
+    })
   });
 }
 
@@ -27,6 +27,7 @@ if (listBtnCheckBox)  {
 if (listOrder) {
   listOrder.forEach(order => {
     order.addEventListener('click', () => {
+      console.log('detail');
       const orderId = order.dataset.id;
       window.location.href = constants.URL_ADMIN_ORDERS + 'order-detail/' + orderId;
     });
@@ -34,16 +35,20 @@ if (listOrder) {
 }
 
 
-const confirmAll = document.getElementById('confirmAll');
-const deleteAll = document.getElementById('deleteAll');
+const confirmAllWaitingOrders = document.getElementById('confirm-all-waiting-orders');
+const confirmAllProcessingOrders = document.getElementById('confirm-all-processing-orders');
+const confirmAllSentOrders = document.getElementById('confirm-all-sent-orders');
+const deleteAllArchivedOrders = document.getElementById('delete-all-archived-orders');
+const archivedAllOrders = document.getElementById('archived-all-orders');
+const deleteAllOrders = document.getElementById('delete-all-orders');
 
 // kiem tra neu khong co input nao duoc check thi khong cho submit
 function isCheck(listCheckBox) {
   let disAbleConfirmAll = false;
   listCheckBox.forEach(check => {
-      if(check.checked) {
-        disAbleConfirmAll = true;
-        return disAbleConfirmAll;
+    if(check.checked) {
+      disAbleConfirmAll = true;
+      return disAbleConfirmAll;
     }
   });
   return disAbleConfirmAll;
@@ -61,21 +66,54 @@ function isCheckedAll(listCheckBox) {
   return disAbleCheckAll;
 }
 
+function checkBtnExistsThenEnable() {
+  if (confirmAllWaitingOrders) {
+    enableBtn(confirmAllWaitingOrders);
+
+  } else if (confirmAllProcessingOrders) {
+    enableBtn(confirmAllProcessingOrders);
+
+  } else if (confirmAllSentOrders) {
+    enableBtn(confirmAllSentOrders);
+
+  } else if (archivedAllOrders) {
+    enableBtn(archivedAllOrders);
+
+  } else if (deleteAllOrders) {
+    enableBtn(deleteAllOrders);
+
+  } else if(deleteAllArchivedOrders) {
+    enableBtn(deleteAllArchivedOrders);
+  }
+}
+function checkBtnExistsThenDisable() {
+  if (confirmAllWaitingOrders) {
+    disableBtn(confirmAllWaitingOrders);
+
+  } else if (confirmAllProcessingOrders) {
+    disableBtn(confirmAllProcessingOrders);
+
+  } else if (confirmAllSentOrders) {
+    disableBtn(confirmAllSentOrders);
+
+  } else if (archivedAllOrders) {
+    disableBtn(archivedAllOrders);
+
+  } else if (deleteAllOrders) {
+    disableBtn(deleteAllOrders);
+
+  } else if(deleteAllArchivedOrders) {
+    disableBtn(deleteAllArchivedOrders);
+  }
+}
+
 // khi check all thi cho phep submit
 if (checkAll) {
   checkAll.addEventListener('change', () => {
     if(checkAll.checked) {
-      if (confirmAll) {
-        enableBtn(confirmAll);
-      } else if (deleteAll) {
-        enableBtn(deleteAll);
-      }
+      checkBtnExistsThenEnable();
     } else {
-      if (confirmAll) {
-        disAbleBtn(confirmAll);
-      } else if(deleteAll) {
-        disAbleBtn(deleteAll);
-      }
+      checkBtnExistsThenDisable();
     }
   });
 }
@@ -85,37 +123,38 @@ listCheckBox.forEach(checkbox => {
   checkbox.addEventListener('change', () => {
     isCheckedAll(listCheckBox);
     if (isCheck(listCheckBox)) {
-      if (confirmAll) {
-        enableBtn(confirmAll);
-      } else if (deleteAll) {
-        enableBtn(deleteAll);
-      }
+      checkBtnExistsThenEnable();
     } else {
-      if (confirmAll) {
-        disAbleBtn(confirmAll);
-      } else if(deleteAll) {
-        disAbleBtn(deleteAll);
-      }
+      checkBtnExistsThenDisable();
     }
   });
 });
 
 function enableBtn(btnElement) {
   btnElement.classList.remove('pointer-events-none');
-  btnElement.classList.add('text-primary-purple');
-  btnElement.classList.add('border-primary-purple');
   btnElement.classList.remove('text-slate-500');
   btnElement.classList.remove('opacity-50');
   btnElement.classList.remove('border-slate-500');
+
+  if (btnElement === deleteAllArchivedOrders || btnElement === deleteAllOrders) {
+    btnElement.classList.add('text-red-400');
+    btnElement.classList.add('border-red-400');
+    return;
+  }
+  if (btnElement === archivedAllOrders) {
+    btnElement.classList.add('text-green-400');
+    btnElement.classList.add('border-green-400');
+    return;
+  }
+  btnElement.classList.add('text-primary-purple');
+  btnElement.classList.add('border-primary-purple');
 }
 
-function disAbleBtn(btnElement) {
+function disableBtn(btnElement) {
   btnElement.classList.add('pointer-events-none');
   btnElement.classList.add('text-slate-500');
   btnElement.classList.add('border-slate-500');
   btnElement.classList.add('opacity-50');
-  btnElement.classList.remove('text-primary-purple');
-  btnElement.classList.remove('border-primary-purple');
 }
 
 function getDataOrderIds() {
@@ -127,9 +166,12 @@ function getDataOrderIds() {
   });
   return orderIds;
 }
-function sendDataToController(endpointUrl) {
+function sendDataToController(endpointUrl, statusId) {
   const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-  const data = getDataOrderIds();
+  const data = {
+    status_id: statusId,
+    arr_order_id: getDataOrderIds()
+  };
   const options = {
     method: 'POST',
     headers: {
@@ -141,28 +183,49 @@ function sendDataToController(endpointUrl) {
   return fetch(endpointUrl, options);
 }
 
-function responseData(endpointUrl) {
-  sendDataToController(endpointUrl)
+function responseData(endpointUrl, statusId) {
+  sendDataToController(endpointUrl, statusId)
     .then(response => response.json())
     .then(data => {
-      // localStorage.setItem('confirm-success', 'Xác nhận đơn hàng thành công.');
       window.location.href = data.url;
-      // setTimeout(() => {
-      //   localStorage.removeItem('confirm-success');
-      // }, 3000);
     })
     .catch(error => {
-      alert(error);
+      console.log(error);
     });
 }
 
-if (confirmAll) {
-  confirmAll.addEventListener('click', () => {
-    responseData(constants.URL_CONFIRM_ORDER);
+if (confirmAllWaitingOrders) {
+  confirmAllWaitingOrders.addEventListener('click', () => {
+    const statusId = confirmAllWaitingOrders.dataset.status_id;
+    responseData(constants.URL_CONFIRM_ORDER, statusId);
   });
 }
-if (deleteAll) {
-  deleteAll.addEventListener('click', () => {
-    responseData(constants.URL_DELETE_ORDER);
+if (confirmAllProcessingOrders) {
+  confirmAllProcessingOrders.addEventListener('click', () => {
+    const statusId = confirmAllProcessingOrders.dataset.status_id;
+    responseData(constants.URL_CONFIRM_PROCESSING_ORDER, statusId);
+  });
+}
+if (confirmAllSentOrders) {
+  confirmAllSentOrders.addEventListener('click', () => {
+    const statusId = confirmAllSentOrders.dataset.status_id;
+    responseData(constants.URL_CONFIRM_SENT_ORDER, statusId);
+  });
+}
+if (deleteAllArchivedOrders) {
+  deleteAllArchivedOrders.addEventListener('click', () => {
+    const statusId = deleteAllArchivedOrders.dataset.status_id;
+    responseData(constants.URL_DELETE_ARCHIVED_ALL_ORDER, statusId);
+  });
+}
+if (archivedAllOrders) {
+  archivedAllOrders.addEventListener('click', () => {
+    responseData(constants.URL_ARCHIVED_ALL_ORDER);
+  });
+}
+if (deleteAllOrders) {
+  deleteAllOrders.addEventListener('click', () => {
+    const statusId = deleteAllOrders.dataset.status_id;
+    responseData(constants.URL_DELETE_ORDER, statusId);
   });
 }

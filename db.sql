@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2023 at 10:58 PM
+-- Generation Time: Apr 22, 2023 at 08:20 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -42,7 +42,7 @@ CREATE TABLE `accessories` (
 --
 
 INSERT INTO `accessories` (`accessories_id`, `category_id`, `accessories_type_id`, `accessories_name`, `accessories_price`, `accessories_desc`, `accessories_link_img`) VALUES
-('ARM01', 0, 'ACCS01', 'Hồ Thủy Sinh STYLE 1', 650000, 'Hồ Thủy Sinh STYLE 1', '/storage/images/img_products/accessories/aquarium/aquarium_type1.jpg'),
+('ARM01', 0, 'ACCS01', 'Hồ Thủy Sinh STYLE 1', 650000, 'Hồ Thủy Sinh STYLE 1', '/storage/images/img_products/JMlisS7a7JmMoTjDaGHNiui6IEi50DGfw1jbONSk.jpg'),
 ('ARM02', 0, 'ACCS01', 'Hồ Thủy Sinh STYLE 2', 850000, 'Hồ Thủy Sinh STYLE 2', '/storage/images/img_products/accessories/aquarium/aquarium_type2.jpg'),
 ('ARM03', 0, 'ACCS01', 'Hồ Thủy Sinh STYLE 3', 1400000, 'Hồ Thủy Sinh STYLE 3', '/storage/images/img_products/accessories/aquarium/aquarium_type3.jpg'),
 ('ARM04', 0, 'ACCS01', 'Hồ Thủy Sinh STYLE 4', 2300000, 'Hồ Thủy Sinh STYLE 4', '/storage/images/img_products/accessories/aquarium/aquarium_type4.jpg'),
@@ -152,7 +152,8 @@ CREATE TABLE `carts` (
 
 INSERT INTO `carts` (`CART_ID`, `user_id`, `created_at`, `updated_at`) VALUES
 (4, 24, '2023-04-03 17:04:24', '2023-04-03 17:04:24'),
-(6, 3, '2023-04-12 17:39:44', '2023-04-12 17:39:44');
+(24, 44, '2023-04-20 11:39:22', '2023-04-20 11:39:22'),
+(25, 45, '2023-04-20 14:30:17', '2023-04-20 14:30:17');
 
 -- --------------------------------------------------------
 
@@ -166,6 +167,15 @@ CREATE TABLE `cart_details` (
   `product_id` char(6) NOT NULL,
   `QUANTITY` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart_details`
+--
+
+INSERT INTO `cart_details` (`id`, `CART_ID`, `product_id`, `QUANTITY`) VALUES
+(1, 4, 'AG01', 15),
+(2, 24, 'ARM06', 6),
+(3, 25, 'DC02', 2);
 
 -- --------------------------------------------------------
 
@@ -370,8 +380,8 @@ CREATE TABLE `fish_import_batches` (
 --
 
 INSERT INTO `fish_import_batches` (`id`, `fish_id`, `quantity`, `import_date`) VALUES
-(1, 'BF01', 10, '2023-04-11 09:47:06'),
-(2, 'BF02', 10, '2023-04-11 09:47:06'),
+(1, 'BF01', 20, '2023-04-11 09:47:06'),
+(2, 'BF02', 30, '2023-04-11 09:47:06'),
 (3, 'BF03', 10, '2023-04-11 09:47:06'),
 (4, 'BF04', 10, '2023-04-11 09:47:06'),
 (5, 'BF05', 10, '2023-04-11 09:47:06'),
@@ -493,6 +503,7 @@ INSERT INTO `has_size` (`fish_species`, `size`, `has_price`) VALUES
 ('Cá Ngựa', '2 - 2.5 cm', 8000),
 ('Cá Ngựa', '2.5 cm', 9000),
 ('Cá Ông Tiên', '2 - 2.5 cm', 12000),
+('Cá Ông Tiên', '2 - 4 cm', 25000),
 ('Cá Ông Tiên', '2.8 - 3 cm', 20000),
 ('Cá Ông Tiên', '3.5 - 4 cm', 30000),
 ('Cá Ông Tiên', '4.5 - 5 cm', 50000),
@@ -530,7 +541,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2019_08_19_000000_create_failed_jobs_table', 1),
 (8, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (9, '2023_03_12_081914_add_column_rememberme_to_users', 2),
-(10, '2023_03_12_150010_add_google_id_to_users', 3);
+(10, '2023_03_12_150010_add_google_id_to_users', 3),
+(11, '2023_03_13_083155_create_user_repositories_table', 4),
+(12, '2023_04_20_022740_add_deleted_at_to_orders', 4),
+(13, '2023_04_20_023328_add_deleted_at_to_users', 5),
+(14, '2023_04_20_043731_add_deleted_at_to_users', 6);
 
 -- --------------------------------------------------------
 
@@ -548,23 +563,25 @@ CREATE TABLE `orders` (
   `full_name` varchar(50) NOT NULL,
   `order_phone_number` char(11) NOT NULL,
   `order_delivery_address` varchar(200) DEFAULT NULL,
-  `order_notes` text NOT NULL
+  `order_notes` text NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `status_id`, `delivery_id`, `payment_id`, `full_name`, `order_phone_number`, `order_delivery_address`, `order_notes`) VALUES
-('BT0001', 2, '2023-03-28 01:25:19', 0, 0, 0, 'Trần Văn Trường', '0123123123', 'Lấp Vò, Đồng Tháp', ''),
-('BT0002', 2, '2023-03-29 01:26:24', 4, 1, 0, 'Võ Đức Duy', '0456456456', 'Kiên Giang', ''),
-('BT0003', 3, '2023-04-05 01:27:18', 2, 2, 1, 'Lê Thanh Hùng', '0123456456', 'An Giang', ''),
-('BT0004', 2, '2023-04-11 12:04:22', 4, 1, 0, 'Lê Minh Toàn', '0123123456', 'Thốt Nốt, Cần Thơ', ''),
-('BT0005', 3, '2023-04-09 12:03:56', 0, 0, 0, 'Nguyễn Hữu Phúc', '0456789789', 'Kiên Giang', ''),
-('BT0006', 2, '2023-04-14 00:38:58', 2, 2, 1, 'Trần Văn Trường', '0123123123', 'Ninh Kiều, Cần Thơ', ''),
-('BT0007', 1, '2023-04-12 12:04:33', 0, 0, 0, 'Võ Đức Duy', '0456456456', 'Ninh Kiều, Cần Thơ', ''),
-('BT0008', 3, '2023-04-07 12:04:50', 3, 0, 0, 'Lê Minh Toàn', '', 'Ninh Kiều, Cần Thơ', ''),
-('BT0009', 2, '2023-04-16 23:04:22', 1, 0, 0, 'Trần Văn Trường', '0123123123', 'An Khánh, Ninh Kiều, Cần Thơ', 'Giao hàng vào buổi chiều');
+INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `status_id`, `delivery_id`, `payment_id`, `full_name`, `order_phone_number`, `order_delivery_address`, `order_notes`, `deleted_at`) VALUES
+('BT0001', 2, '2023-03-28 01:25:19', 0, 0, 0, 'Trần Văn Trường', '0123123123', 'Lấp Vò, Đồng Tháp', '', NULL),
+('BT0002', 2, '2023-03-29 01:26:24', 2, 1, 0, 'Võ Đức Duy', '0456456456', 'Kiên Giang', '', NULL),
+('BT0003', 44, '2023-04-05 01:27:18', 3, 2, 1, 'Lê Thanh Hùng', '0123456456', 'An Giang', '', NULL),
+('BT0004', 2, '2023-04-11 12:04:22', 2, 1, 0, 'Lê Minh Toàn', '0123123456', 'Thốt Nốt, Cần Thơ', '', NULL),
+('BT0005', 44, '2023-04-09 12:03:56', 0, 0, 0, 'Nguyễn Hữu Phúc', '0456789789', 'Kiên Giang', '', NULL),
+('BT0006', 2, '2023-04-14 00:38:58', 3, 2, 1, 'Trần Văn Trường', '0123123123', 'Ninh Kiều, Cần Thơ', '', NULL),
+('BT0007', 1, '2023-04-12 12:04:33', 0, 0, 0, 'Võ Đức Duy', '0456456456', 'Ninh Kiều, Cần Thơ', '', NULL),
+('BT0008', 44, '2023-04-07 12:04:50', 4, 0, 0, 'Lê Minh Toàn', '0123123123', 'Ninh Kiều, Cần Thơ', '', NULL),
+('BT0009', 2, '2023-04-16 23:04:22', 1, 0, 0, 'Trần Văn Trường', '0123123123', 'An Khánh, Ninh Kiều, Cần Thơ', 'Giao hàng vào buổi chiều', NULL),
+('BT0010', 45, '2023-04-16 23:04:22', 5, 2, 1, 'Trần Văn Trường', '0123123123', 'An Khánh, Ninh Kiều, Cần Thơ', 'Giao hàng vào chủ nhật', NULL);
 
 -- --------------------------------------------------------
 
@@ -600,7 +617,8 @@ INSERT INTO `order_details` (`order_detail_id`, `order_id`, `category_id`, `prod
 (15, 'BT0006', 0, 'ARM06', 70000, 3),
 (16, 'BT0007', 0, 'ARM14', 150000, 2),
 (17, 'BT0008', 0, 'ARM06', 70000, 5),
-(18, 'BT0009', 1, 'DGF02', 1500000, 1);
+(18, 'BT0009', 1, 'DGF02', 1500000, 1),
+(19, 'BT00010', 1, 'DGF02', 1500000, 1);
 
 -- --------------------------------------------------------
 
@@ -621,9 +639,10 @@ CREATE TABLE `order_status` (
 INSERT INTO `order_status` (`status_id`, `status_name`, `status_desc`) VALUES
 (0, 'Chờ xác nhận', 'Đơn hàng mới đang chờ xác nhận'),
 (1, 'Đang xử lý', 'Người bán đang chuẩn bị hàng'),
-(2, 'Hoàn thành', 'Đơn hàng đã được giao thành công'),
-(3, 'Đã hủy', 'Người mua đã hủy đặt hàng'),
-(4, 'Đã gửi hàng', 'Người bán đã giao cho đơn vị vận chuyển');
+(2, 'Đã gửi hàng', 'Người bán đã giao cho đơn vị vận chuyển'),
+(3, 'Hoàn thành', 'Đơn hàng đã được giao thành công'),
+(4, 'Đã hủy', 'Người mua đã hủy đặt hàng'),
+(5, 'Lưu trữ', 'Các đơn hàng hoàn thành đã được lưu trữ.');
 
 -- --------------------------------------------------------
 
@@ -792,21 +811,35 @@ CREATE TABLE `users` (
   `link_avt` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `status_id` int(11) NOT NULL,
+  `status_id` int(11) NOT NULL DEFAULT 0,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `role_id`, `first_name`, `last_name`, `phone_number`, `user_address`, `google_id`, `link_avt`, `email`, `password`, `status_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, '1', 'Truong', 'Tran Van', '123123124', 'An Khanh, Ninh Kieu, Can Tho', NULL, '/storage/images/users/tSnbbSgIO5OGbL3SK6UrZfddv4Xyf2iYaAGXUFfS.png', 'vantruong@gmail.com', '$2y$10$NsK.7f6S43ICDsjwKr2NPO42f/faBXRXEXWJMfFH09uE8MDT4ZQRe', 0, 'n1NoPyD1E57UixvRr4xxaytivhOKb1Iap3W4ZIjBuiTzNmpZbPknAPMbzjCk', NULL, '2023-04-10 17:53:41'),
-(2, '0', 'Truong 2', 'Tran Van', '1412312', 'An Khanh, Ninh Kieu, Can Tho', NULL, '', 'vantruong2@gmail.com', '$2y$10$x8dJV84R/9.yAI.cwozA2.5tCcVET2ztAMRnL1MaGWCiAM.ZXU8yK', 0, 'P4RV5SCsUypP8FncWVVSHCnPW7ooxAtcBr43fmWE6wkdhHwMNC9D5SZTyAII', NULL, NULL),
-(3, '0', 'Van', 'Truong', NULL, NULL, '103144632167425600074', NULL, 'vantruongvtd02@gmail.com', '', 0, NULL, '2023-04-12 17:39:44', '2023-04-12 17:39:44'),
-(24, '1', 'Trường', 'Trần Văn', '0123123123', 'An Khánh, Ninh Kiều, Cần Thơ', NULL, '/storage/images/users/JIiMbNO15guSO4LGDH0sB0VdcXHx1yy4bbChCTtj.png', 'admin@gmail.com', '$2y$10$Zi3w9kihSDcpYsUbOoJGvehcS.cCJz15i79P7sJhOgPN0.HbiNypi', 0, NULL, '2023-04-03 17:04:24', '2023-04-03 17:04:24');
+INSERT INTO `users` (`id`, `role_id`, `first_name`, `last_name`, `phone_number`, `user_address`, `google_id`, `link_avt`, `email`, `password`, `status_id`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '1', 'Truong', 'Tran Van', '123123124', 'An Khanh, Ninh Kieu, Can Tho', NULL, '/storage/images/users/tSnbbSgIO5OGbL3SK6UrZfddv4Xyf2iYaAGXUFfS.png', 'vantruong@gmail.com', '$2y$10$NsK.7f6S43ICDsjwKr2NPO42f/faBXRXEXWJMfFH09uE8MDT4ZQRe', 0, 'n1NoPyD1E57UixvRr4xxaytivhOKb1Iap3W4ZIjBuiTzNmpZbPknAPMbzjCk', NULL, '2023-04-10 10:53:41', NULL),
+(2, '0', 'Truong 2', 'Tran Van', '1412312', 'An Khanh, Ninh Kieu, Can Tho', NULL, '', 'vantruong2@gmail.com', '$2y$10$x8dJV84R/9.yAI.cwozA2.5tCcVET2ztAMRnL1MaGWCiAM.ZXU8yK', 0, 'P4RV5SCsUypP8FncWVVSHCnPW7ooxAtcBr43fmWE6wkdhHwMNC9D5SZTyAII', NULL, NULL, NULL),
+(24, '1', 'Trường', 'Trần Văn', '0123123123', 'An Khánh, Ninh Kiều, Cần Thơ', NULL, '/storage/images/users/JIiMbNO15guSO4LGDH0sB0VdcXHx1yy4bbChCTtj.png', 'admin@gmail.com', '$2y$10$Zi3w9kihSDcpYsUbOoJGvehcS.cCJz15i79P7sJhOgPN0.HbiNypi', 0, NULL, '2023-04-03 17:04:24', '2023-04-03 17:04:24', NULL),
+(44, '0', 'Duy', 'Võ Đức', '0998776655', 'Kiên Giang', NULL, '/storage/images/users/1fteqSBzI20DwWMNjeooHywPVX4nsd5zPPqj41DG.jpg', 'duy@gmail.com', '$2y$10$TwDAq2KJTITcjk2nfsZ1x.TlLp0uLJh2EjXNYd6e2GjXWd4KDHiDG', 0, NULL, '2023-04-20 11:39:22', '2023-04-22 16:33:00', NULL),
+(45, '0', 'Truong Tran', 'Van', '0998123124', 'An Khánh, Ninh Kiều, Cần Thơ', '105361341525498359548', '/storage/images/admin/avatar-default.png', 'vtdjv02@gmail.com', '', 0, NULL, '2023-04-20 14:30:17', '2023-04-20 14:30:17', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_repositories`
+--
+
+CREATE TABLE `user_repositories` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -1018,6 +1051,12 @@ ALTER TABLE `users`
   ADD KEY `fk_status_id` (`status_id`);
 
 --
+-- Indexes for table `user_repositories`
+--
+ALTER TABLE `user_repositories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1031,13 +1070,13 @@ ALTER TABLE `accessories_import_batches`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `CART_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `CART_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `cart_details`
 --
 ALTER TABLE `cart_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -1067,13 +1106,13 @@ ALTER TABLE `fish_import_batches`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `password_reset_tokens`
@@ -1091,7 +1130,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT for table `user_repositories`
+--
+ALTER TABLE `user_repositories`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -1159,14 +1204,13 @@ ALTER TABLE `orders`
   ADD CONSTRAINT `fk_delivery` FOREIGN KEY (`delivery_id`) REFERENCES `delivery_status` (`delivery_id`),
   ADD CONSTRAINT `fk_payment` FOREIGN KEY (`payment_id`) REFERENCES `payment_status` (`payment_id`),
   ADD CONSTRAINT `fk_status` FOREIGN KEY (`status_id`) REFERENCES `order_status` (`status_id`),
-  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `order_details`
 --
 ALTER TABLE `order_details`
-  ADD CONSTRAINT `fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`),
-  ADD CONSTRAINT `fk_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
+  ADD CONSTRAINT `fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
 
 --
 -- Constraints for table `supplierinvoice`

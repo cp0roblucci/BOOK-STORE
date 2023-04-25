@@ -6,6 +6,8 @@ use App\Models\Accessories;
 use App\Models\AccessoriesType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class AccessoriesController extends Controller
 {
@@ -14,9 +16,39 @@ class AccessoriesController extends Controller
     dd($request);
   }
 
-  public function update($id)
+  public function update(Request $request, $accessoriesId)
   {
-    dd($id);
+    $accessories = DB::table('accessories')
+      ->where('accessories_id', '=', $accessoriesId)
+      ->first();
+
+    $accessoriesImg = $request->file('accessories-img');
+    if ($accessoriesImg) {
+      $linkImgPath = $accessoriesImg->store('public/images/img_products');
+      $accessoriesImgURL = Storage::url($linkImgPath);
+      $accessoriesLinkImg = Storage::url($accessories->accessories_link_img);
+      if (File::exists($accessoriesLinkImg)) {
+        File::delete($accessoriesLinkImg);
+      }
+    } else {
+      $accessoriesImgURL = $accessories->accessories_link_img;
+    }
+    $accessoriesTypeId = $request->input('accessories-type');
+    $accessoriesPrice = $request->input('price');
+    $accessoriesName = $request->input('accessories-name');
+    $accessoriesDesc = $request->input('description');
+
+    $accessories = DB::table('accessories')
+      ->where('accessories_id', '=', $accessoriesId)
+      ->update([
+        'accessories_type_id' => $accessoriesTypeId,
+        'accessories_name' => $accessoriesName,
+        'accessories_price' => $accessoriesPrice,
+        'accessories_desc' => $accessoriesDesc,
+        'accessories_link_img' => $accessoriesImgURL
+      ]);
+
+    dd($accessories);
   }
 
   public function editAccessories($id) {

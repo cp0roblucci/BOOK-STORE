@@ -29,6 +29,7 @@
           || request()->is('admin/store')
           || request()->is('admin/search-price-fish')
           || request()->is('admin/search-fish')
+          || request()->is('admin/fish/*/edit')
           || request()->is('admin/search-quantity')
           || request()->is('admin/search-accessories')
           || request()->is('admin/create-new-fish')
@@ -51,6 +52,7 @@
               || request()->is('admin/store')
               || request()->is('admin/search-price-fish')
               || request()->is('admin/search-fish')
+              || request()->is('admin/fish/*/edit')
               || request()->is('admin/search-quantity')
               || request()->is('admin/create-new-fish')
               || request()->is('admin/create-new-species')
@@ -76,6 +78,7 @@
           || request()->is('admin/store')
           || request()->is('admin/search-price-fish')
           || request()->is('admin/search-fish')
+          || request()->is('admin/fish/*/edit')
           || request()->is('admin/search-quantity')
           || request()->is('admin/create-new-fish')
           || request()->is('admin/create-new-species')
@@ -103,7 +106,8 @@
           <a
             href="{{route('admin-fish')}}"
             class="transition-all hover:bg-slate-100 py-1 rounded-sm
-            {{ request()->is('admin/fish') || request()->is('admin/search-fish') ? ' text-primary-blue' : ''}}"
+            {{ request()->is('admin/fish') || request()->is('admin/search-fish') || request()->is('admin/fish/*/edit')
+  ? ' text-primary-blue' : ''}}"
           >
             <i class="fa-solid fa-circle-dot text-10 text-primary-blue mr-1"></i>
             Danh sách cá
@@ -265,7 +269,7 @@
             {{ request()->is('admin/create-new-user') ? 'text-primary-purple' : '' }}"
           >
             <i class="fa-solid fa-circle-dot text-10 text-primary-purple mr-1"></i>
-            Tạo mới
+            Thêm người dùng mới
           </a>
         </div>
       </li>

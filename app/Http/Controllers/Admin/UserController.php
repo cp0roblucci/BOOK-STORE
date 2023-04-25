@@ -4,12 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChangePasswordRequest;
-use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\ResetPasswordRequest;
 use App\Models\Cart;
 use App\Models\User;
 use App\Repositories\UserRepositoryRepository;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +14,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\URL;
+
 
 class UserController extends Controller
 {
@@ -27,6 +24,58 @@ class UserController extends Controller
     {
       $this->userRepository = $userRepository;
     }
+
+  public function checkBlock($userId) {
+    $totalOrdersCanceled = DB::table('users')
+      ->join('orders', 'users.id', '=', 'orders.user_id')
+      ->where('orders.status_id', '=', 4)
+      ->whereRaw("users.id = $userId")
+      ->count();
+    return $totalOrdersCanceled > 5;
+  }
+
+  public function users(Request $request) {
+    $page = $request->query('page', 1);
+    $userName = $request->input('user-name') ?? null;
+
+    $query = DB::table('users')
+      ->join('role', 'users.role_id', '=', 'role.role_id')
+      ->join('account_status', 'users.status_id', '=', 'account_status.status_id')
+      ->whereNull('users.deleted_at');
+
+
+    if(!empty($userName)) {
+      $query->where(function ($query) use ($userName) {
+        $query->where(DB::raw("CONCAT(users.last_name, ' ', users.first_name)"), 'LIKE', '%' . $userName . '%');
+      });
+    }
+    $users = $query
+      ->select(
+        'users.*',
+        'role.role_name',
+        'account_status.status_id',
+        'account_status.status_name'
+      )
+      ->paginate(5);
+
+
+//    foreach ($users as $user) {
+//      if ($this->checkBlock($user->id)) {
+//        DB::table('users')
+//          ->where('id', '=', $user->id)
+//          ->update([
+//            'status_id' => 1
+//          ]);
+//      } else {
+//        DB::table('users')
+//          ->where('id', '=', $user->id)
+//          ->update([
+//            'status_id' => 0
+//          ]);
+//      }
+
+    return view('admin.user.user', compact('users', 'page', 'userName'));
+  }
 
     public function createUser(Request $request)
     {
@@ -62,22 +111,9 @@ class UserController extends Controller
       return redirect()->route('admin-users');
     }
 
+
     public function update()
     {
-
-    }
-
-    public function delete(Request $request)
-    {
-      $id = $request->input('user_id');
-      if ($id === 'undefined') {
-        Session::flash('delete-failed', 'không thể xóa người dùng này.');
-        return redirect()->route('admin-users');
-      }
-      $user = User::find($id);
-      $user->delete();
-      Session::flash('delete-success', 'Xóa người dùng thành công.');
-      return redirect()->route('admin-users');
 
     }
 
@@ -113,7 +149,7 @@ class UserController extends Controller
       $firstname = $request->input('firstname');
       $phonenumber = $request->input('phonenumber');
       $email = $request->input('email');
-      $address= $request->input('address');
+      $address = $request->input('address');
 
       DB::table('users')
         ->where('id', $id)
@@ -156,17 +192,44 @@ class UserController extends Controller
       return redirect()->route('admin-profile')->with('success', 'Change Password Successfully!');
     }
 
+    public function delete(Request $request)
+    {
+      $userId = $request->input('user_id');
+      if ($userId === 'undefined') {
+        Session::flash('delete-failed', 'không thể xóa người dùng này.');
+        $url = route('admin-users');
+        return response()->json(['url' => $url]);
+      }
+      $user = User::find($userId);
+      $user->delete();
 
-    public function searchByName(Request $request) {
-      $name = $request->input('user-name');
-
-      $page = $request->query('page', 1);
-      $results = DB::table('users')
-      ->join('role', 'users.role_id', '=', 'role.role_id')
-      ->select('users.*', 'role.role_name')
-      ->whereRaw("CONCAT(users.last_name, ' ', users.first_name) LIKE '%{$name}%'")
-      ->paginate(5);
-
-      return view('admin.user.result-search-user', compact('results', 'page', 'name'));
+      Session::flash('delete-success', 'Xóa người dùng thành công.');
+      $url = route('admin-users');
+      return response()->json(['url' => $url, 'id' => $userId]);
     }
+
+    public function rollback(Request $request) {
+      $userId = $request->input('user_id');
+
+      $user = User::withTrashed()->where('id', $userId)->first();
+      $user->restore();
+
+      $url = route('admin-users');
+      return response()->json(['url' => $url, 'id' => $userId]);
+    }
+
+    public function commit(Request $request) {
+      $userId = $request->input('user_id');
+
+      $user = User::withTrashed()->where('id', $userId)->first();
+      $user->orders()->delete();
+      $user->forceDelete();
+
+      $url = route('admin-users');
+      return response()->json(['url' => $url]);
+    }
+
+
+
+
 }

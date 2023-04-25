@@ -7,6 +7,6 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>Sorry, you don't have permission to access this URL.</h1>
+  <h1 class="text-center">Rất tiếc, bạn không có quyền truy cập đường dẫn này!!!</h1>
 </body>
 </html>

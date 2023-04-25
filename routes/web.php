@@ -3,7 +3,6 @@
 use App\Http\Controllers\AccessoriesController;
 use App\Http\Controllers\AccessoriesTypeController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\CommonController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\UserController;
@@ -22,7 +21,8 @@ use App\Http\Controllers\clients\ProfileUserController;
 //use App\Http\Controllers\clients\ProductDetailController;
 
 use \App\Http\Controllers\Auth\GoogleController;
-
+use App\Http\Controllers\DeliverController;
+use App\Http\Controllers\SpeciesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,12 +95,19 @@ Route::post('/forgot-password', [ResetPasswordController::class, 'sendMail']);
 Route::get('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('reset-password');
 Route::post('/reset-password', [ResetPasswordController::class, 'reset']);
 
-
 // logout
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 // 403
 Route::view('/403', '403')->name('403');
+
+Route::group(['middleware' => ['auth', 'delivery']], function() {
+  // deliver
+  Route::get('delivery', [DeliverController::class, 'listOdersDeliver']);
+  Route::get('deliver/order-detail/{id}', [DeliverController::class, 'orderDetailDeliver']);
+  Route::post('delivery-cancel', [DeliverController::class, 'confirmDeliveryCancel'])->name('confirm-delivery-cancel');
+  Route::post('deliver-success', [DeliverController::class, 'confirmDeliverySuccess'])->name('confirm-delivery-success');
+});
 
 
 // google login
@@ -152,6 +159,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::post('users/{id}/edit', [UserController::class, 'updateUser']);
 
     Route::post('delete-user', [UserController::class, 'delete']);
+    Route::post('delete-user-admin', [UserController::class, 'disAbleDeleteUser'])->name('disable-delete-user');
     Route::post('rollback-delete-user', [UserController::class, 'rollback']);
     Route::post('commit-delete-user', [UserController::class, 'commit']);
 
@@ -180,15 +188,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     // Fish
     // new product
     Route::get('create-new-fish', [FishController::class, 'newFish'])->name('new-fish');
-    Route::post('create-new-fish', [FishController::class, 'create']);
+    Route::post('create-new-fish', [FishController::class, 'postCreateNewFish']);
     // edit fish
-    Route::get('fish/{id}/edit', [FishController::class, 'editFish']);
+    Route::get('fish/{id}/edit', [FishController::class, 'getEditFish']);
+    Route::post('fish/{id}/edit', [FishController::class, 'postEditFish']);
 
 
     // new species
-    Route::get('create-new-species', function() {
-        return view('admin.fish.new-species');
-    })->name('new-species');
+    Route::get('create-new-species', [SpeciesController::class, 'index'])->name('new-species');
     Route::post('create-new-species', [SpeciesController::class, 'create']);
 
     // new ph
@@ -241,15 +248,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::post('/confirm-waiting-orders', [OrderController::class, 'confirmOrders']);
     // confirm orders
     Route::post('/confirm-processing-orders', [OrderController::class, 'confirmOrders']);
-    // confirm orders
-    Route::post('/confirm-sent-orders', [OrderController::class, 'confirmOrders']);
     // delete orders
     Route::post('/delete-archived-orders', [OrderController::class, 'confirmOrders']);
     // delete orders
     Route::post('/archived-orders', [OrderController::class, 'confirmOrders']);
     // delete orders
     Route::post('/delete-orders', [OrderController::class, 'confirmOrders']);
-
+    // return request
+    Route::post('/return-request', [OrderController::class, 'confirmOrders']);
+    // accept return request
+    Route::post('/accept-return-request', [OrderController::class, 'confirmOrders']);
 
 
 

@@ -36,6 +36,11 @@ module.exports = {
                 "primary-purple-4": 'rgba(76, 78, 231, 0.4)',
                 "primary-purple-5": 'rgba(76, 78, 231, 0.5)',
                 "primary-purple-6": 'rgba(76, 78, 231, 0.6)',
+                "primary-blue-1": 'rgba(54, 162, 235, 0.1)',
+                "primary-blue-2": 'rgba(54, 162, 235, 0.2)',
+                "primary-blue-3": 'rgba(54, 162, 235, 0.3)',
+                "primary-blue-4": 'rgba(54, 162, 235, 0.4)',
+                "primary-blue-5": 'rgba(54, 162, 235, 0.5)',
                 "primary-blue": 'rgba(54, 162, 235, 0.8)',
             },
             fontSize: {

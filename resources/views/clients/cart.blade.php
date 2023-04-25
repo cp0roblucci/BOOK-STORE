@@ -46,7 +46,7 @@
                         </div>
                         <div class="quantity-box relative col-span-2 flex justify-center">
                             @if($batch_fish)
-                                @if($item->quantity > $batch_fish[0][$key]->quantity)
+                                @if($item->quantity > $batch_fish[$key][0]->quantity)
                                     <div class="absolute -top-10 text-14 text-red-500">Hết hàng!!!</div>
                                 @endif
                             @endif
@@ -86,7 +86,7 @@
                         </div>
                         <div class="quantity-box relative col-span-2 flex justify-center">
                             @if($batch_acc)
-                                @if($item->quantity > $batch_acc[0][$key]->quantity)
+                                @if($item->quantity > $batch_acc[$key][0]->quantity)
                                 <div class="absolute -top-12 left-0 text-14 text-red-500">Hết hàng!!!</div>
                                 @endif
                             @endif

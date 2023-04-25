@@ -4,39 +4,63 @@
     Thanh Toán
 @endsection
 
+@section('scripts')
+    @vite('./resources/js/transaction.js')
+@endsection
+
 @section('header')
     @include('layouts.header')
-
 @endsection
 
 @section('body')
 <div class="py-2 content-transaction">
     <form action="{{route('order')}}" method="POST">
         <div class="mx-20 h-auto rounded-lg font-popins">
-            <div class="infomation bg-slate-100 py-3 mb-2">
+            <div class="infomation bg-slate-100 pt-3 pb-5 mb-2">
                 <div class="address flex text-2xl leading-[4] text-blue-200 mx-5">
                     <div class="icon mr-5">
                         <i class="fa-sharp fa-solid fa-location-dot"></i>
                     </div>
                     <div class="capitalize">Địa chỉ nhận hàng</div>
+                    @if($errors->any())
+                    <div class="capitalize text-red-500 ml-16">
+                        Vui lòng nhập đầy đủ thông tin đặt hàng
+                    </div>
+                    @endif
                 </div>
                 <div class="inf capitalize flex text-18 ml-5">
-                    <div class="infor text-16">
-                        <label for="name_order">Tên người nhận hàng: </label>
-                        <input class="text-18 h-8 w-36 border-none placeholder:text-14" type="text" name="name_order" id="name_order" 
-                            value="{{Auth::user()->last_name . ' ' . Auth::user()->first_name }}">
-                        <label for="phone_order">Số điện thoại: </label>
-                        <input class="text-18 h-8 border-none placeholder:text-14" type="text" name="phone_order" id="phone_order" 
-                            placeholder="@if(Auth::user()->phone_number){{Auth::user()->phone_number}} @else Số điện thoại @endif">
+                    <div class="infor text-16 flex">
+                       <div class="relative">
+                            <label for="name_order">Tên người nhận hàng: </label>
+                            <input class="text-18 h-8 w-36 border-none placeholder:text-14" type="text" name="name_order" id="name_order" 
+                                value="{{Auth::user()->last_name . ' ' . Auth::user()->first_name }}">
+                            @error('name_order')
+                            <span class="absolute -bottom-5 right-0 text-12 text-red-500">{{$message}}</span>
+                            @enderror
+                       </div>
+                        <div class=" text-16 ml-2 relative">
+                            <label for="phone_order">Số điện thoại: </label>
+                            <input class="text-18 h-8 border-none placeholder:text-14" type="text" name="phone_order" id="phone_order" 
+                                placeholder="@if(Auth::user()->phone_number){{Auth::user()->phone_number}} @else Số điện thoại @endif">
+                            @error('phone_order')
+                            <span class="absolute -bottom-5 right-0 text-12 text-red-500">{{$message}}</span>
+                            @enderror
+                        </div>
                         
                     </div>
-                    <div class="addr ml-5 text-16">
+                    <div class="addr ml-5 text-16 relative">
                         <label for="">Địa chỉ: </label>
                         <input class="text-18 h-8 border-none placeholder:text-14" type="text" name="address_order" placeholder="@if(Auth::user()->user_address) {{Auth::user()->user_address}} @else Địa chỉ @endif">
+                        @error('address_order')
+                        <span class="absolute -bottom-5 right-0 text-12 text-red-500">{{$message}}</span>
+                        @enderror
                     </div>
-                    <div class="ml-5 text-16">
+                    <div class="ml-5 text-16 relative">
                         <label for="note">Lời nhắn: </label>
                         <input class="text-18 h-8 border-none placeholder:text-14" type="text" name="note" id="note" placeholder="Lời nhắn...">
+                        @error('note')
+                        <span class="absolute -bottom-5 right-0 text-12 text-red-500">{{$message}}</span>
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -85,7 +109,7 @@
                         <td></td>
                         <td></td>
                         <td class="text-green-500">Đơn Vị Vận Chuyển:</td>
-                        <td><h2 class="font-bold">Giao Hàng tiết Kiệm</h2>   <span class="text-14 opacity-80">Nhận hàng vào {{date("d")}} Th{{date("m")}} - @if(date("d") + 3 > 30) {{date("d") + 3 -30}} @else {{date("d") + 3}} @endif Th{{date("m")}}</span></td>
+                        <td><h2 class="font-bold">Giao Hàng tiết Kiệm</h2>   <span class="text-14 opacity-80">Nhận hàng vào @if(date("d") + 3 > 30) {{date("d") + 3 -30}} @else {{date("d") + 3}} @endif Th{{date("m")}} - @if(date("d") + 6 > 30) {{date("d") + 6 -30}} @else {{date("d") + 6}} @endif Th{{date("m")}}</span></td>
                         <td class="text-center"><span>{{number_format(30000, 0, '', '.')}} VND</span></td>
                     </tr>
                     <tr>
@@ -100,12 +124,11 @@
             </div>
             <div class="payment bg-slate-100">
                 <div class="title-payment mx-5 flex py-5">
-                    <div class=" py-2 px-5 text-18 "><h1 class="capitalize text-2xl">Phương thức thanh toán</h1></div>
+                    <div class=" py-2 px-5 text-18 "><h1 class="capitalize text-2xl ">Phương thức thanh toán</h1></div>
                     {{-- <div > <button class=" py-2 px-5 mr-5 text-18 border bg-slate-200 hover:border-blue-300 hover:text-blue-300 focus:border-blue-300 focus:text-blue-300">ATM</button></div> --}}
-                    <div ><a class=" py-2 px-5 text-18 border bg-slate-200 hover:border-blue-300 hover:text-blue-300 focus:border-blue-300 focus:text-blue-300">Thanh Toán Khi Nhận Hàng</a></div>
+                    <div ><a class="payments cursor-pointer py-2 px-5 text-18 border bg-slate-200 hover:border-blue-300 hover:text-blue-300 focus:border-blue-300 focus:text-blue-300 ">Thanh Toán Khi Nhận Hàng</a></div>
                 </div>
                 <div class=" mx-5 flex justify-end">
-                    <input type="hidden" name="userid" value="{{Auth::user()->id}}">
                     @csrf
                     <button type="submit" class=" px-8 py-4 mb-2 bg-blue-300 text-26 text-aliceblue">Đặt Hàng</button>
                 </div>

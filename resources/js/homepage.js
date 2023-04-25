@@ -14,9 +14,9 @@ var content_img = [
 ];
 
 var content = [
-    ['supper blue', 'hafmoon beeta fish', 'Bettas are a member of the gournami family and are know to be highly territorial of'],
-    ['white blue', 'hafmoon beeta fish','Bettas are a member of the gournami family and are know to be highly territorial of'],
-    ['supper red', 'hafmoon beeta fish','Bettas are a member of the gournami family and are know to be highly territorial of']
+    ['Cá Xiêm Xanh Tím Than ', 'Cá Xiêm', 'Cá Betta là một chi cá nước ngọt nhỏ, thường có màu sắc đặc trưng thuộc lớp Cá vây tia nằm trong họ (Osphronemidae)'],
+    ['Cá Betta Vàng Đen ', 'Cá Betta','Cá Betta là một chi cá nước ngọt nhỏ, thường có màu sắc đặc trưng thuộc lớp Cá vây tia nằm trong họ (Osphronemidae)'],
+    ['Cá Xiêm Xám Khói', 'Cá Xiêm','Cá Xiêm là một chi cá nước ngọt nhỏ, thường có màu sắc đặc trưng thuộc lớp Cá vây tia nằm trong họ (Osphronemidae)']
 ];
 
 

@@ -7,12 +7,19 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\AuthController;
 
 
 class TransactionController extends Controller
 {
     public function getTransaction(Request $request)  {
+        $request->validate([
+            'checked' => 'required',
+        ]);
+        
         $data =$request->all();
+        // dd($data);
         $items = [];
         $quantity = [];
         $category = [];
@@ -66,6 +73,21 @@ class TransactionController extends Controller
     }
 
     public function postTransaction(Request $request)  {
+
+        $request->validate([
+            'name_order' => 'required',
+            'phone_order' => 'required|regex:/(0[3,5,7,8,9][0-9]{8,9})/',
+            'address_order' => 'required',
+            'note' => 'required',
+        ],
+        [
+            'name_order.required' => 'Vui lòng nhập tên!!!',
+            'phone_order.required' => 'Vui lòng nhập số điện thoại!!!',
+            'phone_order.regex' => 'Vui lòng nhập đúng định dạng!!!',
+            'address_order.required' => 'Vui lòng nhập địa chỉ!!!',
+            'note.required' => 'Mong bạn hãy để lại lời nhắn!!!',
+        ]);
+
         $item_order = [];
         $qtt_item_order = [];
         $category = [];
@@ -95,7 +117,6 @@ class TransactionController extends Controller
         } else {
             $count = 'BT000' .$count_order[0]->count + 1;
         }
-        $user_id = $request->input('userid');
         $name_order = $request->input('name_order');
         $phone_order = $request->input('phone_order');
         $address_order = $request->input('address_order');
@@ -103,13 +124,13 @@ class TransactionController extends Controller
         // $getitem = DB::select("select accessories_price as price from accessories where accessories_id = ?", [$item_order[4]]);
 
 
-        // dd($request->all(), $item_order, $qtt_item_order, $category, $count,  $user_id, $name_order, $phone_order, $address_order, $note_order, $getitem[0]->price );
+        // dd($request->all(), $item_order, $qtt_item_order, $category, $count, $name_order, $phone_order, $address_order, $note_order);
 
 
         DB::table('orders')->insert(
             [
                 'order_id' => $count,
-                'user_id' => $user_id,
+                'user_id' => Auth::user()->id,
                 'status_id' => 0,
                 'delivery_id' => 0,
                 'payment_id' => 0,
@@ -123,12 +144,32 @@ class TransactionController extends Controller
         foreach($item_order as $key => $item) {
             if($category[$key] == 0) {
                 $getitem = DB::select("select accessories_price as price from accessories where accessories_id = ?", [$item]);
+                $quantityindepot = DB::table('accessories_import_batches')
+                                    ->where('accessories_id', $item)
+                                    ->get();
+                // dd($quantityindepot, $qtt_item_order[$key]);
+
+                DB::table('accessories_import_batches')
+                ->where('accessories_id', $item)
+                ->update([
+                    'quantity' => ($quantityindepot[0]->quantity - $qtt_item_order[$key])
+                ]);
             } else {
                 $getitem = DB::select("select has_size.has_price as price 
                                         from fish, has_size
                                         where fish.fish_size = has_size.size
                                         and fish.fish_species = has_size.fish_species
                                         and fish.fish_id = ?", [$item]);
+                $quantityindepot = DB::table('fish_import_batches')
+                                    ->where('fish_id', $item)
+                                    ->get('quantity');
+                // dd($quantityindepot, $qtt_item_order[$key]);
+    
+                DB::table('fish_import_batches')
+                ->where('fish_id', $item)
+                ->update([
+                    'quantity' => ($quantityindepot[0]->quantity  - $qtt_item_order[$key])
+                ]);
             }
             DB::table('order_details')->insert(
                 [
@@ -137,8 +178,16 @@ class TransactionController extends Controller
                     'product_id' => $item,
                     'price' => $getitem[0]->price,
                     'quantity' =>$qtt_item_order[$key]
-                ]
+                ] 
                 );
+            $cartid = DB::table('carts')
+            ->where('user_id', Auth::user()->id)
+            ->get('cart_id');
+            DB::table('cart_details')
+            ->where('product_id', $item)
+            ->where('cart_id', $cartid[0]->cart_id)
+            ->delete();
+
         }
 
 
@@ -147,9 +196,10 @@ class TransactionController extends Controller
     }
 
     public function getOrderSuccess($order_id) {
-        $infor  = DB::select("select * from orders where order_id = ?", [$order_id]);
+        $infor  = DB::select("select * from orders, order_status where orders.status_id = order_status.status_id and order_id = ?", [$order_id]);
 
         $details = DB::select("select * from order_details where order_id = ?", [$order_id]);
+        // dd($details);
         $bill = [];
         $test = DB::select("select * from order_details, fish
                             where order_details.product_id = fish.fish_id

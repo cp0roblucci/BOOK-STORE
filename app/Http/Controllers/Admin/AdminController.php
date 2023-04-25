@@ -23,6 +23,7 @@ class AdminController extends Controller
     $totalNewOrder = DB::table('orders')
         ->where('status_id', '=', 0)
         ->count();
+    session()->put('newOrders', $totalNewOrder);
     return view('admin.layout.main', compact('totalNewOrder'));
   }
 
@@ -65,7 +66,7 @@ class AdminController extends Controller
         ->where('status_id', '=', 0)
         ->count();
 
-      session()->put('newOrders', $totalNewOrder);
+      // session()->put('newOrders', $totalNewOrder);
 
       // Khach hang mua nhieu nhat
       $topCustomer = DB::table('users')

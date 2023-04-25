@@ -34,8 +34,6 @@
           || request()->is('admin/search-accessories')
           || request()->is('admin/create-new-fish')
           || request()->is('admin/create-new-species')
-          || request()->is('admin/create-new-ph')
-          || request()->is('admin/create-new-color')
           || request()->is('admin/create-new-accessories-type')
           || request()->is('admin/create-new-accessory')
           ? 'bg-primary-blue text-white'
@@ -56,8 +54,6 @@
               || request()->is('admin/search-quantity')
               || request()->is('admin/create-new-fish')
               || request()->is('admin/create-new-species')
-              || request()->is('admin/create-new-ph')
-              || request()->is('admin/create-new-color')
               || request()->is('admin/create-new-accessories-type')
               || request()->is('admin/create-new-accessory')
               ? 'bg-primary-blue text-white'
@@ -82,8 +78,6 @@
           || request()->is('admin/search-quantity')
           || request()->is('admin/create-new-fish')
           || request()->is('admin/create-new-species')
-          || request()->is('admin/create-new-ph')
-          || request()->is('admin/create-new-color')
           || request()->is('admin/create-new-accessories-type')
           || request()->is('admin/create-new-accessory')
           ? ' max-h-screen' :
@@ -132,8 +126,6 @@
             {{
               request()->is('admin/create-new-fish')
               || request()->is('admin/create-new-species')
-              || request()->is('admin/create-new-ph')
-              || request()->is('admin/create-new-color')
               || request()->is('admin/create-new-accessories-type')
               ||request()->is('admin/create-new-accessory')
               ? ' text-primary-blue'
@@ -144,8 +136,6 @@
             {{
               request()->is('admin/create-new-fish')
               || request()->is('admin/create-new-species')
-              || request()->is('admin/create-new-ph')
-              || request()->is('admin/create-new-color')
               || request()->is('admin/create-new-accessories-type')
               || request()->is('admin/create-new-accessory')
               ? 'bg-primary-blue text-white'
@@ -161,8 +151,6 @@
             {{
               request()->is('admin/create-new-fish')
               || request()->is('admin/create-new-species')
-              || request()->is('admin/create-new-ph')
-              || request()->is('admin/create-new-color')
               || request()->is('admin/create-new-accessories-type')
               ||request()->is('admin/create-new-accessory')
               ? 'max-h-screen'
@@ -200,22 +188,6 @@
             >
               <i class="fa-solid fa-circle-dot text-10 text-primary-blue mr-1"></i>
               Loài
-            </a>
-            <a
-              href="{{route('new-ph')}}"
-              class="transition-all hover:bg-slate-100 py-1 rounded-sm
-              {{ request()->is('admin/create-new-ph') ? 'text-primary-blue' : '' }}"
-            >
-              <i class="fa-solid fa-circle-dot text-10 text-primary-blue mr-1"></i>
-              Độ PH
-            </a>
-            <a
-              href="{{route('new-color')}}"
-              class="transition-all hover:bg-slate-100 py-1 rounded-sm
-              {{ request()->is('admin/create-new-color') ? 'text-primary-blue' : '' }}"
-            >
-              <i class="fa-solid fa-circle-dot text-10 text-primary-blue mr-1"></i>
-              Màu sắc
             </a>
           </div>
         </div>

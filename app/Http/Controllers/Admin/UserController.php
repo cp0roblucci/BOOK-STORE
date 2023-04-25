@@ -217,6 +217,21 @@ class UserController extends Controller
       $userId = $request->input('user_id');
 
       $user = User::withTrashed()->where('id', $userId)->first();
+      $cart = DB::table('carts')
+          ->where('user_id', '=', $userId)
+          ->first();
+      $cart_details = DB::table('cart_details')
+        ->where('cart_id', '=', $cart->cart_id)
+        ->get();
+      foreach ($cart_details as $cart_detail) {
+        DB::table('cart_details')
+          ->where('cart_id', '=', $cart_detail)
+          ->delete();
+      }
+      DB::table('carts')
+        ->where('user_id', '=', $userId)
+        ->delete();
+
       $user->orders()->delete();
       $user->forceDelete();
 

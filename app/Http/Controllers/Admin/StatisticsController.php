@@ -31,7 +31,7 @@ class StatisticsController extends Controller
         ->where('order_details.category_id', 1)
         ->whereDate('orders.order_date', $day)
         ->selectRaw(
-          'order_details.category_id as category_id,
+            'order_details.category_id as category_id,
             DATE(orders.order_date) as order_date,
             SUM(order_details.quantity) as total_quantity,
             SUM(order_details.price * order_details.quantity) as total_price'
@@ -72,7 +72,7 @@ class StatisticsController extends Controller
         $dataAccessories[] = $result;
       } else {
         $dataAccessories[] = [
-          'category_id' => 2,
+          'category_id' => 0,
           'order_date' => $day,
           'total_quantity' => 0,
           'total_price' => 0,

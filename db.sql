@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2023 at 12:29 PM
+-- Generation Time: Apr 25, 2023 at 03:23 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -152,9 +152,13 @@ CREATE TABLE `carts` (
 
 INSERT INTO `carts` (`cart_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (4, 24, '2023-04-03 17:04:24', '2023-04-03 17:04:24'),
-(24, 44, '2023-04-20 11:39:22', '2023-04-20 11:39:22'),
-(25, 45, '2023-04-20 14:30:17', '2023-04-20 14:30:17'),
-(27, 47, '2023-04-25 07:40:37', '2023-04-25 07:40:37');
+(27, 47, '2023-04-25 07:40:37', '2023-04-25 07:40:37'),
+(28, 50, '2023-04-25 13:10:11', '2023-04-25 13:10:11'),
+(29, 51, '2023-04-25 13:10:42', '2023-04-25 13:10:42'),
+(30, 52, '2023-04-25 13:11:26', '2023-04-25 13:11:26'),
+(31, 53, '2023-04-25 13:11:58', '2023-04-25 13:11:58'),
+(32, 54, '2023-04-25 13:12:30', '2023-04-25 13:12:30'),
+(33, 55, '2023-04-25 13:13:26', '2023-04-25 13:13:26');
 
 -- --------------------------------------------------------
 
@@ -171,15 +175,6 @@ CREATE TABLE `cart_details` (
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `cart_details`
---
-
-INSERT INTO `cart_details` (`id`, `cart_id`, `product_id`, `category_id`, `quantity`, `created_at`, `updated_at`) VALUES
-(1, 4, 'AG01', 1, 15, '2023-04-23 19:07:49', '2023-04-23 19:08:17'),
-(2, 24, 'ARM06', 0, 6, '2023-04-23 19:07:49', '2023-04-23 19:08:17'),
-(3, 25, 'DC02', 1, 2, '2023-04-23 19:07:49', '2023-04-23 19:08:17');
 
 -- --------------------------------------------------------
 
@@ -571,22 +566,6 @@ CREATE TABLE `orders` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `status_id`, `delivery_id`, `payment_id`, `full_name`, `order_phone_number`, `order_delivery_address`, `order_notes`, `deleted_at`) VALUES
-('BT0001', 2, '2023-03-28 01:25:19', 0, 0, 0, 'Trần Văn Trường', '0123123123', 'Lấp Vò, Đồng Tháp', '', NULL),
-('BT0002', 2, '2023-03-29 01:26:24', 7, 2, 1, 'Võ Đức Duy', '0456456456', 'Kiên Giang', '', NULL),
-('BT0003', 44, '2023-04-05 01:27:18', 6, 2, 1, 'Lê Thanh Hùng', '0123456456', 'An Giang', '', NULL),
-('BT0004', 2, '2023-04-11 12:04:22', 2, 1, 1, 'Lê Minh Toàn', '0123123456', 'Thốt Nốt, Cần Thơ', '', NULL),
-('BT0005', 44, '2023-04-09 12:03:56', 0, 0, 0, 'Nguyễn Hữu Phúc', '0456789789', 'Kiên Giang', '', NULL),
-('BT0006', 2, '2023-04-14 00:38:58', 3, 2, 1, 'Trần Văn Trường', '0123123123', 'Ninh Kiều, Cần Thơ', '', NULL),
-('BT0007', 1, '2023-04-12 12:04:33', 0, 0, 0, 'Võ Đức Duy', '0456456456', 'Ninh Kiều, Cần Thơ', '', NULL),
-('BT0008', 44, '2023-04-07 12:04:50', 4, 0, 0, 'Lê Minh Toàn', '0123123123', 'Ninh Kiều, Cần Thơ', '', NULL),
-('BT0009', 2, '2023-04-16 23:04:22', 3, 2, 1, 'Trần Văn Trường', '0123123123', 'An Khánh, Ninh Kiều, Cần Thơ', 'Giao hàng vào buổi chiều', NULL),
-('BT0010', 45, '2023-04-16 23:04:22', 5, 2, 1, 'Trần Văn Trường', '0123123123', 'An Khánh, Ninh Kiều, Cần Thơ', 'Giao hàng vào chủ nhật', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -601,28 +580,6 @@ CREATE TABLE `order_details` (
   `price` float DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `order_details`
---
-
-INSERT INTO `order_details` (`order_detail_id`, `order_id`, `category_id`, `product_id`, `price`, `quantity`) VALUES
-(3, 'BT0002', 1, 'DC01', 20000, 25),
-(4, 'BT0003', 1, 'DC02', 20000, 50),
-(5, 'BT0004', 0, 'ARM05', 20000, 15),
-(6, 'BT0002', 1, 'DA01', 20000, 30),
-(8, 'BT0001', 1, 'BF02', 32000, 15),
-(9, 'BT0004', 0, 'ARM14', 26000, 35),
-(10, 'BT0005', 1, 'AG01', 12000, 32),
-(11, 'BT0006', 1, 'BF01', 120000, 26),
-(12, 'BT0005', 0, 'ARM01', 650000, 1),
-(13, 'BT0007', 1, 'BR03', 30000, 15),
-(14, 'BT0008', 1, 'DA02', 8000, 10),
-(15, 'BT0006', 0, 'ARM06', 70000, 3),
-(16, 'BT0007', 0, 'ARM14', 150000, 2),
-(17, 'BT0008', 0, 'ARM06', 70000, 5),
-(18, 'BT0009', 1, 'DGF02', 1500000, 1),
-(19, 'BT00010', 1, 'DGF02', 1500000, 1);
 
 -- --------------------------------------------------------
 
@@ -830,12 +787,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `first_name`, `last_name`, `phone_number`, `user_address`, `google_id`, `link_avt`, `email`, `password`, `status_id`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '1', 'Truong', 'Tran Van', '123123124', 'An Khanh, Ninh Kieu, Can Tho', NULL, '/storage/images/users/tSnbbSgIO5OGbL3SK6UrZfddv4Xyf2iYaAGXUFfS.png', 'vantruong@gmail.com', '$2y$10$NsK.7f6S43ICDsjwKr2NPO42f/faBXRXEXWJMfFH09uE8MDT4ZQRe', 0, 'n1NoPyD1E57UixvRr4xxaytivhOKb1Iap3W4ZIjBuiTzNmpZbPknAPMbzjCk', NULL, '2023-04-10 10:53:41', NULL),
-(2, '0', 'Truong 2', 'Tran Van', '1412312', 'An Khanh, Ninh Kieu, Can Tho', NULL, '', 'vantruong2@gmail.com', '$2y$10$x8dJV84R/9.yAI.cwozA2.5tCcVET2ztAMRnL1MaGWCiAM.ZXU8yK', 0, 'P4RV5SCsUypP8FncWVVSHCnPW7ooxAtcBr43fmWE6wkdhHwMNC9D5SZTyAII', NULL, '2023-04-25 07:49:44', NULL),
 (24, '1', 'Trường', 'Trần Văn', '0123123123', 'An Khánh, Ninh Kiều, Cần Thơ', NULL, '/storage/images/users/JIiMbNO15guSO4LGDH0sB0VdcXHx1yy4bbChCTtj.png', 'admin@gmail.com', '$2y$10$Zi3w9kihSDcpYsUbOoJGvehcS.cCJz15i79P7sJhOgPN0.HbiNypi', 0, NULL, '2023-04-03 17:04:24', '2023-04-03 17:04:24', NULL),
-(44, '0', 'Duy', 'Võ Đức', '0998776655', 'Kiên Giang', NULL, '/storage/images/users/1fteqSBzI20DwWMNjeooHywPVX4nsd5zPPqj41DG.jpg', 'duy@gmail.com', '$2y$10$TwDAq2KJTITcjk2nfsZ1x.TlLp0uLJh2EjXNYd6e2GjXWd4KDHiDG', 0, NULL, '2023-04-20 11:39:22', '2023-04-22 16:33:00', NULL),
-(45, '0', 'Truong Tran', 'Van', '0998123124', 'An Khánh, Ninh Kiều, Cần Thơ', '105361341525498359548', '/storage/images/admin/avatar-default.png', 'vtdjv02@gmail.com', '', 0, NULL, '2023-04-20 14:30:17', '2023-04-20 14:30:17', NULL),
-(47, '2', 'Giao Hàng', 'Tài Khoản', '0911223344', 'Cần Thơ', NULL, '/storage/images/users/gxKzOyqZaghSymseFFzx6bY3PmllvqGhRUUqyrdK.jpg', 'delivery@gmail.com', '$2y$10$DaGgles1WqyOYY6bG6FLSOCfigadWJ.aSqFleCttsiX.8iF031//6', 0, NULL, '2023-04-25 07:40:37', '2023-04-25 07:40:37', NULL);
+(47, '2', 'Giao Hàng', 'Tài Khoản', '0911223344', 'Cần Thơ', NULL, '/storage/images/users/gxKzOyqZaghSymseFFzx6bY3PmllvqGhRUUqyrdK.jpg', 'delivery@gmail.com', '$2y$10$DaGgles1WqyOYY6bG6FLSOCfigadWJ.aSqFleCttsiX.8iF031//6', 0, NULL, '2023-04-25 07:40:37', '2023-04-25 07:40:37', NULL),
+(50, '0', 'Duy', 'Võ Đức', '0911111111', 'Kiên Giang', NULL, '/storage/images/users/TheaFJmQ058mLe0nKiaUqDkLegvbp5G9mVevaQSn.jpg', 'duy@gmail.com', '$2y$10$S6y0lzLN6sXPRB4BYyGyvulbIk2IxrxduM6vY0S5AQqaFY24sAWrG', 0, NULL, '2023-04-25 13:10:11', '2023-04-25 13:10:11', NULL),
+(51, '0', 'Hùng', 'Lê Thanh', '0922222222', 'An Giang', NULL, '/storage/images/users/K1fYge8YLRo2ecAXqgBIifPVqV0eY8uOGm1Y7DpF.jpg', 'hung@gmail.com', '$2y$10$l9Lj1RtUTLNioqcd/vUq9eN1FQlxyXFauiSQZZLaEnHv0iiwc/cB2', 0, NULL, '2023-04-25 13:10:42', '2023-04-25 13:10:42', NULL),
+(52, '0', 'Trường', 'Trần Văn', '0933333333', 'Đồng Tháp', NULL, '/storage/images/users/QrlvXIHr00766X3dtlqx9EYu5vT9hKF3CglF1pu3.jpg', 'truong@gmail.com', '$2y$10$kwFwM/7YDZMvx9QkmGy8JeVaelKR1RFTnv1w2lrYgp2kAAfmezN6y', 0, NULL, '2023-04-25 13:11:26', '2023-04-25 13:11:26', NULL),
+(53, '0', 'Phúc', 'Nguyễn Hữu', '0944444444', 'Kiên Giang', NULL, '/storage/images/users/yWgMLg9OrZf1xkSlh9GEiWaLaDJ49xkIajb6xJW4.jpg', 'phuc@gmail.com', '$2y$10$C4ywkG/8XUVkAiqIA7CyxeWPr20VG6ph5Htd9bsIXVEhlba7XYOda', 0, NULL, '2023-04-25 13:11:58', '2023-04-25 13:11:58', NULL),
+(54, '0', 'Toàn', 'Lê Minh', '0955555555', 'Cần Thơ', NULL, '/storage/images/users/3qMi49bRwOI80J7ULFSYHNLa4gQl5CwLTn4waqZh.jpg', 'toan@gmail.com', '$2y$10$wfFaqCdFSAkBXq.kiXmjA.DdKGDEI9cIl5322OrElJVRkMzSO8oAO', 0, NULL, '2023-04-25 13:12:30', '2023-04-25 13:12:30', NULL),
+(55, '0', 'Khách Hàng', 'Tài Khoản', '0966666666', 'Cần Thơ', NULL, '/storage/images/users/YS5NFt5zxpOYXNVpBFKG20cWbw1tLhevqWb1oAay.jpg', 'khachhang@gmail.com', '$2y$10$ulXZq7I2a.Q1viVzET4cmO9diJHgJtsOxL2hYPERRP0GEGSTpYTwW', 0, NULL, '2023-04-25 13:13:26', '2023-04-25 13:13:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -1079,7 +1038,7 @@ ALTER TABLE `accessories_import_batches`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `cart_details`
@@ -1139,7 +1098,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `user_repositories`
@@ -1168,7 +1127,7 @@ ALTER TABLE `accessories_import_batches`
 -- Constraints for table `carts`
 --
 ALTER TABLE `carts`
-  ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `cart_details`

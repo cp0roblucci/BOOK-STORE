@@ -24,7 +24,7 @@
     <div
       id="imageLogin1"
       style="background-image: url('/storage/images/login/login.jpg')"
-      class="w-[50%] h-[96%] mt-0.5 rounded-xl absolute z-10 bg-cover translate-x-[96%] transform transition-all ease-linear duration-700">
+      class="w-[50%] h-[96%] mt-0.5 rounded-xl absolute z-10 bg-cover translate-x-[96%] transform transition-all ease-linear duration-700 text-48 text-primary-purple text-opacity-100 text-center">
     </div>
 
 
@@ -33,7 +33,8 @@
         {{-- Login --}}
         <div id="formLogin" class="login flex w-[70%] h-[90%] ml-8">
           <div class="p-6 w-full">
-            <div class="mt-10 mb-6">
+            <div class="text-20 font-sora">Chào mừng trở lại <a href="{{ route('home') }}" class="text-32 font-pacifico text-primary-purple hover:underline">Betta Shop</a></div>
+            <div class="mt-6 mb-6">
               <h2 class="text-26 font-bold text-[#344767] font-sora mb-1">Đăng nhập</h2>
               <span class="text-14 text-slate-400">Nhập email và mật khẩu của bạn để đăng nhập</span>
             </div>

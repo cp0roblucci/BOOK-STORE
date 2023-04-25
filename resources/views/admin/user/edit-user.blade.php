@@ -28,7 +28,7 @@
               > --}}
               <img
                 id="img-preview"
-                src="{{ $user->link_avt ? $user->link_avt : URL::to('/storage/images/admin/add-user.png')  }}"
+                src="{{ $user->link_avt ? $user->link_avt : URL::to('/storage/images/admin/add-user.png') }}"
                 alt="avatar"
                 class="w-full h-full rounded-full"
               >

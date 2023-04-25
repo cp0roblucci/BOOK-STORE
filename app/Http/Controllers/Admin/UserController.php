@@ -107,7 +107,7 @@ class UserController extends Controller
       Cart::create([
         'user_id' => $user->id,
       ]);
-      Session::flash('message', 'Create User successfully.');
+      Session::flash('create-message', 'Create User successfully.');
       return redirect()->route('admin-users');
     }
 
@@ -141,7 +141,7 @@ class UserController extends Controller
       } else if($user->link_avt) {
         $avatarUrl = $user->link_avt;
       } else {
-        $avatarUrl = Storage::url('images/admin/avatar-default.png');
+        $avatarUrl = Storage::url('/storage/images/admin/add-user.png');
       }
 
       $role = $request->input('role');
@@ -195,11 +195,6 @@ class UserController extends Controller
     public function delete(Request $request)
     {
       $userId = $request->input('user_id');
-      if ($userId === 'undefined') {
-        Session::flash('delete-failed', 'không thể xóa người dùng này.');
-        $url = route('admin-users');
-        return response()->json(['url' => $url]);
-      }
       $user = User::find($userId);
       $user->delete();
 
@@ -229,7 +224,8 @@ class UserController extends Controller
       return response()->json(['url' => $url]);
     }
 
-
-
-
+    public function disAbleDeleteUser() {
+      Session::flash('delete-failed', 'không thể xóa người dùng này.');
+      return redirect()->route('admin-users');
+    }
 }

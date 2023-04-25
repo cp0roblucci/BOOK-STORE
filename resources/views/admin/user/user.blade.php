@@ -29,11 +29,11 @@
       </form>
     </div>
 
-    @if(session('update-success'))
+    @if(session('create-success') || session('update-success'))
         <div id="message" class="flex absolute top-12 right-7">
           <div  class="bg-slate-200 rounded-lg border-l-8 border-l-blue-500 opacity-80">
             <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
-              <span class="px-4">{{ session('update-success') ? session('update-success') : session('delete-success') }}</span>
+              <span class="px-4">{{ session('update-success') ? session('update-success') : session('create-success') }}</span>
             </div>
           </div>
         </div>
@@ -122,9 +122,12 @@
                           <i class="fa-regular fa-pen-to-square mr-2"></i>
                         </a>
                         @if($user->id === Auth::user()->id )
-                          <button class="delete-user text-16 mr-2 text-red-300 cursor-pointer">
-                            <i class="fa-regular fa-trash-can text-16"></i>
-                          </button>
+                          <form action="{{ route('disable-delete-user') }}" method="post">
+                            @csrf
+                            <button class="text-16 mr-2 text-red-300 cursor-pointer">
+                              <i class="fa-regular fa-trash-can text-16"></i>
+                            </button>
+                          </form>
                         @else
                           <button class="delete-user text-16 mr-2 text-red-300 cursor-pointer" data-id="{{$user->id}}">
                             <i class="fa-regular fa-trash-can text-16"></i>

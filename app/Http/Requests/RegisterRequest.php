@@ -40,16 +40,18 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'firstname' => 'First name is required',
-            'lastname' => 'Last name is required',
-            'email.required' => 'Email is required',
-            'email.email' => 'Please enter a valid email address.',
-            'password.required' => 'Password is required.',
-            'password.min' => 'Password must be greater than 8 characters.',
-            'password.regex' => 'Password must contain uppercase, lowercase, special characters, and numbers.',
-            'password.confirmed' => 'Passwords do not match.',
-            'password_confirmation.required' => 'Please confirm your password.',
-            'condition_register.required' => 'In order to proceed, please agree to our terms and conditions.'
+            'firstname' => 'Tên là bắt buộc',
+            'lastname' => 'Họ là bắt buộc',
+            'email.required' => 'Email là bắt buộc',
+            'email.email' => 'Vui lòng nhập một địa chỉ email hợp lệ',
+            'password.required' => 'Mật khẩu là bắt buộc',
+            'password.min' => 'Mật khẩu phải lớn hơn 8 ký tự',
+            'password.regex' => 'Mật khẩu phải chứa chữ hoa, chữ thường, ký tự đặc biệt và số',
+            'password.confirmed' => 'Mất khẩu không hợp lệ',
+            'password_confirmation.required' => 'Vui lòng xác nhận mật khẩu của bạn',
+            'condition_register.required' => 'Để tiếp tục, vui lòng đồng ý với các điều khoản và điều kiện của chúng tôi',
+            'password_confirmation.min' => 'Mật khẩu phải lớn hơn 8 ký tự',
+
         ];
     }
 }

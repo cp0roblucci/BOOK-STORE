@@ -23,6 +23,7 @@ class AdminController extends Controller
     $totalNewOrder = DB::table('orders')
         ->where('status_id', '=', 0)
         ->count();
+    session()->put('newOrders', $totalNewOrder);
     return view('admin.layout.main', compact('totalNewOrder'));
   }
 
@@ -65,7 +66,7 @@ class AdminController extends Controller
         ->where('status_id', '=', 0)
         ->count();
 
-      session()->put('newOrders', $totalNewOrder);
+      // session()->put('newOrders', $totalNewOrder);
 
       // Khach hang mua nhieu nhat
       $topCustomer = DB::table('users')
@@ -87,6 +88,11 @@ class AdminController extends Controller
 
       // phu kien ban it nhat
       $leastAccessories = $this->getTopAccessories(0, 2, false);
+
+      $totalNewOrder = DB::table('orders')
+        ->where('status_id', '=', 0)
+        ->count();
+      session()->put('newOrders', $totalNewOrder);
 
       return view('admin.dashboard',
         compact('totalCustomer', 'totalProduct', 'totalNewOrder', 'topCustomer', 'mostFish', 'leastFish', 'mostAccessories', 'leastAccessories')

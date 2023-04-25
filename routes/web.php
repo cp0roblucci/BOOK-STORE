@@ -3,12 +3,12 @@
 use App\Http\Controllers\AccessoriesController;
 use App\Http\Controllers\AccessoriesTypeController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\CommonController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ColorController;
+use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\FishController;
 use App\Http\Controllers\PHController;
 use App\Http\Controllers\ProductsController;
@@ -22,7 +22,8 @@ use App\Http\Controllers\clients\ProfileUserController;
 //use App\Http\Controllers\clients\ProductDetailController;
 
 use \App\Http\Controllers\Auth\GoogleController;
-
+use App\Http\Controllers\DeliverController;
+use App\Http\Controllers\SpeciesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,14 +74,22 @@ Route::get('/products', function () {
 
 
 Route::get('/cart', [CartController::class, 'getCart'])->name('cart');
-Route::post('/cart', [CartController::class, 'postbill']);
+Route::post('/cart', [CartController::class, 'postbill'])->name('handlecart');
+Route::get('/cart/update-quantity/{id_cart}/{product_id}/{quantity}', [CartController::class, 'updatequantity'])->name('update-quantity-cart');
+Route::get('/cart/delete-quantity/{id_cart}/{product_id}', [CartController::class, 'deleteitem'])->name('delete-item-cart');
 
 Route::get('/transaction', [TransactionController::class, 'getTransaction'])->name('transaction');
 Route::post('/transaction', [TransactionController::class, 'postTransaction'])->name('order');
 
 Route::get('/ordered/{order_id}', [TransactionController::class, 'getOrderSuccess'])->name('ordered');
 
-Route::get('/profile-user/{user_id}', [ProfileUserController::class, 'getprofileUser'])->name('profileUser');
+Route::get('/profile-user', [ProfileUserController::class, 'getprofileUser'])->name('profileUser');
+Route::post('profile-user-upload-avt', [ProfileUserController::class, 'getprofileUserUploadAvt'])->name('upload-avt-user');
+Route::post('/profile-user/updatename', [ProfileUserController::class, 'updatename'])->name('updatename');
+Route::post('/profile-user/updatephone', [ProfileUserController::class, 'updatephonenumber'])->name('updatephone');
+Route::post('/profile-user/updateaddress', [ProfileUserController::class, 'updateaddress'])->name('updateaddress');
+Route::post('/profile-user/updateemail', [ProfileUserController::class, 'updateemail'])->name('updateemail');
+Route::post('/profile-user/updatestatus', [ProfileUserController::class, 'updatestatus'])->name('updatestatus');
 
 
 Route::get('/header', function () {
@@ -106,12 +115,20 @@ Route::post('/forgot-password', [ResetPasswordController::class, 'sendMail']);
 Route::get('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('reset-password');
 Route::post('/reset-password', [ResetPasswordController::class, 'reset']);
 
-
 // logout
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 // 403
 Route::view('/403', '403')->name('403');
+
+Route::group(['middleware' => ['auth', 'delivery']], function() {
+  // deliver
+  Route::get('delivery', [DeliverController::class, 'listOdersDeliver']);
+  Route::get('deliver/order-detail/{id}', [DeliverController::class, 'orderDetailDeliver']);
+  Route::post('delivery-cancel', [DeliverController::class, 'confirmDeliveryCancel'])->name('confirm-delivery-cancel');
+  Route::post('deliver-success', [DeliverController::class, 'confirmDeliverySuccess'])->name('confirm-delivery-success');
+});
+
 
 
 // google login
@@ -163,6 +180,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::post('users/{id}/edit', [UserController::class, 'updateUser']);
 
     Route::post('delete-user', [UserController::class, 'delete']);
+    Route::post('delete-user-admin', [UserController::class, 'disAbleDeleteUser'])->name('disable-delete-user');
     Route::post('rollback-delete-user', [UserController::class, 'rollback']);
     Route::post('commit-delete-user', [UserController::class, 'commit']);
 
@@ -191,15 +209,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     // Fish
     // new product
     Route::get('create-new-fish', [FishController::class, 'newFish'])->name('new-fish');
-    Route::post('create-new-fish', [FishController::class, 'create']);
+    Route::post('create-new-fish', [FishController::class, 'postCreateNewFish']);
     // edit fish
-    Route::get('fish/{id}/edit', [FishController::class, 'editFish']);
+    Route::get('fish/{id}/edit', [FishController::class, 'getEditFish']);
+    Route::post('fish/{id}/edit', [FishController::class, 'postEditFish']);
 
 
     // new species
-    Route::get('create-new-species', function() {
-        return view('admin.fish.new-species');
-    })->name('new-species');
+    Route::get('create-new-species', [SpeciesController::class, 'index'])->name('new-species');
     Route::post('create-new-species', [SpeciesController::class, 'create']);
 
     // new ph
@@ -252,15 +269,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::post('/confirm-waiting-orders', [OrderController::class, 'confirmOrders']);
     // confirm orders
     Route::post('/confirm-processing-orders', [OrderController::class, 'confirmOrders']);
-    // confirm orders
-    Route::post('/confirm-sent-orders', [OrderController::class, 'confirmOrders']);
     // delete orders
     Route::post('/delete-archived-orders', [OrderController::class, 'confirmOrders']);
     // delete orders
     Route::post('/archived-orders', [OrderController::class, 'confirmOrders']);
     // delete orders
     Route::post('/delete-orders', [OrderController::class, 'confirmOrders']);
-
+    // return request
+    Route::post('/return-request', [OrderController::class, 'confirmOrders']);
+    // accept return request
+    Route::post('/accept-return-request', [OrderController::class, 'confirmOrders']);
 
 
 

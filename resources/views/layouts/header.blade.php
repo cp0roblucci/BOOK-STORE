@@ -36,38 +36,38 @@
         <div class="w-1/4  flex justify-center items-center">
             @if(Auth::check())
             <div class="mr-20 text-slate-300">
-                <form action="{{route('cart')}}" method="GET">
-                    <input type="hidden" name="userid" value="{{Auth::user()->id}}">
-                    @csrf
-                    <button type="submit">
+                {{-- <form action="{{route('cart')}}" method="GET">
+                    <button type="submit"> --}}
+                    <a href="{{route('cart')}}">
                         <i class="fa-solid fa-cart-shopping hover:scale-90 text-20 cursor-pointer"></i>
-                    </button>
-                </form>
+                    </a>
+                    {{-- </button>
+                </form> --}}
             </div>
             @else
             <div class="mr-20 text-slate-300">
-                <form action="{{route('cart')}}" method="GET">
-                    @csrf
-                    <button type="submit">
-                        <i class="fa-solid fa-cart-shopping hover:scale-90 text-20 cursor-pointer"></i>
-                    </button>
-                </form>
+                {{-- <form action="{{route('login')}}" method="GET">
+                    <button type="submit"> --}}
+                        <a href="{{route('login')}}">
+                            <i class="fa-solid fa-cart-shopping hover:scale-90 text-20 cursor-pointer"></i>
+                        </a>
+                    {{-- </button>
+                </form> --}}
             </div>
             @endif
             @if(Auth::check()) 
             {{-- logged --}}
                 <div class="text-16 flex justify-center items-center">
-                    <form action="{{route('profileUser', ['user_id' => Auth::user()->id])}}" method="GET">
-                        <input type="hidden" name="userid" value="{{Auth::user()->id}}">
-                        <button type="submit" class="flex justify-center items-center text-slate-300">
+                    {{-- <form action="{{route('profileUser', ['user_id' => Auth::user()->id])}}" method="GET"> --}}
+                        <a href="{{route('profileUser')}}" class="flex justify-center items-center text-slate-300">
                             @if(!empty(Auth::user()->link_avt ))
                                 <img src="{{Auth::user()->link_avt}}" class="w-8 h-8 rounded-full mr-2" alt="">
                             @else
                                 <i class="fa-regular fa-circle-user text-24 mr-2"></i>
                             @endif
                             <span class="hover:scale-90 mr-2">{{ Auth::user()->last_name . ' ' . Auth::user()->first_name }}</span>
-                        </button>
-                    </form>
+                        </a>
+                    {{-- </form> --}}
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button type="submit" class="before:border-r-2 before:border-slate-300 before:mr-1.5 before:text-14 text-slate-300 hover:scale-90">Đăng xuất</button>

@@ -29,6 +29,16 @@
         </form>
       </div>
 
+      @if(session('update-success'))
+        <div id="message" class="flex absolute top-12 right-7">
+          <div  class="bg-slate-200 rounded-lg border-l-8 border-l-blue-500 opacity-80">
+            <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
+              <span class="px-4">{{ session('update-success') }}</span>
+            </div>
+          </div>
+        </div>
+      @endif
+
       {{-- Table --}}
       <div class="">
         <div class="flex flex-wrap -mx-3 mb-10 mt-2">

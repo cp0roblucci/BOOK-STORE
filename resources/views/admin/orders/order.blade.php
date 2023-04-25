@@ -19,16 +19,16 @@
       <div class="flex w-full justify-between">
         @foreach ($orderQuantityByStatus as $key => $value)
           @foreach ($value as $order_status => $quantity)
-            <a
-              href="{{ route('order-filter', ['data_id' => $key]) }}"
-              class="btn-orders flex flex-col border-2 rounded-md px-6 py-2 hover:bg-primary-purple-1
+              <a
+                href="{{ route('order-filter', ['data_id' => $key]) }}"
+                class="btn-orders flex flex-col w-full border-2 text-center py-2 hover:bg-primary-purple-1
               {{
                 request()->segment(3) == $key ? 'border-primary-purple text-primary-purple' : 'border-transparent'
               }}"
-            >
-              <span class="text-16">{{ $order_status }}</span>
-              <span class="text-14 text-slate-400">{{ $quantity }} đơn hàng</span>
-            </a>
+              >
+                <span class="text-16">{{ $order_status }}</span>
+                <span class="text-14 text-slate-400">{{ $quantity }} đơn hàng</span>
+              </a>
           @endforeach
         @endforeach
       </div>
@@ -65,20 +65,20 @@
 
     {{--      Thong bao xac nhan thanh cong--}}
     @if(session('confirm-success'))
-      <div id="message" class="flex absolute top-[8.5rem] right-7">
+      <div id="message" class="flex absolute top-[9.5rem] right-7">
         <div id=""
-             class="bg-slate-200 flex justify-between rounded-lg border-l-8 opacity-80
+            class="bg-slate-200 flex justify-between rounded-lg border-l-8 opacity-80
           {{
-            request()->segment(3) == 4 ? 'border-l-red-400'
-            : (request()->segment(3) == 3 ? 'border-l-green-400'
+            request()->segment(3) == 4 || request()->segment(3) == 5 || request()->segment(3) == 7 ? 'border-l-red-400'
+            : (request()->segment(3) == 3 || request()->segment(3) == 6 ? 'border-l-green-400'
             : (request()->segment(3) == 1 || request()->segment(3) == 0 ? 'border-l-yellow-400'
             : (request()->segment(3) == 2 ? 'border-l-primary-purple' : '')))
           }}"
         >
           <div class="py-4 relative before:absolute before:bottom-0 before:content-[''] before:h-0.5 before:w-full before:animate-before
             {{
-            request()->segment(3) == 4 ? 'text-red-400 before:bg-red-400'
-            : (request()->segment(3) == 3 ? 'text-green-400 before:bg-green-400'
+            request()->segment(3) == 4 || request()->segment(3) == 5 || request()->segment(3) == 7 ? 'text-red-400 before:bg-red-400'
+            : (request()->segment(3) == 3 || request()->segment(3) == 6 ? 'text-green-400 before:bg-green-400'
             : (request()->segment(3) == 1 || request()->segment(3) == 0 ? 'text-yellow-400 before:bg-yellow-400'
             : (request()->segment(3) == 2 ? 'text-primary-purple before:bg-primary-purple': '')))
           }}"
@@ -119,7 +119,7 @@
                       <thead class="align-bottom bg-slate-200 rounded-2xl">
                       <tr class="text-black uppercase text-left text-12">
 
-                        @if (request()->segment(3) == 10)
+                        @if (request()->segment(3) == 10 || request()->segment(3) == 2)
                           <th class="px-4 py-3 font-bold">#</th>
                         @else
                           <th class="px-4 py-3 font-bold opacity">
@@ -135,7 +135,7 @@
                         <th class="px-4 py-3 font-bold ">Ngày Tạo</th>
                         <th class="px-4 py-3 font-bold ">Khách Hàng</th>
 
-                        @if (request()->segment(3) == 10)
+                        @if (request()->segment(3) == 10 || request()->segment(3) == 2)
                           <th class="px-4 py-3 font-bold ">Trạng thái</th>
                         @else
                         @endif
@@ -148,8 +148,6 @@
                           <th class="px-4 py-3 font-bold text-center">Xác nhận</th>
                         @elseif(request()->segment(3) == 1)
                           <th class="px-4 py-3 font-bold text-center">Xác nhận gửi hàng</th>
-                        @elseif(request()->segment(3) == 2)
-                          <th class="px-4 py-3 font-bold text-center">Xác nhận hoàn tất</th>
                         @elseif(request()->segment(3) == 3)
                           <th class="px-4 py-3 font-bold text-center">Hành động</th>
                         @elseif(request()->segment(3) == 4 || request()->segment(3) == 5)
@@ -171,7 +169,7 @@
                     {{$order->status_id == 4 ? 'bg-red-50 bg-opacity-50' : ''}}"
                           data-id="{{ $order->order_id }}"
                         >
-                          @if (request()->segment(3) == 10)
+                          @if (request()->segment(3) == 10 || request()->segment(3) == 2)
                             <td data-tooltip-target="tooltip-default" class="w-10 p-4 bg-transparent">
                               <div class="py-1">
                                 <h6 class="mb-0 text-12 leading-normal">{{ ++$key }}</h6>
@@ -215,7 +213,7 @@
                             </div>
                           </td>
 
-                          @if (request()->segment(3) == 10)
+                          @if (request()->segment(3) == 10 || request()->segment(3) == 2)
                             <div
                               id="tooltip-order-status/{{$key}}"
                               role="tooltip"
@@ -335,19 +333,6 @@
                                 </form>
                               </div>
                             </td>
-                          @elseif (request()->segment(3) == 2)
-                            <td class="p-2 bg-transparent">
-                              <div class="py-1 text-center">
-                                <form action="{{ route('confirm-order') }}" method="post">
-                                  @csrf
-                                  <label hidden="">
-                                    <input name="order_id" value="{{ $order->order_id }}">
-                                    <input name="status_id" value="{{ $order->status_id }}">
-                                  </label>
-                                  <button type="submit" class="text-12 text-primary-purple leading-normal border-2 border-primary-purple  px-4 py-2 rounded-xl hover:bg-primary-purple hover:text-white transition-all duration-200">Xác nhận hoàn thành</button>
-                                </form>
-                              </div>
-                            </td>
                           @elseif (request()->segment(3) == 3)
                             <td class="p-2 bg-transparent">
                               <div class="flex justify-around py-1 text-center">
@@ -415,14 +400,6 @@
                 >
                   Xác nhận các mục đã chọn
                 </button>
-              @elseif(request()->segment(3) == 2)
-                <button
-                  id="confirm-all-sent-orders"
-                  class="border select-none px-4 py-3 text-slate-500 opacity-50 pointer-events-none"
-                  data-status_id="{{ request()->segment(3) }}"
-                >
-                  Xác nhận các mục đã chọn
-                </button>
               @elseif(request()->segment(3) == 3)
                 <button
                   id="archived-all-orders"
@@ -441,6 +418,22 @@
               @elseif(request()->segment(3) == 5)
                 <button
                   id="delete-all-archived-orders"
+                  class="border select-none px-4 py-3 text-slate-500 opacity-50 pointer-events-none"
+                  data-status_id="{{ request()->segment(3) }}"
+                >
+                  Xóa các mục đã chọn
+                </button>
+              @elseif(request()->segment(3) == 6)
+                <button
+                  id="return-request"
+                  class="border select-none px-4 py-3 text-slate-500 opacity-50 pointer-events-none"
+                  data-status_id="{{ request()->segment(3) }}"
+                >
+                  Chấp nhận các đơn hàng yêu cầu trả hàng
+                </button>
+              @elseif(request()->segment(3) == 7)
+                <button
+                  id="accept-return-request"
                   class="border select-none px-4 py-3 text-slate-500 opacity-50 pointer-events-none"
                   data-status_id="{{ request()->segment(3) }}"
                 >

@@ -99,6 +99,7 @@
                             @csrf
                         <button type="submit" class="py-4 px-10 bg-red-500 text-white font-medium hover:bg-fuchsia-500 mr-3" id="add-to-transaction">
                             <input name="product_id" type="hidden" value="{{$data->fish_id}}">
+                            <input id="category_id" name="category_id" type="hidden" value="{{$data->category_id}}">
                             <input name="qty" type="hidden" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="{{ old('value-quantity') ?? 1 }}">
                                 <p>MUA NGAY VỚI GIÁ {{number_format($data->has_price,0,',','.')}}đ</p>
                         </button>
@@ -107,6 +108,7 @@
                             @csrf
                         <button type="submit" class="py-4 px-6 bg-blue-500 text-white font-medium hover:bg-fuchsia-500" id="add-to-cart">
                             <input  name="product_id" type="hidden" value="{{$data->fish_id}}">
+                            <input id="category_id" name="category_id" type="hidden" value="{{$data->category_id}}">
                             <input id="add_to_cart_product_id" type="hidden" name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="1">
                                 <i class="fa-solid fa-cart-shopping mr-2"></i>
                                 THÊM VÀO GIỎ HÀNG
@@ -191,7 +193,9 @@
                             @csrf
                         <button type="submit" class="py-4 px-10 bg-red-500 text-white font-medium hover:bg-fuchsia-500 mr-3" id="add-to-transaction">
                             <input name="product_id" type="hidden" value="{{$data->accessories_id}}">
+                            <input id="category_id" name="category_id" type="hidden" value="{{$data->category_id}}">
                             <input type="hidden" name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="{{ old('qty') ?? 1 }}">
+                            
                                 <p>MUA NGAY VỚI GIÁ {{number_format($data->accessories_price,0,',','.')}}đ</p>
                         </button>
                         </form>
@@ -199,6 +203,7 @@
                             @csrf
                         <button type="submit" class="py-4 px-6 bg-blue-500 text-white font-medium hover:bg-fuchsia-500" id="add-to-cart">
                             <input name="product_id" type="hidden" value="{{$data->accessories_id}}">
+                            <input id="category_id" name="category_id" type="hidden" value="{{$data->category_id}}">
                             <input type="hidden" name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="1">
                                 <i class="fa-solid fa-cart-shopping mr-2"></i>
                                 THÊM VÀO GIỎ HÀNG

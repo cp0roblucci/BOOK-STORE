@@ -24,10 +24,9 @@
             </div>
         </div>
         <div class="w-2/4  flex justify-center">
-            <ul class="w-3/4  m-auto flex justify-between items-center flex-wrap">
-                <li class="hover:scale-90"><a class="px-4 py-2 bg-slate-500 opacity-90 text-white rounded-md text-20  " href="/">Trang chủ</a></li>
-                <li class="hover:scale-90"><a class="px-4 py-2 bg-slate-500 opacity-90 text-white rounded-md text-20  " href="{{route('get-product', ['category_id' => 1])}}">Sản phẩm</a></li>
-                <li class="hover:scale-90"><a class="px-4 py-2 bg-slate-500 opacity-90 text-white rounded-md text-20  " href="/contact">Liên hệ</a></li>
+            <ul class="w-3/4 flex justify-between items-center flex-wrap">
+                <li class="hover:scale-90"><a class="px-4 py-2 bg-slate-500 opacity-90 text-white rounded-md text-20 ml-20" href="/">Trang chủ</a></li>
+                <li class="hover:scale-90"><a class="px-4 py-2 bg-slate-500 opacity-90 text-white rounded-md text-20 -ml-48" href="{{route('get-product', ['category_id' => 1])}}">Sản phẩm</a></li>
                 {{-- <li class="w-full flex justify-center items-center mt-3 relative">
                     <input class="w-1/2 border-none rounded-md h-7 px-2 py-2 text-18 bg-slate-200 placeholder-black placeholder-opacity-60 outline-none" type="text" placeholder="ca rong, ca betta">
                     <a href="" class=" absolute right-1/4 px-2 py-0.5 hover:bg-blue-300 rounded-md text-slate-500 text-16"><i class="fa-solid fa-magnifying-glass"></i></a>

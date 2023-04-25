@@ -12,6 +12,7 @@ use App\Models\OrderDetail;
 class TransactionController extends Controller
 {
     public function getTransaction(Request $request)  {
+
         $data =$request->all();
         $items = [];
         $quantity = [];
@@ -22,15 +23,15 @@ class TransactionController extends Controller
         foreach($data as $key =>$element) {
             if(strpos($key, 'item') !== false) {
                 $items[$i] = $element;
-                $i++;  
+                $i++;
             }
             if(strpos($key, 'quantity') !== false) {
                 $quantity[$q] = $element;
-                $q++; 
+                $q++;
             }
             if(strpos($key, 'category') !== false) {
                 $category[$c] = $element;
-                $c++; 
+                $c++;
             }
         };
         $fish = [];
@@ -41,8 +42,8 @@ class TransactionController extends Controller
         $acc = 0;
         foreach($category as $key => $item) {
             if($item == 0) {
-                $accessories[$acc] = DB::select("select * 
-                                                from accessories, categories 
+                $accessories[$acc] = DB::select("select *
+                                                from accessories, categories
                                                 where accessories.category_id = categories.category_id
                                                 and accessories_id = ?", [$items[$key]]);
                 $qttacc[$acc] = $quantity[$key];
@@ -50,7 +51,7 @@ class TransactionController extends Controller
             }
             if($item == 1) {
                 $fish[$f] = DB::select("select *
-                                        from fish, has_size, categories 
+                                        from fish, has_size, categories
                                         where fish.fish_species = has_size.fish_species
                                         and fish.category_id = categories.category_id
                                         and fish.fish_size = has_size.size
@@ -82,7 +83,7 @@ class TransactionController extends Controller
                 $qtt_item_order[$qttitor] = $element;
                 $qttitor++;
             }
-            
+
             if(strpos($key, 'category') !== false) {
                 $category[$ctgr] = $element;
                 $ctgr++;
@@ -124,7 +125,7 @@ class TransactionController extends Controller
             if($category[$key] == 0) {
                 $getitem = DB::select("select accessories_price as price from accessories where accessories_id = ?", [$item]);
             } else {
-                $getitem = DB::select("select has_size.has_price as price 
+                $getitem = DB::select("select has_size.has_price as price
                                         from fish, has_size
                                         where fish.fish_size = has_size.size
                                         and fish.fish_species = has_size.fish_species
@@ -141,9 +142,8 @@ class TransactionController extends Controller
                 );
         }
 
-
         return redirect()->route('ordered', ['order_id' => $count]);
-        
+
     }
 
     public function getOrderSuccess($order_id) {
@@ -173,7 +173,7 @@ class TransactionController extends Controller
         // dd($request->all(), $infor, $details, $test, $details[0]->product_id, $test, $bill);
         $total = 0;
         foreach($bill as $item) {
-        $total += $item[0]->price * $item[0]->quantity;
+          $total += $item[0]->price * $item[0]->quantity;
         }
         return view('clients.order-success', compact('bill', 'total', 'infor'));
     }

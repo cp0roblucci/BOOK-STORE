@@ -60,6 +60,15 @@ class User extends Authenticatable
         return false;
     }
 
+  public function isDeliveryMan() : bool {
+    if (Auth::check()) {
+      $role = Auth::user()->role_id;
+    }
+    if ($role == 2)
+      return true;
+    return false;
+  }
+
   public function orders()
   {
     return $this->hasMany(Order::class);

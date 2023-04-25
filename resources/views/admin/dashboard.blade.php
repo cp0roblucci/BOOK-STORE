@@ -142,7 +142,7 @@
               </div>
               <div class="flex text-20">
                 <p class="w-20">Tổng:</p>
-                <span id="total-revenue" class="text-blue-500 w-[80px] text-right mr-2"></span>
+                <span id="total-revenue" class="text-blue-500 w-[120px] text-right mr-2"></span>
                 <p>vnđ</p>
               </div>
             </div>
@@ -230,7 +230,7 @@
 
 
 
-      <div class="grid grid-cols-4 gap-4 mt-6">
+      <div class="grid grid-cols-4 gap-4 mt-2">
 
 {{--        Cá--}}
         <div class="col-span-2 rounded-2xl ">

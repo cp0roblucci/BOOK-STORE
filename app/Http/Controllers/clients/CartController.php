@@ -5,6 +5,7 @@ namespace App\Http\Controllers\clients;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,7 @@ class CartController extends Controller
                                 and has_size.fish_species = fish.fish_species
                                 and carts.user_id = ?", [Auth::user()->id]);
         //  dd(empty($fish));
-        $accessories = DB::select("select * 
+        $accessories = DB::select("select *
         from carts , cart_details, accessories, accessories_type
         WHERE carts.cart_id = cart_details.cart_id
             and cart_details.product_id = accessories_id
@@ -72,7 +73,7 @@ class CartController extends Controller
                 return view('clients.cart', compact('accessories', 'batch_acc'));
             }
         }
-        
+
 
 
         return view('clients.cart', compact('fish', 'accessories'));

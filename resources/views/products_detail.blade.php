@@ -4,6 +4,7 @@
 @endsection
 
 @section('scripts')
+@vite('./resources/js/products_detail.js')
 @endsection
 
 @section('header')
@@ -14,14 +15,23 @@
   {{--  --}}
 <section class="px-20 py-4 bg-white">
     @if ($data->category_id === 1)
+    @if(session('success'))
+    <div id="message" class="backdrop-blur-3xl bg-gray-100 mt-16 absolute top-2 left-[40%] rounded-lg opacity-80">
+        <div class="py-5 text-20 text-blue-300 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
+          <span class="px-4">{{ session('success') }}</span>
+        </div>
+      </div>
+    @endif
     <div class="bg-white">
-        
+       
         <div class="flex ">
-            <div class="flex flex-col w-1/2">
+            <div class="flex flex-col w-1/2 img h-auto">
                 <img src="{{$data->fish_link_img}}" alt=""
-                class="py-6 px-10">
+                class="py-6 px-10 h-2/3">
             </div>
+        
             <div class="flex flex-col w-1/2 mr-16  mt-4" data-key="1">
+                
                 <div class="">
                     <h2 class="text-24 font-semibold mb-2">{{$data->fish_name}}</h2>
                     <div class="flex text-sm font-semibold">
@@ -39,10 +49,11 @@
                 <div>
                     <button type="button" 
                     class="text-sm text-left font-medium text-red-600 mt-4 w-3/4 border-b border-b-black py-2 group">ĐẶC ĐIỂM NỔI BẬT</button>
+                    
                     <div class="">
                         <ul class="mb-4">
                             <li class="flex mt-4">
-                                <p class="text-gray-700 text-sm font-bold mr-1">pH:</p>
+                                <p class="text-gray-700 text-sm font-bold mr-1">Môi trường sống thích hợp (PH):</p>
                                 <p class="text-sm font-normal">{{$data->ph_level}}</p>
                             </li>
                             <li class="flex mt-4">
@@ -62,37 +73,49 @@
                                 <p class="text-sm font-normal lowercase">{{$data->fish_desc}}</p>
                             </li>
                             <li class="flex mt-4">
-                                <p class="text-gray-700 text-sm font-bold mr-1">Kích thước:</p>
+                                <p class="text-gray-700 text-sm font-bold mr-1">Kích thước cá trưởng thành:</p>
                                 <p class="text-sm font-normal">{{$data->fish_size}}</p>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="flex mb-6 space-x-4">
+                <div type="overflow-hidden" class="quantity flex mb-6 space-x-4">
                     <p class="text-gray-700 text-sm font-bold mt-0.5">Số lượng:</p>
-                    <div class="flex items-center border rounded-sm border-gray-900/30 hover:border-black">
-                        <button onclick="countMinus()" class="mb-0.5">
-                            <i class="fa-solid fa-minus ml-1 text-12"></i>
+                    <div class="quantity-buttons flex items-center border rounded-sm border-gray-900/30 ">
+                        <button class="mb-0.5" type="button" id="previous">
+                                <i class="quantity-down fa-solid fa-minus ml-1 text-12"></i>
                         </button>
-                        <label id="count" class="w-12 h-full text-center outline-none text-sm mt-1">0</label>
-                        <button onclick="countAdd()" class="mb-0.5">
-                            <i class="fa-solid fa-plus mr-1 text-12 "></i>
+                        <input name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="{{ old('value-quantity') ?? 1 }}">
+                        <input id="product_id" name="product_id" type="hidden" value="{{$data->fish_id}}">
+                        <input id="category_id" name="category_id" type="hidden" value="{{$data->category_id}}">
+                        <button class="mb-0.5" type="button" id="increment">
+                                <i class="quantity-up fa-solid fa-plus mr-1 text-12 "></i>
                         </button>
                     </div>
                 </div>
-
                 <div class="mb-4">
                     <div class="flex">
-                        <button class="py-4 px-10 bg-blue-500 text-white font-medium hover:bg-red-500 mr-3">
-                            <i class="fa-solid fa-cart-shopping mr-2"></i>    
-                            MUA NGAY
+                        <form action="{{route('add-to-transaction')}}" method="post" class="">
+                            @csrf
+                        <button type="submit" class="py-4 px-10 bg-red-500 text-white font-medium hover:bg-fuchsia-500 mr-3" id="add-to-transaction">
+                            <input name="product_id" type="hidden" value="{{$data->fish_id}}">
+                            <input name="qty" type="hidden" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="{{ old('value-quantity') ?? 1 }}">
+                                <p>MUA NGAY VỚI GIÁ {{number_format($data->has_price,0,',','.')}}đ</p>
                         </button>
-                        <button class="py-4 px-6 bg-blue-500 text-white font-medium hover:bg-red-500 ">
-                            <i class="fa-solid fa-cart-shopping mr-2"></i>    
-                            THÊM VÀO GIỎ HÀNG
+                        </form>
+                        <form action="{{route('add-to-cart')}}" method="post">
+                            @csrf
+                        <button type="submit" class="py-4 px-6 bg-blue-500 text-white font-medium hover:bg-fuchsia-500" id="add-to-cart">
+                            <input  name="product_id" type="hidden" value="{{$data->fish_id}}">
+                            <input id="add_to_cart_product_id" type="hidden" name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="1">
+                                <i class="fa-solid fa-cart-shopping mr-2"></i>
+                                THÊM VÀO GIỎ HÀNG
                         </button>
+                        </form>
                     </div>
                 </div>
+                        
+                
                 <div class="mb-4 flex border-t pt-2 border-black">
                     <p class="text-sm mr-2.5">Hotline đặt hàng:</p>
                     <p class="text-sm text-blue-500 font-semibold hover:text-red-500">
@@ -106,11 +129,17 @@
     </div>
     @else
     <div class="bg-white">
-        
+        @if(session('success'))
+        <div id="message" class="backdrop-blur-3xl bg-gray-100 mt-16 absolute top-2 left-[40%] rounded-lg opacity-80">
+            <div class="py-6 text-20  relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
+                <span class="px-4 text-blue-500">{{ session('success') }}</span>
+            </div>
+        </div>
+        @endif
         <div class="flex ">
             <div class="flex flex-col w-1/2">
                 <img src="{{$data->accessories_link_img}}" alt=""
-                class="py-6 px-10 h-3/4">
+                class="py-6 px-10 h-full">
             </div>
             <div class="flex flex-col w-1/2 mr-16  mt-4" data-key="1">
                 <div class="">
@@ -139,31 +168,45 @@
                         </ul>
                     </div>
                 </div>
-                <div class="flex mb-6 space-x-4">
+               
+                
+                <div class="quantity flex mb-6 space-x-4">
                     <p class="text-gray-700 text-sm font-bold mt-0.5">Số lượng:</p>
-                    <div class="flex items-center border rounded-sm border-gray-900/30 hover:border-black">
-                        <button onclick="countMinus()" class="mb-0.5">
-                            <i class="fa-solid fa-minus ml-1 text-12"></i>
+                    <div class="quantity-buttons flex items-center border rounded-sm border-gray-900/30 ">
+                        <button class="mb-0.5" type="button" id="previous">
+                                <i class="quantity-down fa-solid fa-minus ml-1 text-12"></i>
                         </button>
-                        <label id="count" class="w-12 h-full text-center outline-none text-sm mt-1">0</label>
-                        <button onclick="countAdd()" class="mb-0.5">
-                            <i class="fa-solid fa-plus mr-1 text-12 "></i>
+                        <input name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="{{ old('value-quantity') ?? 1 }}">
+                        <input id="product_id" name="product_id" type="hidden" value="{{$data->accessories_id}}">
+                        <input id="category_id" name="category_id" type="hidden" value="{{$data->category_id}}">
+                        <button class="mb-0.5" type="button" id="increment">
+                                <i class="quantity-up fa-solid fa-plus mr-1 text-12 "></i>
                         </button>
                     </div>
                 </div>
 
                 <div class="mb-4">
                     <div class="flex">
-                        <button class="py-4 px-10 bg-blue-500 text-white font-medium hover:bg-red-500 mr-3">
-                            <i class="fa-solid fa-cart-shopping mr-2"></i>    
-                            MUA NGAY
+                        <form action="{{route('add-to-transaction')}}" method="post" class="">
+                            @csrf
+                        <button type="submit" class="py-4 px-10 bg-red-500 text-white font-medium hover:bg-fuchsia-500 mr-3" id="add-to-transaction">
+                            <input name="product_id" type="hidden" value="{{$data->accessories_id}}">
+                            <input type="hidden" name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="{{ old('qty') ?? 1 }}">
+                                <p>MUA NGAY VỚI GIÁ {{number_format($data->accessories_price,0,',','.')}}đ</p>
                         </button>
-                        <button class="py-4 px-6 bg-blue-500 text-white font-medium hover:bg-red-500 ">
-                            <i class="fa-solid fa-cart-shopping mr-2"></i>    
-                            THÊM VÀO GIỎ HÀNG
+                        </form>
+                        <form action="{{route('add-to-cart')}}" method="post">
+                            @csrf
+                        <button type="submit" class="py-4 px-6 bg-blue-500 text-white font-medium hover:bg-fuchsia-500" id="add-to-cart">
+                            <input name="product_id" type="hidden" value="{{$data->accessories_id}}">
+                            <input type="hidden" name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="1">
+                                <i class="fa-solid fa-cart-shopping mr-2"></i>
+                                THÊM VÀO GIỎ HÀNG
                         </button>
+                        </form>
                     </div>
                 </div>
+             
                 <div class="mb-4 flex border-t pt-2 border-black">
                     <p class="text-sm mr-2.5">Hotline đặt hàng:</p>
                     <p class="text-sm text-blue-500 font-semibold hover:text-red-500">

@@ -48,11 +48,22 @@ Route::get('/home', [HomeController::class, 'getHome'])->name('home');
 Route::get('/products', [ProductsController::class, 'index']);
 //Route::get('/products/{fish_species}',[ProductsController::class, 'filterProductsBySpecies'])->name('filter-products-by-species');
 Route::get('/products/{category_id}/filter-condition/{price_filter}', [ProductsController::class, 'filterProductsByPrice'])->name('filter-products-by-price');
+//
+
 Route::get('/products/{category_id}',[ProductsController::class, 'getProducts'])->name('get-product');
+//
+Route::get('/products/{categoryId}/page/{page}', [ProductsController::class, 'getProducts'])->name('products-paging');
+//
 Route::get('/products/{category_id}/filter-product-fish/{fish_species}',[ProductsController::class, 'filterProductsByFish'])->name('filter-products-by-fish');
+
 Route::get('/products/{category_id}/filter-products-accessories/{accessories_type_name}',[ProductsController::class, 'filterProductsByAccessories'])->name('filter-products-by-accessories');
+//
+Route::get('/products/{category_id}/filter-size/{size_filter}', [ProductsController::class, 'filterFishBySize'])->name('filter-fish-by-size');
 //products details route
 Route::get('/products_detail/{id}', [ProductsDetailController::class, 'getProductsDetail'])->name('get-products-detail');
+Route::post('/add-to-cart', [ProductsDetailController::class, 'addToCart'])->name('add-to-cart');
+Route::post('get-max-quantity', [ProductsDetailController::class, 'getQuantityAll']);
+Route::post('/add-to-transaction', [ProductsDetailController::class, 'addToTransaction'])->name('add-to-transaction');
 // Route::get('/products_detail', function () {
 //     return view('products_detail');
 // });

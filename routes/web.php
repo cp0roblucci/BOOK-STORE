@@ -63,14 +63,22 @@ Route::get('/products', function () {
 
 
 Route::get('/cart', [CartController::class, 'getCart'])->name('cart');
-Route::post('/cart', [CartController::class, 'postbill']);
+Route::post('/cart', [CartController::class, 'postbill'])->name('handlecart');
+Route::get('/cart/update-quantity/{id_cart}/{product_id}/{quantity}', [CartController::class, 'updatequantity'])->name('update-quantity-cart');
+Route::get('/cart/delete-quantity/{id_cart}/{product_id}', [CartController::class, 'deleteitem'])->name('delete-item-cart');
 
 Route::get('/transaction', [TransactionController::class, 'getTransaction'])->name('transaction');
 Route::post('/transaction', [TransactionController::class, 'postTransaction'])->name('order');
 
 Route::get('/ordered/{order_id}', [TransactionController::class, 'getOrderSuccess'])->name('ordered');
 
-Route::get('/profile-user/{user_id}', [ProfileUserController::class, 'getprofileUser'])->name('profileUser');
+Route::get('/profile-user', [ProfileUserController::class, 'getprofileUser'])->name('profileUser');
+Route::post('profile-user-upload-avt', [ProfileUserController::class, 'getprofileUserUploadAvt'])->name('upload-avt-user');
+Route::post('/profile-user/updatename', [ProfileUserController::class, 'updatename'])->name('updatename');
+Route::post('/profile-user/updatephone', [ProfileUserController::class, 'updatephonenumber'])->name('updatephone');
+Route::post('/profile-user/updateaddress', [ProfileUserController::class, 'updateaddress'])->name('updateaddress');
+Route::post('/profile-user/updateemail', [ProfileUserController::class, 'updateemail'])->name('updateemail');
+Route::post('/profile-user/updatestatus', [ProfileUserController::class, 'updatestatus'])->name('updatestatus');
 
 
 Route::get('/header', function () {

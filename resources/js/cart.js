@@ -68,8 +68,8 @@ function totalbuy() {
         total_value.setAttribute('data-total', total);
         // iptotal.value = total;
         ordered_container.innerHTML += `
-            <div class="warning w-fulll h-16 text-24 flex justify-center items-center text-blue-100">
-                <h1 class="font-bold uppercase">Add Items to buy</h1>
+            <div class="warning w-fulll h-16 text-24 flex justify-center items-center text-red-500">
+                <h1 class="font-bold uppercase">Hãy chọn sản phẩm!!!</h1>
             </div>
         `;
     }
@@ -130,7 +130,7 @@ function removefromcart() {
     console.log(delete_btns.length);
     for(var i = 0; i<delete_btns.length; i++) {
         delete_btns[i].addEventListener('click', (event) => {
-            let item_rm = event.target.parentElement.parentElement;
+            let item_rm = event.target.parentElement.parentElement.parentElement;
             let list_item_buy = $$('.item-buy')
             if(list_item_buy.length > 0) {
                 list_item_buy.forEach(element => {
@@ -185,7 +185,10 @@ buybtn.addEventListener('click', function (e) {
     let quantity_buys = $$('.quantity-buy');
     let items_id = $$('.item-buy');
     let total = $('.total-value'); 
-
+    let checked = $('#checkempty');
+    if(items_id.length !== 0) {
+        checked.setAttribute('value', 1);
+    }
     quantity_buys.forEach((element, index) => {
         items_chosen.innerHTML += `
             <input type="hidden" name="item${items_id[index].getAttribute('data-key')}" value="${items_id[index].getAttribute('data-key')}">
@@ -199,6 +202,9 @@ buybtn.addEventListener('click', function (e) {
         <input type="hidden" name="total" value="${total.getAttribute('data-total')}">
     `;
 });
+
+///payments
+
 
 
 // getdata topost

@@ -8,7 +8,7 @@ use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Auth\AuthController;
-use Illuminate\Support\Facades\Auth;
+
 
 class CartController extends Controller
 {

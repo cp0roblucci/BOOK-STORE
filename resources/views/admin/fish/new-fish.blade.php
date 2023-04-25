@@ -17,7 +17,7 @@
     <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Thêm Cá mới</div>
     <div class="">
       <div class="col-span-3 border p-4">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
           @csrf
           <div class="flex items-center justify-between mt-1 mb-6">
             <div class="w-80 h-32 mr-10">
@@ -159,39 +159,59 @@
 
           </div>
 
-          <div class="mt-4 ">
-            <label
-              for="habit"
-              class="text-slate-500 text-14"
-            >
-              Thói quen, tập tính
-            </label><br>
-            <div class="border-[1.5px] mt-1">
-              <input
-                type="text"
-                name="habit"
-                placeholder="Nhập"
-                class="pb-11 pt-1 w-full outline-none focus-within:border-blue-500 px-2 placeholder:text-14 text-14"
+        <div class="grid grid-cols-3 gap-4">
+            <div class="mt-4 ">
+              <label
+                for="habit"
+                class="text-slate-500 text-14"
               >
+                Số lượng
+              </label><br>
+              <div class="border-[1.5px] mt-1">
+                <input
+                  type="text"
+                  name="quantity"
+                  placeholder="Nhập"
+                  class="pb-11 pt-1 w-full outline-none focus-within:border-blue-500 px-2 placeholder:text-14 text-14"
+                >
+              </div>
             </div>
-          </div>
 
-          <div class="mt-4 ">
-            <label
-              for="description"
-              class="text-slate-500 text-14"
-            >
-              Mô tả
-            </label><br>
-            <div class="border-[1.5px] mt-1">
-              <input
-                type="text"
-                name="description"
-                placeholder="Nhập"
-                class="pb-11 pt-1 w-full outline-none focus-within:border-blue-500 px-2 placeholder:text-14 text-14"
+            <div class="mt-4 ">
+              <label
+                for="habit"
+                class="text-slate-500 text-14"
               >
+                Thói quen, tập tính
+              </label><br>
+              <div class="border-[1.5px] mt-1">
+                <input
+                  type="text"
+                  name="habit"
+                  placeholder="Nhập"
+                  class="pb-11 pt-1 w-full outline-none focus-within:border-blue-500 px-2 placeholder:text-14 text-14"
+                >
+              </div>
             </div>
-          </div>
+
+            <div class="mt-4 ">
+              <label
+                for="description"
+                class="text-slate-500 text-14"
+              >
+                Mô tả
+              </label><br>
+              <div class="border-[1.5px] mt-1">
+                <input
+                  type="text"
+                  name="description"
+                  placeholder="Nhập"
+                  class="pb-11 pt-1 w-full outline-none focus-within:border-blue-500 px-2 placeholder:text-14 text-14"
+                >
+              </div>
+            </div>
+        </div>
+
 
 
           <button

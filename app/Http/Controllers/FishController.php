@@ -4,24 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Models\Color;
 use App\Models\Fish;
+use App\Models\FishImport;
 use App\Models\FishSpecies;
 use App\Models\PH;
 use App\Models\Size;
 use App\Models\SupplierInvoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 
 class FishController extends Controller
 {
-  public function create(Request $request)
-  {
-    dd($request);
 
-    $file = $request->file('fish-img');
-    $fileName = $file->getClientOriginalName();
-    $result = $request->file->storeOnCloudinaryAs('ct299/product', 'fish-' .$fileName);
-    $fishImg = $result->getPath();
+  public function newFish() {
+
+    $fish_species = FishSpecies::all();
+    $ph = PH::all();
+    $color = Color::all();
+    $size = Size::all();
+
+    return view('admin.fish.new-fish', compact( 'fish_species', 'ph', 'color', 'size'));
+  }
+
+  public function postCreateNewFish(Request $request)
+  {
+    // dd($request);
+    $fishImg = $request->file('fish-img');
+    if ($fishImg) {
+      $linkImgPath = $fishImg->store('public/images/img_products');
+      $fishImgURL = Storage::url($linkImgPath);
+    } else {
+      $fishImgURL = '/storage/images/admin/fish-default.png';
+    }
 
     // tìm nếu có mã sản phẩm này rồi thì cập nhật lại lô nhập
     $fishId = $request->input('fish_id');
@@ -34,7 +51,13 @@ class FishController extends Controller
     $habit= $request->input('habit');
     $description= $request->input('description');
 
-    if ($fishId) {
+    $quantity = $request->input('quantity');
+
+    $fishExists = DB::table('fish')
+      ->where('fish_id', '=', $fishId)
+      ->first();
+
+    if ($fishExists) {
       if($fishId->color == $color  && $fishId->fish_size == $size) {
         $product = SupplierInvoice::where('supplier_invoice_product_id', $fish)->first();
         // tăng sl lên 1
@@ -42,15 +65,14 @@ class FishController extends Controller
         // $productImport->supplier_invoice_total_price = $productImport->supplier_invoice_quantity * $productImport->supplier_invoice_price;
         $product->save();
 
-        Session::flash('message', 'Add Fish successfully.');
+        Session::flash('add-success', 'Đã có sản phẩm trong kho, tăng số lượng thành công.');
         return redirect()->route('admin-fish');
       }
     }
 
-    Fish::create(
-      [
+    Fish::create([
         'fish_id' => $fishId,
-        'fish_link_img' => $fishImg,
+        'fish_link_img' => $fishImgURL,
         'fish_species' => $species,
         'fish_name' => $fishName,
         'ph_level' => $phLevel,
@@ -58,28 +80,18 @@ class FishController extends Controller
         'fish_size' => $size,
         'fish_habit' => $habit,
         'fish_desc' => $description
-      ]
-    );
-    Session::flash('message', 'Add Fish successfully.');
+      ]);
+
+    FishImport::create([
+      'fish_id' => $fishId,
+      'quantity' => $quantity,
+    ]);
+
+    Session::flash('add-success', 'Thêm cá thành công.');
     return redirect()->route('admin-fish');
   }
 
-  public function update(Request $request)
-  {
-    dd($request);
-  }
-
-  public function newFish() {
-
-    $fish_species = FishSpecies::all();
-    $ph = PH::all();
-    $color = Color::all();
-    $size = Size::all();
-
-    return view('admin.fish.new-fish', compact( 'fish_species', 'ph', 'color', 'size'));
-  }
-
-  public function editFish($id) {
+  public function getEditFish($id) {
     $fish_species = FishSpecies::all();
     $ph = PH::all();
     $color = Color::all();
@@ -89,6 +101,51 @@ class FishController extends Controller
       ->where('fish_id', '=', $id)
       ->first();
     return view('admin.fish.edit-fish', compact('fish', 'fish_species', 'ph', 'color', 'size'));
+  }
+
+  public function postEditFish(Request $request, $fishId)
+  {
+    $fish = DB::table('fish')
+      ->where('fish_id', '=', $fishId)
+      ->first();
+    
+    $fishImg = $request->file('fish-img');
+    if ($fishImg) {
+      $linkImgPath = $fishImg->store('public/images/img_products');
+      $fishImgURL = Storage::url($linkImgPath);
+
+      $fishLinkImg = Storage::url($fish->fish_link_img);
+
+      if (File::exists($fishLinkImg)) {
+        File::delete($fishLinkImg);
+      }
+    } else {
+      $fishImgURL = $fish->fish_link_img;
+    }
+
+    $species = $request->input('species');
+    $fishName = $request->input('fish_name');
+    $phLevel = $request->input('ph_level');
+    $color = $request->input('color');
+    $size = $request->input('size');
+    $habit= $request->input('habit');
+    $description= $request->input('description');
+
+    DB::table('fish')
+    ->where('fish_id', '=', $fishId)
+    ->update([
+        'fish_link_img' => $fishImgURL,
+        'fish_species' => $species,
+        'fish_name' => $fishName,
+        'ph_level' => $phLevel,
+        'color' => $color,
+        'fish_size' => $size,
+        'fish_habit' => $habit,
+        'fish_desc' => $description
+    ]);
+
+    Session::flash('update-success', 'Cập nhật cá thành công');
+    return redirect()->route('admin-fish');
   }
 
   public function searchFish(Request $request) {
@@ -153,6 +210,16 @@ class FishController extends Controller
   public function delete(Request $request)
   {
     $fish_id = $request->input('fish_id');
-    dd($fish_id);
+    
+    DB::table('fish_import_batches')
+    ->where('fish_id', '=', $fish_id)
+    ->delete();
+
+    DB::table('fish')
+      ->where('fish_id', '=', $fish_id)
+      ->delete();
+
+    Session::flash('delete-success', 'Xóa cá thành công');
+    return redirect()->route('admin-fish');
   }
 }

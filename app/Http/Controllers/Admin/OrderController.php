@@ -79,7 +79,8 @@ class OrderController extends Controller
         ->join('payment_status', 'orders.payment_id', '=', 'payment_status.payment_id')
         ->join('order_status', 'orders.status_id', '=', 'order_status.status_id')
         ->join('users', 'orders.user_id', '=', 'users.id')
-        ->where('orders.status_id', '!=', 5);
+        ->where('orders.status_id', '!=', 5)
+        ->where('orders.status_id', '!=', 7);
       if(!empty($userName)) {
         $query->where(function ($query) use ($userName) {
           $query->where(DB::raw("CONCAT(users.last_name, ' ', users.first_name)"), 'LIKE', '%'. $userName .'%');
@@ -113,6 +114,12 @@ class OrderController extends Controller
     }
     // tong so luong cac don hang
     $orderQuantityByStatus = $this->getOrderQuantityByStatus();
+
+    $totalNewOrder = DB::table('orders')
+    ->where('status_id', '=', 0)
+    ->count();
+
+    session()->put('newOrders', $totalNewOrder);
 
     return view('admin.orders.order',
       compact(
@@ -228,7 +235,7 @@ class OrderController extends Controller
 
       // $data = $request->all();
 
-      if ($statusId == 4 || $statusId == 5) {
+      if ($statusId == 4 || $statusId == 5 || $statusId == 7) {
         foreach ($orderIds as $orderId) {
           $order = DB::table('orders')
           ->where('order_id', '=', $orderId)
@@ -276,4 +283,5 @@ class OrderController extends Controller
       Session::flash('confirm-success', $statusId == null ? 'Lưu trữ đơn hàng thành công.' : ($statusId == 4 || $statusId == 3 ? 'Xóa đơn hàng thành công.' : 'Cập nhật đơn hàng thành công'), 'status_id', $statusId);
       return response()->json(['url' => $url]);
   }
+
 }

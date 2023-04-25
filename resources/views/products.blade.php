@@ -61,7 +61,7 @@
                     Giá Sản Phẩm
                     <i class="fa-solid fa-angle-down ml-1"></i>
                 </p>
-                <div class="absolute group-hover:block hidden bg-white transition-all top-full w-max shadow-md rounded ml-5"
+                <div class="absolute group-hover:block hidden bg-white transition-all top-full w-max shadow-md rounded"
                     id="dropdown">
                     <ul class="text-left border rounded text-sm w-40 ">
                         <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">
@@ -80,7 +80,7 @@
                 </div>
             </button>
         </div>
-        <div class="inline-block">
+        {{-- <div class="inline-block">
             <button class="relative flex justify-center items-center focus:outline-none outline-none border group z-10 rounded-md ml-4 hover:border-blue-500">
                 <p class="px-4 text-sm group-hover:text-blue-500 p-2">  
                     <i class="fa-solid fa-fish mr-1"></i>
@@ -106,7 +106,7 @@
                     </ul>
                 </div>
             </button>
-        </div>
+        </div> --}}
         <div class="flex ml-4">
             <a class="font-light mr-4 text-sm p-2 px-4 rounded-md border hover:text-blue-500 hover:border-blue-500" 
             href="{{route('filter-products-by-price',['category_id' => 1,'price_filter'=> 'asc'])}}">
@@ -210,7 +210,7 @@
     {{--  --}}
     <div id="product-container" class=" mt-10 mx-20 ">
         <div class="p-4 text-center text-32 uppercase font-bold">
-            <h2>Tất cả sản phẩm</h2>
+            TẤT CẢ SẢN PHẨM
         </div>
         @if($categoryId == 1)
         

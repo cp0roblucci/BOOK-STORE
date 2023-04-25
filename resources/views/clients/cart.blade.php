@@ -41,12 +41,12 @@
                         <div class="quantity-box relative col-span-2 flex justify-center">
                             <div class="quantity  absolute top-1/2 -translate-y-1/2">
                                 <i class="fa-solid fa-minus minus p-2 border rounded-lg cursor-pointer inline-block hover:bg-white"></i>
-                                <input class="num w-1/4 inline-block h-8 text-center rounded-lg border-none " type="text" value="{{$item->QUANTITY}}">
+                                <input class="num w-1/4 inline-block h-8 text-center rounded-lg border-none " type="text" value="{{$item->quantity}}">
                                 <i class="fa-solid fa-plus plus p-2 border rounded-lg cursor-pointer inline-block hover:bg-white "></i>
                             </div>
                         </div>
                         <div class="total-box">
-                            <span class="total" data-price-total="{{($item->has_price)*($item->QUANTITY)}}">{{number_format(($item->has_price)*($item->QUANTITY), 0, '', '.')}} VND</span>
+                            <span class="total" data-price-total="{{($item->has_price)*($item->quantity)}}">{{number_format(($item->has_price)*($item->quantity), 0, '', '.')}} VND</span>
                         </div>
                         <div class="delete cursor-pointer relative">
                             <i class="fa-solid fa-trash-can delete-btn p-2 absolute right-5 top-0 -translate-y-1/2"></i>
@@ -81,12 +81,12 @@
                         <div class="quantity-box relative col-span-2 flex justify-center">
                             <div class="quantity  absolute top-1/2 -translate-y-1/2">
                                 <i class="fa-solid fa-minus minus p-2 border rounded-lg cursor-pointer inline-block hover:bg-white"></i>
-                                <input class="num w-1/4 inline-block h-8 text-center rounded-lg " type="text" value="{{$item->QUANTITY}}">
+                                <input class="num w-1/4 inline-block h-8 text-center rounded-lg " type="text" value="{{$item->quantity}}">
                                 <i class="fa-solid fa-plus plus p-2 border rounded-lg cursor-pointer inline-block hover:bg-white "></i>
                             </div>
                         </div>
                         <div class="total-box">
-                            <span class="total" data-price-total="{{($item->accessories_price)*($item->QUANTITY)}}">{{number_format(($item->accessories_price)*($item->QUANTITY), 0, '', '.')}} VND</span>
+                            <span class="total" data-price-total="{{($item->accessories_price)*($item->quantity)}}">{{number_format(($item->accessories_price)*($item->quantity), 0, '', '.')}} VND</span>
                         </div>
                         <div class="delete cursor-pointer relative">
                             <i class="fa-solid fa-trash-can delete-btn p-2 absolute right-5 top-0 -translate-y-1/2"></i>

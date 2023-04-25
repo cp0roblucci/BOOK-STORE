@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
     <link rel="icon" href="/storage/images/logo.png" type="image/icon type">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite('./resources/css/app.css')
     @yield('scripts')
 </head>

@@ -11,13 +11,14 @@ use App\Models\FishFood;
 use App\Models\Cart;
 use App\Models\CartDetail;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class ProductsDetailController extends Controller
 {
 
-   
     public function getProductsDetail($id) {
         
         $data = DB::table('fish')
@@ -44,18 +45,89 @@ class ProductsDetailController extends Controller
 
     public function addToCart(Request $request)
     {
-    $userId = DB::table('users')
-    ->where('users.id','=',$request->id)
-    ->select('users.id');
-    // dd($userId);
-    $product_id = $request->input('product_id');
+    
+    if (!Auth::check()) {
+        return redirect()->route('login')->with('error', 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.');
+    }
+    $userId = Auth::user()->id;
+    $productId = $request->input('product_id');
     $quantity = $request->input('qty');
+    // dd($quantity);
+    // dd($quantity);
+    $cartId = DB::table('carts')
+    ->where('carts.user_id', '=' , $userId)
+    ->select('carts.cart_id')
+    ->first()
+    ->cart_id;
+    //check
+    $productIdExists = DB::table('cart_details')
+    ->where('cart_id','=',$cartId)
+    ->where('product_id','=',$productId)
+    ->first();
+    
+    if($productIdExists) {
+        $productIdExists->quantity += $quantity;
+        // dd($productIdExists->quantity);
+        DB::table('cart_details')
+        ->where('cart_id','=',$cartId)
+        ->where('product_id','=',$productId)
+        ->update([
+            'quantity' => $productIdExists->quantity
+        ]);
+        
+    } else {
+        CartDetail::create([
+            'cart_id' => $cartId,
+            'product_id' => $productId,
+            'quantity' => $quantity
+        ]);
+    }
+    
+    return redirect()->back()->with('success', 'Thêm vào giỏ hàng thành công!');
+    }
+
+    public function addToTransaction(Request $request)
+    {
+        //check user dangnhap
+    if (!Auth::check()) {
+        return redirect()->route('login')->with('error', 'Bạn cần đăng nhập để mua ngay.');
+    } else $userId = Auth::user()->id;
+    // dd($userId);
+    $productId = $request->input('product_id');
+    $quantity = $request->input('qty');
+    $cartId = DB::table('carts')
+    ->where('carts.user_id', '=' , $userId)
+    ->select('carts.cart_id')
+    ->first()
+    ->cart_id;
+   
+    CartDetail::create([
+        'cart_id' => $cartId,
+        'product_id' => $productId,
+        'quantity' => $quantity
+        
+    ]);
+
+    return redirect()->route('transaction');
+    }
     
 
-
-
-    dd($product_id,$quantity,$userId);
-    return redirect()->route('/cart');
-}
+    public function getQuantityAll(Request $request) {
+        $productId = $request->input('product_id');
+        $categoryId = $request->input('category_id');
+        if($categoryId == 1) {
+            $maxQuantity = DB::table('fish_import_batches')
+            ->where('fish_id', '=', $productId)
+            ->select('quantity')
+            ->first();
+        } else {
+            $maxQuantity = DB::table('accessories_import_batches')
+            ->where('accessories_id', '=', $productId)
+            ->select('quantity')
+            ->first();
+        }
+        
+        return response()->json(['quantity' => $maxQuantity->quantity]);
+      }
     
 }

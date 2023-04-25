@@ -12,7 +12,7 @@ class CartController extends Controller
 {
     public function getcart(Request $request) {
         // dd($request->all('userid')['userid']);
-        $fish = DB::select("select fish.category_id, fish.fish_size, fish.fish_id, fish.fish_link_img, fish.fish_name, fish.fish_species, has_size.has_price, cart_details.QUANTITY
+        $fish = DB::select("select fish.category_id, fish.fish_size, fish.fish_id, fish.fish_link_img, fish.fish_name, fish.fish_species, has_size.has_price, cart_details.quantity
                             from carts , cart_details, fish, has_size 
                             where carts.CART_ID = cart_details.CART_ID
                                 and fish.fish_id = cart_details.product_id

@@ -51,8 +51,10 @@ class ProductsDetailController extends Controller
     }
     $userId = Auth::user()->id;
     $productId = $request->input('product_id');
+    $categoryId = $request->input('category_id');
     $quantity = $request->input('qty');
-    // dd($quantity);
+    
+    // dd($userId,$productId,$quantity,$categoryId);
     // dd($quantity);
     $cartId = DB::table('carts')
     ->where('carts.user_id', '=' , $userId)
@@ -79,6 +81,7 @@ class ProductsDetailController extends Controller
         CartDetail::create([
             'cart_id' => $cartId,
             'product_id' => $productId,
+            'category_id' => $categoryId,
             'quantity' => $quantity
         ]);
     }
@@ -94,7 +97,9 @@ class ProductsDetailController extends Controller
     } else $userId = Auth::user()->id;
     // dd($userId);
     $productId = $request->input('product_id');
+    $categoryId = $request->input('category_id');
     $quantity = $request->input('qty');
+    
     $cartId = DB::table('carts')
     ->where('carts.user_id', '=' , $userId)
     ->select('carts.cart_id')
@@ -104,9 +109,11 @@ class ProductsDetailController extends Controller
     CartDetail::create([
         'cart_id' => $cartId,
         'product_id' => $productId,
+        'category_id' => $categoryId,
         'quantity' => $quantity
         
     ]);
+    
 
     return redirect()->route('transaction');
     }

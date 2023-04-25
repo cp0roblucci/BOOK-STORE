@@ -144,7 +144,7 @@ function enableBtn(btnElement) {
   btnElement.classList.remove('opacity-50');
   btnElement.classList.remove('border-slate-500');
 
-  if (btnElement === deleteAllArchivedOrders || btnElement === deleteAllOrders) {
+  if (btnElement === deleteAllArchivedOrders || btnElement === deleteAllOrders || btnElement === acceptReturnRequest) {
     btnElement.classList.add('text-red-400');
     btnElement.classList.add('border-red-400');
     return;

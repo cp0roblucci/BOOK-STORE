@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ColorController;
+use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\FishController;
 use App\Http\Controllers\PHController;
 use App\Http\Controllers\ProductsController;
@@ -108,6 +109,7 @@ Route::group(['middleware' => ['auth', 'delivery']], function() {
   Route::post('delivery-cancel', [DeliverController::class, 'confirmDeliveryCancel'])->name('confirm-delivery-cancel');
   Route::post('deliver-success', [DeliverController::class, 'confirmDeliverySuccess'])->name('confirm-delivery-success');
 });
+
 
 
 // google login

@@ -32,7 +32,7 @@
     <div class="flex justify-center">
       <div class="w-[360px] h-screen rounded-lg shadow-md border bg-primary-blue-2 relative">
         <h1 class="text-center text-24 text-primary-purple border-b border-primary-blue py-1 relative">
-          <a href="/deliver"><i class="fa-solid fa-arrow-left absolute left-2 top-3"></i></a>
+          <a href="/delivery"><i class="fa-solid fa-arrow-left absolute left-2 top-3"></i></a>
           Chi tiết đơn hàng
         </h1>
         <div class="">

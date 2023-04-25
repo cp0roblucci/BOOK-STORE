@@ -120,7 +120,6 @@ class OrderController extends Controller
     ->count();
 
     session()->put('newOrders', $totalNewOrder);
-
     return view('admin.orders.order',
       compact(
         'dataOrders',

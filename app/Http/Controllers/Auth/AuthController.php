@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Constant\EndpointConstant;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
-use App\Models\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Constant\UrlConstant;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Repositories\UserRepositoryRepository;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -25,6 +25,15 @@ class AuthController extends Controller
         $this->userRepository = $userRepository;
     }
 
+  public function checkBlock($userId) {
+    $totalOrdersCanceled = DB::table('users')
+      ->join('orders', 'users.id', '=', 'orders.user_id')
+      ->where('orders.status_id', '=', 4)
+      ->whereRaw("users.id = $userId")
+      ->count();
+    return $totalOrdersCanceled >= 5;
+  }
+
     public function getLogin()
     {
         return view('Auth.login');
@@ -34,8 +43,13 @@ class AuthController extends Controller
     {
         $email = $request->input('email');
         $user = User::where('email', $email)->first();
+        $isBlock = $this->checkBlock($user->id);
+        if ($isBlock) {
+          session()->flash('account-blocked', 'Tài khoản của bạn đã bị khóa.');
+          return redirect()->route('login');
+        }
         if (!$user) {
-            session()->flash('account-not-exists', 'Account does not exist');
+            session()->flash('account-not-exists', 'Tài khoản không tồn tại.');
             return redirect()->route('login');
         }
         $credentials = $request->only('email', 'password');

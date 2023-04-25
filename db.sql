@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2023 at 10:31 AM
+-- Generation Time: Apr 25, 2023 at 12:29 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -140,7 +140,7 @@ INSERT INTO `account_status` (`status_id`, `status_name`) VALUES
 --
 
 CREATE TABLE `carts` (
-  `CART_ID` int(11) NOT NULL,
+  `cart_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
@@ -150,7 +150,7 @@ CREATE TABLE `carts` (
 -- Dumping data for table `carts`
 --
 
-INSERT INTO `carts` (`CART_ID`, `user_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `carts` (`cart_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (4, 24, '2023-04-03 17:04:24', '2023-04-03 17:04:24'),
 (24, 44, '2023-04-20 11:39:22', '2023-04-20 11:39:22'),
 (25, 45, '2023-04-20 14:30:17', '2023-04-20 14:30:17'),
@@ -164,9 +164,10 @@ INSERT INTO `carts` (`CART_ID`, `user_id`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `cart_details` (
   `id` int(11) NOT NULL,
-  `CART_ID` int(11) NOT NULL,
+  `cart_id` int(11) NOT NULL,
   `product_id` char(6) NOT NULL,
-  `QUANTITY` int(11) DEFAULT NULL,
+  `category_id` int(11) NOT NULL,
+  `quantity` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -175,10 +176,10 @@ CREATE TABLE `cart_details` (
 -- Dumping data for table `cart_details`
 --
 
-INSERT INTO `cart_details` (`id`, `CART_ID`, `product_id`, `QUANTITY`, `created_at`, `updated_at`) VALUES
-(1, 4, 'AG01', 15, '2023-04-23 19:07:49', '2023-04-23 19:08:17'),
-(2, 24, 'ARM06', 6, '2023-04-23 19:07:49', '2023-04-23 19:08:17'),
-(3, 25, 'DC02', 2, '2023-04-23 19:07:49', '2023-04-23 19:08:17');
+INSERT INTO `cart_details` (`id`, `cart_id`, `product_id`, `category_id`, `quantity`, `created_at`, `updated_at`) VALUES
+(1, 4, 'AG01', 1, 15, '2023-04-23 19:07:49', '2023-04-23 19:08:17'),
+(2, 24, 'ARM06', 0, 6, '2023-04-23 19:07:49', '2023-04-23 19:08:17'),
+(3, 25, 'DC02', 1, 2, '2023-04-23 19:07:49', '2023-04-23 19:08:17');
 
 -- --------------------------------------------------------
 
@@ -452,14 +453,14 @@ INSERT INTO `fish_species` (`fish_species`) VALUES
 --
 
 CREATE TABLE `food_type` (
-  `FOOD_TYPE` varchar(20) NOT NULL
+  `food_type` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `food_type`
 --
 
-INSERT INTO `food_type` (`FOOD_TYPE`) VALUES
+INSERT INTO `food_type` (`food_type`) VALUES
 ('Cám Thái Inve'),
 ('Giun, Trùn Chỉ, Trùn'),
 ('Thức Ăn Artemia'),
@@ -733,14 +734,14 @@ INSERT INTO `ph` (`ph_level`) VALUES
 
 CREATE TABLE `role` (
   `role_id` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `ROLE_NAME` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'customer'
+  `role_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'customer'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `role`
 --
 
-INSERT INTO `role` (`role_id`, `ROLE_NAME`) VALUES
+INSERT INTO `role` (`role_id`, `role_name`) VALUES
 ('0', 'Khách Hàng'),
 ('1', 'Quản trị viên'),
 ('2', 'tài khoản giao hàng');
@@ -883,7 +884,7 @@ ALTER TABLE `account_status`
 -- Indexes for table `carts`
 --
 ALTER TABLE `carts`
-  ADD PRIMARY KEY (`CART_ID`),
+  ADD PRIMARY KEY (`cart_id`),
   ADD KEY `ID` (`user_id`);
 
 --
@@ -892,7 +893,8 @@ ALTER TABLE `carts`
 ALTER TABLE `cart_details`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_ACCESSOR_RELATIONS_ACCESSOR` (`product_id`),
-  ADD KEY `CART_ID` (`CART_ID`);
+  ADD KEY `CART_ID` (`cart_id`),
+  ADD KEY `category_id` (`category_id`);
 
 --
 -- Indexes for table `categories`
@@ -961,7 +963,7 @@ ALTER TABLE `fish_species`
 -- Indexes for table `food_type`
 --
 ALTER TABLE `food_type`
-  ADD PRIMARY KEY (`FOOD_TYPE`);
+  ADD PRIMARY KEY (`food_type`);
 
 --
 -- Indexes for table `has_size`
@@ -1077,7 +1079,7 @@ ALTER TABLE `accessories_import_batches`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `CART_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `cart_details`
@@ -1172,7 +1174,8 @@ ALTER TABLE `carts`
 -- Constraints for table `cart_details`
 --
 ALTER TABLE `cart_details`
-  ADD CONSTRAINT `fk_cart` FOREIGN KEY (`CART_ID`) REFERENCES `carts` (`CART_ID`);
+  ADD CONSTRAINT `category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`),
+  ADD CONSTRAINT `fk_cart` FOREIGN KEY (`cart_id`) REFERENCES `carts` (`CART_ID`);
 
 --
 -- Constraints for table `fish`

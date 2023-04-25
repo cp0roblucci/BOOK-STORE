@@ -7,7 +7,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Giao Hàng</title>
   @vite([
-    './resources/css/app.css'
+    './resources/css/app.css',
   ])
   <link rel="shortcut icon" sizes="114x114" href="{{  URL::to('/storage/images/logo.png') }}">
   <link

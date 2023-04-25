@@ -42,11 +42,11 @@ class AuthController extends Controller
         if (Auth::guard('web')->attempt($credentials)) {
             $user = $this->userRepository->getUserByEmail($email);
             Auth::login($user, $request->input('remeberme'));
-            if ($user->role_id) {
+            if ($user->role_id == 1) {
                 return redirect(UrlConstant::DASHBOARD);
-            } else {
+            } else if ($user->role_id == 0) {
                 return redirect(RouteServiceProvider::HOME);
-            }
+            } else return redirect(RouteServiceProvider::DELIVERY);
         } else {
             session()->flash('incorect-password', 'Incorect Password');
             return redirect()->route('login');

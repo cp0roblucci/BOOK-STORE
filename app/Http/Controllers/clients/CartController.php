@@ -8,7 +8,6 @@ use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Auth\AuthController;
-use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -16,7 +15,7 @@ class CartController extends Controller
         // dd($request->all('userid')['userid']);
 
         $fish = DB::select("select carts.cart_id , cart_details.product_id, fish.category_id, fish.fish_size, fish.fish_id, fish.fish_link_img, fish.fish_name, fish.fish_species, has_size.has_price, cart_details.quantity
-                            from carts , cart_details, fish, has_size 
+                            from carts , cart_details, fish, has_size
                             where carts.cart_id = cart_details.cart_id
                                 and fish.fish_id = cart_details.product_id
                                 and has_size.size = fish.fish_size
@@ -29,8 +28,8 @@ class CartController extends Controller
             and cart_details.product_id = accessories_id
             and  accessories.accessories_type_id = accessories_type.accessories_type_id
             and carts.user_id = ?", [Auth::user()->id]);
-        
-        
+
+
 
         // dd($fish, $accessories);
 
@@ -93,7 +92,7 @@ class CartController extends Controller
 
         //lay so luong con trong kho
         if($cate == 1) {
-            $rest = 
+            $rest =
             DB::table('fish_import_batches')
             ->where('fish_id',$product_id)
             ->get('quantity'); //sum('quantity')
@@ -102,18 +101,18 @@ class CartController extends Controller
             // ->where('product_id',$product_id)
             // ->sum('quantity');
         } else {
-            $rest = 
+            $rest =
             DB::table('accessories_import_batches')
             ->where('accessories_id',$product_id)
             ->get('quantity'); //sum('quantity');
-            //  - 
+            //  -
             // DB::table('order_details')
             // ->where('product_id',$product_id)
             // ->sum('quantity');
         }
-        
+
         // dd($cart_id, $product_id, $quantity, $detail,$cate, $quantityincart, $rest);
-        
+
         // dd($detail);
 
         //update so luong
@@ -126,7 +125,7 @@ class CartController extends Controller
             ->increment('quantity', $quantity);
             return redirect('/cart');
         }
-        
+
     }
 
     public function deleteitem($cart_id, $product_id) {

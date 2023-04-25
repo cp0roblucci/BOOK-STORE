@@ -100,7 +100,7 @@ setTimeout(() => {
           console.log(data);
           localStorage.removeItem('userId');
           localStorage.removeItem('url');
-          window.location.href = data.url;
+          // window.location.href = data.url;
         })
         .catch(error => {
           console.log(error);

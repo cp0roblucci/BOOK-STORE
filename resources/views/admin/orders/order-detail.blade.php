@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 
 {{-- set title --}}
-@section('title', 'Quản lý đơn hàng')
+@section('title', 'Chi tiết đơn hàng')
 @section('path', 'Đơn hàng / Chi tiết đơn hàng')
 
 @section('sidebar')
@@ -135,7 +135,7 @@
           </div>
         </div>
       </div>
-    
+
 
     </div>
 
@@ -247,7 +247,7 @@
                     <button type="submit" class="text-12 text-green-400 leading-normal border-2 border-green-400  px-4 py-2 rounded-xl hover:bg-green-400  hover:text-white transition-all duration-200">Lưu trữ</button>
                   </form>
                 </div>
-              @elseif ($order->status_id == 4)
+              @elseif ($order->status_id == 4 || $order->status_id == 7)
                 <form action="{{ route('confirm-order') }}" method="post">
                   @csrf
                   <label hidden="">
@@ -265,8 +265,16 @@
                       </label>
                       <button type="submit" class="text-12 text-red-400 leading-normal border-2 border-red-400  px-4 py-2 rounded-xl hover:bg-red-400  hover:text-white transition-all duration-200">Xóa</button>
                     </form>
+              @elseif ($order->status_id == 6)
+                <form action="{{ route('confirm-order') }}" method="post">
+                  @csrf
+                  <label hidden="">
+                    <input name="order_id" value="{{ $order->order_id }}">
+                    <input name="status_id" value="{{ $order->status_id }}">
+                  </label>
+                  <button type="submit" class="text-12 text-green-400 leading-normal border-2 border-green-400  px-4 py-2 rounded-xl hover:bg-green-400  hover:text-white transition-all duration-200">Xác nhận trả hàng</button>
+                </form>
               @endif
-
             </div>
 
           </div>

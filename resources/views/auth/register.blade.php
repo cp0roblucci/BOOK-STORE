@@ -26,6 +26,10 @@
       id="imageLogin2"
       style="background-image: url('/storage/images/login/login2.jpg')"
       class="w-[50%] h-[96%] mt-0.5 rounded-xl absolute bg-cover translate-x-2 transform transition-all ease-linear duration-700">
+      <div class="mt-10">
+        <p class="text-48 text-slate-300 translate-x-10 font-sora">Chào mừng đến với</p>
+        <div class="translate-x-72 mt-4"><a href="{{ route('home') }}" class="text-7xl font-pacifico text-purple-700 hover:underline">Betta Shop</a></div>
+      </div>
     </div>
 
     <div class="bg-white h-full ">
@@ -155,7 +159,7 @@
                             id="condition"
                             name="condition_register"
                             type="checkbox"
-                            class="appearance-none w-10 h-5 rounded-[10px] bg-zinc-700/10 border transform transition-all after:content[''] after:bg-white after:w-4 after:h-4 after:rounded-[10px] after:shadow-2xl after:duration-[250ms] relative after:absolute after:top-[1px] after:left-[1px] checked:after:translate-x-5 checked:bg-purple-400 checked:border-slate-300 cursor-pointer"
+                            class="appearance-none w-10 h-5 rounded-[10px] bg-zinc-700/10 border transform transition-all after:content[''] after:bg-white after:w-4 after:h-4 after:rounded-[10px] after:shadow-2xl after:duration-[250ms] relative after:absolute after:top-[1px] after:left-[1px] checked:after:translate-x-5 checked:bg-purple-400 checked:border-primary-purple cursor-pointer"
                         >
                         <label for="condition" class="text-slate-600 text-14 ml-2">
                           Tôi đồng ý với các <span class="font-bold">Điều khoản và Điều kiện</span>

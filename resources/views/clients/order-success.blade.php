@@ -11,9 +11,10 @@
                 <div class="check"><i class="fa-solid fa-circle-check p-2 "></i></div>
                 <div class="title"><h1 class="capitalize px-5 py-5">Đặt hàng thành công</h1></div>
             </div>
-            <div class="status w-3/4 m-auto grid grid-cols-6 mb-3 text-center">
+           
             @switch($infor[0]->status_id)
                 @case(0)
+                    <div class="status w-3/4 m-auto grid grid-cols-6 mb-3 text-center">
                         <div class="">Đặt hàng thành công</div>
                         <div class="relative active before:absolute before:h-1 before:w-1/2 before:translate-x-1/2 before:bg-green-400 before:border-2 before:border-green-400 before:-bottom-1 before:left-0 before:rounded-full  ">Chờ xác nhận</div>
                         <div class="">Đang xử lý</div>
@@ -24,6 +25,7 @@
                     <div class="line_status relative before:absolute before:top-0 before:left-1/8 before:w-[31.25%]  before:border-2 before:border-green-400 "></div>
                     @break
                     @case(1)
+                        <div class="status w-3/4 m-auto grid grid-cols-6 mb-3 text-center">
                             <div class="">Đặt hàng thành công</div>
                             <div class="">Chờ xác nhận</div>
                             <div class="relative active before:absolute before:h-1 before:w-1/2 before:translate-x-1/2 before:bg-green-400 before:border-2 before:border-green-400 before:-bottom-1 before:left-0 before:rounded-full  ">Đang xử lý</div>
@@ -34,6 +36,7 @@
                         <div class="line_status relative before:absolute before:top-0 before:left-1/8 before:w-[43.75%]  before:border-2 before:border-green-400 "></div>
                     @break
                     @case(2)
+                        <div class="status w-3/4 m-auto grid grid-cols-6 mb-3 text-center">
                             <div class="">Đặt hàng thành công</div>
                             <div class="">Chờ xác nhận</div>
                             <div class="">Đang xử lý</div>
@@ -44,6 +47,7 @@
                         <div class="line_status relative before:absolute before:top-0 before:left-1/8 before:w-[56.25%]  before:border-2 before:border-green-400 "></div>
                     @break
                     @case(3)
+                        <div class="status w-3/4 m-auto grid grid-cols-6 mb-3 text-center">
                             <div class="">Đặt hàng thành công</div>
                             <div class="">Chờ xác nhận</div>
                             <div class="">Đang xử lý</div>
@@ -54,6 +58,7 @@
                         <div class="line_status relative before:absolute before:top-0 before:left-1/8 before:w-[68.75%]  before:border-2 before:border-green-400 "></div>
                     @break
                     @case(4)
+                        <div class="status w-3/4 m-auto grid grid-cols-6 mb-3 text-center">
                             <div class="">Đặt hàng thành công</div>
                             <div class="">Chờ xác nhận</div>
                             <div class="">Đang xử lý</div>
@@ -63,7 +68,11 @@
                         </div>
                         <div class="line_status relative before:absolute before:top-0 before:left-1/8 before:w-[80.25%] before:border-2 before:border-green-400 "></div>
                     @break
-                    @default ...
+                    @default 
+                        <div class="status w-3/4 m-auto mb-3 text-center">
+                            <div class="relative active before:absolute before:h-1 before:w-1/2 before:translate-x-1/2 before:bg-red-500 before:border-2 before:border-red-500 before:-bottom-1  before:rounded-full before:left-0 "><h1 class="text-24 text-red-400">{{$infor[0]->status_name}}</h1></div>
+                        </div>
+                        
                 @endswitch
             {{-- </div>
             <div class="line_status relative before:absolute before:top-0 before:left-1/8 before:w-[31.25%] before:animate-line0 before:border-2 before:border-green-400 "></div> --}}

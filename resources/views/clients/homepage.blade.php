@@ -1,5 +1,8 @@
 @extends('layouts.main')
 
+@section('title')
+    Trang Chủ
+@endsection
 
 @section('header')
     @include('layouts.header')
@@ -19,7 +22,7 @@
                 <h1 class="fish-name uppercase font-bold text-48 mb-4 ">Cyan Red</h1>
                 <h2 class="subname uppercase text-26 mb-2">HAFMOON BETTA FISH</h2>
                 <p class="des">Bettas are a member of the gourami family and are know to be highly territorial.</p>
-                <button class="mt-4"><a class="px-4 py-2 bg-none text-aliceblue border rounded-lg hover:bg-blue-300" href="/products_detail">Mua Ngay</a></button>
+                <button class="mt-4"><a class="px-4 py-2 bg-none text-aliceblue border rounded-lg hover:bg-blue-300" href="{{route('get-product', ['category_id' => 1])}}">Mua Ngay</a></button>
             </div>
             <div class="btn-pre text-slate-300 text-36 p-4 absolute top-1/2 -translate-y-1/2">
                 <button ><i class="fa-solid fa-angle-left"></i></button>

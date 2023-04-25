@@ -14,9 +14,20 @@
       @include('admin.layout.header')
     @endsection
 
-    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Thêm mới loại cá</div>
-    <div class="">
-      <div class="col-span-3 border p-4">
+    <div>
+      <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Thêm mới loại cá</div>
+      @if(session('create-success'))
+          <div id="message" class="flex absolute top-12 right-7">
+            <div  class="bg-slate-200 rounded-lg border-l-8 border-l-blue-500 opacity-80">
+              <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
+                <span class="px-4">{{ session('create-success') }}</span>
+              </div>
+            </div>
+          </div>
+        @endif
+    </div>
+    <div class="grid grid-cols-4 gap-8 border">
+      <div class="col-span-3 p-4">
         <form action="" method="post">
           @csrf
 
@@ -46,6 +57,17 @@
 
         </form>
       </div>
+
+      <div class="border">
+        <h2 class="text-24 text-center font-sora text-primary-purple">Danh sách các loại Cá</h2>
+        <div class="mx-2 leading-8">
+          @foreach ($listSpecies as $key => $species)
+            <div class="flex">
+              <h2 class="mr-2">{{ ++$key }}.</h2>
+              <h4 class="font-medium">{{ $species->fish_species }}</h4>
+            </div>
+          @endforeach
+        </div>
 
     </div >
   </div>

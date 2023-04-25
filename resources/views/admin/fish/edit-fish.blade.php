@@ -17,7 +17,7 @@
     <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Cập nhật Cá</div>
     <div class="">
       <div class="col-span-3 border p-4">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
           @csrf
           <div class="flex items-center justify-between mt-1 mb-6">
             <div class="w-80 h-32 mr-10">

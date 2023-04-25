@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Accessories;
 use App\Models\AccessoriesType;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -48,7 +49,8 @@ class AccessoriesController extends Controller
         'accessories_link_img' => $accessoriesImgURL
       ]);
 
-    dd($accessories);
+    Session::flash('update-success', 'Cập nhật phụ kiện thành công');
+    return redirect()->route('admin-accessories');
   }
 
   public function editAccessories($id) {

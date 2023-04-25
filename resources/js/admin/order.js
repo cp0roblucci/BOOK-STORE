@@ -37,10 +37,12 @@ if (listOrder) {
 
 const confirmAllWaitingOrders = document.getElementById('confirm-all-waiting-orders');
 const confirmAllProcessingOrders = document.getElementById('confirm-all-processing-orders');
-const confirmAllSentOrders = document.getElementById('confirm-all-sent-orders');
 const deleteAllArchivedOrders = document.getElementById('delete-all-archived-orders');
 const archivedAllOrders = document.getElementById('archived-all-orders');
 const deleteAllOrders = document.getElementById('delete-all-orders');
+const returnRequest = document.getElementById('return-request');
+const acceptReturnRequest = document.getElementById('accept-return-request');
+
 
 // kiem tra neu khong co input nao duoc check thi khong cho submit
 function isCheck(listCheckBox) {
@@ -73,9 +75,6 @@ function checkBtnExistsThenEnable() {
   } else if (confirmAllProcessingOrders) {
     enableBtn(confirmAllProcessingOrders);
 
-  } else if (confirmAllSentOrders) {
-    enableBtn(confirmAllSentOrders);
-
   } else if (archivedAllOrders) {
     enableBtn(archivedAllOrders);
 
@@ -84,6 +83,12 @@ function checkBtnExistsThenEnable() {
 
   } else if(deleteAllArchivedOrders) {
     enableBtn(deleteAllArchivedOrders);
+
+  } else if(returnRequest) {
+    enableBtn(returnRequest);
+
+  } else if(acceptReturnRequest) {
+    enableBtn(acceptReturnRequest);
   }
 }
 function checkBtnExistsThenDisable() {
@@ -93,9 +98,6 @@ function checkBtnExistsThenDisable() {
   } else if (confirmAllProcessingOrders) {
     disableBtn(confirmAllProcessingOrders);
 
-  } else if (confirmAllSentOrders) {
-    disableBtn(confirmAllSentOrders);
-
   } else if (archivedAllOrders) {
     disableBtn(archivedAllOrders);
 
@@ -104,6 +106,12 @@ function checkBtnExistsThenDisable() {
 
   } else if(deleteAllArchivedOrders) {
     disableBtn(deleteAllArchivedOrders);
+
+  } else if(returnRequest) {
+    disableBtn(returnRequest);
+
+  } else if(acceptReturnRequest) {
+    disableBtn(acceptReturnRequest);
   }
 }
 
@@ -136,7 +144,7 @@ function enableBtn(btnElement) {
   btnElement.classList.remove('opacity-50');
   btnElement.classList.remove('border-slate-500');
 
-  if (btnElement === deleteAllArchivedOrders || btnElement === deleteAllOrders) {
+  if (btnElement === deleteAllArchivedOrders || btnElement === deleteAllOrders || btnElement === acceptReturnRequest) {
     btnElement.classList.add('text-red-400');
     btnElement.classList.add('border-red-400');
     return;
@@ -206,12 +214,6 @@ if (confirmAllProcessingOrders) {
     responseData(constants.URL_CONFIRM_PROCESSING_ORDER, statusId);
   });
 }
-if (confirmAllSentOrders) {
-  confirmAllSentOrders.addEventListener('click', () => {
-    const statusId = confirmAllSentOrders.dataset.status_id;
-    responseData(constants.URL_CONFIRM_SENT_ORDER, statusId);
-  });
-}
 if (deleteAllArchivedOrders) {
   deleteAllArchivedOrders.addEventListener('click', () => {
     const statusId = deleteAllArchivedOrders.dataset.status_id;
@@ -227,5 +229,17 @@ if (deleteAllOrders) {
   deleteAllOrders.addEventListener('click', () => {
     const statusId = deleteAllOrders.dataset.status_id;
     responseData(constants.URL_DELETE_ORDER, statusId);
+  });
+}
+if (returnRequest) {
+  returnRequest.addEventListener('click', () => {
+    const statusId = returnRequest.dataset.status_id;
+    responseData(constants.URL_RETURN_REQUEST, statusId);
+  });
+}
+if (acceptReturnRequest) {
+  acceptReturnRequest.addEventListener('click', () => {
+    const statusId = acceptReturnRequest.dataset.status_id;
+    responseData(constants.URL_ACCEPT_RETURN_REQUEST, statusId);
   });
 }

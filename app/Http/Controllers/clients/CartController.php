@@ -8,7 +8,6 @@ use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Auth\AuthController;
-use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -37,21 +36,27 @@ class CartController extends Controller
         if(!empty($fish)) {
             if(!empty($accessories)) {
                 $batch_acc = [];
-                $tempbatch_acc =0;
+                $tempbatch_acc = 0;
+                // dd($tempbatch_acc);
                 foreach($accessories as $key => $acc) {
                     // $temp = DB::table('accessories_import_batch')->where('accessories_id', $acc[0]->accessories_id)->get('quantity');
-                    // dd($acc);
+                    // dd();
                     $batch_acc[$tempbatch_acc] = DB::table('accessories_import_batches')->where('accessories_id', $acc->accessories_id)->get('quantity');
+
                     $tempbatch_acc++;
+                    // dd($batch_acc[$tempbatch_acc], $tempbatch_acc);
                 }
 
+                // dd($batch_acc);
+
                 $batch_fish = [];
-                $tempbatch_fish =0;
+                $tempbatch_fish = 0;
                 foreach($fish as $key => $element) {
                     $batch_fish[$tempbatch_fish] = DB::table('fish_import_batches')->where('fish_id', $element->fish_id)->get('quantity');
                     $tempbatch_fish++;
                 }
-                // dd($batch_fish[0][0]->quantity,$batch_acc[0][0]->quantity );
+                // dd($batch_fish);
+                // dd($batch_fish[1][0]->quantity,$batch_acc[0][0]->quantity );
                 return view('clients.cart', compact('fish', 'accessories', 'batch_fish', 'batch_acc'));
             } else {
                 // dd($fish);

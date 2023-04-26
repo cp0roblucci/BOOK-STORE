@@ -111,6 +111,7 @@
                         <form action="{{route('add-to-cart')}}" method="post">
                             @csrf
                         <button type="submit" class="py-4 px-6 bg-blue-500 text-white font-medium hover:bg-fuchsia-500" id="add-to-cart">
+                            <input type="hidden" name="category_id" value="{{$data->category_id}}">
                             <input  name="product_id" type="hidden" value="{{$data->fish_id}}">
                             <input id="add_to_cart_product_id" type="hidden" name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="1">
                                 <i class="fa-solid fa-cart-shopping mr-2"></i>
@@ -208,6 +209,7 @@
                         <form action="{{route('add-to-cart')}}" method="post">
                             @csrf
                         <button type="submit" class="py-4 px-6 bg-blue-500 text-white font-medium hover:bg-fuchsia-500" id="add-to-cart">
+                            <input type="hidden" name="category_id" value="{{$data->category_id}}">
                             <input name="product_id" type="hidden" value="{{$data->accessories_id}}">
                             <input type="hidden" name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="1">
                                 <i class="fa-solid fa-cart-shopping mr-2"></i>

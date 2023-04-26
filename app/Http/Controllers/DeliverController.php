@@ -13,9 +13,9 @@ class DeliverController extends Controller
     // deliver
     public function listOdersDeliver() {
       $groupedOrders = DB::table('orders')
-        ->select('order_delivery_address', 'order_id', 'full_name', 'order_phone_number')
+        ->select('order_delivery_address', 'order_id', 'full_name', 'order_notes', 'order_phone_number')
         ->where('status_id', '=', 2)
-        ->groupBy('order_delivery_address', 'order_id', 'full_name', 'order_phone_number')
+        ->groupBy('order_delivery_address', 'order_id', 'full_name', 'order_notes', 'order_phone_number')
         ->get()
         ->groupBy('order_delivery_address');
 
@@ -30,9 +30,7 @@ class DeliverController extends Controller
         ->join('users', 'orders.user_id', '=', 'users.id')
         ->where('orders.order_id', '=', $orderId)
         ->select(
-        'orders.*',
-        'users.last_name', 'users.first_name', 'users.user_address', 'users.phone_number',
-        'order_status.status_name',
+        'orders.*'
         )
         ->orderBy('orders.order_id')
         ->first();

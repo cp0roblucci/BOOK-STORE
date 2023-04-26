@@ -96,7 +96,8 @@ class OrderController extends Controller
         'users.last_name',
         'users.first_name',
       )
-        ->orderBy('orders.order_id')
+//        ->orderBy('orders.order_date')
+        ->latest('order_date')
         ->get();
 
       $totalPrice = DB::table('orders')
@@ -203,25 +204,33 @@ class OrderController extends Controller
       ->delete();
     } else {
       if ($statusId == 1) {
-          DB::table('orders')
+        DB::table('orders')
           ->where('order_id', '=', $orderId)
           ->update([
-            'delivery_id' => 1
+            'status_id' => 2,
+            'delivery_id' => 1,
           ]);
       } else if ($statusId == 2) {
-          DB::table('orders')
-            ->where('order_id', '=', $orderId)
-            ->update([
-              'delivery_id' => 2,
-              'payment_id' => 1
-            ]);
-      }
         DB::table('orders')
-        ->where('order_id', '=', $orderId)
-        ->update([
-          'status_id' => ++$statusId
-        ]);
+          ->where('order_id', '=', $orderId)
+          ->update([
+            'delivery_id' => 2,
+            'payment_id' => 1
+          ]);
+      } else if ($statusId == 3) {
+        DB::table('orders')
+          ->where('order_id', '=', $orderId)
+          ->update([
+            'status_id' => 5
+          ]);
+      } else {
+        DB::table('orders')
+          ->where('order_id', '=', $orderId)
+          ->update([
+            'status_id' => ++$statusId
+          ]);
         $statusId--;
+      }
     }
 
     Session::flash('confirm-success', $statusId === 4 ? 'Xóa đơn hàng thành công.' : ($statusId === null ? 'Lưu trữ đơn hàng thành công.' : 'Cập nhật đơn hàng thành công'));

@@ -227,15 +227,15 @@
                   </label>
                   <button type="submit" class="text-12 text-primary-blue leading-normal border-2 border-primary-blue  px-4 py-2 rounded-xl hover:bg-primary-blue  hover:text-white transition-all duration-200">Xác nhận gửi hàng</button>
                 </form>
-              @elseif ($order->status_id == 2)
-                <form action="{{ route('confirm-order') }}" method="post">
-                  @csrf
-                  <label hidden="">
-                    <input name="order_id" value="{{ $order->order_id }}">
-                    <input name="status_id" value="{{ $order->status_id }}">
-                  </label>
-                  <button type="submit" class="text-12 text-primary-purple leading-normal border-2 border-primary-purple  px-4 py-2 rounded-xl hover:bg-primary-purple hover:text-white transition-all duration-200">Xác nhận hoàn thành</button>
-                </form>
+{{--              @elseif ($order->status_id == 2)--}}
+{{--                <form action="{{ route('confirm-order') }}" method="post">--}}
+{{--                  @csrf--}}
+{{--                  <label hidden="">--}}
+{{--                    <input name="order_id" value="{{ $order->order_id }}">--}}
+{{--                    <input name="status_id" value="{{ $order->status_id }}">--}}
+{{--                  </label>--}}
+{{--                  <button type="submit" class="text-12 text-primary-purple leading-normal border-2 border-primary-purple  px-4 py-2 rounded-xl hover:bg-primary-purple hover:text-white transition-all duration-200">Xác nhận hoàn thành</button>--}}
+{{--                </form>--}}
               @elseif ($order->status_id == 3)
                 <div class="flex justify-between">
                   <form action="{{ route('confirm-order') }}" method="post" class="ml-2">

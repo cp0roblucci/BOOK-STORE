@@ -111,7 +111,7 @@
             <div class="flex flex-col w-full max-w-full px-3">
               <div class="flex flex-col min-w-[980px] mb-4 bg-white border-0 border-transparent border-solid shadow-md rounded-lg bg-clip-border overflow-hidden">
                 <div class="flex p-2 py-2 items-center justify-between">
-                  <h3 class="text-[#344767] text-20 font-sora">{{ $userName ? 'Các đơn hàng của người dùng tên "' . $userName .'"' : 'Đơn Hàng'}}</h3>
+                  <h3 class="text-[#344767] text-20 font-sora">{{ $userName ? 'Các đơn hàng của khách hàng "' . $userName .'"' : 'Đơn Hàng'}}</h3>
                 </div>
                 <div class="flex-auto px-0 pt-0">
                   <div class="p-0 overflow-x-auto place-self-auto">
@@ -146,11 +146,11 @@
 
                         @if (request()->segment(3) == 0)
                           <th class="px-4 py-3 font-bold text-center">Xác nhận</th>
-                        @elseif(request()->segment(3) == 1)
+                        @elseif(request()->segment(3) == 1 || request()->segment(3) == 6)
                           <th class="px-4 py-3 font-bold text-center">Xác nhận gửi hàng</th>
                         @elseif(request()->segment(3) == 3)
                           <th class="px-4 py-3 font-bold text-center">Hành động</th>
-                        @elseif(request()->segment(3) == 4 || request()->segment(3) == 5)
+                        @elseif(request()->segment(3) == 4 || request()->segment(3) == 5 || request()->segment(3) == 7)
                           <th class="px-4 py-3 font-bold text-center">Xóa</th>
                         @endif
 
@@ -333,6 +333,19 @@
                                 </form>
                               </div>
                             </td>
+                            @elseif (request()->segment(3) == 6)
+                              <td class="p-2 bg-transparent">
+                                <div class="py-1 text-center">
+                                  <form action="{{ route('confirm-order') }}" method="post">
+                                    @csrf
+                                    <label hidden="">
+                                      <input name="order_id" value="{{ $order->order_id }}">
+                                      <input name="status_id" value="{{ $order->status_id }}">
+                                    </label>
+                                    <button type="submit" class="text-12 text-primary-blue leading-normal border-2 border-primary-blue  px-4 py-2 rounded-xl hover:bg-primary-blue  hover:text-white transition-all duration-200">Xác nhận gửi hàng</button>
+                                  </form>
+                                </div>
+                              </td>
                           @elseif (request()->segment(3) == 3)
                             <td class="p-2 bg-transparent">
                               <div class="flex justify-around py-1 text-center">
@@ -360,6 +373,19 @@
                               </div>
                             </td>
                             @elseif (request()->segment(3) == 5)
+                              <td class="p-2 bg-transparent">
+                                <div class="py-1 text-center">
+                                  <form action="{{ route('confirm-order') }}" method="post">
+                                    @csrf
+                                    <label hidden="">
+                                      <input name="order_id" value="{{ $order->order_id }}">
+                                      <input name="status_id" value="{{ $order->status_id }}">
+                                    </label>
+                                    <button type="submit" class="text-12 text-red-400 leading-normal border-2 border-red-400  px-4 py-2 rounded-xl hover:bg-red-400  hover:text-white transition-all duration-200">Xóa</button>
+                                  </form>
+                                </div>
+                              </td>
+                            @elseif (request()->segment(3) == 7)
                               <td class="p-2 bg-transparent">
                                 <div class="py-1 text-center">
                                   <form action="{{ route('confirm-order') }}" method="post">

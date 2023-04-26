@@ -59,6 +59,10 @@
                               <div class="w-28">Số điện thoại: </div>
                               <span class="pr-4 font-normal uppercase text-primary-blue">{{ $order->order_phone_number }}</span>
                             </div>
+                            <div class="flex justify-between px-2 text-12">
+                              <div class="w-28">Ghi chú: </div>
+                              <span class="pr-4 font-normal text-slate-700">{{ $order->order_notes ? $order->order_notes : 'Không có'}}</span>
+                            </div>
                           </a>
                         </div>
                       @endforeach

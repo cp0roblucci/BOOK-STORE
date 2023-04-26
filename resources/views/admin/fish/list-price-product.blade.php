@@ -28,10 +28,10 @@
         </form>
       </div>
 
-      @if(session('update-price-success'))
+      @if(session('update-price-success') || session('update-price-failed'))
         <div id="message" class="bg-slate-200 absolute top-12 right-7 rounded-lg border-l-8 border-l-blue-500 opacity-80">
           <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
-            <span class="px-4">{{ session('update-price-success') }}</span>
+            <span class="px-4">{{ session('update-price-success') ? session('update-price-success') : session('update-price-failed') }}</span>
           </div>
         </div>
       @endif

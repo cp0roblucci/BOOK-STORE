@@ -188,6 +188,10 @@ class FishController extends Controller
     $size = $request->input('size');
     $newPrice = $request->input('new-price');
 
+    if ($newPrice <= 1000) {
+      return redirect()->back()->with('update-price-failed', 'Giá không được nhỏ hơn 1000đ, Vui lòng nhập giá lớn hơn!');
+    }
+
     DB::table('has_size')
       ->where('fish_species', '=', $species)
       ->where('size', '=', $size)

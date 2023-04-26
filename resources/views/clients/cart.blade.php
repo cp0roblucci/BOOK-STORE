@@ -111,7 +111,7 @@
         </div>
         <div class="order-container bg-slate-100 relative flex flex-col justify-between">
             <div class="items-order-container ">
-                <div class="warning w-fulll h-16 text-36 flex justify-center items-center text-red-500  p-2">
+                <div class="warning w-fulll h-16 text-24 flex justify-center items-center text-red-500  p-2">
                     <h1 class="font-bold capitalize p-2">Hãy chọn sản phẩm!!!</h1>
                 </div>
             </div>

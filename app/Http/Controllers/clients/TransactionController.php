@@ -197,6 +197,10 @@ class TransactionController extends Controller
     public function getOrderSuccess($order_id) {
         $infor  = DB::select("select * from orders, order_status where orders.status_id = order_status.status_id and order_id = ?", [$order_id]);
 
+        // $d = date("m", strtotime($infor[0]->order_date));
+
+        // dd($infor, $d);
+
         $details = DB::select("select * from order_details where order_id = ?", [$order_id]);
         // dd($details);
         $bill = [];

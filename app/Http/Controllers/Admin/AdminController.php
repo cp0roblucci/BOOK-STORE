@@ -73,6 +73,8 @@ class AdminController extends Controller
         ->join('orders', 'users.id', '=', 'orders.user_id')
         ->join('order_details', 'orders.order_id', '=', 'order_details.order_id')
         ->select('users.first_name', 'users.last_name', 'users.phone_number', 'users.email', 'users.user_address', DB::raw('SUM(order_details.price * order_details.quantity) AS total_spent'))
+        ->where('orders.status_id', '!=', 4)
+        ->where('orders.status_id', '!=', 7)
         ->groupBy('users.first_name',  'users.last_name', 'users.phone_number', 'users.email', 'users.user_address',)
         ->orderByDesc('total_spent')
         ->limit(2)

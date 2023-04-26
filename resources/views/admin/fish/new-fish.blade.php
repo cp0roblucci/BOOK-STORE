@@ -15,6 +15,17 @@
     @endsection
 
     <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Thêm Cá mới</div>
+      @if( session('lack-info') || session('exists-fish_id'))
+        <div id="message" class="flex absolute top-12 right-7">
+          <div  class="bg-slate-200 rounded-lg border-l-8 border-l-blue-500 opacity-80">
+            <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
+              <span class="px-4">
+                {{ session('lack-info') ? session('lack-info') : session('exists-fish_id') }}
+              </span>
+            </div>
+          </div>
+        </div>
+      @endif
     <div class="">
       <div class="col-span-3 border p-4">
         <form action="" method="post" enctype="multipart/form-data">
@@ -159,23 +170,7 @@
 
           </div>
 
-        <div class="grid grid-cols-3 gap-4">
-            <div class="mt-4 ">
-              <label
-                for="habit"
-                class="text-slate-500 text-14"
-              >
-                Số lượng
-              </label><br>
-              <div class="border-[1.5px] mt-1">
-                <input
-                  type="text"
-                  name="quantity"
-                  placeholder="Nhập"
-                  class="pb-11 pt-1 w-full outline-none focus-within:border-blue-500 px-2 placeholder:text-14 text-14"
-                >
-              </div>
-            </div>
+        <div class="grid grid-cols-2 gap-4">
 
             <div class="mt-4 ">
               <label

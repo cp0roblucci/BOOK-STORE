@@ -15,6 +15,17 @@
     @endsection
 
     <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Thêm phụ kiện mới</div>
+      @if( session('lack-info'))
+        <div id="message" class="flex absolute top-12 right-7">
+          <div  class="bg-slate-200 rounded-lg border-l-8 border-l-blue-500 opacity-80">
+            <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
+              <span class="px-4">
+                {{ session('lack-info') }}
+              </span>
+            </div>
+          </div>
+        </div>
+      @endif
     <div class="">
       <div class="col-span-3 border p-4">
         <form action="" method="post">
@@ -37,14 +48,14 @@
               <input
                 id="input-file-img"
                 type="file"
-                name="avatar"
+                name="accessories-img"
                 placeholder=""
                 class="w-full py-8 text-14 border border-slate-500 file:ml-2 rounded-lg border-dashed text-slate-500 cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-none file:bg-[#5490f0] file:text-white file:cursor-pointer file:hover:bg-blue-100"
               >
             </div>
 
 
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-3 gap-4">
             <div class="">
               <label
                 for="accessories-type"
@@ -57,12 +68,27 @@
                   name="accessories-type"
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14 cursor-pointer"
                 >
-                  <option value="red">Red</option>
-                  <option value="blue">Blue</option>
-                  <option value="green">Green</option>
-                  <option value="gold">Gold</option>
-                  <option value="yellow">Yellow</option>
+                  @foreach($accessories_type as $value)
+                    <option value="{{ $value->accessories_type_id }}">{{ $value->accessories_type_name }}</option>
+                  @endforeach
                 </select>
+              </div>
+            </div>
+
+            <div class="">
+              <label
+                for="name"
+                class="text-slate-500 text-14"
+              >
+                Mã phụ kiện
+              </label><br>
+              <div class="flex items-center border-[1.5px] mt-1 rounded-lg focus-within:border-blue-200">
+                <input
+                  type="text"
+                  name="accessories-id"
+                  placeholder="Nhập giá"
+                  class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14"
+                >
               </div>
             </div>
 
@@ -83,6 +109,8 @@
               </div>
             </div>
 
+          </div>
+          <div class="grid grid-cols-2 gap-4">
             <div class="mt-4 ">
               <label
                 for="name"
@@ -118,6 +146,7 @@
               </div>
             </div>
           </div>
+
 
           <button
             type="submit"

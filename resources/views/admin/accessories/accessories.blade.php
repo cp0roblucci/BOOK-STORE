@@ -29,11 +29,18 @@
         </form>
       </div>
 
-      @if(session('update-success'))
+      @if(session('update-success') || session('create-success') || session('exists-accessories') || session('delete-success'))
         <div id="message" class="flex absolute top-12 right-7">
           <div  class="bg-slate-200 rounded-lg border-l-8 border-l-blue-500 opacity-80">
             <div class="py-4 text-blue-100 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
-              <span class="px-4">{{ session('update-success') }}</span>
+              <span class="px-4">
+                {{
+                    session('update-success') ? session('update-success')
+                    : (session('create-success') ? session('create-success')
+                    : (session('exists-accessories') ? session('exists-accessories')
+                     : (session('delete-success') ? session('delete-success') : '' )))
+                }}
+              </span>
             </div>
           </div>
         </div>

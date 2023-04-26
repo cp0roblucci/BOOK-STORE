@@ -78,9 +78,10 @@ class OrderController extends Controller
         ->join('delivery_status', 'orders.delivery_id', '=', 'delivery_status.delivery_id')
         ->join('payment_status', 'orders.payment_id', '=', 'payment_status.payment_id')
         ->join('order_status', 'orders.status_id', '=', 'order_status.status_id')
-        ->join('users', 'orders.user_id', '=', 'users.id')
-        ->where('orders.status_id', '!=', 5)
-        ->where('orders.status_id', '!=', 7);
+        ->join('users', 'orders.user_id', '=', 'users.id');
+//        ->where('orders.status_id', '!=', 4)
+//        ->where('orders.status_id', '!=', 5)
+//        ->where('orders.status_id', '!=', 7);
       if(!empty($userName)) {
         $query->where(function ($query) use ($userName) {
           $query->where(DB::raw("CONCAT(users.last_name, ' ', users.first_name)"), 'LIKE', '%'. $userName .'%');

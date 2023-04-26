@@ -58,7 +58,7 @@
                   class="py-1.5 px-2 w-full outline-none rounded-lg placeholder:text-14 text-14 cursor-pointer"
                 >
                   @foreach($accessories_type as $value)
-                    <option {{ $value->accessories_type_id === $accessories->accessories_type_id ? 'selected' : '' }} value="{{ $value->accessories_type_id }}">{{$value->accessories_type_name}}</option>
+                    <option {{ $value->accessories_type_id === $accessories->accessories_type_id ? 'selected' : '' }} value="{{ $value->accessories_type_id }}">{{ $value->accessories_type_name }}</option>
                   @endforeach
                 </select>
               </div>

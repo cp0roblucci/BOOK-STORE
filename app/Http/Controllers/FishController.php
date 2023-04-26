@@ -42,7 +42,6 @@ class FishController extends Controller
 
     // tìm nếu có mã sản phẩm này rồi thì cập nhật lại lô nhập
     $fishId = $request->input('fish_id');
-    $fish = Fish::where('fish_id', $fishId)->first();
     $species = $request->input('species');
     $fishName = $request->input('fish_name');
     $phLevel = $request->input('ph_level');
@@ -51,22 +50,26 @@ class FishController extends Controller
     $habit= $request->input('habit');
     $description= $request->input('description');
 
-    $quantity = $request->input('quantity');
+    if ($fishId === null || $fishName === null) {
+      Session::flash('lack-info', 'Vui lòng nhập thêm thông tin Cá');
+      return redirect()->route('new-fish');
+    }
 
     $fishExists = DB::table('fish')
       ->where('fish_id', '=', $fishId)
       ->first();
-
     if ($fishExists) {
-      if($fishId->color == $color  && $fishId->fish_size == $size) {
-        $product = SupplierInvoice::where('supplier_invoice_product_id', $fish)->first();
+      if($fishExists->color === $color  && $fishExists->fish_size == $size) {
+        $product = FishImport::where('fish_id', $fishId)->first();
         // tăng sl lên 1
-        $product->increment('supplier_invoice_quantity');
+        $product->increment('quantity');
         // $productImport->supplier_invoice_total_price = $productImport->supplier_invoice_quantity * $productImport->supplier_invoice_price;
         $product->save();
-
         Session::flash('add-success', 'Đã có sản phẩm trong kho, tăng số lượng thành công.');
         return redirect()->route('admin-fish');
+      } else {
+        Session::flash('exists-fish_id', 'Mã sản phẩm đã tồn tại, vui lòng nhập mã khác.');
+        return redirect()->route('new-fish');
       }
     }
 
@@ -84,7 +87,7 @@ class FishController extends Controller
 
     FishImport::create([
       'fish_id' => $fishId,
-      'quantity' => $quantity,
+      'quantity' => 1,
     ]);
 
     Session::flash('add-success', 'Thêm cá thành công.');
@@ -108,7 +111,7 @@ class FishController extends Controller
     $fish = DB::table('fish')
       ->where('fish_id', '=', $fishId)
       ->first();
-    
+
     $fishImg = $request->file('fish-img');
     if ($fishImg) {
       $linkImgPath = $fishImg->store('public/images/img_products');
@@ -157,6 +160,7 @@ class FishController extends Controller
       })
       ->join('fish_import_batches', 'fish.fish_id', '=', 'fish_import_batches.fish_id')
       ->where('fish.fish_name', 'LIKE', '%'. $fish_name .'%')
+      ->Orwhere('fish.fish_species', 'LIKE', '%'. $fish_name .'%')
       ->select('fish.*', 'has_size.has_price', 'fish_import_batches.quantity')
       ->get();
 
@@ -210,7 +214,7 @@ class FishController extends Controller
   public function delete(Request $request)
   {
     $fish_id = $request->input('fish_id');
-    
+
     DB::table('fish_import_batches')
     ->where('fish_id', '=', $fish_id)
     ->delete();

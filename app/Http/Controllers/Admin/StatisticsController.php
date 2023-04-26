@@ -27,6 +27,8 @@ class StatisticsController extends Controller
       $result = OrderDetail::join('orders', 'order_details.order_id', '=', 'orders.order_id')
         ->leftJoin('fish', 'order_details.product_id', '=', 'fish.fish_id')
         ->where('order_details.category_id', 1)
+        ->where('orders.status_id', '!=', 4)
+        ->where('orders.status_id', '!=', 7)
         ->whereDate('orders.order_date', $day)
         ->selectRaw(
             'order_details.category_id as category_id,
@@ -63,6 +65,8 @@ class StatisticsController extends Controller
         $result = OrderDetail::join('orders', 'order_details.order_id', '=', 'orders.order_id')
           ->leftJoin('accessories', 'order_details.product_id', '=', 'accessories.accessories_id')
           ->where('order_details.category_id', 0)
+          ->where('orders.status_id', '!=', 4)
+          ->where('orders.status_id', '!=', 7)
           ->whereDate('orders.order_date', $day)
           ->selectRaw(
             'order_details.category_id as category_id,

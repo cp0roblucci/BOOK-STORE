@@ -115,6 +115,7 @@ async function fetchDataApi($endpointApi, options) {
   return await fetch($endpointApi, options)
     .then(response => response.json())
     .then(data => {
+      // console.log(data);
       dataFish = data[0];
       dataAccessories = data[1];
 

@@ -23,24 +23,30 @@ class StatisticsController extends Controller
     }
 
 // Truy vấn và tính toán dữ liệu cho từng ngày trong mảng
-    $dataFish = [];
     foreach ($days as $day) {
       $result = OrderDetail::join('orders', 'order_details.order_id', '=', 'orders.order_id')
         ->leftJoin('fish', 'order_details.product_id', '=', 'fish.fish_id')
-        ->leftJoin('accessories', 'order_details.product_id', '=', 'accessories.accessories_id')
         ->where('order_details.category_id', 1)
         ->whereDate('orders.order_date', $day)
         ->selectRaw(
-          'order_details.category_id as category_id,
+            'order_details.category_id as category_id,
             DATE(orders.order_date) as order_date,
             SUM(order_details.quantity) as total_quantity,
             SUM(order_details.price * order_details.quantity) as total_price'
         )
         ->groupBy('category_id', 'order_date')
-        ->first();
+        ->get();
 
-      if ($result) {
-        $dataFish[] = $result;
+      $totalQuantity = $result->sum('total_quantity');
+      $totalPrice = $result->sum('total_price');
+
+      if ($totalQuantity > 0) {
+        $dataFish[] = [
+          'category_id' => 1,
+          'order_date' => $day,
+          'total_quantity' => $totalQuantity,
+          'total_price' => $totalPrice,
+        ];
       } else {
         $dataFish[] = [
           'category_id' => 1,
@@ -54,25 +60,32 @@ class StatisticsController extends Controller
 // Truy vấn và tính toán dữ liệu cho từng ngày trong mảng
     $dataAccessories = [];
     foreach ($days as $day) {
-      $result = OrderDetail::join('orders', 'order_details.order_id', '=', 'orders.order_id')
-        ->leftJoin('fish', 'order_details.product_id', '=', 'fish.fish_id')
-        ->leftJoin('accessories', 'order_details.product_id', '=', 'accessories.accessories_id')
-        ->where('order_details.category_id', 0)
-        ->whereDate('orders.order_date', $day)
-        ->selectRaw(
-          'order_details.category_id as category_id,
+        $result = OrderDetail::join('orders', 'order_details.order_id', '=', 'orders.order_id')
+          ->leftJoin('accessories', 'order_details.product_id', '=', 'accessories.accessories_id')
+          ->where('order_details.category_id', 0)
+          ->whereDate('orders.order_date', $day)
+          ->selectRaw(
+            'order_details.category_id as category_id,
             DATE(orders.order_date) as order_date,
             SUM(order_details.quantity) as total_quantity,
             SUM(order_details.price * order_details.quantity) as total_price'
-        )
-        ->groupBy('category_id', 'order_date')
-        ->first();
+          )
+          ->groupBy('category_id', 'order_date')
+          ->get();
 
-      if ($result) {
-        $dataAccessories[] = $result;
+      $totalQuantity = $result->sum('total_quantity');
+      $totalPrice = $result->sum('total_price');
+
+      if ($totalQuantity > 0) {
+        $dataAccessories[] = [
+          'category_id' => 0,
+          'order_date' => $day,
+          'total_quantity' => $totalQuantity,
+          'total_price' => $totalPrice,
+        ];
       } else {
         $dataAccessories[] = [
-          'category_id' => 2,
+          'category_id' => 0,
           'order_date' => $day,
           'total_quantity' => 0,
           'total_price' => 0,

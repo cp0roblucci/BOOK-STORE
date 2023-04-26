@@ -75,7 +75,9 @@
                             </div>
                             @endif
                         </div>
-                        <div class="flex ml-80">
+                    </div>
+                    <div class="leading-[5] flex "> 
+                        <div class="flex ">
                             @if($infor[0]->user_address)
                             <div class="infor ">
                                 <label for="" class="px-2 py-1 font-semibold">Địa chỉ: </label>
@@ -157,6 +159,14 @@
                                     <td class="leading-[5] py-2">
                                         <span class="leading-[2]">{{$order->status_name}}</span>
                                         <div class="w-full flex  leading-[2] justify-center">
+                                            @if($order->status_id == 0 || $order->status_id == 1)
+                                                <form action="{{route('updatestatus')}}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="order_id" value="{{$order->order_id}}">
+                                                    <input type="hidden" name="status_id" value="4">
+                                                    <button class="px-1 py-0.5 text-14 border rounded-md bg-red-400">Hủy đơn hàng</button>
+                                                </form>
+                                            @endif
                                             @if($order->status_id == 3)
                                             <form action="{{route('updatestatus')}}" method="post">
                                                 @csrf
@@ -167,7 +177,7 @@
                                             <form action="{{route('updatestatus')}}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="order_id" value="{{$order->order_id}}">
-                                                <input type="hidden" name="status_id" value="3">
+                                                <input type="hidden" name="status_id" value="5">
                                                 <button class="px-1 py-0.5 text-14 border rounded-md bg-green-400">Đã nhận</button>
                                             </form>
                                             @endif

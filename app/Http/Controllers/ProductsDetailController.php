@@ -54,7 +54,7 @@ class ProductsDetailController extends Controller
     $categoryId = $request->input('category_id');
     $quantity = $request->input('qty');
     
-    // dd($userId,$productId,$quantity,$categoryId);
+    dd($userId,$productId,$quantity,$categoryId);
     // dd($quantity);
     $cartId = DB::table('carts')
     ->where('carts.user_id', '=' , $userId)

@@ -177,7 +177,7 @@
                         <th class="px-4 py-3 font-bold text-slate-400 opacity-70">Số điện thoại</th>
                         <th class="px-4 py-3 font-bold text-slate-400 opacity-70">Email</th>
                         <th class="px-4 py-3 font-bold text-slate-400 opacity-70">Địa chỉ</th>
-                        <th class="px-4 py-3 font-bold text-yellow-500 opacity-70">Chi tiêu</th>
+                        <th class="px-4 py-3 font-bold text-yellow-500 opacity-70 text-center">Chi tiêu</th>
                       </tr>
                       </thead>
                       <tbody>

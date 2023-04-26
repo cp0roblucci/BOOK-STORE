@@ -44,7 +44,7 @@
                 </div>
                 <div class="price flex mt-4">
                     <span class="mr-2 text-red-600 font-bold text-20">Giá:</span>
-                    <span class="text-20 text-red-600 font-bold">{{number_format($data->has_price,0,',','.')}}đ</span>
+                    <span class="text-20 text-red-600 font-bold" id="price_item" data-price="{{$data->has_price}}">{{number_format($data->has_price,0,',','.')}}đ</span>
                 </div>
                 <div>
                     <button type="button" 
@@ -95,20 +95,23 @@
                 </div>
                 <div class="mb-4">
                     <div class="flex">
-                        <form action="{{route('add-to-transaction')}}" method="post" class="">
+                        <form action="{{route('transaction')}}" method="get">
                             @csrf
-                        <button type="submit" class="py-4 px-10 bg-red-500 text-white font-medium hover:bg-fuchsia-500 mr-3" id="add-to-transaction">
-                            <input name="product_id" type="hidden" value="{{$data->fish_id}}">
-                            <input id="category_id" name="category_id" type="hidden" value="{{$data->category_id}}">
-                            <input name="qty" type="hidden" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="{{ old('value-quantity') ?? 1 }}">
+                            <input type="hidden" name="checked" value="1">
+                            <input type="hidden" name="category{{$data->fish_id}}" value="{{$data->category_id}}">
+                            <input type="hidden" name="item{{$data->fish_id}}" value="{{$data->fish_id}}">
+                            <input type="hidden" name="total" id="total_post" value="1">
+                            <input type="hidden" name="quantity{{$data->fish_id}}" id="quantity_product"  class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="{{ old('value-quantity') ?? 1 }}">
+                            <button type="submit"  class="py-4 px-10 bg-red-500 text-white font-medium hover:bg-fuchsia-500 mr-3" id="add-to-transaction">
+                            {{-- <input name="product_id" type="hidden" value="{{$data->fish_id}}">
+                            <input name="qty" type="hidden" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="{{ old('value-quantity') ?? 1 }}"> --}}
                                 <p>MUA NGAY VỚI GIÁ {{number_format($data->has_price,0,',','.')}}đ</p>
-                        </button>
+                            </button>
                         </form>
                         <form action="{{route('add-to-cart')}}" method="post">
                             @csrf
                         <button type="submit" class="py-4 px-6 bg-blue-500 text-white font-medium hover:bg-fuchsia-500" id="add-to-cart">
                             <input  name="product_id" type="hidden" value="{{$data->fish_id}}">
-                            <input id="category_id" name="category_id" type="hidden" value="{{$data->category_id}}">
                             <input id="add_to_cart_product_id" type="hidden" name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="1">
                                 <i class="fa-solid fa-cart-shopping mr-2"></i>
                                 THÊM VÀO GIỎ HÀNG
@@ -156,7 +159,7 @@
                 </div>
                 <div class="price flex mt-4">
                     <span class="mr-2 text-red-600 font-bold text-20">Giá:</span>
-                    <span class="text-20 text-red-600 font-bold">{{number_format($data->accessories_price,0,',','.')}}đ</span>
+                    <span class="text-20 text-red-600 font-bold" id="price_item" data-price="{{$data->accessories_price}}">{{number_format($data->accessories_price,0,',','.')}}đ</span>
                 </div>
                 <div>
                     <button type="button" 
@@ -189,13 +192,16 @@
 
                 <div class="mb-4">
                     <div class="flex">
-                        <form action="{{route('add-to-transaction')}}" method="post" class="">
+                        <form action="{{route('transaction')}}" method="get" class="">
                             @csrf
+                            <input type="hidden" name="checked" value="1">
+                            <input type="hidden" name="category{{$data->accessories_id}}" value="{{$data->category_id}}">
+                            <input type="hidden" name="item{{$data->accessories_id}}" value="{{$data->accessories_id}}">
+                            <input type="hidden" name="total" id="total_post" value="1">
+                            <input type="hidden" name="quantity{{$data->accessories_id}}" id="quantity_product"  class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="{{ old('value-quantity') ?? 1 }}">
                         <button type="submit" class="py-4 px-10 bg-red-500 text-white font-medium hover:bg-fuchsia-500 mr-3" id="add-to-transaction">
-                            <input name="product_id" type="hidden" value="{{$data->accessories_id}}">
-                            <input id="category_id" name="category_id" type="hidden" value="{{$data->category_id}}">
-                            <input type="hidden" name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="{{ old('qty') ?? 1 }}">
-                            
+                            {{-- <input name="product_id" type="hidden" value="{{$data->accessories_id}}">
+                            <input type="hidden" name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="{{ old('qty') ?? 1 }}"> --}}
                                 <p>MUA NGAY VỚI GIÁ {{number_format($data->accessories_price,0,',','.')}}đ</p>
                         </button>
                         </form>
@@ -203,7 +209,6 @@
                             @csrf
                         <button type="submit" class="py-4 px-6 bg-blue-500 text-white font-medium hover:bg-fuchsia-500" id="add-to-cart">
                             <input name="product_id" type="hidden" value="{{$data->accessories_id}}">
-                            <input id="category_id" name="category_id" type="hidden" value="{{$data->category_id}}">
                             <input type="hidden" name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="1">
                                 <i class="fa-solid fa-cart-shopping mr-2"></i>
                                 THÊM VÀO GIỎ HÀNG

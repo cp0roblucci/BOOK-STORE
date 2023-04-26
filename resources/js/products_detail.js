@@ -38,6 +38,8 @@ const previous = document.getElementById('previous');
 const quantityElement = document.querySelectorAll('.value-quantity');
 const increment = document.getElementById('increment');
 
+// console.log(quantityElement);
+
 const productId = document.getElementById('product_id').value;
 const categoryId = document.getElementById('category_id').value;
 console.log(productId, categoryId);
@@ -85,3 +87,29 @@ function fetchQuantity(productId, categoryId) {
       return data.quantity;
     });
 }
+
+
+/////post data buy now/////
+
+
+var qtt_product = $('#quantity_product');
+// var qtt_post = $('#add_to_cart_product_id');
+var total_post = $('#total_post');
+var price_item = $('#price_item');
+var btnadd = $('#add-to-transaction');
+
+// console.log(qtt_product.getAttribute('value'), qtt_post, total_post, price_item, btnadd);
+
+
+btnadd.addEventListener('click', function(e) {
+  let qtt_product = $('#quantity_product');
+  let total_post = $('#total_post');
+  let price_item = $('#price_item');
+
+  let total = qtt_product.getAttribute('value') * price_item.getAttribute('data-price');
+  total_post.setAttribute('value', total);
+  // qtt_post.setAttribute('value', qtt_product.getAttribute('value'));
+  // total_post.setAttribute('value', (price_item.getAttribute('data-price')*qtt_product.getAttribute('value')));
+})
+
+// console.log(qtt_product.getAttribute('value'), qtt_post, total_post, price_item, btnadd);

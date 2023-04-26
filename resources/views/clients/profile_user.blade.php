@@ -75,7 +75,9 @@
                             </div>
                             @endif
                         </div>
-                        <div class="flex ml-80">
+                    </div>
+                    <div class="leading-[5] flex "> 
+                        <div class="flex ">
                             @if($infor[0]->user_address)
                             <div class="infor ">
                                 <label for="" class="px-2 py-1 font-semibold">Địa chỉ: </label>

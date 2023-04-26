@@ -177,7 +177,7 @@
                                             <form action="{{route('updatestatus')}}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="order_id" value="{{$order->order_id}}">
-                                                <input type="hidden" name="status_id" value="3">
+                                                <input type="hidden" name="status_id" value="5">
                                                 <button class="px-1 py-0.5 text-14 border rounded-md bg-green-400">Đã nhận</button>
                                             </form>
                                             @endif

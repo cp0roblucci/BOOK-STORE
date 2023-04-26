@@ -1,6 +1,6 @@
 @section('footer')
 
-<div style="background-image: url(/storage/images/bg-header1.jpg)" class="footer py-3">
+<div style="background-image: url(/storage/images/fish.jpg); height:full; width:10000px"  class="footer py-3">
     <div class="content-footer mx-20 /bg-red-600 h-auto flex  relative">
         <div class="footer-item ">
             <div class="title mb-3">
@@ -20,7 +20,7 @@
             <div class="list">
                 <ul>
                     <li><a class="hover:text-slate-300 text-white" href="/">Trang chủ</a></li>
-                    <li><a class="hover:text-slate-300 text-white" href="/{{route('get-product', ['category_id' => 1])}}">Sản Phẩm</a></li>
+                    <li><a class="hover:text-slate-300 text-white" href="{{route('get-product', ['category_id' => 1])}}">Sản Phẩm</a></li>
                     {{-- <li><a class="hover:text-slate-300" href="#"></a></li> --}}
                 </ul>
             </div>

@@ -32,7 +32,12 @@
       * đơn hàng
       * sản phẩm (thêm, sửa xóa)
       * người dùng
-      * thống kê
+      * thống kê doanh thu
+      * thống kê số lượng bán
+      * thống kê khách hàng mua nhiều nhất
+      * các sản phẩm bán ít và nhiều nhất
+      
+      
 
 ## Giao diện
 

@@ -133,7 +133,24 @@
                                 <td></td>
                                 <td></td>
                                 <td class="text-green-500">Đơn Vị Vận Chuyển:</td>
-                                <td><h2 class="font-bold">Giao Hàng tiết Kiệm</h2>   <span class="text-14 opacity-80">Nhận hàng vào {{date("d")}} Th{{date("m")}} - @if(date("d") + 3 > 30) {{date("d") + 3 -30}} @else {{date("d") + 3}} @endif Th{{date("m")}}</span></td>
+                                <td><h2 class="font-bold">Giao Hàng tiết Kiệm</h2>   
+                                    <span class="text-14 opacity-80">Nhận hàng vào &nbsp;
+                                        @if(date("d" ,strtotime($infor[0]->order_date)) + 2 > 30)
+                                            {{date("d" ,strtotime($infor[0]->order_date)) + 2 - 30}}
+                                            Th{{date("m" ,strtotime($infor[0]->order_date)) + 1}} -
+                                        @else 
+                                            {{date("d" ,strtotime($infor[0]->order_date)) + 2}}
+                                            Th{{date("m" ,strtotime($infor[0]->order_date))}} -
+                                        @endif
+                                        @if(date("d" ,strtotime($infor[0]->order_date)) + 4 > 30)
+                                            {{date("d" ,strtotime($infor[0]->order_date)) + 4 - 30}}
+                                            Th{{date("m" ,strtotime($infor[0]->order_date)) + 1}}
+                                        @else
+                                            {{date("d" ,strtotime($infor[0]->order_date)) + 4}}
+                                            Th{{date("m" ,strtotime($infor[0]->order_date))}}
+                                        @endif
+                                    </span>
+                                </td>
                                 <td class="text-center"><span>{{number_format(30000, 0, '', '.')}} VND</span></td>
                             </tr>
                             <tr>

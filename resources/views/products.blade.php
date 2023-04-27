@@ -15,14 +15,14 @@
 @section('body')
 <section class="py-5 bg-white">
     {{-- container filter --}}
-    
+
     {{-- container product --}}
 
     <div class="container_filter flex mx-6 relative ml-28">
         @if ($categoryId == 1)
         {{-- slidebar fish --}}
         <div class="flex mr-6 border px-4 py-1.5 rounded-md text-sm hover:text-blue-500 hover:border-blue-500">
-            <a href="{{route('get-product',['category_id' => 1])}}" id="all-products-btn" class="category-btn mt-1"> 
+            <a href="{{route('get-product',['category_id' => 1])}}" id="all-products-btn" class="category-btn mt-1">
                 <i class="fa-solid fa-fish mr-1"></i> Cá
             </a>
         </div>
@@ -35,13 +35,13 @@
         <button id="filter_btn" class="hover:border-blue-500 relative flex justify-center items-center focus:outline-none outline-none border group z-10 rounded-md hover:bg-gray-200" onclick="">
             <p class="px-2 py-2 mt-0.5 text-sm group-hover:text-blue-500 hover:border-blue-500">
                 <i class="fa-solid fa-fish mr-1"></i>
-                Loại sản phẩm 
+                Loại sản phẩm
                 <i class="fa-solid fa-angle-down mr-2 text-14 ml-1"></i>
             </p>
             <div id="filter-type" class="absolute group-hover:block hidden bg-white transition-all top-full w-max shadow-md rounded ml-2"
                 id=""
                 name="">
-    
+
                 <ul class="text-left border rounded text-sm w-40">
                 @foreach($fishSpecies as $value)
                     <li class="category-btn px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500 category ">
@@ -82,12 +82,12 @@
         </div>
         {{-- <div class="inline-block">
             <button class="relative flex justify-center items-center focus:outline-none outline-none border group z-10 rounded-md ml-4 hover:border-blue-500">
-                <p class="px-4 text-sm group-hover:text-blue-500 p-2">  
+                <p class="px-4 text-sm group-hover:text-blue-500 p-2">
                     <i class="fa-solid fa-fish mr-1"></i>
                     Kích thước
                     <i class="fa-solid fa-angle-down -translate-x-1 pt-1 ml-2"></i>
                 </p>
-                
+
                 <div class="absolute group-hover:block hidden bg-white transition-all top-full w-max shadow-md rounded ml-8"
                     id="dropdown">
                     <ul class="text-left border rounded text-sm w-44">
@@ -108,7 +108,7 @@
             </button>
         </div> --}}
         <div class="flex ml-4">
-            <a class="font-light mr-4 text-sm p-2 px-4 rounded-md border hover:text-blue-500 hover:border-blue-500" 
+            <a class="font-light mr-4 text-sm p-2 px-4 rounded-md border hover:text-blue-500 hover:border-blue-500"
             href="{{route('filter-products-by-price',['category_id' => 1,'price_filter'=> 'asc'])}}">
             <p class="mt-0.5">
                 <i class="fa-regular fa-money-bill-1 mr-2"></i>
@@ -116,7 +116,7 @@
                 <i class="fa-solid fa-arrow-up ml-2"></i>
             </p>
             </a>
-            <a class="font-light text-sm p-2 px-4 rounded-md border hover:text-blue-500 hover:border-blue-500" 
+            <a class="font-light text-sm p-2 px-4 rounded-md border hover:text-blue-500 hover:border-blue-500"
             href="{{route('filter-products-by-price',['category_id' => 1,'price_filter'=> 'desc'])}}">
             <p class="mt-0.5">
                 <i class="fa-regular fa-money-bill-1 mr-2"></i>
@@ -128,7 +128,7 @@
     @else
     {{-- slidebar phụ kiện --}}
     <div class="flex mr-6 border px-4 py-1.5 rounded-md text-sm hover:text-blue-500 hover:border-blue-500">
-        <a href="{{route('get-product',['category_id' => 1])}}" id="all-products-btn" class="category-btn mt-1"> 
+        <a href="{{route('get-product',['category_id' => 1])}}" id="all-products-btn" class="category-btn mt-1">
             <i class="fa-solid fa-fish mr-1"></i> Cá
         </a>
     </div>
@@ -141,7 +141,7 @@
     <button id="filter_btn" class="relative flex justify-center items-center  focus:outline-none outline-none border group z-10 rounded-md hover:border-blue-500" onclick="">
         <p class="px-2 text-sm group-hover:text-blue-500  p-2 mt-0.5">
             <i class="fa-solid fa-diagram-successor mr-2"></i>
-            Loại sản phẩm 
+            Loại sản phẩm
             <i class="fa-solid fa-angle-down text-14 ml-2"></i>
         </p>
         <div id="filter-type" class="absolute group-hover:block hidden bg-white transition-all top-full w-max shadow-md rounded ml-3"
@@ -187,7 +187,7 @@
         </button>
     </div>
     <div class="flex ml-4">
-        <a class="font-light mr-4 text-sm p-2 px-4 rounded-md border hover:text-blue-500 hover:border-blue-500" 
+        <a class="font-light mr-4 text-sm p-2 px-4 rounded-md border hover:text-blue-500 hover:border-blue-500"
         href="{{route('filter-products-by-price',['category_id' => 0,'price_filter'=> 'asc'])}}">
         <p class="mt-0.5">
             <i class="fa-regular fa-money-bill-1 mr-2"></i>
@@ -195,7 +195,7 @@
             <i class="fa-solid fa-arrow-up ml-2"></i>
         </p>
         </a>
-        <a class="font-light text-sm p-2 px-4 rounded-md border hover:text-blue-500 hover:border-blue-500" 
+        <a class="font-light text-sm p-2 px-4 rounded-md border hover:text-blue-500 hover:border-blue-500"
         href="{{route('filter-products-by-price',['category_id' => 0,'price_filter'=> 'desc'])}}">
         <p class="mt-0.5">
             <i class="fa-regular fa-money-bill-1 mr-2"></i>
@@ -204,26 +204,27 @@
         </p>
         </a>
     </div>
-    @endif   
+    @endif
     </div>
-    
+
+
     {{--  --}}
     <div id="product-container" class=" mt-10 mx-20 ">
         <div class="p-4 text-center text-32 uppercase font-bold">
             TẤT CẢ SẢN PHẨM
         </div>
         @if($categoryId == 1)
-        
+
         @foreach($data as $value)
-        
+
         <div id="dragon-fish" class="product dragon-fish border md:w-1/5 float-left border-gray-100 relative overflow-hidden group">
-            
+
             <a class="block img h-auto w-full my-5 px-0.5">
                 <img class=" h-48 w-full " src="{{$value->fish_link_img}}" alt="">
             </a>
                 {{-- button --}}
             <div class="absolute w-full flex -translate-y-10 opacity-0 group-hover:opacity-100 items-center justify-center transition-all ">
-                    
+
                 <a href="/products_detail/{{$value->fish_id}}" class="px-5 py-2 mx-0.5 w-full bg-blue-500 text-white rounded-md font-semibold text-center">
                     <i class="fa-solid fa-link text-14 " ></i>
                     Tùy chọn
@@ -249,7 +250,7 @@
             </a>
                 {{-- button --}}
             <div class="absolute w-full flex -translate-y-10 opacity-0 group-hover:opacity-100 items-center justify-center transition-all ">
-                    
+
                 <a href="/products_detail/{{$value->accessories_id}}" id="btnProductDetail" class="px-5 py-2 mx-0.5 w-full bg-blue-500 text-white rounded-md font-semibold text-center">
                     <i class="fa-solid fa-link text-14 " ></i>
                     Tùy chọn

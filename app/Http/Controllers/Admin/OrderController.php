@@ -103,7 +103,7 @@ class OrderController extends Controller
 
       $totalPrice = DB::table('orders')
         ->join('order_details', 'orders.order_id', '=', 'order_details.order_id')
-        ->where('orders.status_id', '!=', 5)
+//        ->where('orders.status_id', '!=', 5)
         ->select(DB::raw('SUM(order_details.price * order_details.quantity) AS totalPrice'))
         ->groupBy('order_details.order_id')
         ->get();

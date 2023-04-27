@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 
 class ProductsController extends Controller
-{   
+{
     public function create(Request $request)
     {
       dd($request);
@@ -20,7 +20,7 @@ class ProductsController extends Controller
     public function index() {
       return redirect()->route('get-product',['category_id' => 1]);
     }
-    
+
     public function getProducts($categoryId,$page = 1) {
       $fishSpecies = FishSpecies::all();
       $accessoriesType = AccessoriesType::all();
@@ -33,13 +33,13 @@ class ProductsController extends Controller
         ->select('fish.*', 'has_size.has_price')
         // ->get();
         ->paginate(10);
-        
+
         // dd($data);
-        
+
       } else {
         $data = Accessories::paginate(10);
       }
-      
+
       return view('/products', compact('data','categoryId','fishSpecies','accessoriesType','page'));
     }
 
@@ -47,7 +47,7 @@ class ProductsController extends Controller
     {
       $fishSpecies = FishSpecies::all();
       $accessoriesType = AccessoriesType::all();
-    
+
       if ($categoryId == 1) {
           $data = DB::table('fish')
               ->join('has_size', function ($join) {
@@ -55,7 +55,7 @@ class ProductsController extends Controller
                       ->on('fish.fish_size', '=', 'has_size.size');
               })
               ->select('fish.*', 'has_size.has_price');
-    
+
             // lọc theo giá
           switch ($priceFilter) {
               case 'from_50000':
@@ -70,7 +70,7 @@ class ProductsController extends Controller
               case 'from_300000':
                   $data = $data->where('has_size.has_price', '>', 300000)->orderBy('has_size.has_price', 'asc');
                   break;
-              case 'desc' : 
+              case 'desc' :
                   $data = $data->orderBy('has_size.has_price', 'desc');
                   break;
               case 'asc':
@@ -93,7 +93,7 @@ class ProductsController extends Controller
               case 'from_300000':
                   $data = $data->where('accessories.accessories_price', '>', 300000)->orderBy('accessories.accessories_price', 'asc');
                   break;
-              case 'desc' : 
+              case 'desc' :
                   $data = $data->orderBy('accessories.accessories_price', 'desc');
                   break;
               case 'asc':
@@ -102,10 +102,10 @@ class ProductsController extends Controller
             }
             $data = $data->paginate(10);
         }
-    
+
         return view('/products', compact('data', 'categoryId', 'priceFilter', 'fishSpecies', 'accessoriesType'));
     }
-    
+
 
   public function filterProductsByFish($categoryId, $fishSpeciesId) {
     // $priceFilter = 0;
@@ -116,13 +116,13 @@ class ProductsController extends Controller
             $join->on('fish.fish_species', '=', 'has_size.fish_species')
                 ->on('fish.fish_size', '=', 'has_size.size')
                 ->where('fish.fish_species', '=', $fishSpeciesId);
-    
+
         })
         ->select('fish.*', 'has_size.has_price')
         // ->orderBy('has_size.has_price', 'asc')
         ->paginate(10);
-       
-      
+
+
       return view('/products', compact('data', 'categoryId', 'fishSpecies','accessoriesType'));
   }
   public function filterProductsByAccessories($categoryId, $accessoriesTypeId) {
@@ -139,7 +139,7 @@ class ProductsController extends Controller
 //   public function filterFishBySize($categoryId, $sizeFilter)
 //   {
 //       $fishSpecies = FishSpecies::all();
-  
+
 //       $data = DB::table('fish')
 //           ->join('has_size', function ($join) {
 //               $join->on('fish.fish_species', '=', 'has_size.fish_species')
@@ -163,8 +163,8 @@ class ProductsController extends Controller
 //                 break;
 //           }
 //           $data = $data->paginate(10);
-  
-      
+
+
 //       return view('/products', compact('data', 'categoryId', 'sizeFilter','fishSpecies'));
 //   }
 }

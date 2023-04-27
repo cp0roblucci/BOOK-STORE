@@ -114,6 +114,7 @@
                             <input type="hidden" name="category_id" value="{{$data->category_id}}">
                             <input  name="product_id" type="hidden" value="{{$data->fish_id}}">
                             <input id="add_to_cart_product_id" type="hidden" name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="1">
+                            <input id="category_id" name="category_id" type="hidden" value="{{$data->category_id}}">
                                 <i class="fa-solid fa-cart-shopping mr-2"></i>
                                 THÊM VÀO GIỎ HÀNG
                         </button>
@@ -212,6 +213,7 @@
                             <input type="hidden" name="category_id" value="{{$data->category_id}}">
                             <input name="product_id" type="hidden" value="{{$data->accessories_id}}">
                             <input type="hidden" name="qty" class="value-quantity w-12 h-full text-center outline-none text-sm" min="1" max="100" step="1" value="1">
+                            <input id="category_id" name="category_id" type="hidden" value="{{$data->category_id}}">
                                 <i class="fa-solid fa-cart-shopping mr-2"></i>
                                 THÊM VÀO GIỎ HÀNG
                         </button>

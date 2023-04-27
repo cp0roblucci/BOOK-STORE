@@ -57,6 +57,10 @@ Route::get('/products/{category_id}/filter-product-fish/{fish_species}',[Product
 Route::get('/products/{category_id}/filter-products-accessories/{accessories_type_name}',[ProductsController::class, 'filterProductsByAccessories'])->name('filter-products-by-accessories');
 //
 Route::get('/products/{category_id}/filter-size/{size_filter}', [ProductsController::class, 'filterFishBySize'])->name('filter-fish-by-size');
+
+Route::get('/products/{product_name}/search-product-fish', [ProductsController::class, 'searchProductFish'])->name('search-product-fish');
+Route::get('/products/{product_name}/search-product-accessories', [ProductsController::class, 'searchProductAccessories'])->name('search-product-accessories');
+
 //products details route
 Route::get('/products_detail/{id}', [ProductsDetailController::class, 'getProductsDetail'])->name('get-products-detail');
 Route::post('/add-to-cart', [ProductsDetailController::class, 'addToCart'])->name('add-to-cart');

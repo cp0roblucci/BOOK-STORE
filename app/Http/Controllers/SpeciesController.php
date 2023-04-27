@@ -15,10 +15,10 @@ class SpeciesController extends Controller
     public function create(Request $request) {
         // dd($request);
 
-        // $species = $request->input('species');
-        // FishSpecies::create([
-        //     'fish_species' => $species
-        // ]);
+         $species = $request->input('species');
+         FishSpecies::create([
+             'fish_species' => $species
+         ]);
 
         Session::flash('create-success', 'Thêm loại cá thành công');
         return redirect()->route('new-species');

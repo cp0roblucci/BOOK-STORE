@@ -18,7 +18,6 @@ use App\Http\Controllers\clients\CartController;
 use App\Http\Controllers\clients\HomeController;
 use App\Http\Controllers\clients\TransactionController;
 use App\Http\Controllers\clients\ProfileUserController;
-//use App\Http\Controllers\clients\ProductDetailController;
 
 use \App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\DeliverController;
@@ -195,9 +194,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::post('create-new-accessories-type', [AccessoriesTypeController::class, 'create']);
 
     // accessories
-    Route::get('create-new-accessory', function() {
-        return view('admin.accessories.new-accessory');
-    })->name('new-accessory');
+    Route::get('create-new-accessory', [AccessoriesController::class, 'index'])->name('new-accessory');
     Route::post('create-new-accessory', [AccessoriesController::class, 'create']);
 
     // edit accessories

@@ -146,8 +146,10 @@
 
                         @if (request()->segment(3) == 0)
                           <th class="px-4 py-3 font-bold text-center">Xác nhận</th>
-                        @elseif(request()->segment(3) == 1 || request()->segment(3) == 6)
+                        @elseif(request()->segment(3) == 1)
                           <th class="px-4 py-3 font-bold text-center">Xác nhận gửi hàng</th>
+                          @elseif(request()->segment(3) == 6)
+                          <th class="px-4 py-3 font-bold text-center">Xác nhận trả hàng</th>
                         @elseif(request()->segment(3) == 3)
                           <th class="px-4 py-3 font-bold text-center">Hành động</th>
                         @elseif(request()->segment(3) == 4 || request()->segment(3) == 5 || request()->segment(3) == 7)
@@ -342,7 +344,7 @@
                                       <input name="order_id" value="{{ $order->order_id }}">
                                       <input name="status_id" value="{{ $order->status_id }}">
                                     </label>
-                                    <button type="submit" class="text-12 text-primary-blue leading-normal border-2 border-primary-blue  px-4 py-2 rounded-xl hover:bg-primary-blue  hover:text-white transition-all duration-200">Xác nhận gửi hàng</button>
+                                    <button type="submit" class="text-12 text-primary-blue leading-normal border-2 border-primary-blue  px-4 py-2 rounded-xl hover:bg-primary-blue  hover:text-white transition-all duration-200">Xác nhận trả hàng</button>
                                   </form>
                                 </div>
                               </td>

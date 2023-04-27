@@ -54,7 +54,7 @@ class ProductsDetailController extends Controller
     $categoryId = $request->input('category_id');
     $quantity = $request->input('qty');
     
-    dd($userId,$productId,$quantity,$categoryId);
+    // dd($userId,$productId,$quantity,$categoryId);
     // dd($quantity);
     $cartId = DB::table('carts')
     ->where('carts.user_id', '=' , $userId)
@@ -94,7 +94,7 @@ class ProductsDetailController extends Controller
         //check user dangnhap
     if (!Auth::check()) {
         return redirect()->route('login')->with('error', 'Bạn cần đăng nhập để mua ngay.');
-    } else $userId = Auth::user()->id;
+    } $userId = Auth::user()->id;
     // dd($userId);
     $productId = $request->input('product_id');
     $categoryId = $request->input('category_id');

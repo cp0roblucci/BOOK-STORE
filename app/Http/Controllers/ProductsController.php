@@ -9,6 +9,7 @@ use App\Models\Accessories;
 use App\Models\HasSize;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 
 class ProductsController extends Controller
@@ -136,35 +137,38 @@ class ProductsController extends Controller
     return view('/products', compact('data', 'categoryId', 'accessoriesType','fishSpecies'));
   }
 
-//   public function filterFishBySize($categoryId, $sizeFilter)
-//   {
-//       $fishSpecies = FishSpecies::all();
+  public function searchProductFish(Request $request) {
+    $fishSpecies = FishSpecies::all();
+    $accessoriesType = AccessoriesType::all();
+    $fish_name = $request->input('fish_name');
+    $categoryId = 1;
+      $data = DB::table('fish')
+      ->join('has_size', function ($join) {
+      $join->on('fish.fish_species', '=', 'has_size.fish_species')
+        ->on('fish.fish_size', '=', 'has_size.size');
+    })
+    ->join('fish_import_batches', 'fish.fish_id', '=', 'fish_import_batches.fish_id')
+    ->where('fish.fish_name', 'LIKE', '%'. $fish_name .'%')
+    ->select('fish.*', 'has_size.has_price', 'fish_import_batches.quantity')
+    ->paginate(10);
   
-//       $data = DB::table('fish')
-//           ->join('has_size', function ($join) {
-//               $join->on('fish.fish_species', '=', 'has_size.fish_species')
-//                   ->on('fish.fish_size', '=', 'has_size.size');
-//           })
-//           ->select('fish.*', 'has_size.has_price');
-//           // ->orderBy('has_size.has_price', $sizeFilter)
-//           switch ($sizeFilter) {
-//             case 'from_5cm':
-//                 $data = $data->whereBetween('fish.fish_size',['2 - 4 cm' , '7-8 cm'])->orderBy('fish.fish_size', 'asc');
-//                 break;
+    return view('/products', compact('data','categoryId','fishSpecies','accessoriesType','fish_name'));
+  }
 
-//             case 'from_5cm_to_10cm':
-//                 $data = $data->whereBetween('fish.fish_size', ['5 cm' , '10 cm'])->orderBy('fish.fish_size', 'asc');
-//                 break;
-//             case 'from_10_to_50cm':
-//                 $data = $data->whereBetween('fish.fish_size', ['10 cm', '50cm'])->orderBy('fish.fish_size', 'asc');
-//                 break;
-//             case 'from_50cm':
-//                 $data = $data->where('fish.fish_size', '>', '50cm')->orderBy('fish.fish_size', 'desc');
-//                 break;
-//           }
-//           $data = $data->paginate(10);
+  public function searchProductAccessories(Request $request) {
+    $fishSpecies = FishSpecies::all();
+    $accessoriesType = AccessoriesType::all();
+    $categoryId = 0;
+    $accessories_name = $request->input('accessories_name');
+
+    $data = DB::table('accessories')
+      ->join('accessories_type', 'accessories_type.accessories_type_id', '=', 'accessories.accessories_type_id')
+      ->where('accessories.accessories_name', 'LIKE', '%'. $accessories_name .'%')
+      ->orWhere('accessories_type.accessories_type_name', 'LIKE', '%' . $accessories_name . '%')
+      ->select('accessories.*', 'accessories_type.accessories_type_name')
+      ->paginate(10);
   
-      
-//       return view('/products', compact('data', 'categoryId', 'sizeFilter','fishSpecies'));
-//   }
+    return view('/products', compact('data','categoryId','fishSpecies','accessoriesType','accessories_name'));
+  }
+
 }

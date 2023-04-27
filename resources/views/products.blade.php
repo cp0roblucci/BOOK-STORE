@@ -15,11 +15,27 @@
 @section('body')
 <section class="py-5 bg-white">
     {{-- container filter --}}
-    
+    @if ($categoryId == 1)
     {{-- container product --}}
-
+    <div class="w-[40%] ml-28 bg-white rounded-md border-[1.5px] focus-within:border-[1.5px] focus-within:border-blue-200 my-4">
+        <form action="{{ route('search-product-fish',['product_name'])}}" method="get" class=" relative flex justify-between">
+          @csrf
+          <input type="text" placeholder="Tìm kiếm..." name="fish_name" class="caret-blue-500 rounded-md outline-none w-full bg-white" required> 
+          <i class="absolute fa-solid fa-magnifying-glass mt-3 right-3"></i>
+        </form>
+      </div>
+    @else 
+    <div class="w-[40%] ml-28  bg-white rounded-md border-[1.5px] focus-within:border-[1.5px] focus-within:border-blue-200 my-4">
+        <form action="{{ route('search-product-accessories',['product_name'])}}" method="get" class="relative flex justify-between ">
+          @csrf
+          <i class="absolute fa-solid fa-magnifying-glass mt-3 right-3"></i>
+          <input type="text" placeholder="Tìm kiếm..." name="accessories_name" class="caret-blue-500 rounded-md outline-none w-full bg-white" required>
+        </form>
+      </div>
+    @endif
     <div class="container_filter flex mx-6 relative ml-28">
         @if ($categoryId == 1)
+       
         {{-- slidebar fish --}}
         <div class="flex mr-6 border px-4 py-1.5 rounded-md text-sm hover:text-blue-500 hover:border-blue-500">
             <a href="{{route('get-product',['category_id' => 1])}}" id="all-products-btn" class="category-btn mt-1"> 
@@ -61,7 +77,7 @@
                     Giá Sản Phẩm
                     <i class="fa-solid fa-angle-down ml-1"></i>
                 </p>
-                <div class="absolute group-hover:block hidden bg-white transition-all top-full w-max shadow-md rounded"
+                <div class="absolute group-hover:block hidden bg-white transition-all top-full w-max shadow-md rounded "
                     id="dropdown">
                     <ul class="text-left border rounded text-sm w-40 ">
                         <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">
@@ -167,7 +183,7 @@
                 Giá Sản Phẩm
                 <i class="fa-solid fa-angle-down ml-1"></i>
             </p>
-            <div class="absolute group-hover:block hidden bg-white transition-all top-full w-max shadow-md rounded ml-5"
+            <div class="absolute group-hover:block hidden bg-white transition-all top-full w-max shadow-md rounded "
                 id="dropdown">
                 <ul class="text-left border rounded text-sm w-40 ">
                     <li class="px-4 py-1 border-b hover:bg-gray-100 hover:text-blue-500 hover:border-blue-500">

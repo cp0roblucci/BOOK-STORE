@@ -11,12 +11,12 @@
     @yield('scripts')
 </head>
 <body class="font-popins bg-bg-header relative ">
-    <img class=" absolute -z-10 w-full h-screen" src="/storage/images/bg-header1.jpg" alt="">
-    <header class="h-22 //bg-cyan-500">  
+    <!-- <img class=" absolute -z-10 w-full h-screen" src="/storage/images/bg-header1.jpg" alt=""> -->
+    <header >  
         {{-- bg-gradient-to-r from-cyan-600 to-cyan-300 --}}
         @yield('header')
     </header>
-    <main class="min-h-[calc(100vh-132px-100px)] bg-white">
+    <main >
         @yield('body')
     </main>
     <footer class="h-39 bg-cyan-500">

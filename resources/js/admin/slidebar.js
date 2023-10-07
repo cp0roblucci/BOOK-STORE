@@ -10,6 +10,7 @@ if(btnSlideBar) {
   for(let i = 0; i < btnSlideBar.length; i++) {
     btnSlideBar[i].addEventListener('click', function() {
       menuSlideBar[i].classList.toggle('max-h-screen');
+      // menuSlideBar[i].classList.toggle('max-h-screen');
       iconBtnSlideBar[i].classList.toggle('rotate-90');
     });
   }

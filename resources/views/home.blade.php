@@ -1,12 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    @vite('./resources/css/app.css')
-</head>
-<body>
-    <h1 class = "text-blue-300">CC</h1>
-</body>
-</html>
+@extends('layouts.main')
+
+
+@section('title')
+    HomePage
+@endsection
+
+@section('scripts')
+    
+@endsection
+
+@section('header')
+    @include('layouts.header');
+@endsection
+
+@section('body')
+<h1 class = "text-red-500">Trang Chủ</h1>
+@endsection
+
+@section('footer')
+
+@endsection 

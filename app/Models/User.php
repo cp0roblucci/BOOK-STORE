@@ -12,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    protected $table = 'users';
+    protected $table = 'nguoidung';
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
@@ -21,15 +21,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'role_id',
-        'first_name',
-        'last_name',
-        'phone_number',
-        'user_address',
-        'google_id',
-        'email',
-        'password',
-        'link_avt',
+        'vt_ma',
+        'nd_ten',
+        'nd_diachi',
+        'nd_email',
+        'nd_sdt',
+        'nd_matkhau',
+        'nd_avt'
     ];
 
     /**
@@ -51,23 +49,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function isAdmin() : bool {
-        if (Auth::check()) {
-            $role = Auth::user()->role_id;
-        }
-        if ($role == 1)
-            return true;
-        return false;
-    }
-
-  public function isDeliveryMan() : bool {
-    if (Auth::check()) {
-      $role = Auth::user()->role_id;
-    }
-    if ($role == 2)
-      return true;
-    return false;
-  }
+    // public function isAdmin() : bool {
+    //     if (Auth::check()) {
+    //         $role = Auth::user()->ng_vaitro;
+    //     }
+    //     if ($role == 1)
+    //         return true;
+    //     return false;
+    // }
 
   public function orders()
   {

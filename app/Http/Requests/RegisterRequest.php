@@ -31,7 +31,7 @@ class RegisterRequest extends FormRequest
                 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/',
                 'confirmed'
             ],
-            'confirm-password' => 'required|min:8',
+            'password_confirmation' => 'required|min:8',
         ];
     }
 
@@ -45,8 +45,8 @@ class RegisterRequest extends FormRequest
             'password.min' => 'Mật khẩu phải lớn hơn 8 ký tự',
             'password.regex' => 'Mật khẩu phải chứa chữ hoa, chữ thường, ký tự đặc biệt và số',
             'password.confirmed' => 'Mất khẩu xác nhận không hợp lệ',
-            'confirm-password.required' => 'Vui lòng xác nhận mật khẩu của bạn',
-            'confirm-password.min' => 'Mật khẩu phải lớn hơn 8 ký tự',
+            'password_confirmation.required' => 'Vui lòng xác nhận mật khẩu của bạn',
+            'password_confirmation.min' => 'Mật khẩu phải lớn hơn 8 ký tự',
 
         ];
     }

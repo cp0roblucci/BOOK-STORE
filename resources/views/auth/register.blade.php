@@ -8,14 +8,14 @@
   @vite(['./resources/css/app.css',
         './resources/js/app.js',
   ])
-  <link
+  {{-- <link
     href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&display=swap"
     rel="stylesheet"
   />
   <link
     href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
     rel="stylesheet"
-  />
+  /> --}}
   <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
 </head>
 <body class="relative">
@@ -40,11 +40,12 @@
                   </span>
                   @endif
                   
-                    <form class="space-y-4 md:space-y-6" action="" method="POST" id="Formregister" name="Formregister" onsubmit="" >
+                    <form class="space-y-4 md:space-y-6" action="" method="POST" id="Formregister" name="Formregister" enctype="multipart/form-data">
                         @csrf
                         <div>
                             <input type="fullname" name="fullname" 
-                            id="fullname" class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}" 
+                            id="fullname" 
+                            class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}" 
                             placeholder="Vui lòng nhập họ tên" 
                             >
                             @if ($errors->has('fullname'))
@@ -56,7 +57,7 @@
                         <div>
                             <input type="email" name="email" 
                             id="email" 
-                            class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}"
+                            class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}" 
                             placeholder="Vui lòng nhập email" 
                             >
                             @if ($errors->has('email'))
@@ -69,7 +70,7 @@
                             <div class="mb-6 group:">
                                 <input type="password" name="password" 
                                 id="password" placeholder="Vui lòng nhập mật khẩu" 
-                                class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}" 
+                                class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}"
                                 >
                                 @if ($errors->has('password'))
                                 @foreach ($errors->get('password') as $error)
@@ -116,7 +117,7 @@
                         </p>
                         </div>
                 </div>
-                
+                @csrf
             </div>
         </div>
         

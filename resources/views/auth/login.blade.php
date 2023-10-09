@@ -26,31 +26,52 @@
                     <a href="/">
                       <img class="h-52 ml-28" src="/storage/images/logo.png" alt=""></a>
                   </div>
-                <div class="ml-8 pt-6">
+                <div class="ml-8 pt-6 -mb-6">
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white mb-2">
                         Đăng nhập
                     </h1>
                     <p class="text-12 font-light"> Nhập email và mật khẩu của bạn để đăng nhập </p>
                 </div>
-                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <div class="space-y-4 md:space-y-6 sm:p-8">
                     
-                    <form method="POST" class="space-y-4 md:space-y-6" action="#">
+                    <form method="POST" class="space-y-4 md:space-y-6" action="{{route('login')}}">
+                        @csrf
                         <div>
                             {{-- <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label> --}}
                             <input type="email" name="email" id="email" 
-                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                            class=" p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-blue-500' }}" 
                             placeholder="Nhập email (ví dụ như duyttbt@gmail.com)"
-                            required="">
+                            >
+                            @if ($errors->has('email'))
+                            @foreach ($errors->get('email') as $error)
+                            <span id="message-email-login" class="text-12 ml-2 text-red-500">* {{ $error }}</span>
+                            @endforeach
+                            @endif
+                            @if(session()->has('account-not-exists') || session()->has('account-blocked'))
+                            <span id="message-password-login" class="text-12 ml-2 text-red-500">* {{ session()->get('account-not-exists') ? session()->get('account-not-exists') : session()->get('account-blocked') }}</span>
+                            @endif
                         </div>
                         <div>
                             {{-- <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label> --}}
                             <input type="password" name="password" id="password" 
                             placeholder="Mật khẩu" 
-                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                            required="">
+                            class="p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-blue-500' }}"
+                           >
+                            @if ($errors->has('password'))
+                            @foreach ($errors->get('password') as $error)
+                                <span id="message-password-login" class="text-12 ml-2 text-red-500">* {{ $error }}</span>
+                            @endforeach
+                            @endif
+                            @if(session()->has('incorect-password'))
+                                <span id="message-password-login" class="text-12 ml-2 text-red-500">* {{ session()->get('incorect-password') }}</span>
+                            @endif
                         </div>
                         <div class="flex items-center justify-between">
-                            
+                            <div class="flex text-14 relative ">
+                                <input class="remember" type="checkbox" name="remember" id="">
+                                <p class="ml-2">Ghi nhớ lần đăng nhập này</p>
+                            </div>
+                           
                             <a href="#" class="text-sm font-medium text-red-500 hover:underline dark:text-primary-500">Quên mật khẩu?</a>
                         </div>
                         <button type="submit" class="w-full text-white bg-red-500 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Đăng Nhập</button>

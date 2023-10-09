@@ -20,21 +20,27 @@
             <div class="flex hover:opacity-80 icon-dropdown">
               {{-- @if (Auth::check())
                 <div class="w-6 h-6">
-                  {{-- <img src="{{Auth::user()->link_avt}}" alt=""> --}}
+                   {{-- <img src="{{Auth::user()->link_avt}}" alt="">  --}}
                   {{-- <img
                     src="{{ Auth::user()->link_avt != null ?  Auth::user()->link_avt : URL::to('/images/admin/avatar-default.png')}}"
                     alt="avatar"
                     class="w-full h-full rounded-full"
                   >
                 </div> --}}
-              {{-- @else --}} 
+              {{-- @else --}}
                 <i class="fa-solid fa-circle-user cursor-pointer text-20"></i>
-              {{-- @endif --}}
-              <span  class="icon-dropdown cursor-pointer px-2">
-                {{-- {{ Auth::user()->last_name . ' ' . Auth::user()->first_name}} --}}Vo Duc Duy
-              </span>
-            </div>
-  
+              {{-- @endif --}} 
+              {{-- @if (Auth::check())
+              @if (Auth::user()->ND_ten)
+                  <span class="icon-dropdown cursor-pointer px-2">
+                      {{ Auth::user()->ND_ten }}
+                  </span>
+              @else
+                  <span class="icon-dropdown cursor-pointer px-2">
+                      Tên không tồn tại
+                  </span>
+              @endif
+              @endif --}}
             <div class="menu-dropdown bg-slate-50 min-w-[116px] top-8 right-6 absolute hidden shadow-md text-blue-900 animate-topToBottom leading-[40px] rounded-sm z-10 mt-2">
               <ul class="">
                 <li class="hover:bg-slate-200 hover:rounded-sm px-2 text-center border-b transform transition-all duration-300">
@@ -53,6 +59,7 @@
                 </li>
               </ul>
             </div>
+           
           </div>
         </div>
       </div>

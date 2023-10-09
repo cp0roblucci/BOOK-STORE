@@ -13,7 +13,7 @@
     './resources/js/admin/dashboard.js',
   ])
   {{-- <link rel="shortcut icon" sizes="114x114" href="{{  URL::to('/storage/images/logo.png') }}"> --}}
-  <link
+  {{-- <link
   href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&display=swap"
   rel="stylesheet"
   />
@@ -21,7 +21,7 @@
     href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
     rel="stylesheet"
   />
-  <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+  <script src="https://cdn.lordicon.com/ritcuqlt.js"></script> --}}
 </head>
 <body class="scrollbar-thin scroll-smooth scrollbar-thumb-rounded-lg scrollbar-thumb-blue-200 scrollbar-track-gray-100">
 

@@ -26,7 +26,7 @@ class User extends Authenticatable
         'nd_diachi',
         'nd_email',
         'nd_sdt',
-        'nd_matkhau',
+        'password',
         'nd_avt'
     ];
 
@@ -48,19 +48,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    // public function isAdmin() : bool {
-    //     if (Auth::check()) {
-    //         $role = Auth::user()->ng_vaitro;
-    //     }
-    //     if ($role == 1)
-    //         return true;
-    //     return false;
+    // public function getAuthPassword()
+    // {
+    //   return $this->ND_MatKhau;
     // }
+    public function isAdmin() : bool {
+        if (Auth::check()) {
+            $role = Auth::user()->vt_ma;
+        }
+        if ($role == 1)
+            return true;
+        return false;
+    }
 
   public function orders()
   {
     return $this->hasMany(Order::class);
   }
+ 
 
 }

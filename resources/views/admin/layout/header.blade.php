@@ -1,68 +1,45 @@
 <div class="select-none items-center ml-2 mr-6 py-2.5">
 
-    <div class="flex items-center justify-between">
-      <div class="">
-        <div class="text-14 text-slate-400"><span class="text-slate-300">Trang </span> / @yield('path')</div>
-      </div>
-      <div class="items-center">
-        <div class="flex text-slate-500">
-            {{-- <div class="relative hover:opacity-80">
-              <a href="" class="mx-4 absolute -left-10 p-1">
-                <lord-icon
-                  src="https://cdn.lordicon.com/psnhyobz.json"
-                  trigger="hover"
-                  colors="primary:#848484"
-                  style="width:18px;height:18px">
-                </lord-icon>
-              </a> --}}
+  <div class="flex items-center justify-between">
+    <div class="">
+      <div class="text-14 text-slate-400"><span class="text-slate-300">Trang </span> / @yield('path')</div>
+    </div>
+    <div class="items-center">
+      <div class="flex text-slate-500">
+          
+        <div class="pl-4 text-[#848484] text-14">
+          <div class="flex icon-dropdown ">
+            <div class="w-7 h-7 mr-2 mt-1">
+              {{-- <img src="{{Auth::user()->link_avt}}" alt=""> --}}
+              <img
+                src="{{ Auth::user()->ND_avt!= null ?  Auth::user()->ND_avt : URL::to('/images/admin/user_default.png')}}"
+                alt="avatar"
+                class="w-full h-full rounded-full "
+              >
             </div>
-          <div class="pl-4 text-[#848484] text-14">
-            <div class="flex hover:opacity-80 icon-dropdown">
-              {{-- @if (Auth::check())
-                <div class="w-6 h-6">
-                   {{-- <img src="{{Auth::user()->link_avt}}" alt="">  --}}
-                  {{-- <img
-                    src="{{ Auth::user()->link_avt != null ?  Auth::user()->link_avt : URL::to('/images/admin/avatar-default.png')}}"
-                    alt="avatar"
-                    class="w-full h-full rounded-full"
-                  >
-                </div> --}}
-              {{-- @else --}}
-                <i class="fa-solid fa-circle-user cursor-pointer text-20"></i>
-              {{-- @endif --}} 
-              {{-- @if (Auth::check())
-              @if (Auth::user()->ND_ten)
-                  <span class="icon-dropdown cursor-pointer px-2">
-                      {{ Auth::user()->ND_ten }}
-                  </span>
-              @else
-                  <span class="icon-dropdown cursor-pointer px-2">
-                      Tên không tồn tại
-                  </span>
-              @endif
-              @endif --}}
-            <div class="menu-dropdown bg-slate-50 min-w-[116px] top-8 right-6 absolute hidden shadow-md text-blue-900 animate-topToBottom leading-[40px] rounded-sm z-10 mt-2">
-              <ul class="">
-                <li class="hover:bg-slate-200 hover:rounded-sm px-2 text-center border-b transform transition-all duration-300">
-                    {{-- <a href="{{ route('admin-profile') }}" type="submit" class=""> --}}
-                    <a href="" type="submit" class="text-black"> 
-                      Tài khoản của tôi
-                    </a>
-                  </form >
+            @if (Auth::check())
+              <div class="px-6 py-2 font-medium uppercase transition-all duration-300  cursor-pointer relative group ">
+                <span class="">{{Auth::user()->ND_Ten}}</span>
+                <span class="absolute top-0 left-0 w-[50%] h-0.5 bg-primary-300 transition-all duration-300 group-hover:w-full"></span>
+                <span class="absolute top-0 left-0 w-0.5 h-[50%] bg-primary-300 transition-all duration-300 group-hover:h-full"></span>
+                <span class="absolute right-0 bottom-0 w-0.5 h-[50%] bg-primary-800 transition-all duration-300 group-hover:h-full"></span>
+                <span class="absolute bottom-0 right-0 w-[50%] h-0.5 bg-primary-800 transition-all duration-300 group-hover:w-full"></span>
+                <ul class="bg-white w-full absolute top-10 left-0 text-14 capitalize invisible opacity-0  group-hover:visible group-hover:opacity-100 transition-all duration-500 shadow-md">
+                  <li class="whitespace-nowrap border-b hover:bg-gray-100 hover:text-primary-300 transition-all duration-150">
+                    <a href="{{route('profile-users',['id' => Auth::user()->ND_Ma])}}" class="p-2 block">Thông tin tài khoản</a>
+                  </li>
+                  <li class="whitespace-nowrap border-b hover:bg-gray-100 hover:text-primary-300 transition-all duration-150">
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button type="submit" class="p-2 block">Đăng xuất</button>
+                    </form>
                 </li>
-                <li class="hover:bg-slate-200 hover:rounded-sm px-2 text-center transform transition-all duration-300">
-                  {{-- <form action="{{ route('admin-logout')}}" method="post">   --}}
-                  <form action="" method="post">
-                      @csrf
-                    <button type="submit">Đăng xuất</button>
-                  </form>
-                </li>
-              </ul>
-            </div>
-           
+                </ul>
+              </div>
+            @endif
           </div>
         </div>
       </div>
-    </div >
+    </div>
   </div >
-  
+</div >

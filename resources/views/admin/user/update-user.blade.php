@@ -1,0 +1,194 @@
+@extends('admin.layout.main')
+
+{{-- set title --}}
+@section('title', 'Cập nhật người dùng')
+@section('path', 'Cập Nhật / Người dùng')
+
+@section('sidebar')
+  @include('admin.layout.slidebar')
+@endsection
+
+@section('content')
+  <div class="mb-2">
+    @section('header')
+      @include('admin.layout.header')
+    @endsection
+    @if(session('add-success') || session('update-success') || session('delete-success'))
+    <div id="message" class="flex absolute top-12 right-7">
+      <div  class="bg-slate-200 rounded-lg border-l-8 border-l-blue-500 opacity-80">
+        <div class="py-4 text-blue-400 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
+          <span class="px-4">{{ session('add-success') ? session('add-success') : (session('update-success') ? session('update-success') : session('delete-success')) }}</span>
+        </div>
+      </div>
+    </div>
+    @endif
+
+    
+    <div class="py-4 pt-2 ml-2 text-24 font-sora text-[#5432a8]">Cập nhật người dùng</div>
+    @if(session('add-failed'))
+        <div id="message" class="bg-slate-200 absolute top-12 right-7 rounded-lg border-l-8 border-l-blue-500 opacity-80">
+          <div class="py-4 text-blue-400 relative before:absolute before:bottom-0 before:content-[''] before:bg-blue-500 before:h-0.5 before:w-full before:animate-before">
+            <span class="px-4">{{ session('add-failed') }}</span>
+          </div>
+        </div>
+      @endif
+    @if ($errors->any())
+    <div class="alert alert-danger text-red-500 mb-1">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <div class="border p-4">
+      <form action="" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="flex items-center justify-between mt-1 mb-6">
+          <div class="flex items-center">
+            <div class="w-28 h-28 mr-10">
+              <img
+                id="img-preview"
+                src="{{ $user->ND_avt ? $user->ND_avt : URL::to('images/admin/user_default.png') }}"
+                alt="avatar"
+                class="w-full h-full rounded-full"
+              >
+            </div>
+
+            <div class="px-4 py-2 border-2 rounded-full hover:bg-blue-100 hover:text-white transition-all duration-300 cursor-pointer">
+              <label for="input-file-img" class="cursor-pointer inline-block rounded-lg">
+                Chọn ảnh
+              </label>
+            </div>
+            <input
+              id="input-file-img"
+              type="file"
+              name="user-img"
+              hidden
+              accept="input-file-img/*"
+              class="py-8 text-14 border border-slate-500 file:ml-2 rounded-lg border-dashed text-slate-500 cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-none file:bg-[#5490f0] file:text-white file:cursor-pointer file:hover:bg-blue-100"
+            >
+          </div>
+
+          <div class="mr-20 flex flex-col font-extralight text-slate-500 uppercase">
+            <div class="mb-1">
+              <input
+                type="radio"
+                name="ND_VT"
+                id="customer"
+                value="3"
+                class="h-4 w-4 cursor-pointer peer/customer"
+                {{ $user->VT_Ma == 3 ? 'checked' : '' }}
+              >
+              <label for="customer" class="{{ $user->VT_Ma == 3 ? 'text-blue-200' : '' }}">Khách Hàng</label>
+            </div>
+            <div class="">
+              <input
+                type="radio"
+                name="ND_VT"
+                id="admin"
+                value="1"
+                class="h-4 w-4 cursor-pointer peer/admin"
+                {{ $user->VT_Ma == 1 ? 'checked' : '' }}
+              >
+              <label for="admin" class="{{ $user->VT_Ma == 1 ? 'text-blue-200' : '' }}">Quản Trị Viên</label>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="">
+            <label
+              for="ND_Ten"
+              class="text-slate-500 text-14"
+            >
+              Tên
+            </label><br>
+            <div class="flex items-center mt-1 rounded-lg relative">
+              <i class="fa-regular fa-user absolute left-2 top-1/2 transform -translate-y-1/2 group"></i>
+              <input
+                type="text"
+                name="ND_Ten"
+                value="{{$user->ND_Ten}}"
+                placeholder="Vd: Võ Đức Duy"
+                class="py-1.5 pl-8 w-full outline-none rounded-lg placeholder:text-14 text-14"
+              >
+             
+            </div>
+          </div>
+
+          <div class="">
+            <label
+              for="ND_SDT"
+              class="text-slate-500 text-14"
+            >
+              Số điện thoại
+            </label><br>
+            <div class="flex items-center mt-1 rounded-lg relative  focus-within:border-blue-100">
+              <i class="fa-solid fa-mobile-screen absolute left-2 top-1/2 transform -translate-y-1/2 group"></i>
+              <input
+                type="number"
+                name="ND_SDT"
+                value="{{$user->ND_SDT}}"
+                placeholder="(012) 345-6789"
+                class="py-1.5 pl-8 w-full outline-none rounded-lg placeholder:text-14 text-14"
+              >
+            </div>
+          </div>
+
+          <div class="">
+            <label
+              for="ND_Email"
+              class="text-slate-500 text-14"
+            >
+              Email
+            </label><br>
+            <div class="flex items-center mt-1 rounded-lg relative  focus-within:border-blue-100">
+              <i class="fa-regular fa-envelope absolute left-2 top-1/2 transform -translate-y-1/2 group"></i>
+              <input
+                type="email"
+                name="ND_Email"
+                value="{{$user->ND_Email}}"
+                placeholder="Địa chỉ email"
+                class="py-1.5 pl-8 w-full outline-none rounded-lg placeholder:text-14 text-14"
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 ">
+          <label
+            for="ND_DiaChi"
+            class="text-slate-500 text-14"
+          >
+            Địa chỉ
+          </label><br>
+          <div class="border-[1.5px] mt-1">
+            <input
+              type="text"
+              name="ND_DiaChi"
+              value="{{$user->ND_DiaChi}}"
+              placeholder="Địa chỉ"
+              class="pb-11 pt-1 w-full outline-none focus-within:border-blue-500 px-2 placeholder:text-14 text-14"
+            >
+          </div>
+        </div>
+
+        
+        <button
+          type="submit"
+          class="border-2 border-blue-500 p-2 px-6 mt-4 flex hover:bg-slate-100"
+        >
+         Cập Nhật
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+@endsection
+
+@section('footer')
+  @include('admin.layout.footer')
+@endsection

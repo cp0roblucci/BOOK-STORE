@@ -34,7 +34,7 @@ class LoginRequest extends FormRequest
         return [
             'email.required' => 'Email là bắt buộc',
             'email.email' => 'Vui lòng nhập một địa chỉ email hợp lệ',
-            'password.required' => 'Password là bắt buộc'
+            'password.required' => 'Mật khẩu là bắt buộc'
         ];
     }
 }

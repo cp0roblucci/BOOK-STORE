@@ -5,24 +5,25 @@ const $$ = document.querySelectorAll.bind(document);
 
 const overlayDelete = $('.overlay-delete');
 
-const modalDeleteFish = $('.modal-delete-fish');
-const cancelDeleteFish = $('.cancel-delete-fish');
+// categorybook
+const modalDeleteCategorybook = $('.modal-delete-categorybook');
+const cancelDeleteCategorybook = $('.cancel-delete-categorybook');
+const listBtnDeleteCategorybook = $$('.delete-categorybook');
+const idCategorybook = document.getElementById('idCategorybook');
 
-const listBtnDeleteFish = $$('.delete-fish');
+if (listBtnDeleteCategorybook) {
+  listBtnDeleteCategorybook.forEach(btnDeleteCategorybook => {
+    btnDeleteCategorybook.addEventListener('click', function () {
+      const categorybookId = btnDeleteCategorybook.dataset.id;
 
-const idFish = document.getElementById('idFish');
-
-if(listBtnDeleteFish) {
-  listBtnDeleteFish.forEach(btnDeleteFish => {
-    btnDeleteFish.addEventListener('click', function() {
-      overlayDelete.classList.remove('hidden');
-      modalDeleteFish.classList.remove('hidden');
-      const fishId = btnDeleteFish.dataset.id;
-
-      if(idFish) {
-        idFish.value = fishId;
+      if (idCategorybook) {
+        idCategorybook.value = categorybookId;
       }
-      console.log(idFish.value);
+      
+      overlayDelete.classList.remove('hidden');
+      modalDeleteCategorybook.classList.remove('hidden');
+      
+      console.log(idCategorybook.value);
     })
   });
 }
@@ -30,38 +31,35 @@ if(listBtnDeleteFish) {
 if(overlayDelete) {
   overlayDelete.addEventListener('click', function() {
     overlayDelete.classList.add('hidden');
-    modalDeleteFish.classList.add('hidden');
+    modalDeleteCategorybook.classList.add('hidden');
   })
 }
 
-if(cancelDeleteFish) {
-  cancelDeleteFish.addEventListener('click', function() {
+if(cancelDeleteCategorybook) {
+  cancelDeleteCategorybook.addEventListener('click', function() {
     overlayDelete.classList.add('hidden');
-    modalDeleteFish.classList.add('hidden');
+    modalDeleteCategorybook.classList.add('hidden');
   })
 }
+//nxb
+const modalDeleteNXB = $('.modal-delete-nxb');
+const cancelDeleteNXB = $('.cancel-delete-nxb');
+const listBtnDeleteNXB = $$('.delete-nxb');
+const idNXB = document.getElementById('idNXB');
 
+if (listBtnDeleteNXB) {
+  listBtnDeleteNXB.forEach(btnDeletenxb => {
+    btnDeletenxb.addEventListener('click', function () {
+      const nxbId = btnDeletenxb.dataset.id;
 
-
-// ACCESSORIES
-const modalDeleteAccessories = $('.modal-delete-accessories');
-const cancelDeleteAccessories = $('.cancel-delete-accessories');
-
-const listBtnDeleteAccessories = $$('.delete-accessories');
-
-const idAccessories = document.getElementById('idAccessories');
-
-if(listBtnDeleteAccessories) {
-  listBtnDeleteAccessories.forEach(btnDeleteAccessories => {
-    btnDeleteAccessories.addEventListener('click', function() {
-      overlayDelete.classList.remove('hidden');
-      modalDeleteAccessories.classList.remove('hidden');
-      const accessoriesId = btnDeleteAccessories.dataset.id;
-
-      if(idAccessories) {
-        idAccessories.value = accessoriesId;
+      if (idNXB) {
+        idNXB.value = nxbId;
       }
-      console.log(idAccessories.value);
+      
+      overlayDelete.classList.remove('hidden');
+      modalDeleteNXB.classList.remove('hidden');
+      
+      console.log(idCategorybook.value);
     })
   });
 }
@@ -69,53 +67,35 @@ if(listBtnDeleteAccessories) {
 if(overlayDelete) {
   overlayDelete.addEventListener('click', function() {
     overlayDelete.classList.add('hidden');
-    modalDeleteAccessories.classList.add('hidden');
+    modalDeleteNXB.classList.add('hidden');
   })
 }
 
-if(cancelDeleteAccessories) {
-  cancelDeleteAccessories.addEventListener('click', function() {
+if(cancelDeleteNXB) {
+  cancelDeleteNXB.addEventListener('click', function() {
     overlayDelete.classList.add('hidden');
-    modalDeleteAccessories.classList.add('hidden');
+    modalDeleteNXB.classList.add('hidden');
   })
 }
+// supplier 
+const modalDeleteSupplier = $('.modal-delete-supplier');
+const cancelDeleteSupplier = $('.cancel-delete-supplier');
+const listBtnDeleteSupplier = $$('.delete-supplier');
+const idSupplier= document.getElementById('idSupplier');
 
+if (listBtnDeleteSupplier) {
+  listBtnDeleteSupplier.forEach(btnDeletesupplier => {
+    btnDeletesupplier.addEventListener('click', function () {
+      const supplierId = btnDeletesupplier.dataset.id;
 
-
-// UPDATE PRICE
-const modalUpdatePrice = $('.modal-update-price');
-const cancelUpdatePrice = $('.cancel-update-price');
-
-const listBtnUpdatePrice = $$('.update-price');
-
-const titleSpecies = document.getElementById('title-species');
-const titleSize = document.getElementById('title-size');
-
-const newPrice = document.getElementById('new-price');
-
-
-const inputUpdatePriceSpecies = document.getElementById('updatePriceSpecies');
-const inputUpdatePriceSize = document.getElementById('updatePriceSize');
-
-if(listBtnUpdatePrice) {
-  listBtnUpdatePrice.forEach(btnUpdatePrice => {
-    btnUpdatePrice.addEventListener('click', function() {
-      overlayDelete.classList.remove('hidden');
-      modalUpdatePrice.classList.remove('hidden');
-      const UpdatePriceSpecies = btnUpdatePrice.dataset.species;
-      const UpdatePriceSize = btnUpdatePrice.dataset.size;
-      const oldPrice = btnUpdatePrice.dataset.price;
-
-      newPrice.value = oldPrice;
-
-      if(inputUpdatePriceSpecies && inputUpdatePriceSize) {
-        inputUpdatePriceSpecies.value = UpdatePriceSpecies;
-        inputUpdatePriceSize.value = UpdatePriceSize;
+      if (idSupplier) {
+        idSupplier.value = supplierId;
       }
-
-      titleSpecies.innerHTML = UpdatePriceSpecies;
-      titleSize.innerHTML = UpdatePriceSize;
-
+      
+      overlayDelete.classList.remove('hidden');
+      modalDeleteSupplier.classList.remove('hidden');
+      
+      console.log(idSupplier.value);
     })
   });
 }
@@ -123,61 +103,35 @@ if(listBtnUpdatePrice) {
 if(overlayDelete) {
   overlayDelete.addEventListener('click', function() {
     overlayDelete.classList.add('hidden');
-    modalUpdatePrice.classList.add('hidden');
-    newPrice.value = '';
+    modalDeleteSupplier.classList.add('hidden');
   })
 }
 
-if(cancelUpdatePrice) {
-  cancelUpdatePrice.addEventListener('click', function() {
+if(cancelDeleteSupplier) {
+  cancelDeleteSupplier.addEventListener('click', function() {
     overlayDelete.classList.add('hidden');
-    modalUpdatePrice.classList.add('hidden');
-    newPrice.value = '';
+    modalDeleteSupplier.classList.add('hidden');
   })
 }
+//book
+const modalDeleteBook = $('.modal-delete-book');
+const cancelDeleteBook  = $('.cancel-delete-book');
+const listBtnDeleteBook = $$('.delete-book');
+const idBook = document.getElementById('idBook');
 
+if (listBtnDeleteBook) {
+  listBtnDeleteBook.forEach(btnDeletesupplier => {
+    btnDeletesupplier.addEventListener('click', function () {
+      const bookId = btnDeletesupplier.dataset.id;
 
-const modalUpdateQuantity = $('.modal-update-quantity');
-const cancelUpdateQuantity = $('.cancel-update-quantity');
-
-const listBtnUpdateQuantity = $$('.update-quantity');
-
-const productName = document.getElementById('product-name');
-const productQuantity = document.getElementById('product-quantity');
-
-const newQuantity = document.getElementById('new-quantity');
-
-
-const idProduct = document.getElementById('idProduct');
-
-if(listBtnUpdateQuantity) {
-  listBtnUpdateQuantity.forEach(btnUpdateQuantity => {
-    btnUpdateQuantity.addEventListener('click', function() {
-      overlayDelete.classList.remove('hidden');
-      modalUpdateQuantity.classList.remove('hidden');
-
-      const fishName = btnUpdateQuantity.dataset.fish_name;
-      const fishId = btnUpdateQuantity.dataset.fish_id;
-
-      const accessoriesName = btnUpdateQuantity.dataset.accessories_name;
-      const accessoriesId = btnUpdateQuantity.dataset.accessories_id;
-
-      const quantity = btnUpdateQuantity.dataset.quantity;
-
-      newQuantity.value = quantity;
-
-
-      if (fishName && fishId) {
-        productName.innerHTML = fishName;
-
-        idProduct.value = fishId;
-      } else {
-        productName.innerHTML = accessoriesName;
-
-        idProduct.value = accessoriesId;
+      if (idBook) {
+        idBook.value = bookId;
       }
-
-      console.log(idProduct.value);
+      
+      overlayDelete.classList.remove('hidden');
+      modalDeleteBook.classList.remove('hidden');
+      
+      console.log(idBook.value);
     })
   });
 }
@@ -185,15 +139,50 @@ if(listBtnUpdateQuantity) {
 if(overlayDelete) {
   overlayDelete.addEventListener('click', function() {
     overlayDelete.classList.add('hidden');
-    modalUpdateQuantity.classList.add('hidden');
-    newQuantity.value = '';
+    modalDeleteBook.classList.add('hidden');
   })
 }
 
-if(cancelUpdateQuantity) {
-  cancelUpdateQuantity.addEventListener('click', function() {
+if(cancelDeleteBook) {
+  cancelDeleteBook.addEventListener('click', function() {
     overlayDelete.classList.add('hidden');
-    modalUpdateQuantity.classList.add('hidden');
-    newQuantity.value = '';
+    modalDeleteBook.classList.add('hidden');
   })
 }
+//importwarehouse
+const modalDeleteImportwarehouse= $('.modal-delete-importwarehouse');
+const cancelDeleteImportwarehouse = $('.cancel-delete-importwarehouse');
+const listBtnDeleteImportwarehouse = $$('.delete-importwarehouse');
+const idImportwarehouse = document.getElementById('idImportwarehouse');
+
+if (listBtnDeleteImportwarehouse) {
+  listBtnDeleteImportwarehouse.forEach(btnDeletePortfolio => {
+    btnDeletePortfolio.addEventListener('click', function () {
+      const importwarehouseId = btnDeletePortfolio.dataset.id;
+
+      if (idImportwarehouse) {
+        idImportwarehouse.value = importwarehouseId;
+      }
+      
+      overlayDelete.classList.remove('hidden');
+      modalDeleteImportwarehouse.classList.remove('hidden');
+      
+      console.log(idImportwarehouse.value);
+    })
+  });
+}
+
+if(overlayDelete) {
+  overlayDelete.addEventListener('click', function() {
+    overlayDelete.classList.add('hidden');
+    modalDeleteImportwarehouse.classList.add('hidden');
+  })
+}
+
+if(cancelDeleteImportwarehouse) {
+  cancelDeleteImportwarehouse.addEventListener('click', function() {
+    overlayDelete.classList.add('hidden');
+    modalDeleteImportwarehouse.classList.add('hidden');
+  })
+}
+

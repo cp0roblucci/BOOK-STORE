@@ -44,12 +44,13 @@ class AuthController extends Controller
         }
         $user = User::create(
             [
-                'vt_ma' => $nd_vaitro,
-                'nd_ten' => $nd_ten,
-                'nd_email' => $nd_email,
+                'VT_Ma' => $nd_vaitro,
+                'ND_Ten' => $nd_ten,
+                'ND_Email' => $nd_email,
                 'password' => $nd_matkhau,
             ]
         );
+        session()->flash('create-win', 'Tài khoản của bạn đã được tạo thành công');
         return redirect()->route('login');
     }
     //login ---------------------------
@@ -59,7 +60,7 @@ class AuthController extends Controller
     public function postLogin(LoginRequest $request) {
         $nd_email = $request->input('email');
         $nd_matkhau = $request->input('password');
-        $user = User::where('nd_email', $nd_email)->first();
+        $user = User::where('ND_Email', $nd_email)->first();
         // $user = DB::table('nguoidung')->where('nd_email', $nd_email)->first();
         $remember = $request->input('remember');
        
@@ -68,28 +69,26 @@ class AuthController extends Controller
             return redirect()->route('login');
         }
         if (Auth::attempt([
-            'nd_email' => $nd_email, 
+            'ND_Email' => $nd_email, 
             'password' => $nd_matkhau ]
             ,$remember)) {
                 
             if (Auth::User()->VT_Ma == 1) {
-                $user = User::where('nd_email', $nd_email)->first();
                 Auth::login($user);
-                session(['user' => Auth::user()]);
-                return redirect()->route('adminhome');
-              
+                return redirect()->route('admin-homepage')->withInput();
             } else {
-                $user = User::where('nd_email', $nd_email)->first();
                 Auth::login($user);
-                // dd($user);
-                session(['user' => Auth::user()]);
-                return view ('/home');
-                
+                return redirect()->route('home')->withInput();
             } 
            
         }  else {
             session()->flash('incorect-password', 'Mật khẩu sai');
             return redirect()->route('login');
         }
+    }
+
+    public function logout() {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

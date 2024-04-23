@@ -34,9 +34,9 @@
                   </h1>
                   </div>
                   @if(session()->has('email-exists'))
-                  <span class="text-16 text-red-400 ml-1">
+                  <span class="text-14 text-red-400 ml-1">
                       Tài khoản đã tồn tại.
-                      <a href="/login" class="text-purple-400 ml-2 p-1 rounded-lg border hover:bg-purple-50">Đăng nhập ngay</a>
+                      <a href="/login" class="text-purple-400 ml-2 p-1.5 rounded-lg border hover:bg-purple-50">Đăng nhập ngay</a>
                   </span>
                   @endif
                   
@@ -45,7 +45,7 @@
                         <div>
                             <input type="fullname" name="fullname" 
                             id="fullname" 
-                            class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}" 
+                            class="input-register p-[10px] w-full text-14 border outline-none placeholder:text-slate-300 rounded-lg  {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus:border-2 focus-within:border-blue-500' }}" 
                             placeholder="Vui lòng nhập họ tên" 
                             >
                             @if ($errors->has('fullname'))
@@ -57,7 +57,7 @@
                         <div>
                             <input type="email" name="email" 
                             id="email" 
-                            class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}" 
+                            class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300  focus-within:border-blue-500' }}" 
                             placeholder="Vui lòng nhập email" 
                             >
                             @if ($errors->has('email'))
@@ -66,17 +66,19 @@
                             @endforeach
                             @endif
                         </div>
-                        <div class="group">
-                            <div class="mb-6 group:">
+                        <div class="group ">
+                            <div class="mb-6 relative">
                                 <input type="password" name="password" 
                                 id="password" placeholder="Vui lòng nhập mật khẩu" 
-                                class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}"
+                                class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-blue-500' }}"
                                 >
                                 @if ($errors->has('password'))
                                 @foreach ($errors->get('password') as $error)
                                   <span id="message-password" class="text-10 ml-2 text-red-500">* {{ $error }}</span>
                                 @endforeach
                                 @endif
+                                <i id="iconHideConfirmPass1" class="fa-regular fa-eye-slash absolute text-14 right-6 top-4 cursor-pointer text-slate-500" onclick="togglePassword1()"></i>
+                                <i id="iconShowConfirmPass1" class="fa-regular fa-eye hidden absolute text-14 right-6 top-4 cursor-pointer text-slate-500" onclick="togglePassword1()"></i>
                             </div>
                             <div class="group">
                               <div class="w-full relative mb-2">
@@ -85,21 +87,21 @@
                                   type="password"
                                   name="password_confirmation"
                                   placeholder="Xác nhận mật khẩu"
-                                  class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-purple-500' }}"
+                                  class="input-register p-[10px] w-full text-14 outline-none placeholder:text-slate-300 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-slate-300 focus-within:border-blue-500' }}"
                                 >
                                 @if ($errors->has('password_confirmation'))
                                     @foreach ($errors->get('password_confirmation') as $error)
                                       <span id="message-confirm-password" class="text-10 ml-2 text-red-500">* {{ $error }}</span><br>
                                     @endforeach
                                 @endif
-                                <i id="iconHideConfirmPass" class="fa-regular fa-eye-slash absolute text-14 right-6 top-4 cursor-pointer text-slate-500"></i>
-                                <i id="iconShowConfirmPass" class="fa-regular fa-eye hidden absolute text-14 right-6 top-4 cursor-pointer text-slate-500"></i>
+                                <i id="iconHideConfirmPass" class="fa-regular fa-eye-slash absolute text-14 right-6 top-4 cursor-pointer text-slate-500" onclick="togglePassword()"></i>
+                                <i id="iconShowConfirmPass" class="fa-regular fa-eye hidden absolute text-14 right-6 top-4 cursor-pointer text-slate-500" onclick="togglePassword()"></i>
                               </div>
                             </div>
                         </div>
                         
                         <input type="hidden" value = "3" name ="role">
-                        <button type="submit" class="w-full text-white bg-red-500 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                        <button type="submit" class="w-full text-white bg-red-500 hover:bg-black focus:ring-1 focus:outline-none focus:ring-red-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                           Đăng ký
                         </button>
                     </form>
@@ -124,3 +126,42 @@
       </section>
 </body>
 </html>
+
+<script>
+  function togglePassword() {
+    var passwordField = document.getElementById('confirm-password-register');
+    var iconHide = document.getElementById('iconHideConfirmPass');
+    var iconShow = document.getElementById('iconShowConfirmPass');
+   
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+      iconHide.style.display = 'none';
+      iconShow.style.display = 'block';
+    } else {
+      passwordField.type = 'password';
+      iconHide.style.display = 'block';
+      iconShow.style.display = 'none';
+    }
+
+  
+  }
+  function togglePassword1() {
+    
+    var passwordField1 = document.getElementById('password');
+   
+    var iconHide1 = document.getElementById('iconHideConfirmPass1');
+    var iconShow1 = document.getElementById('iconShowConfirmPass1');
+
+ 
+
+    if (passwordField1.type === 'password') {
+      passwordField1.type = 'text';
+      iconHide1.style.display = 'none';
+      iconShow1.style.display = 'block';
+    } else {
+      passwordField1.type = 'password';
+      iconHide1.style.display = 'block';
+      iconShow1.style.display = 'none';
+    }
+  }
+</script>

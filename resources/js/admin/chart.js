@@ -2,7 +2,7 @@ import { Chart } from "chart.js/auto";
 import constants from "../constants";
 
 const $ = document.querySelector.bind(document);
-// const $$ = document.querySelectorAll.bind(document);
+const $$ = document.querySelectorAll.bind(document);
 
 // chart element
 const lastWeekChart = document.getElementById('lastWeekChart');
@@ -18,7 +18,6 @@ const loading3 = $('.loading3');
 
 // doanh thu
 const revenueFish = document.getElementById('revenue-fish');
-const revenueAccessories = document.getElementById('revenue-accessories');
 const totalRevenue = document.getElementById('total-revenue');
 
 // 3 bien luu 3 bieu do khi duoc ve ra
@@ -37,7 +36,6 @@ const dayOfWeek = [
 ];
 
 let dataFish;
-let dataAccessories;
 
 // draw chart function
 function drawChart(chartElement, time, dataFish, dataAccessories) {
@@ -48,18 +46,9 @@ function drawChart(chartElement, time, dataFish, dataAccessories) {
       labels: time.map(row => row.day),
       datasets: [
         {
-          label: 'Cá',
+          label: 'Sách',
           data: dataFish.map(row => row.total_quantity),
           backgroundColor: 'rgba(54, 162, 235, 0.8)',
-          borderColor: 'rgb(54, 162, 235)',
-          borderWidth: 2,
-          borderRadius: 20,
-          barThickness: 20
-        },
-        {
-          label: 'Phụ kiện',
-          data: dataAccessories.map(row => row.total_quantity),
-          backgroundColor: 'rgba(76, 78, 231, 0.8)',
           borderColor: 'rgb(54, 162, 235)',
           borderWidth: 2,
           borderRadius: 20,
@@ -115,21 +104,23 @@ async function fetchDataApi($endpointApi, options) {
   return await fetch($endpointApi, options)
     .then(response => response.json())
     .then(data => {
-      // console.log(data);
+      console.log(data);
       dataFish = data[0];
-      dataAccessories = data[1];
+      console.log(dataFish);
+      // dataAccessories = data[1];
 
       let totalRevenueFish = 0;
-      let totalRevenueAccessories = 0;
+      // let totalRevenueAccessories = 0;
       for (let i = 0; i < dataFish.length; i++) {
         totalRevenueFish += data[0][i].total_price;
-        totalRevenueAccessories += data[1][i].total_price;
+        // totalRevenueAccessories += data[1][i].total_price;
       }
       // toLocaleString('vi-VN') format 500000000 = 500.000.000;
-      if (revenueFish && revenueAccessories && totalRevenue) {
+      // && revenueAccessories
+      if (revenueFish  && totalRevenue) {
         revenueFish.innerHTML = totalRevenueFish.toLocaleString('vi-VN');
-        revenueAccessories.innerHTML = totalRevenueAccessories.toLocaleString('vi-VN');
-        totalRevenue.innerHTML = (totalRevenueFish + totalRevenueAccessories).toLocaleString('vi-VN');
+        // revenueAccessories.innerHTML = totalRevenueAccessories.toLocaleString('vi-VN');
+        totalRevenue.innerHTML = (totalRevenueFish).toLocaleString('vi-VN');
       }
 
       return data;
@@ -143,7 +134,7 @@ function fetchApiDataLastWeek() {
       lastWeekChartDraw.destroy();
     }
     if (lastWeekChart) {
-      lastWeekChartDraw = drawChart(lastWeekChart, dayOfWeek, dataFish, dataAccessories);
+      lastWeekChartDraw = drawChart(lastWeekChart, dayOfWeek, dataFish);
       if (lastSevenDayChartDraw) {
         lastSevenDayChartDraw.destroy();
       }
@@ -239,7 +230,7 @@ if(btnlastSevenDay) {
         lastSevenDayChartDraw.destroy();
       }
       if (lastSevenDaysChart) {
-        lastSevenDayChartDraw = drawChart(lastSevenDaysChart, dayOfMonth, dataFish, dataAccessories);
+        lastSevenDayChartDraw = drawChart(lastSevenDaysChart, dayOfMonth, dataFish);
         if (lastWeekChartDraw) {
           lastWeekChartDraw.destroy();
         }
@@ -296,7 +287,6 @@ function getDaysInRange(startDate, endDate) {
 const notifyInvalidDate = document.getElementById('date-invalid');
 function updateResult(data) {
   const dataFish = data[0];
-  const dataAccessories = data[1];
   if (startDateInput.value > endDateInput.value) {
     notifyInvalidDate.classList.remove('hidden');
     startDateInput.value = '';
@@ -316,11 +306,11 @@ function updateResult(data) {
     const startDate = new Date(startDateInput.value);
     const endDate = new Date(endDateInput.value);
     const days = getDaysInRange(startDate, endDate);
-    periodChartDraw = drawChart(periodChart, days, dataFish, dataAccessories);
+    periodChartDraw = drawChart(periodChart, days, dataFish);
     loading3.classList.add('hidden');
   }
 }
-
+//update data
 function updateData() {
   const dataDate = {
     start_date: startDateInput.value,
@@ -377,7 +367,6 @@ if(btnPeriod) {
 
     // reset = 0
     revenueFish.innerHTML = 0;
-    revenueAccessories.innerHTML = 0;
     totalRevenue.innerHTML = 0;
 
     if (lastWeekChartDraw) {

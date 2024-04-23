@@ -20,14 +20,15 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $primaryKey = 'ND_Ma';
     protected $fillable = [
-        'vt_ma',
-        'nd_ten',
-        'nd_diachi',
-        'nd_email',
-        'nd_sdt',
+        'VT_Ma',
+        'ND_Ten',
+        'ND_DiaChi',
+        'ND_Email',
+        'ND_SDT',
         'password',
-        'nd_avt'
+        'ND_avt'
     ];
 
     /**
@@ -54,7 +55,7 @@ class User extends Authenticatable
     // }
     public function isAdmin() : bool {
         if (Auth::check()) {
-            $role = Auth::user()->vt_ma;
+            $role = Auth::user()->VT_Ma;
         }
         if ($role == 1)
             return true;
@@ -63,7 +64,7 @@ class User extends Authenticatable
 
   public function orders()
   {
-    return $this->hasMany(Order::class);
+    return $this->hasMany(Donhang::class);
   }
  
 

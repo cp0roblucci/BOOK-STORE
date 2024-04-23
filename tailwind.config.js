@@ -11,6 +11,7 @@ module.exports = {
     ],
     theme: {
         fontFamily: {
+            san: ['Oswald','sans'],
             "popins" : "Popins, sans-serif",
             sora: ["Sora"],
             pacifico: ["Pacifico"],

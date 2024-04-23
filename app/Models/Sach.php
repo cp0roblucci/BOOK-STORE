@@ -5,21 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Sach extends Model
 {
     protected $table ='sach';
+    protected $primaryKey = 'S_Ma';
     use HasFactory;
-
+    // use SoftDeletes;
     protected $fillable = [
-        'S_ma',
-        'S_ten',
-        'S_giaban',
-        'S_mota',
-        'S_ngayxuatban',
+        'S_Ma',
+        'NXB_Ma',
+        'NCC_Ma',
+        'TG_Ma',
+        'DM_Ma',
+        'S_Ten',
+        'S_GiaBan',
+        'S_Mota',
+        'S_SoLuong',
+        'S_NamXuatBan',
         'S_DichGia',
-        'S_Sotrang',
-        'S_trongluong',
-        'S_hinhanh',
+        'S_SoTrang',
+        'S_TrongLuong',
+        'S_HinhAnh',
       ];
       
       public $timestamps = false;
@@ -28,5 +35,9 @@ class Sach extends Model
   {
     return $this->morphMany(Chitietdonhang::class, 'product');
   }
-    
+  
+  public function importcthd(): MorphMany
+  {
+  return $this->morphMany(Chitiethoadonnhap::class, 'importcthdn');
+  }
 }

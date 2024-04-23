@@ -12,7 +12,11 @@ class Nhacungcap extends Model
     use HasFactory;
 
     protected $fillable = [
-        'ncc_ma',
-        'ncc_ten'
+        'NCC_Ma',
+        'NCC_Ten',
+        'NCC_Diachi',
+        'NCC_Email',
+        'NCC_SDT'
       ];
+    public $timestamps = false;
 }

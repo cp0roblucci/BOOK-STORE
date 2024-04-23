@@ -7,10 +7,11 @@ const iconBtnSlideBar = $$('.icon__btn--slidebar');
 const menuSlideBar = $$('.menu__slidebar');
 
 if(btnSlideBar) {
+
   for(let i = 0; i < btnSlideBar.length; i++) {
-    btnSlideBar[i].addEventListener('click', function() {
+    
+    btnSlideBar[i].addEventListener('click', function() {     
       menuSlideBar[i].classList.toggle('max-h-screen');
-      // menuSlideBar[i].classList.toggle('max-h-screen');
       iconBtnSlideBar[i].classList.toggle('rotate-90');
     });
   }
@@ -24,6 +25,7 @@ const menuSlideBar2 = $$('.menu__slidebar2');
 
 if(btnSlideBar2) {
   for(let i = 0; i < btnSlideBar2.length; i++) {
+    
     btnSlideBar2[i].addEventListener('click', function() {
       menuSlideBar2[i].classList.toggle('max-h-screen');
       iconBtnSlideBar2[i].classList.toggle('rotate-90');
